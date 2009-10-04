@@ -1,0 +1,92 @@
+* Things to do on the project
+
+** Setup the initial project [0/2]
+   - [ ] add LICENCE and COPYING files
+   - [ ] Setup github project
+   - [ ] Add basic SConstruct.
+   - [ ] Add gtest support, implement some phony test.
+   - [ ] Add i18n support, make sure I can display a string in the
+     proper locale (through compiler switchs if necessary).
+   - [ ] Add SDL support, make sure I can open a window in the main.
+   - [ ] Add Lua support, make sure I can load a lua file an execute its content.
+	 
+** Compile project under Win32
+   - [ ] Install SCons under windows.
+   - [ ] Install MinGW under windows (to compile..)
+   - [ ] Add Win32 version of gtest
+   - [ ] Add Win32 version of i18n support
+   - [ ] Add Win32 version of SDL
+   - [ ] Modify SConstruct to be able to build the basic example
+   - [ ] Make test pass
+
+** Make project deb package under linux
+   - [ ] Add 'packaging' folders, with whatever is needed to build packages
+   - [ ] Setup scons task to create "debian-like architecture
+   - [ ] Write debian configuration file
+   - [ ] Learn how I can write a decent 'source' package ...
+   - [ ] Add scons task to create a debian package and an 'apt' folder
+
+** Make Win32 installer using NSIS
+   - [ ] Install NSIS under windows
+   - [ ] Choose Windows icon
+   - [ ] Write installer that install all the necessary libs, and the binairies
+
+** Game engine features
+
+*** Iteration 1
+
+Demo : display a grid with a entry and an exit, in an SDL window.
+
+**** BE
+     - [ ] Notion of a grid, entry, exit.
+     - [ ] Grid is stored in a Lua script (as a simple structure)
+**** Client
+     - [ ] Sprites for empty cells, entry, exit.
+     - [ ] Client displays all cells
+**** Build system
+     - [ ] Images must be copied to the proper location, and game can be run without questions.
+
+*** Iteration 2
+
+Demo : some power-ups are added on the grid, an you see them in the client.
+    
+**** BE
+     - [ ] The player has a position (starts at the entry).
+     - [ ] The player has a current "moving way".
+     - [ ] Two moving ways exists : one-cell at a time, and two-cells at a time.
+     - [ ] You can put "moving-power-ups" on the grid using the Lua script.
+	   
+**** Client
+     - [ ] Images for the power-ups
+     - [ ] Clients display the power-ups accordingly.
+	   
+
+*** Iteration 3
+
+Demo : path finding with the mouse from your current position to the next one
+
+**** BE
+     - [ ] Given a position and a "moving-way", compute a path to
+           another position in the grid.
+**** Client
+     - [ ] Overlay images for the current path.
+     - [ ] When the user's mouse rolls over a cell of the grid, a path
+           is computed and displayed.
+     - [ ] When the user uses his mouse wheel, the current "moving-way" changes.
+     - [ ] The color of the path reflects the color of the "moving-way".
+	   
+
+     
+	   
+	   
+	   
+	  
+	  
+
+	  
+	  
+	 
+	 
+	 
+	 
+	

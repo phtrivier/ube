@@ -1,0 +1,35 @@
+h1. Folder organisation 
+
+'TBD' means the folder does not exists yet, and has to be created / integrated in the build system.
+
+ - src : C++ implementation files for the code
+   - engine : source code for the engine of the game (compiled as libube-engine)
+   - editor : source code for the associated game editor
+   - client : source code for the game client (some parts might be compiled as libube-client)
+
+ - include : C++ header files for the code
+   - engine : headers for the engine
+   - editor : headers for the editor
+   - client : headers for the client
+
+ - test : C++ implementation files for the Google Test unit test
+   - engine : tests for the engine
+   - editor : tests for the editor
+
+ - lib : third party libraries (TBD). This folder should be persistent. It might contain 'hard-imported' libs (gtest ? sdl?)
+   - linux : third-party libs for linux (both for engine and editor)
+   - win32 : third-party libs for windows
+
+ - build : results of builds (TBD). This folder shoudl be cleanable by 'scons -c'.
+   - linux : binairies and libraries for build under linux
+   - win32 : binairies and libraries for build under win32
+
+TODO : Where do I put i18n files ? 
+
+ - doc : documentation (will be written in some markup language or another) (TBD)
+   - src : source files for the manual
+   - dist : output for the builds of the manual
+     - pdf : manual in pdf format
+     - html : manual in html format
+
+ - org : kitchen-sink for plan, diary, ideas, maybe even bugs if I read some
