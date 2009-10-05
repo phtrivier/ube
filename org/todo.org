@@ -1,14 +1,14 @@
 * Things to do on the project
 
 ** Setup the initial project [2/7]
-   - [X] add COPYING files
-   - [X] Setup github project
-   - [ ] Add basic SConstruct.
-   - [ ] Add gtest support, implement some phony test.
-   - [ ] Add i18n support, make sure I can display a string in the
+   + [X] add COPYING files
+   + [X] Setup github project
+   + [ ] Add basic SConstruct / Autotools support
+   + [ ] Add gtest support, implement some phony test.
+   + [ ] Add i18n support, make sure I can display a string in the
      proper locale (through compiler switchs if necessary).
-   - [ ] Add SDL support, make sure I can open a window in the main.
-   - [ ] Add Lua support, make sure I can load a lua file an execute its content.
+   + [ ] Add SDL support, make sure I can open a window in the main.
+   + [ ] Add Lua support, make sure I can load a lua file an execute its content.
 	 
 ** Compile project under Win32
    - [ ] Install SCons under windows.

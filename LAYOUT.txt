@@ -4,7 +4,9 @@ h1. Folder organisation
 
  - src : C++ implementation files for the code
    - engine : source code for the engine of the game (compiled as libube-engine)
+     - test : source code for the Google Test unit test ; compiled into and executable ube-engine-test
    - editor : source code for the associated game editor
+     - test : source code for the Google Test unit tests
    - client : source code for the game client (some parts might be compiled as libube-client)
 
  - lib : third party libraries (TBD). This folder should be persistent. It might contain 'hard-imported' libs (gtest ? sdl?)
