@@ -1,8 +1,8 @@
 * Things to do on the project
 
-** Setup the initial project [1/7]
+** Setup the initial project [2/7]
    - [X] add COPYING files
-   - [ ] Setup github project
+   - [X] Setup github project
    - [ ] Add basic SConstruct.
    - [ ] Add gtest support, implement some phony test.
    - [ ] Add i18n support, make sure I can display a string in the
