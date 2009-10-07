@@ -1,0 +1,22 @@
+# French translations for ube package.
+# Copyright (C) 2009 Pierre-Henri Trivier
+# This file is distributed under the same license as the ube package.
+# Pierre-Henri Trivier <phtrivier@yahoo.fr>, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ube 0.1\n"
+"Report-Msgid-Bugs-To: phtrivier@yahoo.fr\n"
+"POT-Creation-Date: 2009-10-07 12:45+0200\n"
+"PO-Revision-Date: 2009-10-07 12:55+0200\n"
+"Last-Translator: Pierre-Henri Trivier <phtrivier@yahoo.fr>\n"
+"Language-Team: French\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ASCII\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: src/client/ube.cpp:23
+#, c-format
+msgid "Hello %s. What's the craic today ?\n"
+msgstr "Bonjour %s. Quoi de neuf aujourdh'ui ?\n"

@@ -6,3 +6,8 @@ Makefile
 configure
 config.log
 config.status
+config.h.in
+autom4te.cache/*
+*.gmo
+tmp/*
+ube-*.tar.gz
