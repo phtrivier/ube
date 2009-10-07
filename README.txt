@@ -40,11 +40,11 @@ The game will be written in C++.
 
 It is in 2D. Sprites will be animated at all time.
 
-It should be cleanly i18n-ized from day one (strings will be externalized properly, using po files ? )
+It should be cleanly i18n-ized from day one (using gettext)
 
 It will use the SDL for display and input handling.
 
-It will use SCons as its build System. 
+It will use GNU Autotools as its build system
 
 It will use Google Test for its unit testing.
 
