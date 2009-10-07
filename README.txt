@@ -6,7 +6,7 @@ The game is an extension to 'boots-puzzle'.
 
 h2. Install
 
-TBD (hint : use scons)
+TBD (hint : ./configure && make && make install)
 
 h2. Game design
 
