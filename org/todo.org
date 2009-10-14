@@ -1,6 +1,6 @@
 * Things to do on the project
 
-** Setup the initial project [7/9]
+** Setup the initial project [8/9]
    - [X] add COPYING files.
    - [X] Setup github project.
    - [X] Add basic SConstruct / Autotools support.
@@ -9,7 +9,7 @@
    - [X] Add gmock support, implement some phony test.
    - [X] Add i18n support, make sure I can display a string in the
      proper locale (through compiler switchs if necessary).
-   - [ ] Add SDL support, make sure I can open a window in the main.
+   - [X] Add SDL support, make sure I can open a window in the main.
    - [ ] Add Lua support, make sure I can load a lua file an execute
      its content (assuming the file is in /share/ or something like that ...
 	 

@@ -22,10 +22,14 @@ src/engine/.deps/*
 src/*.a
 src/*/*.a
 stamp-h1
+po/remove-potcdate.sed
 
 # Binairies
 src/client/ube
 src/engine/engine-tests
+
+# Builds
+build/*
 
 # Dists
 ube-*.*
