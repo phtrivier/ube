@@ -1,6 +1,9 @@
+# Temporary files
 *~
 *#
 .#*
+
+# Generated files
 Makefile.in
 Makefile
 configure
@@ -17,5 +20,9 @@ po/POTFILES
 src/client/.deps/*
 src/engine/.deps/*
 src/*.a
-src/client/ube
+src/*/*.a
 stamp-h1
+
+# Binairies
+src/client/ube
+src/engine/engine-tests

@@ -1,5 +1,9 @@
 #include <greeter.hpp>
 #include <gtest/gtest.h>
+#include <gmock/gmock.h>
+using ::testing::AtLeast;
+
+#include "tests/mock_amplifier.hpp"
 
 namespace {
 
@@ -37,6 +41,15 @@ namespace {
     // You can break the test by using this line instead ... 
     // EXPECT_GT(0,1);
     EXPECT_GT(1,0);
+  }
+
+  TEST_F(GreeterTest, UsesAmplifierToShout) {
+
+    MockAmplifier mock;
+    EXPECT_CALL(mock, amplify("Hello pht!!\n")).Times(AtLeast(1));
+
+    Greeter g("pht");
+    g.shout(mock);
   }
 
 } // Namespace
