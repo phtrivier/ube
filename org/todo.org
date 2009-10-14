@@ -1,10 +1,10 @@
 * Things to do on the project
 
-** Setup the initial project [6/9]
+** Setup the initial project [7/9]
    - [X] add COPYING files.
    - [X] Setup github project.
    - [X] Add basic SConstruct / Autotools support.
-   - [ ] Fix the dist check task (lib seems to be badly referenced ...)
+   - [X] Fix the dist check task (lib seems to be badly referenced ...)
    - [X] Add gtest support, implement some phony test.
    - [X] Add gmock support, implement some phony test.
    - [X] Add i18n support, make sure I can display a string in the
