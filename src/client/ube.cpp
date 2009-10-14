@@ -9,7 +9,7 @@
 #include <cstdio>
 using namespace std;
 
-#include "SDL/SDL.h"   /* All SDL apps need this */
+#include "SDL.h"   /* All SDL apps need this */
 #include <stdio.h>
 #include <stdlib.h> /* for exit() */
 
