@@ -26,3 +26,6 @@ stamp-h1
 # Binairies
 src/client/ube
 src/engine/engine-tests
+
+# Dists
+ube-*.*

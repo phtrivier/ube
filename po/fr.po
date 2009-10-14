@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ube 0.1\n"
 "Report-Msgid-Bugs-To: phtrivier@yahoo.fr\n"
-"POT-Creation-Date: 2009-10-07 13:25+0200\n"
+"POT-Creation-Date: 2009-10-14 17:26+0200\n"
 "PO-Revision-Date: 2009-10-07 13:26+0200\n"
 "Last-Translator: Pierre-Henri Trivier <phtrivier@yahoo.fr>\n"
 "Language-Team: French\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: src/engine/greeter.cpp:10
+#: src/engine/greeter.cpp:19 src/engine/greeter.cpp:28
 #, c-format
 msgid "Hello %s!!\n"
 msgstr "Bonjour %s!!\n"
