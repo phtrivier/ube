@@ -16,6 +16,6 @@ po/POTFILES
 *.o
 src/client/.deps/*
 src/engine/.deps/*
-*.a
+src/*.a
 src/client/ube
 stamp-h1
