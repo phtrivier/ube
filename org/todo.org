@@ -1,6 +1,5 @@
 * Things to do on the project
-
-** Setup the initial project [8/9]
+** Setup the initial project [8/10]
    - [X] add COPYING files.
    - [X] Setup github project.
    - [X] Add basic SConstruct / Autotools support.
@@ -12,15 +11,18 @@
    - [X] Add SDL support, make sure I can open a window in the main.
    - [ ] Add Lua support, make sure I can load a lua file an execute
      its content (assuming the file is in /share/ or something like that ...
+   - [ ] Replace SDL support with SFML support (seems to be funnier to use...)
 	 
 ** Compile project under Win32
-   - [ ] Install SCons under windows.
-   - [ ] Install MinGW under windows (to compile..)
-   - [ ] Add Win32 version of gtest
+   - [ ] Install cross-compilator
+   - [ ] Setup libs for cross compilation
+   - [ ] Add Win32 version of gtest & gmock
    - [ ] Add Win32 version of i18n support
-   - [ ] Add Win32 version of SDL
-   - [ ] Modify SConstruct to be able to build the basic example
+   - [ ] Add Win32 version of SDL (or SFML ?)
+   - [ ] Cross compile windows binary
+   - [ ] Find a way to make i18n work when cross compiling
    - [ ] Make test pass
+   - [ ] Install a vmware to run the binairy under windows (or use wine ... or another machine .. whatever)
 
 ** Make project deb package under linux
    - [ ] Add 'packaging' folders, with whatever is needed to build packages
