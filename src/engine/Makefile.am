@@ -2,11 +2,16 @@ lib_LIBRARIES=libube-engine.a
 libube_engine_a_SOURCES=greeter.hpp greeter.cpp \
 	gettext.h lua_helper.hpp \
 	amplifier.hpp \
-	puzzle.hpp puzzle.cpp lua_puzzle.hpp \
-	lua_script_runner.hpp lua_script_runner.cpp \
-	lua/story_lib.lua
+	puzzle.hpp puzzle.cpp lua_puzzle.hpp lua_puzzle.cpp\
+	lua_script_runner.hpp lua_script_runner.cpp
 
-AM_CPPFLAGS=-DSRCDIR=\"${srcdir}\" -Wall -Werror \
+# TODO : Find a way to make sure this file is available ...
+luadir=${datadir}/@PACKAGE@/lua
+lua_DATA=lua/story_lib.lua
+
+AM_CPPFLAGS=-DSRCDIR=\"${srcdir}\" \
+	-DLUADIR=\"${luadir}\" \
+	-Wall -Werror \
 	-I$(srcdir)/../../include
 
 # There is one program that aggreatates all tests cases
@@ -22,7 +27,8 @@ engine_tests_LDADD=libube-engine.a -L$(top_srcdir)/lib -lgtest -lgmock -llua -ld
 # You should include here any local file that a test program.
 # Otherwise it won't be included in the distribution, 
 # and make distcheck will fail.
-EXTRA_DIST=tests/lua/lua_script_runner_test_story1.lua
+EXTRA_DIST=${lua_DATA} \
+	tests/lua/lua_script_runner_test_story1.lua
 
 # This means engine-tests is run when using 'make check'.
 TESTS = engine-tests

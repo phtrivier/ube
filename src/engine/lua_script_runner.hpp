@@ -16,22 +16,12 @@ class Puzzle;
 
 class LuaScriptRunner {
   lua_State *L;
+  std::string lua_base_prefix;
 public:
-  LuaScriptRunner() {
-    L = lua_open();
-    luaL_openlibs(L);
-
-    // TODO : Load a standard lua file (story.lua)
-    try_and_load_file("lua/story_lib.lua");
-    // TODO : Register functions from the "puzzle" lib
-    lua_pushcfunction(L, lua_puzzle_set_name);
-    lua_setglobal(L, "puzzle_set_name");
-  }
-  ~LuaScriptRunner() {
-    lua_close(L);
-  }
+  LuaScriptRunner(std::string iLua_base_prefix=LUADIR); 
+  ~LuaScriptRunner();
   int error(const char *fmt, ...);
-  void try_and_load_file(std::string file_name);
+  void try_and_load_file(std::string file_name, std::string prefix=LUADIR);
   void visit_cell(std::string cell_name, Puzzle & iPuzzle);
 };
 

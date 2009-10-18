@@ -83,6 +83,9 @@ AC_DEFUN([_AX_LUA_OPTS],
 
 AC_DEFUN([AX_WITH_LUA],
   [_AX_LUA_OPTS
+  # Fix(pht) : when with_lua_prefix is defined, the compiler expects the binary
+  # and the includes to be under with_lua_prefix ... however on my debian install
+  # it does not work this way !!
   # if test "x$with_lua_prefix" = x; then
   #   lua_search_path="$PATH"
   # else
@@ -104,6 +107,7 @@ AC_DEFUN([_AX_LUA_VERSIONS],
     lua_max_version=1000
   fi])
 
+dnl Checks the lua version by launching the 'lua' executable with -v option.
 AC_DEFUN([AX_LUA_VERSION],
   [_AX_LUA_OPTS
   AC_MSG_CHECKING([Lua version is in range $1 <= v < $2])
@@ -135,6 +139,9 @@ AC_DEFUN([AX_LUA_VERSION],
     AC_MSG_FAILURE([Lua version not in desired range.])
   fi])dnl
 
+dnl Look for headers lua.h and lualib.h.
+dnl Unfortunately, for some reason, lua's headers or not anywhere
+dnl in the expected path of AC_CHECK_HEADERS ... 
 AC_DEFUN([AX_LUA_HEADERS],
   [_AX_LUA_OPTS
   if test "x$with_lua_prefix" != x; then

@@ -13,6 +13,9 @@ using namespace std;
 #include <stdio.h>
 #include <stdlib.h> /* for exit() */
 
+#include "lua_script_runner.hpp"
+
+
 int main(int argc, char ** argv) {
   
   // printf("This is %s. Thanks for watching\n", PACKAGE_STRING);
@@ -35,7 +38,7 @@ int main(int argc, char ** argv) {
   /* Initialize defaults, Video and Audio subsystems */
   if((SDL_Init(SDL_INIT_VIDEO|SDL_INIT_AUDIO)==-1)) { 
     printf("Could not initialize SDL: %s.\n", SDL_GetError());
-    exit(-1);
+    return -1;
   }
   
   /* Clean up on exit */
@@ -47,7 +50,11 @@ int main(int argc, char ** argv) {
     exit(1);
   }
   
-  sleep(5);
+  for (int i = 0 ; i < 100000 ; i++) {
+    cout << ".";
+  }
 
-  exit(0);
+  LuaScriptRunner runner;
+
+  return 0;
 }

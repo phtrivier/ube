@@ -10,10 +10,12 @@ namespace {
   };
 
   TEST_F(LuaScriptRunnerTest, CanRunScriptOnPuzzle) {
-    // Create a scriptRunner
-    LuaScriptRunner runner;
+    // Create a scriptRunner (Note 
+    std::string prefix = SRCDIR;
+    prefix.append("/lua");
+    LuaScriptRunner runner(prefix);
     // Load a known story file
-    runner.try_and_load_file("tests/lua/lua_script_runner_test_story1.lua");
+    runner.try_and_load_file("tests/lua/lua_script_runner_test_story1.lua",SRCDIR);
     // Create a puzzle with a given name
     Puzzle p("foo");
     // Check the name
