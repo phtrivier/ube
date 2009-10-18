@@ -17,7 +17,8 @@ int main(int argc, char ** argv) {
   
   // printf("This is %s. Thanks for watching\n", PACKAGE_STRING);
 
-  cout << "For info : " << LOCALEDIR << endl;
+  cout << "For info, LOCALEDIR is  : " << LOCALEDIR << endl;
+  cout << "For info, DATADIR is  : " << DATADIR << endl;
   
   setlocale (LC_ALL, "");
   bindtextdomain (PACKAGE, LOCALEDIR);

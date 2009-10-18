@@ -15,7 +15,9 @@ AC_CONFIG_FILES([
    	src/Makefile
    	src/engine/Makefile
    	src/client/Makefile
-	po/Makefile.in	
+	po/Makefile.in
+	data/Makefile
+	data/images/Makefile
 ])
 AC_OUTPUT
 		
