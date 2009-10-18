@@ -33,3 +33,5 @@ build/*
 
 # Dists
 ube-*.*
+
+sandbox/*
