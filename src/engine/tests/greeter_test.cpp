@@ -4,6 +4,9 @@
 using ::testing::AtLeast;
 
 #include "tests/mock_amplifier.hpp"
+#include <iostream>
+#include <fstream>
+using namespace std;
 
 namespace {
 
@@ -50,6 +53,16 @@ namespace {
 
     Greeter g("pht");
     g.shout(mock);
+  }
+
+  TEST_F(GreeterTest, CouldUseLocalFileIfItWanted) {
+    cout << "For info, SRCDIR is " << SRCDIR << endl;
+
+    char buffer[256];
+    sprintf(buffer, "%s/tests/script1.lua", SRCDIR);
+    ifstream f;
+    f.open(buffer);
+    EXPECT_TRUE(f.good());
   }
 
 } // Namespace
