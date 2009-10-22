@@ -12,7 +12,8 @@ lua_DATA=lua/story_lib.lua
 AM_CPPFLAGS=-DSRCDIR=\"${srcdir}\" \
 	-DLUADIR=\"${luadir}\" \
 	-Wall -Werror \
-	-I$(srcdir)/../../include
+	-I$(srcdir)/../../include \
+	$(LUA_INCLUDE)
 
 # There is one program that aggreatates all tests cases
 check_PROGRAMS = engine-tests

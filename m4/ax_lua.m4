@@ -83,14 +83,11 @@ AC_DEFUN([_AX_LUA_OPTS],
 
 AC_DEFUN([AX_WITH_LUA],
   [_AX_LUA_OPTS
-  # Fix(pht) : when with_lua_prefix is defined, the compiler expects the binary
-  # and the includes to be under with_lua_prefix ... however on my debian install
-  # it does not work this way !!
-  # if test "x$with_lua_prefix" = x; then
-  #   lua_search_path="$PATH"
-  # else
-  #   lua_search_path="$with_lua_prefix/bin"
-  # fi
+  if test "x$with_lua_prefix" = x; then
+     lua_search_path="$PATH"
+  else
+    lua_search_path="$with_lua_prefix/bin"
+  fi
   lua_search_path="$PATH"	
   if test "x$LUA" = x; then
     AC_PATH_PROG([LUA], [lua$with_lua_suffix], [], [$lua_search_path])
@@ -149,7 +146,9 @@ AC_DEFUN([AX_LUA_HEADERS],
   fi
   LUA_OLD_CPPFLAGS="$CPPFLAGS"
   CPPFLAGS="$CPPFLAGS $LUA_INCLUDE"
-  AC_CHECK_HEADERS([lua.h lualib.h])
+  AC_CHECK_HEADERS([lua.h lualib.h],
+		   [AC_SUBST(LUA_INCLUDE)],
+		   [AC_MSG_ERROR("lua includes could not be found. You might need to use --with-lua-prefix")])			  
   CPPFLAGS="$LUA_OLD_CPPFLAGS"])dnl
 
 AC_DEFUN([AX_LUA_LIBS],
@@ -161,7 +160,8 @@ AC_DEFUN([AX_LUA_LIBS],
   AC_CHECK_LIB([dl], [dlopen], [lua_extra_libs="$lua_extra_libs -ldl"], [])
   AC_CHECK_LIB([lua$with_lua_suffix],
     [lua_call],
-    [LUA_LIB="$LUA_LIB -llua$with_lua_suffix $lua_extra_libs"],
+    [LUA_LIB="$LUA_LIB -llua$with_lua_suffix $lua_extra_libs"
+     AC_SUBST(LUA_LIB)]
     [],
     [$LUA_LIB $lua_extra_libs])])dnl
 

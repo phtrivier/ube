@@ -1,0 +1,3 @@
+To configure on a debian system, with lua5.1 installed
+
+../configure --with-lua-prefix=/usr/include/lua5.1 --with-lua-suffix=5.1

@@ -10,11 +10,12 @@ AM_CPPFLAGS= -DLOCALEDIR=\"$(datadir)/locale\" \
 	-Wall -Werror \
 	-I$(srcdir)/../engine  \
 	$(SDL_CFLAGS) \
+	$(LUA_INCLUDE)
 	-I$(srcdir)/../../include
 
-LUA_LIBS=-L$(top_srcdir)/lib -llua -ldl
+# LUA_LIBS=-L$(top_srcdir)/lib -llua -ldl
 
-ube_LDADD=../engine/libube-engine.a $(SDL_LIBS) $(LUA_LIBS)
+ube_LDADD=../engine/libube-engine.a $(LUA_LIB) $(SDL_LIBS) 
 
 # FIXME(pht) : I need the libintl to be passed to the windows binaries, also ... and it seems to be null for the moment !!
 # ube_LDADD=$(srcdir)/../engine/libube-engine.a -L$(LIBINTL)
