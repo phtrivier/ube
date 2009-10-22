@@ -9,17 +9,15 @@
 #include <cstdio>
 using namespace std;
 
-#include "SDL.h"   /* All SDL apps need this */
+#include "SDL.h"  
+
 #include <stdio.h>
 #include <stdlib.h> /* for exit() */
 
 #include "lua_script_runner.hpp"
 
-
 int main(int argc, char ** argv) {
   
-  // printf("This is %s. Thanks for watching\n", PACKAGE_STRING);
-
   cout << "For info, LOCALEDIR is  : " << LOCALEDIR << endl;
   cout << "For info, DATADIR is  : " << DATADIR << endl;
   
@@ -28,7 +26,7 @@ int main(int argc, char ** argv) {
   textdomain (PACKAGE);
 
   // Just for a lest ... normally I have done everything required ... 
-  printf(_("Hello %s. What's the craic today ?\n"), "prout");
+  fprintf(stdout, _("Hello %s. What's the craic today ?\n"), "prout");
 
   Greeter g("PHT");
   g.greet();

@@ -1,3 +1,17 @@
 To configure on a debian system, with lua5.1 installed
 
 ../configure --with-lua-prefix=/usr/include/lua5.1 --with-lua-suffix=5.1
+
+-- 
+
+To cross compile, assuming you have installed mingw-cross-env-2.8, and package sdl lua gettext  
+
+export M32=/home/phtrivier/sandbox/src/mingw-cross-env-2.8/usr/i386-mingw32msvc
+export PATH=$M32/bin:$PATH
+mkdir build-win32
+cd build-win32
+../configure --host=i386-mingw32msvc --build=i586-pc-linux --with-lua-prefix=$M32/include
+
+This should build a nice cross compiled version.
+
+Next things to figure out : how do you set DATADIR to something that makes sense on a windows machine ? 
