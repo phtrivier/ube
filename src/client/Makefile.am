@@ -1,5 +1,7 @@
 bin_PROGRAMS = ube
-ube_SOURCES = ube.cpp gettext.h
+ube_SOURCES = ube.cpp \
+	gettext.h \
+	sdl_app.hpp sdl_app.cpp	
 
 # TODO : Find a way not to have to repeat this ... 
 luadir=${datadir}/@PACKAGE@/lua
@@ -12,10 +14,4 @@ AM_CPPFLAGS= -DLOCALEDIR=\"$(datadir)/locale\" \
 	$(LUA_INCLUDE) \
 	$(SDL_CFLAGS) 
 
-
-# LUA_LIBS=-L$(top_srcdir)/lib -llua -ldl
-
 ube_LDADD=../engine/libube-engine.a $(LUA_LIB) $(LIBINTL) $(SDL_LIBS)
-
-# FIXME(pht) : I need the libintl to be passed to the windows binaries, also ... and it seems to be null for the moment !!
-# ube_LDADD=$(srcdir)/../engine/libube-engine.a -L$(LIBINTL)
