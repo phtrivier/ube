@@ -9,6 +9,11 @@ SDL_VERSION=1.2.13
 AM_PATH_SDL($SDL_VERSION, :,
             AC_MSG_ERROR([*** SDL version $SDL_VERSION not found!]))
 
+# Check for SDL_image library
+AC_CHECK_LIB(SDL_image, IMG_LoadPNG_RW, , 
+	     AC_MSG_ERROR([*** Unable to find SDL_image libary with PNG support
+	     		       (http://www.libsdl.org/projects/SDL_image/)]))
+
 # You might need to define --with-lua-prefix and --with-lua-suffix to use this
 AX_LUA_HEADERS
 AX_LUA_LIBS
