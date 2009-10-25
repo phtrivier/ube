@@ -29,9 +29,11 @@ src/client/ube
 src/engine/engine-tests
 
 # Builds
-build/*
+build*/*
 
 # Dists
 ube-*.*
 
 sandbox/*
+
+**/*.pyc
