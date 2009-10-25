@@ -1,0 +1,10 @@
+* client
+ - prepare a test suite, gmock/gtest-enabled
+* file_checker
+ - write a "concrete" file checker (make it testable by checking for local files that you just created ... or for itself)
+ - write a mock file checker
+* resource manager
+ - write a test, using a mock file checker
+ - note that the file_checker should only be called once; we don't want to test for folder presence 
+   everytime, after a while we can simply expect things to exists ...
+

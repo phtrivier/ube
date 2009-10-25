@@ -48,10 +48,6 @@ int main(int argc, char ** argv) {
     exit(1);
   }
   
-  for (int i = 0 ; i < 100000 ; i++) {
-    cout << ".";
-  }
-
   LuaScriptRunner runner;
 
   return 0;
