@@ -1,0 +1,97 @@
+; UBE Installer
+
+;--------------------------------
+;Include Modern UI
+
+  !include "MUI2.nsh"
+
+;--------------------------------
+;General
+
+  ;Name and file
+  Name "Ube"
+  OutFile "Setup.exe"
+
+  ;Default installation folder
+  InstallDir "$PROGRAMFILES\ube"
+  
+  ;Get installation folder from registry if available
+  InstallDirRegKey HKCU "Software\ube" ""
+
+  ;Request application privileges for Windows Vista
+  RequestExecutionLevel user
+
+;--------------------------------
+;Interface Settings
+
+  !define MUI_ABORTWARNING
+
+;--------------------------------
+;Pages
+
+;  !insertmacro MUI_PAGE_LICENSE "${NSISDIR}\Docs\Modern UI\License.txt"
+  !insertmacro MUI_PAGE_COMPONENTS
+  !insertmacro MUI_PAGE_DIRECTORY
+  !insertmacro MUI_PAGE_INSTFILES
+  
+  !insertmacro MUI_UNPAGE_CONFIRM
+  !insertmacro MUI_UNPAGE_INSTFILES
+  
+;--------------------------------
+;Languages
+ 
+  !insertmacro MUI_LANGUAGE "English"
+; TODO : Add French if possible
+
+;--------------------------------
+;Installer Sections
+
+Section "Ube" SecUbe
+
+  SetOutPath "$INSTDIR"
+  
+  ;ADD YOUR OWN FILES HERE...
+  File /r ube_w32/* 
+
+  ;Store installation folder
+  WriteRegStr HKCU "Software\ube" "" $INSTDIR
+  
+  ;Create uninstaller
+  WriteUninstaller "$INSTDIR\Uninstall.exe"
+
+  SetOutPath "$INSTDIR\bin" ;
+
+  CreateDirectory "$SMPROGRAMS\ube"
+  createShortCut "$SMPROGRAMS\ube\ube.lnk" "$INSTDIR\bin\ube"
+
+  createShortCut "$SMPROGRAMS\ube\uninstall.lnk" "$INSTDIR\uninstall.exe"
+
+SectionEnd
+
+;--------------------------------
+;Descriptions
+
+  ;Language strings
+  LangString DESC_SecUbe ${LANG_ENGLISH} "A test section."
+
+  ;Assign language strings to sections
+  !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
+    !insertmacro MUI_DESCRIPTION_TEXT ${SecUbe} $(DESC_SecUbe)
+  !insertmacro MUI_FUNCTION_DESCRIPTION_END
+
+;--------------------------------
+;Uninstaller Section
+
+Section "Uninstall"
+
+  Delete "$INSTDIR\*"
+
+  RMDir "$INSTDIR"
+
+  Delete "$SMPROGRAMS\ube\*"
+
+  RMDir "$SMPROGRAMS\ube"
+
+  DeleteRegKey /ifempty HKCU "Software\ube"
+
+SectionEnd
