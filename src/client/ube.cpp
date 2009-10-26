@@ -64,7 +64,7 @@ int main(int argc, char ** argv) {
   string fileName = resolver.getImageFileName("gnu.png");
   cout << "Will look for image in path " << fileName << endl;
 
-  temp = IMG_LoadPNG_RW(fileName.c_str());
+  temp = IMG_Load(fileName.c_str());
   if (temp == NULL) {
     printf("Unable to load bitmap: %s\n", SDL_GetError());
     return 1;
