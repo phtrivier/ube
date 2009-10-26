@@ -21,7 +21,9 @@ AM_CPPFLAGS= -DLOCALEDIR=\"${datadir}/locale\" \
 	$(SDL_CFLAGS) \
 	$(LUA_INCLUDE)
 
-ube_LDADD=../engine/libube-engine.a libube-client.a $(LUA_LIB) $(LIBINTL) $(SDL_LIBS) -lSDL_image -lpng -ljpeg -ltiff -lz
+SDL_IMAGE_LIBS = -lSDL_image -lpng -ltiff -ljpeg -lz
+
+ube_LDADD=../engine/libube-engine.a libube-client.a $(LUA_LIB) $(LIBINTL) $(SDL_LIBS) $(SDL_IMAGE_LIBS)
 
 check_PROGRAMS=client-tests
 client_tests_SOURCES=tests/client_tests.cpp \
