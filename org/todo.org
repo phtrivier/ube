@@ -1,5 +1,5 @@
 * Things to do on the project
-** Setup the initial project [8/10]
+** Setup the initial project [9/9]
    - [X] add COPYING files.
    - [X] Setup github project.
    - [X] Add basic SConstruct / Autotools support.
@@ -9,32 +9,28 @@
    - [X] Add i18n support, make sure I can display a string in the
      proper locale (through compiler switchs if necessary).
    - [X] Add SDL support, make sure I can open a window in the main.
-   - [ ] Add Lua support, make sure I can load a lua file an execute
+   - [X] Add Lua support, make sure I can load a lua file an execute
      its content (assuming the file is in /share/ or something like that ...
-   - [ ] Replace SDL support with SFML support (seems to be funnier to use...)
 	 
-** Compile project under Win32
-   - [ ] Install cross-compilator
-   - [ ] Setup libs for cross compilation
-   - [ ] Add Win32 version of gtest & gmock
-   - [ ] Add Win32 version of i18n support
-   - [ ] Add Win32 version of SDL (or SFML ?)
-   - [ ] Cross compile windows binary
-   - [ ] Find a way to make i18n work when cross compiling
-   - [ ] Make test pass
-   - [ ] Install a vmware to run the binairy under windows (or use wine ... or another machine .. whatever)
+** Compile project under Win32 [8/9]
+   - [X] Install cross-compilator
+   - [X] Setup libs for cross compilation
+   - [X] Add Win32 version of i18n support
+   - [X] Add Win32 version of SDL (or SFML ?)
+   - [X] Cross compile windows binary
+   - [X] Find a way to make i18n work when cross compiling
+   - [X] Install a vmware to run the binairy under windows (or use wine ... or another machine .. whatever)
+   - [X] Write a basic NSIS installer (and cross compile to a windows Setup.exe)
+   - [ ] Write a shell script to automate creating the exe and the NSIS installer (playing with the PATH, the configure options and stuff)
+   - [ ] See if the version of the software can be integrated in the Setup.exe name, or something
 
-** Make project deb package under linux
-   - [ ] Add 'packaging' folders, with whatever is needed to build packages
-   - [ ] Setup scons task to create "debian-like architecture
-   - [ ] Write debian configuration file
-   - [ ] Learn how I can write a decent 'source' package ...
-   - [ ] Add scons task to create a debian package and an 'apt' folder
-
-** Make Win32 installer using NSIS
-   - [ ] Install NSIS under windows
-   - [ ] Choose Windows icon
-   - [ ] Write installer that install all the necessary libs, and the binairies
+** Make project deb package under linux [/]
+   - [ ] Make distcheck work again ; it fails at finding the 
+         lua headers because it runs autoconf by itsef without
+         passing the releavant options ... 
+   - [ ] Read the debian new maintainer guide
+   - [ ] Do the fracking package !
+   - [ ] Write a shell script to automate creating the distrib and the package
 
 ** Game engine features
 
