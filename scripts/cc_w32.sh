@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # The MW32 path should be the path where syou installed mingw-cross-env.
 # Version 2.9 at least is required.
 
