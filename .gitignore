@@ -30,7 +30,8 @@ src/client/ube
 src/engine/engine-tests
 
 # Builds
-build*/*
+builds*/*
+Setup.exe
 
 # Dists
 ube-*.*
