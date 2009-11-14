@@ -4,20 +4,37 @@ h1. Folder organisation
 
  - src : C++ implementation files for the code
    - engine : source code for the engine of the game (compiled as libube-engine)
-     - test : source code for the Google Test unit test ; compiled into and executable ube-engine-test
+     - tests : source code for the Google Test unit test ; compiled into and executable ube-engine-test
+     - lua : lua files that are part of the engine
    - editor : source code for the associated game editor
-     - test : source code for the Google Test unit tests
+     - tests : source code for the Google Test unit tests
    - client : source code for the game client (some parts might be compiled as libube-client)
+     - tests : source code for the game client's specific parts.
 
- - lib : third party libraries (TBD). This folder should be persistent. It might contain 'hard-imported' libs (gtest ? sdl?)
-   - linux : third-party libs for linux (both for engine and editor)
-   - win32 : third-party libs for windows
+ - data : run-time data
+   - images : images in PNG format
+   - fonts : TTF fonts
+   - lua (TBD) : run-time lua scripts that are not part of the engine
+     - adventures : set of levels that ship with the game
+       - main : main set of level that ship with the game
+   (Note : the layout is only here to make it possible to ship several set of levels with the game, should
+   I want to go that road again)
 
- - build : results of builds (TBD). This folder shoudl be cleanable by 'scons -c'.
-   - linux : binairies and libraries for build under linux
-   - win32 : binairies and libraries for build under win32
+ - lib : third party libraries. This folder should be persistent. It might contain 'hard-imported' libs (gtest ? sdl?)
 
-TODO : Where do I put i18n files ? 
+ - include : includes for third party libs.
+
+ - po : po files for gettext
+
+ - scripts : usefull scripts. In particular, scripts/cc_linux.sh and scripts/cc_w32.sh are used to help in compilation.
+   Those scripts should be launched from the top level folder.
+
+ - builds : results of builds (This folder is generated).
+   - linux/tmp_XXXXXX : temporary folder for the build. configure is run from this folder. It is deleted at the end of a build.
+   - linux/ube_XXXXXX : result of a build AND a local installation
+   - linux/latest : symbolic link to the latest successfull build and installation
+
+   - w32/* : same structure for windows builds
 
  - doc : documentation (will be written in some markup language or another) (TBD)
    - src : source files for the manual
