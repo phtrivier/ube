@@ -1,5 +1,5 @@
 * Things to do on the project
-** Setup the initial project [8/10]
+** Setup the initial project [9/10]
    - [X] add COPYING files.
    - [X] Setup github project.
    - [X] Add basic SConstruct / Autotools support.
@@ -9,39 +9,31 @@
    - [X] Add i18n support, make sure I can display a string in the
      proper locale (through compiler switchs if necessary).
    - [X] Add SDL support, make sure I can open a window in the main.
-   - [ ] Add Lua support, make sure I can load a lua file an execute
-     its content (assuming the file is in /share/ or something like that ...
-   - [ ] Replace SDL support with SFML support (seems to be funnier to use...)
+   - [X] Add Lua support, make sure I can load a lua file an execute
+     its content (assuming the file is in /share/ or something like that ...)
+   - [ ] Set up font loading using sdl_ttf (add a font to the project, use it to display some
+	 translated text !!)
 	 
-** Compile project under Win32
-   - [ ] Install cross-compilator
-   - [ ] Setup libs for cross compilation
-   - [ ] Add Win32 version of gtest & gmock
-   - [ ] Add Win32 version of i18n support
-   - [ ] Add Win32 version of SDL (or SFML ?)
-   - [ ] Cross compile windows binary
-   - [ ] Find a way to make i18n work when cross compiling
-   - [ ] Make test pass
-   - [ ] Install a vmware to run the binairy under windows (or use wine ... or another machine .. whatever)
+** Compile project under Win32 [1/3]
+   - [ ] Configure mingw-cross-env to use all the required libs
+   - [X] set up a virtualbox machine to test the program
+   - [ ] make a shell script to do the compilation
 
-** Make project deb package under linux
-   - [ ] Add 'packaging' folders, with whatever is needed to build packages
-   - [ ] Setup scons task to create "debian-like architecture
-   - [ ] Write debian configuration file
-   - [ ] Learn how I can write a decent 'source' package ...
-   - [ ] Add scons task to create a debian package and an 'apt' folder
+** Make project deb package under linux [1/3]
+   - [X] Make an initial deb package following the debian maintainer manual
+   - [ ] Refollow the debian maintainer manual to create a debian package from the sources (there is a version of
+	 the control file somewhere, but it was done a long time ago)
+   - [ ] Automate the process of creating the debian package
 
-** Make Win32 installer using NSIS
-   - [ ] Install NSIS under windows
-   - [ ] Choose Windows icon
-   - [ ] Write installer that install all the necessary libs, and the binairies
+** Make Win32 installer using NSIS [2/4]
+   - [X] Use NSIS version from mingw-cross-env
+   - [X] Write installer that install all the necessary libs, and the binairies
+   - [ ] Automate building the win32 version along with the installer
+   - [ ] Add a windows icon for the executable
 
 ** Game engine features
-
 *** Iteration 1
-
 Demo : display a grid with a entry and an exit, in an SDL window.
-
 **** BE
      - [ ] Notion of a grid, entry, exit.
      - [ ] Grid is stored in a Lua script (as a simple structure)

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ube 0.1\n"
 "Report-Msgid-Bugs-To: phtrivier@yahoo.fr\n"
-"POT-Creation-Date: 2009-10-25 18:58+0100\n"
+"POT-Creation-Date: 2009-10-27 21:09+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,7 +21,7 @@ msgstr ""
 msgid "Hello %s!!\n"
 msgstr ""
 
-#: src/client/ube.cpp:29
+#: src/client/ube.cpp:62
 #, c-format
 msgid "Hello %s. What's the craic today ?\n"
 msgstr ""

@@ -47,6 +47,19 @@ namespace {
     ASSERT_EQ("baz/share/ube/images/toto.png",pResolver_->getImageFileName("toto.png"));
   }
 
+  TEST_F(ResourceResolverTest, UsesAllPrefixToLookForFonts) {
+    EXPECT_CALL(checker_, isFolderPresent(StrEq("foo"))).WillOnce(Return(false));
+    EXPECT_CALL(checker_, isFolderPresent(StrEq("bar"))).WillOnce(Return(false));
+    EXPECT_CALL(checker_, isFolderPresent(StrEq("baz"))).WillOnce(Return(true));
+
+    const char* prefixes[3] = {"foo", "bar", "baz"};
+    pResolver_->setPrefixes(prefixes,3);
+    
+    ASSERT_EQ("baz/share/ube/fonts/Vera.ttf",pResolver_->getFontFileName("Vera.ttf"));
+    // No checks the second time
+    ASSERT_EQ("baz/share/ube/fonts/Vera.ttf",pResolver_->getFontFileName("Vera.ttf"));
+  }
+
   TEST_F(ResourceResolverTest, ChecksFoldersAsLittleAsPossible) {
     EXPECT_CALL(checker_, isFolderPresent(StrEq("foo"))).WillOnce(Return(false));
     EXPECT_CALL(checker_, isFolderPresent(StrEq("bar"))).WillOnce(Return(false));

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ube 0.1\n"
 "Report-Msgid-Bugs-To: phtrivier@yahoo.fr\n"
-"POT-Creation-Date: 2009-10-25 18:58+0100\n"
+"POT-Creation-Date: 2009-10-27 21:09+0100\n"
 "PO-Revision-Date: 2009-10-07 13:26+0200\n"
 "Last-Translator: Pierre-Henri Trivier <phtrivier@yahoo.fr>\n"
 "Language-Team: French\n"
@@ -21,7 +21,7 @@ msgstr ""
 msgid "Hello %s!!\n"
 msgstr "Bonjour %s!!\n"
 
-#: src/client/ube.cpp:29
+#: src/client/ube.cpp:62
 #, c-format
 msgid "Hello %s. What's the craic today ?\n"
 msgstr "Bonjour %s. Quoi de neuf aujourdh'ui ?\n"

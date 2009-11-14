@@ -15,6 +15,10 @@ AC_SEARCH_LIBS(IMG_LoadPNG_RW, SDL_image, ,
 	     		      Are you cross compiling ?
 	     		       (http://www.libsdl.org/projects/SDL_image/)]))
 
+AC_SEARCH_LIBS(TTF_OpenFontRW, SDL_ttf, , 
+ 	     AC_MSG_WARN([*** Unable to find SDL_ttf libary.
+	     		      Are you cross compiling ?]))
+
 # You might need to define --with-lua-prefix and --with-lua-suffix to use this
 AX_LUA_HEADERS
 AX_LUA_LIBS
@@ -28,6 +32,7 @@ AC_CONFIG_FILES([
 	po/Makefile.in
 	data/Makefile
 	data/images/Makefile
+	data/fonts/Makefile
 ])
 AC_OUTPUT
 		

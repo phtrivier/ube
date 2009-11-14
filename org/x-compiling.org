@@ -1,0 +1,7 @@
+works : 
+
+i686-pc-mingw32-g++  -g -O2   -o ube.exe ube.o ../engine/libube-engine.a libube-client.a -llua  -lm -lintl -liconv -L/home/phtrivier/src/mingw-cross-env-2.9/usr/i686-pc-mingw32/lib -lmingw32 -lSDLmain -lSDL -lwinmm -mwindows -lSDL_image -lpng -ltiff -ljpeg -lz
+
+does not work : 
+
+i686-pc-mingw32-g++  -g -O2   -o ube.exe ube.o ../engine/libube-engine.a libube-client.a -llua  -lm -lintl -liconv -L/home/phtrivier/src/mingw-cross-env-2.9/usr/i686-pc-mingw32/lib -lmingw32 -lSDLmain -lSDL -lwinmm -mwindows -lSDL_image -lpng -ljpeg -ltiff -lz 

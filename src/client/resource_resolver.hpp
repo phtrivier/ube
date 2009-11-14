@@ -46,6 +46,9 @@ class ResourceResolver {
   // Clear the prefixes allocated in the prefixes_ vector.
   void clearPrefixes();
 
+  // Utility functions to look for a kind of resource
+  std::string getResFileName(const char *iResType, const char * iResName);
+
 public:
   ResourceResolver(const AbstractFileChecker & iChecker) : pChecker_(&iChecker) {
     pPrefix_ = NULL;
@@ -62,14 +65,24 @@ public:
   std::string getLocaleDir();
 
   /**
-   * Gives the expected position of an image.
+   * Gives the expected location of an image file.
    * 
    * Under linux, this should be under PREFIX/share/ube/images.
    * Under windows, this should be under ../share/ube/images.
    *
-   * @param iImageName name of the image, with prefix (eg "foo.png")
+   * @param iImageName name of the image, with suffix (eg "foo.png")
    */
   std::string getImageFileName(const char * iImageName);
+
+  /**
+   * Gives the expected location of a font file
+   * 
+   * Under linux, this should be under PREFIX/share/ube/fonts.
+   * Under windows, this should be under ../share/ube/fonts.
+   *
+   * @param iFontName name of the font, with suffix (eg "Vera.ttf")
+   */
+  std::string getFontFileName(const char * iFontName);
 
   // TODO : Same thing with 'standard lua scripts'
 

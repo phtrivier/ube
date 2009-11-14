@@ -72,8 +72,22 @@ ResourceResolver::getLocaleDir()
 string 
 ResourceResolver::getImageFileName(const char * iImageName) 
 {
+  return getResFileName("images", iImageName);
+}
+
+string 
+ResourceResolver::getFontFileName(const char * iFontName) 
+{
+  return getResFileName("fonts", iFontName);
+}
+
+string
+ResourceResolver::getResFileName(const char *iResType, const char * iResName)
+{
   string res = getSafePrefix();
-  res.append("share/ube/images/");
-  res.append(iImageName);
+  res.append("share/ube/");
+  res.append(iResType);
+  res.append("/");
+  res.append(iResName);
   return res;
 }
