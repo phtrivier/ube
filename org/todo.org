@@ -1,5 +1,5 @@
 * Things to do on the project
-** Setup the initial project [9/10]
+** Setup the initial project [9/9]
    - [X] add COPYING files.
    - [X] Setup github project.
    - [X] Add basic SConstruct / Autotools support.
@@ -30,6 +30,26 @@
    - [X] Write installer that install all the necessary libs, and the binairies
    - [ ] Automate building the win32 version along with the installer
    - [ ] Add a windows icon for the executable
+	 
+** Compile project under Win32 [8/9]
+   - [X] Install cross-compilator
+   - [X] Setup libs for cross compilation
+   - [X] Add Win32 version of i18n support
+   - [X] Add Win32 version of SDL (or SFML ?)
+   - [X] Cross compile windows binary
+   - [X] Find a way to make i18n work when cross compiling
+   - [X] Install a vmware to run the binairy under windows (or use wine ... or another machine .. whatever)
+   - [X] Write a basic NSIS installer (and cross compile to a windows Setup.exe)
+   - [ ] Write a shell script to automate creating the exe and the NSIS installer (playing with the PATH, the configure options and stuff)
+   - [ ] See if the version of the software can be integrated in the Setup.exe name, or something
+
+** Make project deb package under linux [/]
+   - [ ] Make distcheck work again ; it fails at finding the 
+         lua headers because it runs autoconf by itsef without
+         passing the releavant options ... 
+   - [ ] Read the debian new maintainer guide
+   - [ ] Do the fracking package !
+   - [ ] Write a shell script to automate creating the distrib and the package
 
 ** Game engine features
 *** Iteration 1
