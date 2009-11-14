@@ -1,35 +1,35 @@
-; UBE Installer
+# UBE Installer
 
-;--------------------------------
-;Include Modern UI
+#--------------------------------
+#Include Modern UI
 
   !include "MUI2.nsh"
 
-;--------------------------------
-;General
+#--------------------------------
+#General
 
-  ;Name and file
+  #Name and file
   Name "Ube"
-  OutFile "Setup.exe"
+  OutFile "../builds/w32/latest/Setup.exe"
 
-  ;Default installation folder
+  #Default installation folder
   InstallDir "$PROGRAMFILES\ube"
   
-  ;Get installation folder from registry if available
+  #Get installation folder from registry if available
   InstallDirRegKey HKCU "Software\ube" ""
 
-  ;Request application privileges for Windows Vista
+  #Request application privileges for Windows Vista
   RequestExecutionLevel user
 
-;--------------------------------
-;Interface Settings
+#--------------------------------
+#Interface Settings
 
   !define MUI_ABORTWARNING
 
-;--------------------------------
-;Pages
+#--------------------------------
+#Pages
 
-;  !insertmacro MUI_PAGE_LICENSE "${NSISDIR}\Docs\Modern UI\License.txt"
+#  !insertmacro MUI_PAGE_LICENSE "${NSISDIR}\Docs\Modern UI\License.txt"
   !insertmacro MUI_PAGE_COMPONENTS
   !insertmacro MUI_PAGE_DIRECTORY
   !insertmacro MUI_PAGE_INSTFILES
@@ -37,26 +37,26 @@
   !insertmacro MUI_UNPAGE_CONFIRM
   !insertmacro MUI_UNPAGE_INSTFILES
   
-;--------------------------------
-;Languages
+#--------------------------------
+#Languages
  
   !insertmacro MUI_LANGUAGE "English"
-; TODO : Add French if possible
+# TODO : Add French if possible
 
-;--------------------------------
-;Installer Sections
+#--------------------------------
+#Installer Sections
 
 Section "Ube" SecUbe
 
   SetOutPath "$INSTDIR"
   
-  ;ADD YOUR OWN FILES HERE...
-  File /r ube_w32/* 
+  #ADD YOUR OWN FILES HERE...
+  File /r ../builds/w32/latest/* 
 
-  ;Store installation folder
+  #Store installation folder
   WriteRegStr HKCU "Software\ube" "" $INSTDIR
   
-  ;Create uninstaller
+  #Create uninstaller
   WriteUninstaller "$INSTDIR\Uninstall.exe"
 
   SetOutPath "$INSTDIR\bin" ;
@@ -68,25 +68,23 @@ Section "Ube" SecUbe
 
 SectionEnd
 
-;--------------------------------
-;Descriptions
+#--------------------------------
+#Descriptions
 
-  ;Language strings
+  #Language strings
   LangString DESC_SecUbe ${LANG_ENGLISH} "A test section."
 
-  ;Assign language strings to sections
+  #Assign language strings to sections
   !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
     !insertmacro MUI_DESCRIPTION_TEXT ${SecUbe} $(DESC_SecUbe)
   !insertmacro MUI_FUNCTION_DESCRIPTION_END
 
-;--------------------------------
-;Uninstaller Section
+#--------------------------------
+#Uninstaller Section
 
 Section "Uninstall"
 
-  Delete "$INSTDIR\*"
-
-  RMDir "$INSTDIR"
+  RMDir /r "$INSTDIR"
 
   Delete "$SMPROGRAMS\ube\*"
 

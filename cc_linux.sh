@@ -14,4 +14,4 @@ mkdir -p $INSTALL_FOLDER
 autoreconf
 cd $BUILD_FOLDER
 ../../../configure --prefix $INSTALL_FOLDER --with-lua-prefix=/usr/include/lua5.1 --with-lua-suffix=5.1
-make && make install && rm -rf $BUILD_FOLDER && rm -rf $LATEST && ln -sf $INSTALL_FOLDER $LATEST
+make check && make install && rm -rf $BUILD_FOLDER && rm -rf $LATEST && ln -sf $INSTALL_FOLDER $LATEST

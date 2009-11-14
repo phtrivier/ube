@@ -20,3 +20,5 @@ autoreconf
 cd $BUILD_FOLDER
 ../../../configure --prefix $INSTALL_FOLDER --host=i686-pc-mingw32 --build=i686-pc-linux-gnu
 make && make install && rm -rf $BUILD_FOLDER && rm -rf $LATEST && ln -sf $INSTALL_FOLDER $LATEST
+cd $HERE
+makensis ./scripts/w32.nsis
