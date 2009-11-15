@@ -21,9 +21,9 @@ namespace {
 
   TEST_F(CellTest, IsEmptyBasedOnType) {
     Cell c(0,1, Cell::EMPTY);
-    ASSERT_EQ(0, c.getI());
-    ASSERT_EQ(1, c.getJ());
-    ASSERT_TRUE(c.isEmpty());
+    ASSERT_EQ(0, c.get_i());
+    ASSERT_EQ(1, c.get_j());
+    ASSERT_TRUE(c.is_empty());
   }
 
 } // Namespace

@@ -16,7 +16,7 @@ void Puzzle::ensure_valid_position(int iI, int iJ) const {
   }
 }
 
-void Puzzle::setDimensions(int iW, int iH) {
+void Puzzle::set_dimensions(int iW, int iH) {
 
   if (iW <= 0 || iH <= 0) {
     std::ostringstream msg;
@@ -36,15 +36,15 @@ void Puzzle::setDimensions(int iW, int iH) {
   }
 }
 
-void Puzzle::addCell(Cell * ipCell) {
+void Puzzle::add_cell(Cell * ipCell) {
   if (ipCell == NULL) {
     throw logic_error("Null Cell");
   }
-  ensure_valid_position(ipCell->getI(), ipCell->getJ());
-  cells_[ipCell->getI()][ipCell->getJ()] = ipCell;  
+  ensure_valid_position(ipCell->get_i(), ipCell->get_j());
+  cells_[ipCell->get_i()][ipCell->get_j()] = ipCell;  
 }
 
-Cell* Puzzle::getCellAt(int iI, int iJ) const {
+Cell* Puzzle::get_cell_at(int iI, int iJ) const {
   ensure_valid_position(iI, iJ);
   return cells_[iI][iJ];
 }

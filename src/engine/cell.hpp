@@ -29,27 +29,27 @@ public:
   Cell(int iI, int iJ, int iType) : i_(iI), j_(iJ), type_(iType) {
   }
 
-  int getI() {
+  int get_i() {
     return i_;
   }
 
-  int getJ() {
+  int get_j() {
     return j_;
   }
 
-  bool isEmpty() {
+  bool is_empty() {
     return type_ == EMPTY;
   }
 
-  bool isIn() {
+  bool is_in() {
     return type_ == IN;
   }
 
-  bool isOut() {
+  bool is_out() {
     return type_ == OUT;
   }
 
-  bool isWalkable() {
+  bool is_walkable() {
     return type_ == WALKABLE;
   }
   

@@ -33,13 +33,13 @@ public:
    * This must be called before any call to 
    * setCellAt.
    */
-  void setDimensions(int iW, int iH);
+  void set_dimensions(int iW, int iH);
 
-  int getW() const {
+  int get_w() const {
     return w_;
   }
 
-  int getH() const {
+  int get_h() const {
     return h_;
   }
 
@@ -48,7 +48,7 @@ public:
    * The cell is added a its corresponding (i,j) position.
    * @param ipCell a pointer to a cell.
    */
-  void addCell(Cell * ipCell);
+  void add_cell(Cell * ipCell);
 
   /**
    * Find a cell by its position.
@@ -56,7 +56,7 @@ public:
    * @param iJ the column
    * @return a pointer to the corresponding cell (might be NULL)
    */
-  Cell * getCellAt(int iI, int iJ) const;
+  Cell* get_cell_at(int iI, int iJ) const;
 
 };
 
