@@ -21,7 +21,7 @@ class ResourceResolver {
   const std::string * pPrefix_;
 
   /**
-   * Check all prefixes provided by setPrefixes.
+   * Check all prefixes provided by set_prefixes.
    * If one of the prefixes point to an 
    * existing folder, pPrefix_ is set to this 
    * value.
@@ -29,19 +29,19 @@ class ResourceResolver {
    * @return true if any of the prefixes point to
    *    an existing folder.
    */
-  bool checkPrefixes();
+  bool check_prefixes();
 
   /**
    * Get a safe prefix to look for files.
-   * The first time it is called, it uses checkPrefixes
+   * The first time it is called, it uses check_prefixes
    * to get a valid prefix from the list supplied
-   * to setPrefixes.
+   * to set_prefixes.
    *
    * @return the first prefix pointing to an existing folder
-   * in the list supplied by setPrefixes, or "" if none
+   * in the list supplied by set_prefixes, or "" if none
    * was found.
    */
-  std::string getSafePrefix();
+  std::string get_safe_prefix();
 
   // Clear the prefixes allocated in the prefixes_ vector.
   void clearPrefixes();
@@ -55,14 +55,14 @@ public:
   }
   ~ResourceResolver();
 
-  void setPrefixes(const char* iPrefixes[], int iPrefixCount);
+  void set_prefixes(const char* iPrefixes[], int iPrefixCount);
 
   /**
    * Gives the root folder containing locale files.
    * Under linux, this should be something like PREFIX/share/locale.
    * Under windows, this should be ../share/locale
    */
-  std::string getLocaleDir();
+  std::string get_locale_dir();
 
   /**
    * Gives the expected location of an image file.
@@ -72,7 +72,7 @@ public:
    *
    * @param iImageName name of the image, with suffix (eg "foo.png")
    */
-  std::string getImageFileName(const char * iImageName);
+  std::string get_image_file_name(const char * iImageName);
 
   /**
    * Gives the expected location of a font file
@@ -82,7 +82,7 @@ public:
    *
    * @param iFontName name of the font, with suffix (eg "Vera.ttf")
    */
-  std::string getFontFileName(const char * iFontName);
+  std::string get_font_file_name(const char * iFontName);
 
   // TODO : Same thing with 'standard lua scripts'
 

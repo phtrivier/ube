@@ -48,12 +48,12 @@ int main(int argc, char ** argv) {
   const StatFileChecker checker;
   ResourceResolver resolver(checker);
   const char* prefixes[2] = { PREFIX, ".."};
-  resolver.setPrefixes(prefixes,2);
+  resolver.set_prefixes(prefixes,2);
 
   setlocale (LC_ALL, "");
   // TODO(pht) : shouldn't I change this to use the locale
   // from the resolver instead of LOCALEDIR ? 
-  bindtextdomain (PACKAGE, resolver.getLocaleDir().c_str());
+  bindtextdomain (PACKAGE, resolver.get_locale_dir().c_str());
   textdomain (PACKAGE);
 
   if (TTF_Init() != 0) {
@@ -62,7 +62,7 @@ int main(int argc, char ** argv) {
   }
 
   TTF_Font *pFont;
-  pFont = TTF_OpenFont(resolver.getFontFileName("FreeSans.ttf").c_str(), 16);
+  pFont = TTF_OpenFont(resolver.get_font_file_name("FreeSans.ttf").c_str(), 16);
   if (pFont == NULL) {
     printf("Could not load font : %s\n", TTF_GetError());
     exit(1);
@@ -85,7 +85,7 @@ int main(int argc, char ** argv) {
 
   fprintf(stdout, _("Hello %s. What's the craic today ?\n"), "prout");
 
-  string fileName = resolver.getImageFileName("gnu.png");
+  string fileName = resolver.get_image_file_name("gnu.png");
   cout << "Will look for image in path " << fileName << endl;
 
   temp = IMG_Load(fileName.c_str());

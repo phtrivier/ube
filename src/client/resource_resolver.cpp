@@ -4,10 +4,10 @@
 using namespace std;
 
 void 
-ResourceResolver::setPrefixes(const char* iPrefixes[], int iPrefixCount) 
+ResourceResolver::set_prefixes(const char* iPrefixes[], int iPrefixCount) 
 {
   clearPrefixes();
-  // Make sure prefixes are check next time getSafePrefix() is called.
+  // Make sure prefixes are check next time get_safe_prefix() is called.
   pPrefix_ = NULL;
   for (int i=0 ; i<iPrefixCount ; i++) {
     prefixes_.push_back(new string(iPrefixes[i]));
@@ -34,7 +34,7 @@ ResourceResolver::clearPrefixes()
 }
 
 bool
-ResourceResolver::checkPrefixes() {
+ResourceResolver::check_prefixes() {
   assert(pChecker_!=NULL);
   vector<const string*>::iterator it = prefixes_.begin();
   bool found = false;
@@ -51,10 +51,10 @@ ResourceResolver::checkPrefixes() {
 }
 
 string
-ResourceResolver::getSafePrefix()
+ResourceResolver::get_safe_prefix()
 {
   string res = "";
-  if (pPrefix_ != NULL || checkPrefixes()) {
+  if (pPrefix_ != NULL || check_prefixes()) {
     res = *pPrefix_;
     res.append("/");
   } 
@@ -62,21 +62,21 @@ ResourceResolver::getSafePrefix()
 }
 
 string 
-ResourceResolver::getLocaleDir() 
+ResourceResolver::get_locale_dir() 
 {
-  string res = getSafePrefix();
+  string res = get_safe_prefix();
   res.append("share/locale");
   return res;
 }
 
 string 
-ResourceResolver::getImageFileName(const char * iImageName) 
+ResourceResolver::get_image_file_name(const char * iImageName) 
 {
   return getResFileName("images", iImageName);
 }
 
 string 
-ResourceResolver::getFontFileName(const char * iFontName) 
+ResourceResolver::get_font_file_name(const char * iFontName) 
 {
   return getResFileName("fonts", iFontName);
 }
@@ -84,7 +84,7 @@ ResourceResolver::getFontFileName(const char * iFontName)
 string
 ResourceResolver::getResFileName(const char *iResType, const char * iResName)
 {
-  string res = getSafePrefix();
+  string res = get_safe_prefix();
   res.append("share/ube/");
   res.append(iResType);
   res.append("/");
