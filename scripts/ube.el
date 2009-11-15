@@ -35,6 +35,8 @@
   "#include \"" str "\"\n"
   "#include <gtest/gtest.h>\n"
   "#include <gmock/gmock.h>\n"
+  "#include <stdexcept>\n"
+  "using namespace std;\n"
   "\n"
   "namespace {\n"
   "  class " (class-name) " : public ::testing::Test {\n"

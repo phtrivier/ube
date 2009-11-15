@@ -1,10 +1,9 @@
 lib_LIBRARIES=libube-engine.a
 libube_engine_a_SOURCES=gettext.h lua_helper.hpp \
 	cell.hpp \
+	cell_factory.hpp cell_factory.cpp \
 	puzzle.hpp puzzle.cpp
-#       greeter.hpp greeter.cpp \
 #	puzzle.hpp puzzle.cpp lua_puzzle.hpp lua_puzzle.cpp\
-#	amplifier.hpp \
 # 	lua_script_runner.hpp lua_script_runner.cpp
 
 # TODO : Find a way to make sure this file is available ...
@@ -21,8 +20,8 @@ AM_CPPFLAGS=-DSRCDIR=\"${srcdir}\" \
 check_PROGRAMS = engine-tests
 engine_tests_SOURCES= tests/engine_tests.cpp \
 	tests/cell_test.cpp \
+	tests/cell_factory_test.cpp \
 	tests/puzzle_test.cpp
-#	tests/mock_amplifier.hpp \
 #	tests/lua_script_runner_test.cpp
 
 # The program needs to be compiled with 
