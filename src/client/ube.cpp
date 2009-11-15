@@ -3,7 +3,7 @@
 #include "gettext.h"
 #define _(String) gettext (String)
 
-#include <greeter.hpp>
+// #include <greeter.hpp>
 
 #include <iostream>
 #include <cstdio>
@@ -16,7 +16,6 @@ using namespace std;
 #include <stdio.h>
 #include <stdlib.h> /* for exit() */
 
-#include "lua_script_runner.hpp"
 #include "resource_resolver.hpp"
 #include "stat_file_checker.hpp"
 
@@ -24,10 +23,6 @@ int main(int argc, char ** argv) {
   
   cout << "For info, LOCALEDIR is  : " << LOCALEDIR << endl;
   cout << "For info, DATADIR is  : " << DATADIR << endl;
-  
-  Greeter g("PHT");
-  g.greet();
-  
   SDL_Surface* screen = NULL;
 
   /* Initialize defaults, Video and Audio subsystems */
@@ -127,6 +122,8 @@ int main(int argc, char ** argv) {
   bool running = true;
   SDL_Event event;
   while (running) {
+    // FIXME(pht) : instead, use SDL_getTicks, plus a now / then counter,
+    // along with SDL_Delay, to make the CPU consumption less horrible.
     while(SDL_PollEvent(&event)) {
       switch(event.type) {  
       case SDL_KEYDOWN:
@@ -165,12 +162,10 @@ int main(int argc, char ** argv) {
       // // Of course in the real implementation you would have to count
       // // for how long it took to display the image, make sure the animation state
       // // is properly set, etc...
-      SDL_Delay(10);
+      SDL_Delay(30);
 
     }
   }
-
-  LuaScriptRunner runner;
 
   return 0;
 }

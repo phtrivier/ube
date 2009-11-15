@@ -1,22 +1,52 @@
 #ifndef _PUZZLE_HPP_
 #define _PUZZLE_HPP_
 
-#include <iostream>
-#include <string>
+class Cell;
 
-class Puzzle {
-  std::string my_name;
+/**
+ * The board of the game.
+ */
+class Puzzle { 
+
+  // Dimensions
+  int w_,h_;
+
+  // Cells
+  Cell*** cells_;
+
 public:
-  Puzzle(std::string iName) : my_name(iName) {
+
+  Puzzle() {
+    w_ = h_ = -1;
   }
-  ~Puzzle(){
+
+  ~Puzzle() {
   }
-  void set_name(const std::string & iName) {
-    my_name = iName;
+
+  /**
+   * Set the dimensions of the puzzle, 
+   * and prepare it for cell settings.
+   * This must be called before any call to 
+   * setCellAt.
+   */
+  void setDimensions(int iW, int iH);
+
+  int getW() const {
+    return w_;
   }
-  std::string get_name() {
-    return my_name;
+
+  int getH() const {
+    return h_;
   }
+
+  /**
+   * Find a cell by its position.
+   * @param iI the line
+   * @param iJ the column
+   * @return a pointer to the corresponding cell (might be NULL)
+   */
+  Cell * getCellAt(int iI, int iJ) const;
+
 };
 
-#endif //_PUZZLE_HPP_
+#endif // _PUZZLE_HPP_

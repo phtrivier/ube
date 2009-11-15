@@ -9,6 +9,7 @@ namespace {
   class LuaScriptRunnerTest : public ::testing::Test {
   };
 
+  /* Puzzle class will change, and I don't really need a name that much.
   TEST_F(LuaScriptRunnerTest, CanRunScriptOnPuzzle) {
     // Create a scriptRunner (Note 
     std::string prefix = SRCDIR;
@@ -28,5 +29,6 @@ namespace {
     EXPECT_EQ("Bar", p.get_name());
     // Check the name of the puzzle changed
   }
+  */
 }
 
