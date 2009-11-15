@@ -14,6 +14,10 @@ class Puzzle {
   // Cells
   Cell*** cells_;
 
+  // Check that a position is valid in this puzzle,
+  // and throws a logic_error otherwise
+  void ensure_valid_position(int iI, int iJ) const;
+
 public:
 
   Puzzle() {
@@ -38,6 +42,13 @@ public:
   int getH() const {
     return h_;
   }
+
+  /**
+   * Add a cell to the puzzle.
+   * The cell is added a its corresponding (i,j) position.
+   * @param ipCell a pointer to a cell.
+   */
+  void addCell(Cell * ipCell);
 
   /**
    * Find a cell by its position.

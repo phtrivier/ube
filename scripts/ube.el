@@ -32,7 +32,7 @@
 (define-skeleton gmock-test
   "Insert an empty Gmock Test skeleton"
   "Header file : "
-  "#include <" str ">\n"
+  "#include \"" str "\"\n"
   "#include <gtest/gtest.h>\n"
   "#include <gmock/gmock.h>\n"
   "\n"
@@ -65,5 +65,7 @@
   "TEST_F(" (class-name) ", " str ") {\n"
   "    " _ "\n"
   "  }\n")
+
+(global-set-key [(control ?c) (control ?j)] 'compile)
 
 (provide 'ube)
