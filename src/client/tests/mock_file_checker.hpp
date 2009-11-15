@@ -3,8 +3,8 @@
 
 class MockFileChecker : public AbstractFileChecker {
  public:
-  MOCK_CONST_METHOD1(isFolderPresent,
+  MOCK_CONST_METHOD1(is_folder_present,
 	       bool(const std::string iPath));
-  MOCK_CONST_METHOD1(isFilePresent,
+  MOCK_CONST_METHOD1(is_file_present,
 	       bool(const std::string iPath));
 };

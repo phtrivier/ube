@@ -22,9 +22,9 @@ namespace {
   };
 
   TEST_F(ResourceResolverTest, UsesEachPrefixInTurnToLookForLocale) {
-    EXPECT_CALL(checker_, isFolderPresent(StrEq("foo"))).WillOnce(Return(false));
-    EXPECT_CALL(checker_, isFolderPresent(StrEq("bar"))).WillOnce(Return(false));
-    EXPECT_CALL(checker_, isFolderPresent(StrEq("baz"))).WillOnce(Return(true));
+    EXPECT_CALL(checker_, is_folder_present(StrEq("foo"))).WillOnce(Return(false));
+    EXPECT_CALL(checker_, is_folder_present(StrEq("bar"))).WillOnce(Return(false));
+    EXPECT_CALL(checker_, is_folder_present(StrEq("baz"))).WillOnce(Return(true));
 
     const char* prefixes[3] = {"foo", "bar", "baz"};
     pResolver_->set_prefixes(prefixes,3);
@@ -35,9 +35,9 @@ namespace {
   }
 
   TEST_F(ResourceResolverTest, UsesAllPrefixToLookForImages) {
-    EXPECT_CALL(checker_, isFolderPresent(StrEq("foo"))).WillOnce(Return(false));
-    EXPECT_CALL(checker_, isFolderPresent(StrEq("bar"))).WillOnce(Return(false));
-    EXPECT_CALL(checker_, isFolderPresent(StrEq("baz"))).WillOnce(Return(true));
+    EXPECT_CALL(checker_, is_folder_present(StrEq("foo"))).WillOnce(Return(false));
+    EXPECT_CALL(checker_, is_folder_present(StrEq("bar"))).WillOnce(Return(false));
+    EXPECT_CALL(checker_, is_folder_present(StrEq("baz"))).WillOnce(Return(true));
 
     const char* prefixes[3] = {"foo", "bar", "baz"};
     pResolver_->set_prefixes(prefixes,3);
@@ -48,9 +48,9 @@ namespace {
   }
 
   TEST_F(ResourceResolverTest, UsesAllPrefixToLookForFonts) {
-    EXPECT_CALL(checker_, isFolderPresent(StrEq("foo"))).WillOnce(Return(false));
-    EXPECT_CALL(checker_, isFolderPresent(StrEq("bar"))).WillOnce(Return(false));
-    EXPECT_CALL(checker_, isFolderPresent(StrEq("baz"))).WillOnce(Return(true));
+    EXPECT_CALL(checker_, is_folder_present(StrEq("foo"))).WillOnce(Return(false));
+    EXPECT_CALL(checker_, is_folder_present(StrEq("bar"))).WillOnce(Return(false));
+    EXPECT_CALL(checker_, is_folder_present(StrEq("baz"))).WillOnce(Return(true));
 
     const char* prefixes[3] = {"foo", "bar", "baz"};
     pResolver_->set_prefixes(prefixes,3);
@@ -61,9 +61,9 @@ namespace {
   }
 
   TEST_F(ResourceResolverTest, ChecksFoldersAsLittleAsPossible) {
-    EXPECT_CALL(checker_, isFolderPresent(StrEq("foo"))).WillOnce(Return(false));
-    EXPECT_CALL(checker_, isFolderPresent(StrEq("bar"))).WillOnce(Return(false));
-    EXPECT_CALL(checker_, isFolderPresent(StrEq("baz"))).WillOnce(Return(true));
+    EXPECT_CALL(checker_, is_folder_present(StrEq("foo"))).WillOnce(Return(false));
+    EXPECT_CALL(checker_, is_folder_present(StrEq("bar"))).WillOnce(Return(false));
+    EXPECT_CALL(checker_, is_folder_present(StrEq("baz"))).WillOnce(Return(true));
 
     const char* prefixes[3] = {"foo", "bar", "baz"};
     pResolver_->set_prefixes(prefixes,3);
@@ -75,8 +75,8 @@ namespace {
   }
 
   TEST_F(ResourceResolverTest, ReCheckFolderIfPrefixesAreSetAgain) {
-    EXPECT_CALL(checker_, isFolderPresent(StrEq("foo"))).WillOnce(Return(false));
-    EXPECT_CALL(checker_, isFolderPresent(StrEq("bar"))).WillOnce(Return(true));
+    EXPECT_CALL(checker_, is_folder_present(StrEq("foo"))).WillOnce(Return(false));
+    EXPECT_CALL(checker_, is_folder_present(StrEq("bar"))).WillOnce(Return(true));
 
     const char* prefixes[2] = {"foo", "bar"};
     pResolver_->set_prefixes(prefixes,2);
@@ -87,7 +87,7 @@ namespace {
     const char * newPrefixes[1] = {"baz"};
     pResolver_->set_prefixes(newPrefixes,1);
     
-    EXPECT_CALL(checker_, isFolderPresent(StrEq("baz"))).WillOnce(Return(true));
+    EXPECT_CALL(checker_, is_folder_present(StrEq("baz"))).WillOnce(Return(true));
     
     ASSERT_EQ("baz/share/locale",pResolver_->get_locale_dir());
     ASSERT_EQ("baz/share/ube/images/tata.png",pResolver_->get_image_file_name("tata.png"));
@@ -100,7 +100,7 @@ namespace {
     pResolver_->set_prefixes(prefixes,1);
 
     // As long as you don't set prefixes to something that work, we will check.
-    EXPECT_CALL(checker_, isFolderPresent(StrEq("baz"))).WillRepeatedly(Return(false));
+    EXPECT_CALL(checker_, is_folder_present(StrEq("baz"))).WillRepeatedly(Return(false));
 
     ASSERT_EQ("share/locale", pResolver_->get_locale_dir());
     ASSERT_EQ("share/locale", pResolver_->get_locale_dir());

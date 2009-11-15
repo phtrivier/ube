@@ -10,9 +10,9 @@ namespace {
     // Note : this should only work on a POSIX, unix-like system. 
     // That's enough for me, for the moment.
     StatFileChecker checker;
-    EXPECT_TRUE(checker.isFolderPresent("/usr"));
-    EXPECT_TRUE(checker.isFolderPresent("."));
-    EXPECT_FALSE(checker.isFolderPresent("foobar"));
+    EXPECT_TRUE(checker.is_folder_present("/usr"));
+    EXPECT_TRUE(checker.is_folder_present("."));
+    EXPECT_FALSE(checker.is_folder_present("foobar"));
   }
 
   TEST_F(StatFileCheckerTest, KnowsWhetherFileExists){
@@ -20,8 +20,8 @@ namespace {
     // So I just check that the executable exists. 
     // Change this if the executable name ever change...
     StatFileChecker checker;
-    EXPECT_TRUE(checker.isFilePresent("./client-tests"));
-    EXPECT_FALSE(checker.isFilePresent("./foobar"));
+    EXPECT_TRUE(checker.is_file_present("./client-tests"));
+    EXPECT_FALSE(checker.is_file_present("./foobar"));
   }
 
 }

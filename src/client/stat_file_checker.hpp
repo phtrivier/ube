@@ -5,10 +5,10 @@
 #include <sys/stat.h>
 
 class StatFileChecker : public AbstractFileChecker {
-  bool hasStatMode(const std::string iPath, mode_t mode) const;
+  bool has_stat_mode(const std::string iPath, mode_t mode) const;
 public:
-  bool isFolderPresent(const std::string iPath) const;
-  bool isFilePresent(const std::string iPath) const;
+  bool is_folder_present(const std::string iPath) const;
+  bool is_file_present(const std::string iPath) const;
 };
 
 #endif //_STAT_FILE_CHECKER_HPP

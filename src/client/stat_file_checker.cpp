@@ -6,19 +6,19 @@
 #include <string>
 
 bool
-StatFileChecker::isFolderPresent(const std::string iPath) const
+StatFileChecker::is_folder_present(const std::string iPath) const
 {
-  return hasStatMode(iPath, S_IFDIR);
+  return has_stat_mode(iPath, S_IFDIR);
 }
 
 bool
-StatFileChecker::isFilePresent(const std::string iPath) const
+StatFileChecker::is_file_present(const std::string iPath) const
 {
-  return hasStatMode(iPath, S_IFREG);
+  return has_stat_mode(iPath, S_IFREG);
 }
 
 bool
-StatFileChecker::hasStatMode(const std::string iPath, mode_t mode) const {
+StatFileChecker::has_stat_mode(const std::string iPath, mode_t mode) const {
   bool res = false;
   struct stat status;
   int statRes = stat(iPath.c_str(),&status);

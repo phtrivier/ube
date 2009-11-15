@@ -15,7 +15,7 @@ public:
    * @param iPath : absolute path to a folder.
    * @returns true if the path points to an existing folder.
    */
-  virtual bool isFolderPresent(const std::string iPath) const = 0;
+  virtual bool is_folder_present(const std::string iPath) const = 0;
 
   /**
    * Does a file exists ? 
@@ -23,7 +23,7 @@ public:
    * @param iPath : absolute path to a file.
    * @returns true if the path points to an existing file.
    */
-  virtual bool isFilePresent(const std::string iPath) const = 0;
+  virtual bool is_file_present(const std::string iPath) const = 0;
   
 };
 

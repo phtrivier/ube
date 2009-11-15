@@ -39,7 +39,7 @@ ResourceResolver::check_prefixes() {
   vector<const string*>::iterator it = prefixes_.begin();
   bool found = false;
   while (!found && it != prefixes_.end()) {
-    found = (pChecker_->isFolderPresent(*(*it)));
+    found = (pChecker_->is_folder_present(*(*it)));
     if (!found) {
       ++it;
     }
