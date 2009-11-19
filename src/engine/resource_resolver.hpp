@@ -20,6 +20,11 @@ class ResourceResolver {
   // ever done.
   const std::string * pPrefix_;
 
+  // In test scenarios, lua files are in a completely different location.
+  // If this flag is on, get_engine_lua_file_name will point to SRCDIR/engine/lua instead
+  // of using the prefixes.
+  bool test_mode_;
+
   /**
    * Check all prefixes provided by set_prefixes.
    * If one of the prefixes point to an 
@@ -52,6 +57,7 @@ class ResourceResolver {
 public:
   ResourceResolver(const AbstractFileChecker & iChecker) : pChecker_(&iChecker) {
     pPrefix_ = NULL;
+    test_mode_ = false;
   }
   ~ResourceResolver();
 
@@ -93,6 +99,14 @@ public:
    * @param iFontName name of the font, with suffix (eg "story_lib.lua")
    */
   std::string get_engine_lua_file_name(const char *iFileName);
+
+  /**
+   * Make this resource_resolver look for lua files in SRCDIR/engine/lua
+   * instead of using the prefixes.
+   */
+  void set_test_mode(bool iMode) {
+    test_mode_ = iMode;
+  }
 
 };
 

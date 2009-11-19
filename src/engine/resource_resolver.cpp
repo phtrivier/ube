@@ -84,7 +84,15 @@ ResourceResolver::get_font_file_name(const char * iFontName)
 string 
 ResourceResolver::get_engine_lua_file_name(const char * iFontName) 
 {
-  return getResFileName("lua", iFontName);
+  string res;
+  if (test_mode_) {
+    res = SRCDIR;
+    res.append("/engine/lua/");
+    res.append(iFontName);
+  } else {
+    res = getResFileName("lua", iFontName);
+  } 
+  return res;
 }
 
 string
