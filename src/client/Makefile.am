@@ -1,9 +1,6 @@
 lib_LIBRARIES=libube-client.a
 libube_client_a_SOURCES=gettext.h \
-	sdl_app.hpp sdl_app.cpp	\
-	abstract_file_checker.hpp \
-	resource_resolver.hpp resource_resolver.cpp \
-	stat_file_checker.hpp stat_file_checker.cpp
+	sdl_app.hpp sdl_app.cpp
 
 bin_PROGRAMS = ube
 ube_SOURCES = ube.cpp
@@ -27,10 +24,7 @@ SDL_IMAGE_LIBS = -lSDL_image -lpng -ltiff -ljpeg -lz
 ube_LDADD=../engine/libube-engine.a libube-client.a $(LUA_LIB) $(LIBINTL) $(SDL_LIBS) $(SDL_IMAGE_LIBS) $(SDL_TTF_LIBS)
 
 check_PROGRAMS=client-tests
-client_tests_SOURCES=tests/client_tests.cpp \
-	tests/resource_resolver_test.cpp \
-	tests/mock_file_checker.hpp \
-	tests/stat_file_checker_test.cpp
+client_tests_SOURCES=tests/client_tests.cpp
 
 client_tests_LDADD=libube-client.a -L$(top_srcdir)/lib -lgtest -lgmock -llua -ldl
 

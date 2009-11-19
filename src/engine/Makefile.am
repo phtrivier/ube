@@ -2,7 +2,10 @@ lib_LIBRARIES=libube-engine.a
 libube_engine_a_SOURCES=gettext.h lua_helper.hpp \
 	cell.hpp \
 	cell_factory.hpp cell_factory.cpp \
-	puzzle.hpp puzzle.cpp
+	puzzle.hpp puzzle.cpp \
+	abstract_file_checker.hpp \
+	resource_resolver.hpp resource_resolver.cpp \
+	stat_file_checker.hpp stat_file_checker.cpp
 #	puzzle.hpp puzzle.cpp lua_puzzle.hpp lua_puzzle.cpp\
 # 	lua_script_runner.hpp lua_script_runner.cpp
 
@@ -21,7 +24,10 @@ check_PROGRAMS = engine-tests
 engine_tests_SOURCES= tests/engine_tests.cpp \
 	tests/cell_test.cpp \
 	tests/cell_factory_test.cpp \
-	tests/puzzle_test.cpp
+	tests/puzzle_test.cpp \
+	tests/resource_resolver_test.cpp \
+	tests/mock_file_checker.hpp \
+	tests/stat_file_checker_test.cpp
 #	tests/lua_script_runner_test.cpp
 
 # The program needs to be compiled with 

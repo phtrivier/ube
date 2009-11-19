@@ -84,7 +84,15 @@ public:
    */
   std::string get_font_file_name(const char * iFontName);
 
-  // TODO : Same thing with 'standard lua scripts'
+  /**
+   * Gives the expected location of an engine Lua file
+   * 
+   * Under linux, this should be under PREFIX/share/ube/lua.
+   * Under windows, this should be under ../share/ube/lua.
+   *
+   * @param iFontName name of the font, with suffix (eg "story_lib.lua")
+   */
+  std::string get_engine_lua_file_name(const char *iFileName);
 
 };
 

@@ -20,7 +20,7 @@ namespace {
     // So I just check that the executable exists. 
     // Change this if the executable name ever change...
     StatFileChecker checker;
-    EXPECT_TRUE(checker.is_file_present("./client-tests"));
+    EXPECT_TRUE(checker.is_file_present("./engine-tests"));
     EXPECT_FALSE(checker.is_file_present("./foobar"));
   }
 

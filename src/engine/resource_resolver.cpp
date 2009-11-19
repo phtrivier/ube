@@ -81,6 +81,12 @@ ResourceResolver::get_font_file_name(const char * iFontName)
   return getResFileName("fonts", iFontName);
 }
 
+string 
+ResourceResolver::get_engine_lua_file_name(const char * iFontName) 
+{
+  return getResFileName("lua", iFontName);
+}
+
 string
 ResourceResolver::getResFileName(const char *iResType, const char * iResName)
 {
