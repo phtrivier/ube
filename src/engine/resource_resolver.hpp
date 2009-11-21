@@ -54,6 +54,22 @@ class ResourceResolver {
   // Utility functions to look for a kind of resource
   std::string getResFileName(const char *iResType, const char * iResName);
 
+  // Get a lua file name. In test mode, SRCDIR/iTestPrefix is used
+  // to prefix the file name.
+  // @see set_test_mode
+
+  /**
+   * Get a lua file name. 
+   * 
+   * In normal mode, it combines the general prefix for resource (get_safe_prefix) and iStandardPrefix.
+   * In test mode, its combines SRCDIR and iTestPrefix.
+   *
+   * @param iFile file name, with suffix (eg "toto.lua")
+   * @param iStandardPrefix prefix to use in standard (non-test) mode
+   * @param iTestPrefix prefix to use in test mode (see set_test_mode_)
+   */
+  std::string get_lua_file_name(const char * iFileName, const char * iStandardPrefix, const char * iTestPrefix);
+
 public:
   ResourceResolver(const AbstractFileChecker & iChecker) : pChecker_(&iChecker) {
     pPrefix_ = NULL;
@@ -93,13 +109,23 @@ public:
   /**
    * Gives the expected location of an engine Lua file
    * 
-   * Under linux, this should be under PREFIX/share/ube/lua.
-   * Under windows, this should be under ../share/ube/lua.
+   * Under linux, this should be under PREFIX/share/ube/lua/engine.
+   * Under windows, this should be under ../share/ube/lua/engine.
    *
-   * @param iFontName name of the font, with suffix (eg "story_lib.lua")
+   * @param iFontName name of the file, with suffix (eg "story_lib.lua")
    */
   std::string get_engine_lua_file_name(const char *iFileName);
 
+  /**
+   * Gives the expected location of a puzzle Lua file
+   * 
+   * Under linux, this should be under PREFIX/share/ube/lua/puzzles.
+   * Under windows, this should be under ../share/ube/lua/puzzles.
+   *
+   * @param iFontName name of the file, with suffix (eg "puzzle.lua")
+   */
+  std::string get_puzzle_lua_file_name(const char *iFileName);
+  
   /**
    * Make this resource_resolver look for lua files in SRCDIR/engine/lua
    * instead of using the prefixes.

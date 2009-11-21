@@ -62,18 +62,32 @@ namespace {
     ASSERT_EQ("baz/share/locale",pResolver_->get_locale_dir());
   }
 
-  TEST_F(ResourceResolverTest, UsesAllPrefixToLookForLuaFiles) {
+  TEST_F(ResourceResolverTest, UsesAllPrefixToLookForEngineLuaFiles) {
     expectsThreeFolderCheck();
-    ASSERT_EQ("baz/share/ube/lua/test.lua",pResolver_->get_engine_lua_file_name("test.lua"));
+    ASSERT_EQ("baz/share/ube/lua/engine/test.lua",pResolver_->get_engine_lua_file_name("test.lua"));
     // No checks the second time
-    ASSERT_EQ("baz/share/ube/lua/test.lua",pResolver_->get_engine_lua_file_name("test.lua"));
+    ASSERT_EQ("baz/share/ube/lua/engine/test.lua",pResolver_->get_engine_lua_file_name("test.lua"));
+  }
+
+  TEST_F(ResourceResolverTest, UsesAllPrefixToLookForPuzzleLuaFiles) {
+    expectsThreeFolderCheck();
+    ASSERT_EQ("baz/share/ube/lua/puzzles/puzzle1.lua",pResolver_->get_puzzle_lua_file_name("puzzle1.lua"));
+    // No checks the second time
+    ASSERT_EQ("baz/share/ube/lua/puzzles/puzzle1.lua",pResolver_->get_puzzle_lua_file_name("puzzle1.lua"));
+  }
+
+  TEST_F(ResourceResolverTest, UsesSRCDIRToLookForEngineLuaFilesInTestMode) {
+    pResolver_->set_test_mode(true);
+    std::string expected = SRCDIR;
+    expected.append("/lua/test.lua");
+    ASSERT_EQ(expected.c_str(),pResolver_->get_engine_lua_file_name("test.lua"));
   }
 
   TEST_F(ResourceResolverTest, UsesSRCDIRToLookForLuaFilesInTestMode) {
     pResolver_->set_test_mode(true);
     std::string expected = SRCDIR;
-    expected.append("/engine/lua/test.lua");
-    ASSERT_EQ(expected.c_str(),pResolver_->get_engine_lua_file_name("test.lua"));
+    expected.append("/tests/lua/foobar/test.lua");
+    ASSERT_EQ(expected.c_str(),pResolver_->get_puzzle_lua_file_name("foobar/test.lua"));
   }
-
+  
 }

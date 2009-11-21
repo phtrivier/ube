@@ -5,19 +5,22 @@ libube_engine_a_SOURCES=gettext.h lua_helper.hpp \
 	puzzle.hpp puzzle.cpp \
 	abstract_file_checker.hpp \
 	resource_resolver.hpp resource_resolver.cpp \
-	stat_file_checker.hpp stat_file_checker.cpp
+	stat_file_checker.hpp stat_file_checker.cpp \
+	puzzle_loader.hpp puzzle_loader.cpp \
+	lua_puzzle_loader.hpp lua_puzzle_loader.cpp
 #	puzzle.hpp puzzle.cpp lua_puzzle.hpp lua_puzzle.cpp\
 # 	lua_script_runner.hpp lua_script_runner.cpp
 
 # TODO : Find a way to make sure this file is available ...
-luadir=${datadir}/@PACKAGE@/lua
+luadir=${datadir}/@PACKAGE@/lua/engine
 lua_DATA=lua/story_lib.lua
 
 AM_CPPFLAGS=-DSRCDIR=\"${srcdir}\" \
 	-DLUADIR=\"${luadir}\" \
 	-Wall -Werror \
 	-I$(srcdir)/../../include \
-	$(LUA_INCLUDE)
+	$(LUA_INCLUDE) \
+	$(BOOST_CPPFLAGS)
 
 # There is one program that aggreatates all tests cases
 check_PROGRAMS = engine-tests
@@ -27,7 +30,9 @@ engine_tests_SOURCES= tests/engine_tests.cpp \
 	tests/puzzle_test.cpp \
 	tests/resource_resolver_test.cpp \
 	tests/mock_file_checker.hpp \
-	tests/stat_file_checker_test.cpp
+	tests/stat_file_checker_test.cpp \
+	tests/puzzle_loader_test.cpp \
+	tests/lua_puzzle_loader_test.cpp
 #	tests/lua_script_runner_test.cpp
 
 # The program needs to be compiled with 

@@ -68,6 +68,9 @@
   "    " _ "\n"
   "  }\n")
 
-(global-set-key [(control ?c) (control ?j)] 'compile)
+(global-set-key [(control ?c) (control ?j)] 'recompile)
+
+(set (make-local-variable 'compile-command)
+     "cd ~/prj/ube/builds/linux/current ; make check")
 
 (provide 'ube)

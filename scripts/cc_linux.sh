@@ -13,7 +13,7 @@ usage(){
 
 options() {
     echo "Options :"
-    echo "--no-build : the package is simply configured, and not build. This implies '--no-build'."
+    echo "--no-build : the package is simply configured, and not build. This implies '--no-tmp'."
     echo "--no-tmp   : a long-lasting folder will be used for the build instead of a temporary one."
     echo "--help     : print this message"
 }

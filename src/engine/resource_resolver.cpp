@@ -81,18 +81,30 @@ ResourceResolver::get_font_file_name(const char * iFontName)
   return getResFileName("fonts", iFontName);
 }
 
-string 
-ResourceResolver::get_engine_lua_file_name(const char * iFontName) 
+string
+ResourceResolver::get_lua_file_name(const char * iFileName, const char * iStandardPrefix, const char * iTestPrefix)
 {
   string res;
   if (test_mode_) {
     res = SRCDIR;
-    res.append("/engine/lua/");
-    res.append(iFontName);
+    res.append(iTestPrefix);
+    res.append(iFileName);
   } else {
-    res = getResFileName("lua", iFontName);
+    res = getResFileName(iStandardPrefix, iFileName);
   } 
   return res;
+}
+
+string 
+ResourceResolver::get_engine_lua_file_name(const char * iFileName) 
+{
+  return get_lua_file_name(iFileName, "lua/engine", "/lua/");
+}
+
+string 
+ResourceResolver::get_puzzle_lua_file_name(const char *iFileName)
+{
+  return get_lua_file_name(iFileName, "lua/puzzles", "/tests/lua/");
 }
 
 string
