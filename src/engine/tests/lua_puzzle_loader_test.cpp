@@ -41,12 +41,11 @@ namespace {
     
     ASSERT_EQ(3, p.get_w());
     ASSERT_EQ(4, p.get_h());
-    /*
+
     ASSERT_TRUE(p.get_cell_at(2,0)->is_in());
     ASSERT_TRUE(p.get_cell_at(1,2)->is_out());
     ASSERT_TRUE(p.get_cell_at(0,0)->is_empty());
     ASSERT_TRUE(p.get_cell_at(2,1)->is_walkable());
-    */
     
   }
 

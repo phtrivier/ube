@@ -1,8 +1,8 @@
 #include "sdl_app.hpp"
 
 SdlApp::SdlApp() {
-  screen_ = NULL;
   running_ = true;
+  screen_ = NULL;
 }
 
 int SdlApp::execute() {
