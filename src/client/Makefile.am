@@ -1,6 +1,10 @@
 lib_LIBRARIES=libube-client.a
 libube_client_a_SOURCES=gettext.h \
-	sdl_app.hpp sdl_app.cpp
+	abstract_observer.hpp \
+	abstract_controller.hpp \
+	observable.hpp observable.cpp \
+	game_mode.hpp game_mode.cpp
+#	sdl_app.hpp sdl_app.cpp
 
 bin_PROGRAMS = ube
 ube_SOURCES = ube.cpp
@@ -24,7 +28,11 @@ SDL_IMAGE_LIBS = -lSDL_image -lpng -ltiff -ljpeg -lz
 ube_LDADD=../engine/libube-engine.a libube-client.a $(LUA_LIB) $(LIBINTL) $(SDL_LIBS) $(SDL_IMAGE_LIBS) $(SDL_TTF_LIBS)
 
 check_PROGRAMS=client-tests
-client_tests_SOURCES=tests/client_tests.cpp
+client_tests_SOURCES=tests/client_tests.cpp \
+	tests/mock_observer.hpp \
+	tests/mock_controller.hpp \
+	tests/observable_test.cpp \
+	tests/game_mode_test.cpp
 
 client_tests_LDADD=libube-client.a -L$(top_srcdir)/lib -lgtest -lgmock -llua -ldl
 
