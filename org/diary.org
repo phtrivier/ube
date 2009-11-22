@@ -1,0 +1,24 @@
+* <2009-11-22 dim.>
+
+  After a bit of thinking about the game loop, I again ends up with a game loop that asks a current game mode
+  to ask a controller to check for events, process them if needed by calling functions on a game model ; and the
+  game loop will use a view to render the game model. And all this little world will communicate through the 
+  observer pattern (just to decouple things a bit).
+
+  So I start writing a lot of code with interfaces and virtual functions all over the place ; let's hope
+  it does not mean poor performances in the end... 
+
+* <2009-11-21 sam.>
+
+  I had completely forgotten I had to do a diary ;).
+  Will have to update it from the git logs for previous days.
+  Okay, so today, a session of about 2/3h, where I : 
+  
+  - Added a PuzzleLoader to load a row of puzzle from a string
+  - Added methods in the ResourceLocator to find engine and puzzle lua files
+  - Added a LuaPuzzleLoader, that, more or less ... loads a puzzle from a file. Yes ma'm.
+    
+    Not too bad for a saturday afternoon. And just in time for djee, ce and seb's birthday ;)
+   
+    
+    Not too bad for a saturday. No off to ce, djee and seb's BD party !!
