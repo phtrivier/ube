@@ -41,7 +41,7 @@ namespace {
     gm.update_game(10);
     // Second call will get an event and process it
     gm.update_game(10);
-    
+
   }
 
 } // Namespace

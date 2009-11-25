@@ -8,7 +8,7 @@
 using boost::format;
 
 void PuzzleLoader::set_row(int i, Puzzle * poPuzzle, const char * row) {
-
+   
   // Dimensions check
   if (i<0 || i >= poPuzzle->get_h()) {
     throw std::logic_error(str(format("Bad row index %1%") % i));

@@ -35,7 +35,7 @@ namespace {
   TEST_F(PuzzleLoaderTest, CanLoadAPuzzleRow) {
     Puzzle p;
     p.set_dimensions(2,2);
-    
+
     pLoader_->set_row(0,&p,"#I");
     pLoader_->set_row(1,&p,"-O");
     
