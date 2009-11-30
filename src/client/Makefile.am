@@ -2,6 +2,7 @@ lib_LIBRARIES=libube-client.a
 libube_client_a_SOURCES=gettext.h \
 	abstract_observer.hpp \
 	abstract_controller.hpp \
+	abstract_view.hpp \
 	observable.hpp observable.cpp \
 	game_mode.hpp game_mode.cpp
 #	sdl_app.hpp sdl_app.cpp
@@ -31,6 +32,7 @@ check_PROGRAMS=client-tests
 client_tests_SOURCES=tests/client_tests.cpp \
 	tests/mock_observer.hpp \
 	tests/mock_controller.hpp \
+	tests/mock_view.hpp \
 	tests/observable_test.cpp \
 	tests/game_mode_test.cpp
 

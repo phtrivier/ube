@@ -1,5 +1,6 @@
 #include "game_mode.hpp"
 #include "mock_controller.hpp"
+#include "mock_view.hpp"
 
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
@@ -28,13 +29,12 @@ namespace {
   TEST_F(GameModeTest, GetsAndProcessEventsFromController) {
 
     MockController mc;
-    // TODO : MockView
-    GameMode gm(&mc);
+    MockView mv;
+    GameMode gm(&mc, &mv);
 
     EXPECT_CALL(mc,check_events())
       .WillOnce(Return(false))
       .WillOnce(Return(true));
-
     EXPECT_CALL(mc,handle_event());
 
     // First call will get nothing
@@ -43,5 +43,16 @@ namespace {
     gm.update_game(10);
 
   }
+
+  TEST_F(GameModeTest, UsesViewToRenderTheContent) {
+    MockController mc;
+    MockView mv;
+    GameMode gm(&mc, &mv);
+
+    EXPECT_CALL(mv, render_game()).Times(1);
+
+    gm.render_game();
+  }
+
 
 } // Namespace
