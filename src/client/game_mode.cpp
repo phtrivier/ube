@@ -18,3 +18,10 @@ GameMode::render_game()
   assert(pView_ != NULL);
   pView_->render_game();
 }
+
+void
+GameMode::add_observer(AbstractObserver *o)
+{
+  Observable::add_observer(o);
+  pController_->add_observer(o);
+}

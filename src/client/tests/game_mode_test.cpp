@@ -1,5 +1,6 @@
 #include "game_mode.hpp"
 #include "mock_controller.hpp"
+#include "mock_observer.hpp"
 #include "mock_view.hpp"
 
 #include <gtest/gtest.h>
@@ -53,6 +54,23 @@ namespace {
 
     gm.render_game();
   }
+
+  TEST_F(GameModeTest, AddObserversToControllerAndView) {
+    MockObserver o;
+    MockController mc;
+    MockView mv;
+    
+    GameMode gm(&mc, &mv);
+
+    EXPECT_CALL(mc, add_observer(&o));
+    EXPECT_CALL(o, handle_event(12));
+
+    gm.add_observer(&o);
+    gm.fire_event(12);
+		
+    
+  }
+
 
 
 } // Namespace

@@ -4,7 +4,9 @@ libube_client_a_SOURCES=gettext.h \
 	abstract_controller.hpp \
 	abstract_view.hpp \
 	observable.hpp observable.cpp \
-	game_mode.hpp game_mode.cpp
+	game_mode.hpp game_mode.cpp \
+	game_loop.hpp game_loop.cpp
+#	abstract_clock.hpp
 #	sdl_app.hpp sdl_app.cpp
 
 bin_PROGRAMS = ube
@@ -34,7 +36,8 @@ client_tests_SOURCES=tests/client_tests.cpp \
 	tests/mock_controller.hpp \
 	tests/mock_view.hpp \
 	tests/observable_test.cpp \
-	tests/game_mode_test.cpp
+	tests/game_mode_test.cpp \
+	tests/game_loop_test.cpp
 
 client_tests_LDADD=libube-client.a -L$(top_srcdir)/lib -lgtest -lgmock -llua -ldl
 
