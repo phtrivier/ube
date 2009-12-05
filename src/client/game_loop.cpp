@@ -1,5 +1,9 @@
 #include "game_loop.hpp"
 #include "game_mode.hpp"
+#include "abstract_clock.hpp"
+#include "game_event.hpp"
+
+#include <cstdio>
 
 #include <boost/format.hpp>
 using boost::format;
@@ -28,11 +32,35 @@ GameLoop::set_current_game_mode(std::string iModeName)
 void 
 GameLoop::loop() 
 {
+  assert(pClock_!=NULL);
+  assert(get_current_game_mode() != NULL);
+  assert(running_ == false);
+
+  pClock_->init();
+
+  running_ = true;
+  while (running_) {
+
+    pClock_->restart();
+
+    while (!pClock_->is_time_to_render()) {
+      // printf("Not time to render, updating the game state..\n");
+      get_current_game_mode()->update_game(pClock_->get_delta());
+      pClock_->tick();
+    }
+
+    // printf("Time to render, will render..\n");
+    get_current_game_mode()->render_game();
+
+  }
 }
 
 
 void 
 GameLoop::handle_event(int iEventCode) 
 {
-  
+  printf("handling event to quit %d\n", iEventCode);
+  if (iEventCode == GameEvent::QUIT) {
+    running_ = false;
+  }
 }

@@ -1,3 +1,11 @@
+* <2009-12-03 jeu.>
+  
+  About an hour or two ... game mode, introduced the clock, but did not implement anything... 
+  wondering if I should not stop using so many interfaces ...
+  God everything takes ages in C++... And I am pretty sure I am not doing
+  things the best way (all my functions tends to be virtual, I only have
+  one implementation ... ain't I doing JavaInCpp ?)
+
 * <2009-11-22 dim.>
 
   After a bit of thinking about the game loop, I again ends up with a game loop that asks a current game mode

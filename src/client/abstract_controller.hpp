@@ -12,6 +12,12 @@ class AbstractController : public Observable {
 
 public:
 
+  AbstractController() : Observable() {
+  }
+
+  virtual ~AbstractController() {
+  }
+
   /**
    * Check if any new event should be handled.
    */

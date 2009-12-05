@@ -7,6 +7,7 @@ using namespace std;
 #include "mock_controller.hpp"
 #include "mock_view.hpp"
 #include "mock_game_mode.hpp"
+#include "mock_clock.hpp"
 
 namespace {
   class GameLoopTest : public ::testing::Test {
@@ -32,10 +33,11 @@ namespace {
     GameMode mode1(&mc,&mv);
     GameMode mode2(&mc,&mv);
     */
+    MockClock c;
     MockGameMode mode1;
     MockGameMode mode2;
 
-    GameLoop loop;
+    GameLoop loop(&c);
 
     EXPECT_CALL(mode1,add_observer(&loop));
     EXPECT_CALL(mode2,add_observer(&loop));

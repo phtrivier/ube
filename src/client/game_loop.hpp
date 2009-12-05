@@ -7,6 +7,7 @@
 
 // Forward declare should be enough
 #include "abstract_game_mode.hpp"
+class AbstractClock;
 
 /**
  * Main game loop.
@@ -18,10 +19,17 @@ class GameLoop : public AbstractObserver {
 
   // Map of game modes, by names
   std::map<std::string, AbstractGameMode *> gameModes_;
+
+  // Clcok
+  AbstractClock * pClock_;
+
+  // Is the game running ? 
+  bool running_;
   
 public:
 
-  GameLoop() {
+  GameLoop(AbstractClock * ipClock) : pClock_(ipClock) {
+    running_=false;
   }
 
   virtual ~GameLoop() {
