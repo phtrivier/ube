@@ -1,3 +1,11 @@
+* <2009-12-06 dim.>
+
+  2h. Implemented the SdlClock, a trivial Sdl controller and a trivial
+  Sdl view (back to drawing the GNU head again...). Loop seems to be
+  less CPU-intensive (32% of CPU, but I haven't tested the mouse handling
+  yet... which is the step for tomorow, with a trivial "model" that 
+  will be a simple boolean !! ;))
+
 * <2009-12-03 jeu.>
   
   About an hour or two ... game mode, introduced the clock, but did not implement anything... 
