@@ -3,9 +3,14 @@ libube_client_a_SOURCES=gettext.h \
 	abstract_observer.hpp \
 	abstract_controller.hpp \
 	abstract_view.hpp \
+	abstract_clock.hpp \
 	observable.hpp observable.cpp \
-	game_mode.hpp game_mode.cpp
-#	sdl_app.hpp sdl_app.cpp
+	game_mode.hpp game_mode.cpp \
+	game_event.hpp \
+	game_loop.hpp game_loop.cpp \
+	sdl_clock.hpp sdl_clock.cpp \
+	sdl_controller.hpp sdl_controller.cpp \
+	sdl_view.hpp sdl_view.cpp
 
 bin_PROGRAMS = ube
 ube_SOURCES = ube.cpp
@@ -17,7 +22,7 @@ AM_CPPFLAGS= -DLOCALEDIR=\"${datadir}/locale\" \
 	-DDATADIR=\"${datadir}/@PACKAGE@\" \
 	-DLUADIR=\"${luadir}\" \
 	-DPREFIX=\"${prefix}\" \
-	-Wall -Werror \
+	-Wall -Werror -enable-assert\
 	-I$(srcdir)/../../include \
 	-I$(srcdir)/../engine \
 	$(SDL_CFLAGS) \
@@ -33,8 +38,10 @@ client_tests_SOURCES=tests/client_tests.cpp \
 	tests/mock_observer.hpp \
 	tests/mock_controller.hpp \
 	tests/mock_view.hpp \
+	tests/mock_clock.hpp \
 	tests/observable_test.cpp \
-	tests/game_mode_test.cpp
+	tests/game_mode_test.cpp \
+	tests/game_loop_test.cpp
 
 client_tests_LDADD=libube-client.a -L$(top_srcdir)/lib -lgtest -lgmock -llua -ldl
 

@@ -1,0 +1,180 @@
+#title Ube Functionnal Specification
+#author Pierre-Henri Trivier
+#desc This is the functionnal spec for ube.
+
+<contents>
+
+* Introduction
+
+This is the functionnal specification for the game ube. 
+The name of the game is still work-in-progress, so it might be changed in the end. 
+
+This document is by no mean definitive or complete, any omission or error is the author's own. 
+
+This document is by probably not up to date, by the way. If you really want to know how things work, look at the code. *(sure, there is little to no code at this point, but you get the idea ;) )*.
+
+* What is this game ? 
+
+In the middle of 2008, I got dum... I mean, I started working on a game called "boots-puzzle" -- actually, more a game engine than a game. ube is an evolution of this game.
+
+ube is a puzzle game, in which you have to go through mazes. Your possible moves are constraint at any given time : you are given a bunch of possible moves, and you must use them to reach the exit. 
+
+* Fun factors
+
+A game being a "series of interesting choices", here you need to choose which move is the next, in order to reach the exit.
+It involves planning your way through complicated patterns, tricky traps, easy solutions that ends-up being dead-end.
+To make things even tricky, time can be against you.
+
+(Note : Part of the fun can be about solving a particular puzzle in as little moves as possible. However not for this version)
+
+Every puzzle should be finishable, without cheating.
+
+You should always get all the information you need at startup (you should'nt have to "guess" what another move will be).
+
+It should be easy to undo and redo a move.
+
+You should be able to get help when you are stuck, to skip a puzzle if it is too complicated.
+
+* Mood
+
+The game should be relaxing. 
+
+The graphical design will be minimalistic, with an overall white on black theme. If any music is present, it should be relaxing instrumental, possibly with an melodic / house twist -- think mild Robert Miles, gentle Bach, the kind of stuff you hear on FIP ;)
+
+Puzzle should start with a quotation, something to give the player food for though, and possibly a hint about how to solve the puzzle.
+
+There is no story, nor is there a need for it.
+
+* Details
+
+This section will go into details about every screens of the game, and everything the player should see.
+
+** Startup page
+
+The startup page need be minimalistic. Options available should be : 
+
+ - Start a new game (possibly choosing a given puzzle)
+ - Continue an older game
+ - Quit
+
+In detail, if the user starts the game for the first time, there should be three options : 
+
+ - Start a new game...
+ - Quit
+
+If you have already started a game, and you're currently playing puzzle "Let there be light" from the "Genesis" chapter, you should see this 
+
+ - Start a new game...
+ - Continue chapter "Genesis", at puzzle "Let there be light"
+ - Quit
+
+If you have started one game at level Genesis/"Let there be light", and another at level Wonderland/"Through the looking glass", you should see this : 
+
+ - Start a new game...
+ - Continue chapter "Genesis", at puzzle "Let there be light"
+ - Continue chapter "Wonderland", at puzzle "Through the looking glass"
+ - Quit
+
+The first one in the list is the latest game you played.
+
+If you have actually started more than two games, you should only see the latest two, and another option to go through earlier games : 
+
+ - Start a new game...
+ - Continue chapter "Genesis", at puzzle "Let there be light"
+ - Continue chapter "Wonderland", at puzzle "Through the looking glass"
+ - Continue older game...
+ - Quit 
+
+Corner case : if you start two games, and they all reach the same chapter and puzzle, it is still a good idea to separate them. In this case, and only in this case (when there is an ambiguity), we should display some information to help you find which game is which, for example : 
+
+ - Start a new game...
+ - Continue chapter "Genesis", at puzzle "Let there be light" (last played yesterday at 10:52)
+ - Continue chapter "Genesis", at puzzle "Let there be light" (last played Monday, October the 10th at 10:52)
+ - Quit
+
+The date should be display in a gentle manner (no "2009/10/10 10:52"), at least "Monday, October the 10 at 10:52".
+Ideally, 'special' cases like 'today', 'yesterday' or "10 minutes ago" should be used instead of the general description.)
+
+** Start a new game
+
+The player should get a list of chapters. A chapter is a bunch of puzzles. 
+The chapter should have a name, and a short description. 
+A chapter can have up to 10 puzzles. 
+
+The screen should present a list of icons for each chapters. 
+When clicking on a chapter, the description should be displayed. 
+Two options should be shown : 
+
+ - Start chapter
+ - Choose a puzzle
+ - Quit
+
+If "Start chapter" is chosen, the first puzzle of the chapter should be used.
+
+If "Choose a chapter" is chosen, a list of icons for each puzzle should be displayed.
+
+Already solved puzzle should be displayed differently (lighter tones ? more colorfull ones ? special icons ? )
+
+Mousing over a puzzle icon should make visible the name of the puzzle.
+
+Clicking on an icon starts the chapter from this given puzzle.
+
+Note : 
+
+ - There should not be too much chapters and puzzles displayed on the screen, so that scrolling is useless. Care will have to be taken to the position of the writen text, and its size (possibly constrained at puzzle creation time).
+ - Icons should be different enough from each other. The icon might be something very sketchy (so that I don't have to draw beautifull stuffs, as I suck in art ...)
+ - The "quit" options is the only one that is always visible
+ - Do I also add a "Back" option ? Something to go back to the "entry screen ?". I guess quiting and restarting is always an option.
+
+** Continue at chapter xxx ...
+
+I assume that if the player wants to continue playing, they want to do it right now. So clicking on "Continue at chapter ..." directly goes to playing this chapter.
+
+Let the UI be forgotten : to get to your preferred puzzle in two clicks is enough.
+
+Note : 
+
+ - there should be a possibility to go back to the "Select a puzzle" screen any time, later, in the puzzle UI. BUt it is not the general case that someone decides to continue a game, starting with another puzzle.
+
+** Continue another game...
+
+That leads to a screen where you have to choose between the last 5 / 10 played games (the older ones are forgotten, you need to pick a limit, don't you ?).
+
+This is a single list that goes like this : 
+
+ - Continue chapter Foo, at puzzle Bar (last played on Monday, October the 10th, 10:30)
+ - Continue chapter Baz, at puzzle Bing (last played on Sunday, October the 9th, 09:00)
+ - etc...
+ - Quit
+
+Time indication is always given, to make things easier.
+There is a quit button (possibly a "back" one ?)
+
+Each continue line does the same thing as the "Continue at chapter XXX" line from the start screen.
+
+** Playing a puzzle
+
+How do you play a puzzle ? 
+
+*** Navigating using the mouse
+
+How do you use the mouse to see what's happening ? 
+
+*** Advancing in the game
+
+What do you have to do to advance ? 
+
+** UI-specific Controls
+
+What are other controls available when you play ? 
+
+*** The Help button
+
+*** Undoing
+
+*** Reloading the current puzzle
+
+*** Skipping the current puzzle
+
+*** Quitting the game
+

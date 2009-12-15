@@ -68,6 +68,13 @@
   "    " _ "\n"
   "  }\n")
 
+(define-skeleton method-comments
+  "Include empty method comments"
+  ""
+  "/**\n"
+  "   * " _ "\n"
+  "   */")
+
 (global-set-key [(control ?c) (control ?j)] 'recompile)
 
 (set (make-local-variable 'compile-command)
@@ -99,7 +106,7 @@
     (set 'compilation-directory folder1)
     (set 'compile-command (concat "make -C " folder1 " check && make -C " folder2 " check"))
     (recompile)))
-  
+
 
 (setq ube-project
       (ede-cpp-root-project "ube"

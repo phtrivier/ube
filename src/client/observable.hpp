@@ -14,11 +14,17 @@ class Observable {
 
 public:
 
+  Observable() {
+  }
+
+  virtual ~Observable() {
+  }
+
   /**
    * Add an observer.
    *
    */
-  void add_observer(AbstractObserver * ipObserver);
+  virtual void add_observer(AbstractObserver * ipObserver);
 
   /**
    * Notify all registered observers
