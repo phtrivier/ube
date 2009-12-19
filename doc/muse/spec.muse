@@ -154,27 +154,172 @@ Each continue line does the same thing as the "Continue at chapter XXX" line fro
 
 ** Playing a puzzle
 
-How do you play a puzzle ? 
+The main screen is divided into three parts : 
+
+ - the board of the game (center / top / left)
+ - the list of available moves (bottom)
+ - the UI buttons
+
+*** The board
+
+All visible (non empty) cells of the current puzzles are displayed as white on black, empty circles.
+
+The entry of the puzzle is displayed with a different sprite / color / animation. (blue ?)
+The output, too. (red ?)
+
+The current position on the board is displayed as a filled circle (green ?)
+
+*** The stack of moves
+
+Every available move corresponds to an icon. The list of move can contain up to 10 (?) elements. 
+
+The next move is visible (to the left, with more color around it ?).
+
+*** UI options
+
+Buttons should be visible on the right hand side / left hand side to :
+
+ - Get a tip
+ - Undo previous move
+ - Restart the puzzle
+ - Skip the puzzle
+
+UI should not be too intrusive. Idealy, there should only be one button visible, and whenever the mouse moves to 
+the right of the screen, the button should appear. 
 
 *** Navigating using the mouse
 
-How do you use the mouse to see what's happening ? 
+The current cell is marked in a specific color. When the mouse moves over a cell, if there is a possible path from the current cell to the hovered cell, the cells in between should be colored / animated differently (flashing green ?)
+
+If no path is available, the hovered cells should be colored in red / animated with a NO sprite. 
 
 *** Advancing in the game
 
-What do you have to do to advance ? 
+When a path is available, and the use clicks on a cell, the current move should be consummed from the list of moves.
+
+If the clicked cell is the exit, the puzzle is solved, and the player should proceed to the next puzzle. 
+
+If it is the last puzzle of a chapter, the player should proceed to the "choose chapter..." screen
 
 ** UI-specific Controls
 
-What are other controls available when you play ? 
-
 *** The Help button
+
+If possible, help button should suggest a position for next move. Or simply display all the places that you can reach ? 
 
 *** Undoing
 
+It should be possible to undo the previous moves. This can be done either with the "Undo" button, or with a shortcut.
+
 *** Reloading the current puzzle
+
+It should be possible to completely reload the current puzzle.
 
 *** Skipping the current puzzle
 
+It should be possible to skip the current puzzle. A confirmation button appears, and if the user confirm, she proceeds to the next level. 
+
+If it is the last level of a puzzle, the user should proceed to the "choose chapter" screen.
+
 *** Quitting the game
+
+If the user clicks the "quit" button, (or press Esc ?), a confirmation button appears, and if the user confirm, the application closes. 
+
+** Possible moves
+
+*** Notation
+
+I'll use diagrams like this : 
+
+<example>
+  1 2 3 4
+A % % % -
+B X % X %
+C - - % %
+D X - ! % 
+</example>
+
+The legend is : 
+
+ - '!' is the current position
+ - '-' is an empty cell
+ - X is a non empty cell that is reachable using the current move
+ - % is a non empty cell that is not reachable using the current move
+
+*** +1 move (next cell, neighboor, default, single...)
+
+This moves let the player moves from a cell to any contiguous cell.
+
+In this display : 
+
+<example>
+  1 2 3 4
+A X X X -
+B X ! X X
+C - - X X
+D % - X X 
+</example>
+
+From current position !, with default move, all cells are accessible except cell D1.
+
+**** +2 move (jumper, double boots)
+
+This moves two cells at a time.
+
+<example>
+  1 2 3 4
+A % % % -
+B X % X %
+C - - % %
+D X - ! % 
+</example>
+
+
+From current position !, only the cells that you can reach by jumping 2 cells (even by moving several times) are reachable.
+
+*** chess knight 
+
+<example>
+  1 2 3 4
+A % % % -
+B % X % X
+C - - % %
+D % - ! % 
+</example>
+
+This moves replicates who a knight moves in Chess. It can go in both directions, but it moves only once (otherwhise it becomes almost possible to reach every single cell in the puzzle, so it would be less fun)
+
+*** diagonal move
+
+<example>
+  1 2 3 4
+A % X % -
+B % % ! X
+C - - % X
+D X - % %
+</example>
+
+With this move, any non-empty cell that is on one of the diagonals covered by the current cell can be reached (even if there are empty cells in between)
+
+** Special cells
+
+*** Tunnels
+
+A tunel is a cell that teleports you to another cell. 
+
+<example>
+  1 2 3 4
+A % T % -
+B % % ! -
+C - - - -
+D - - % t
+</example>
+
+If there is a tunnel between 'T' and 't', and the current moves make it possible to reach 'T', then when the player clicks on 'T', it gets teleported to 't'. 
+Note that to use the tunnel back (to go from 't' to 'T'), the player must first select go to another cell.
+
+*** Doors and Switches
+
+Some cells might be "doors", closed by a corresponding "switch". It should be obvious from the colors / shape that a switch corresponds to a door. When the user reaches the "switch" cell, the corresponding door gets opened or closed (wich means it becomes a normal cell or an empty one)
+
 
