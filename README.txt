@@ -6,7 +6,12 @@ The game is an extension to 'boots-puzzle'.
 
 h2. Install
 
-TBD (hint : ./configure && make && make install)
+For linux users, from the git sources, you can do an out-of-sources build with : 
+
+(From where you checked out the sources)
+./scripts/cc_linux.sh 
+
+This is really a shortcut to creating 
 
 h2. Game design
 
