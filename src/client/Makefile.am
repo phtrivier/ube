@@ -24,14 +24,18 @@ AM_CPPFLAGS= -DLOCALEDIR=\"${datadir}/locale\" \
 	-DPREFIX=\"${prefix}\" \
 	-Wall -Werror -enable-assert\
 	-I$(srcdir)/../../include \
-	-I$(srcdir)/../engine \
+	-I$(srcdir)/../ \
 	$(SDL_CFLAGS) \
 	$(LUA_INCLUDE)
 
 SDL_TTF_LIBS = -lSDL_ttf -lfreetype
 SDL_IMAGE_LIBS = -lSDL_image -lpng -ltiff -ljpeg -lz
 
-ube_LDADD=../engine/libube-engine.a libube-client.a $(LUA_LIB) $(LIBINTL) $(SDL_LIBS) $(SDL_IMAGE_LIBS) $(SDL_TTF_LIBS)
+ube_LDADD=../common/libube-common.a \
+	../engine/libube-engine.a \
+	libube-client.a \
+	$(LUA_LIB) $(LIBINTL) \
+	$(SDL_LIBS) $(SDL_IMAGE_LIBS) $(SDL_TTF_LIBS)
 
 check_PROGRAMS=client-tests
 client_tests_SOURCES=tests/client_tests.cpp \

@@ -1,7 +1,9 @@
 #include "lua_puzzle_loader.hpp"
-#include "lua_helper.hpp"
+
+#include "common/lua_helper.hpp"
+#include "common/resource_resolver.hpp"
+
 #include "puzzle.hpp"
-#include "resource_resolver.hpp"
 
 #include <stdio.h>
 #include <string.h>
@@ -19,7 +21,6 @@ LuaPuzzleLoader::close_lua_state()
 }
 
 int lua_puzzle_set_dimensions(lua_State * ipLuaState) {
-  //  Puzzle * a_ptr_puzzle = (Puzzle *) lua_touserdata(L,1);
   Puzzle * pPuzzle = (Puzzle *) lua_touserdata(ipLuaState,1);
   int w = lua_tointeger(ipLuaState,2);
   int h = lua_tointeger(ipLuaState,3);
@@ -28,7 +29,6 @@ int lua_puzzle_set_dimensions(lua_State * ipLuaState) {
 }
 
 int lua_puzzle_loader_set_row(lua_State * ipLuaState) {
-  //  Puzzle * a_ptr_puzzle = (Puzzle *) lua_touserdata(L,1);
   Puzzle * pPuzzle = (Puzzle *) lua_touserdata(ipLuaState,1);
   LuaPuzzleLoader * pPuzzleLoader = (LuaPuzzleLoader *) lua_touserdata(ipLuaState,2);
   int i = lua_tointeger(ipLuaState,3);

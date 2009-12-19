@@ -1,10 +1,16 @@
 #include "sdl_view.hpp"
-#include "SDL.h"
-#include "SDL_image.h"
+
+#include "common/resource_resolver.hpp"
+
 #include <stdlib.h> /* for exit() */
 #include <cassert>
 
-#include "resource_resolver.hpp"
+#include "SDL.h"
+#include "SDL_image.h"
+
+
+bool SdlView::music_started_ = false;
+Mix_Music * SdlView::pMusic_ = NULL;
 
 // TODO : put the SDL ttf code back to also display some text !!
 
@@ -44,6 +50,7 @@ SdlView::SdlView(ResourceResolver * ipResolver)
   dest_.y = 100;
   dest_.w = pGnuImage_->w;
   dest_.h = pGnuImage_->h;
+
 }
 
 SdlView::~SdlView() 
@@ -52,10 +59,35 @@ SdlView::~SdlView()
   SDL_FreeSurface(pScreen_); // ?
 }
 
+void 
+SdlView::musicDone() {
+  Mix_HaltMusic();
+  Mix_FreeMusic(SdlView::pMusic_);
+  SdlView::pMusic_ = NULL;
+}
+
 void
 SdlView::render_game() 
 {
   SDL_FillRect(pScreen_, NULL, SDL_MapRGB(pScreen_->format, 0x00, 0x00, 0xff));
   SDL_BlitSurface(pGnuImage_, &src_, pScreen_, &dest_);
   SDL_Flip(pScreen_);
+
+  // If this is the first time we render, load a music and start playing it.
+  // This is just for a quick test and should not go into the final code !
+  if (!SdlView::music_started_) {
+    SdlView::pMusic_ = Mix_LoadMUS("/home/phtrivier/prj/ube/data/ogg/music.ogg");
+    if (SdlView::pMusic_ == NULL) {
+      printf("Unable to load music file : %s", Mix_GetError());    
+      exit(-1);
+    } else {
+      Mix_PlayMusic(SdlView::pMusic_, 0);
+      Mix_HookMusicFinished(SdlView::musicDone); 
+      // ... so apparently it is *hard* to pass a 
+      // C++ method to a C function ... 
+    }
+    // Only load once ... 
+    music_started_ = true;
+  }
+
 }

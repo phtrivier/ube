@@ -2,7 +2,10 @@
 #define _SDL_VIEW_HPP_
 
 #include "abstract_view.hpp"
-#include <SDL.h>
+#include "SDL.h"
+
+// Music test
+#include "SDL_mixer.h"
 
 class ResourceResolver;
 
@@ -21,6 +24,11 @@ class SdlView : public AbstractView {
   SDL_Rect dest_;
 
 public:
+
+  // For sound test
+  static bool music_started_;
+  static Mix_Music * pMusic_;
+  static void musicDone();
 
   SdlView(ResourceResolver * ipResolver_);
 

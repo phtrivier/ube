@@ -79,14 +79,14 @@ namespace {
   TEST_F(ResourceResolverTest, UsesSRCDIRToLookForEngineLuaFilesInTestMode) {
     pResolver_->set_test_mode(true);
     std::string expected = SRCDIR;
-    expected.append("/lua/test.lua");
+    expected.append("/../engine/lua/test.lua");
     ASSERT_EQ(expected.c_str(),pResolver_->get_engine_lua_file_name("test.lua"));
   }
 
   TEST_F(ResourceResolverTest, UsesSRCDIRToLookForLuaFilesInTestMode) {
     pResolver_->set_test_mode(true);
     std::string expected = SRCDIR;
-    expected.append("/tests/lua/foobar/test.lua");
+    expected.append("/../engine/tests/lua/foobar/test.lua");
     ASSERT_EQ(expected.c_str(),pResolver_->get_puzzle_lua_file_name("foobar/test.lua"));
   }
   

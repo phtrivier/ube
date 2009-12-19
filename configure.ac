@@ -16,8 +16,13 @@ AC_SEARCH_LIBS(IMG_LoadPNG_RW, SDL_image, ,
 	     		       (http://www.libsdl.org/projects/SDL_image/)]))
 
 AC_SEARCH_LIBS(TTF_OpenFontRW, SDL_ttf, , 
- 	     AC_MSG_WARN([*** Unable to find SDL_ttf libary.
+ 	     AC_MSG_WARN([*** Unable to find SDL_ttf library.
 	     		      Are you cross compiling ?]))
+
+AC_SEARCH_LIBS(Mix_LoadMUS, SDL_mixer, , 
+             AC_MSG_WARN([*** Unable to find SDL_mixer library.
+                              Are you cross compiling ? ]))			    
+
 
 # You might need to define --with-lua-prefix and --with-lua-suffix to use this
 AX_LUA_HEADERS
@@ -29,6 +34,7 @@ AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_FILES([ 
 	Makefile
    	src/Makefile
+	src/common/Makefile
    	src/engine/Makefile
    	src/client/Makefile
 	po/Makefile.in

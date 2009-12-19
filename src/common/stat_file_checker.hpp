@@ -1,7 +1,7 @@
 #ifndef _STAT_FILE_CHECKER_HPP
 #define _STAT_FILE_CHECKER_HPP
 
-#include <abstract_file_checker.hpp>
+#include "abstract_file_checker.hpp"
 #include <sys/stat.h>
 
 class StatFileChecker : public AbstractFileChecker {

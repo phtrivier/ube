@@ -17,6 +17,15 @@ C++ is used as the main language.
 Lua is used for data storage, preferencies and extendibility
 .
 
+** Libraries
+
+ - boost
+ - lua
+ - SDL
+ - SDL_image
+ - SDL_mixer
+ - SDL_ttf
+
 ** Engine
 
 ube-engine is a C++ lib that provides the meat of the game. 
@@ -216,6 +225,10 @@ Lua files for puzzles. All puzzles are next to each other, although chapters mak
 
 Lua files describing chapters. A chapter file has minimal information (mostly a list of corresponding puzzle file names)
 
+*** share/ube/ogg
+
+For ogg background music (and potentially sound effects, If i play some)
+
 Note : why not puzzles under chapters ? Because this way, it is possible to implement puzzles without implementing chapters at all. Just in case ;)
 
 * Lua files for puzzles
@@ -277,6 +290,3 @@ The idea is to be able to use a command line like
 
 Yes, I know, you would probably like a puzzle editor. I suppose it would be possible to write one using ube-commons, and ube-engine (plus any other kind of GUI framework). That's a task for when I am in better shape. 
 
-** No sound ? 
-
-For the moment, I don't deal with sound, because I like silence. Okay, I really need to deal with sound, fine, I'll do that now. I hate when you're right, you know ?

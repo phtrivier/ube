@@ -98,13 +98,13 @@ ResourceResolver::get_lua_file_name(const char * iFileName, const char * iStanda
 string 
 ResourceResolver::get_engine_lua_file_name(const char * iFileName) 
 {
-  return get_lua_file_name(iFileName, "lua/engine", "/lua/");
+  return get_lua_file_name(iFileName, "lua/engine", "/../engine/lua/");
 }
 
 string 
 ResourceResolver::get_puzzle_lua_file_name(const char *iFileName)
 {
-  return get_lua_file_name(iFileName, "lua/puzzles", "/tests/lua/");
+  return get_lua_file_name(iFileName, "lua/puzzles", "/../engine/tests/lua/");
 }
 
 string

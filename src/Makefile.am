@@ -1,2 +1,1 @@
-# SUBDIRS = engine editor client
-SUBDIRS = engine client
+SUBDIRS = common engine client 

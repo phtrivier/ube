@@ -1,9 +1,10 @@
 #include "lua_puzzle_loader.hpp"
 #include "cell.hpp"
 #include "puzzle.hpp"
-#include "resource_resolver.hpp"
 #include "cell_factory.hpp"
-#include "stat_file_checker.hpp"
+
+#include "common/resource_resolver.hpp"
+#include "common/stat_file_checker.hpp"
 
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
