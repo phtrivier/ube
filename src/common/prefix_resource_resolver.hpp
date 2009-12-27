@@ -1,14 +1,14 @@
-#ifndef _RESOURCE_RESOLVER_HPP_
-#define _RESOURCE_RESOLVER_HPP_
+#ifndef _PREFIX_RESOURCE_RESOLVER_HPP_
+#define _PREFIX_RESOURCE_RESOLVER_HPP_
 
-// #include <stdio.h>
-// #include <string.h>
+#include "abstract_resource_resolver.hpp"
+
 #include <string>
 #include <vector>
 
 class AbstractFileChecker;
 
-class ResourceResolver {
+class PrefixResourceResolver :  public AbstractResourceResolver {
   // External dependency, to check for folder / file existence
   const AbstractFileChecker * pChecker_;
 
@@ -19,11 +19,6 @@ class ResourceResolver {
   // Once this is set, no further check is
   // ever done.
   const std::string * pPrefix_;
-
-  // In test scenarios, lua files are in a completely different location.
-  // If this flag is on, get_engine_lua_file_name will point to SRCDIR/engine/lua instead
-  // of using the prefixes.
-  bool test_mode_;
 
   /**
    * Check all prefixes provided by set_prefixes.
@@ -52,30 +47,13 @@ class ResourceResolver {
   void clearPrefixes();
 
   // Utility functions to look for a kind of resource
-  std::string getResFileName(const char *iResType, const char * iResName);
-
-  // Get a lua file name. In test mode, SRCDIR/iTestPrefix is used
-  // to prefix the file name.
-  // @see set_test_mode
-
-  /**
-   * Get a lua file name. 
-   * 
-   * In normal mode, it combines the general prefix for resource (get_safe_prefix) and iStandardPrefix.
-   * In test mode, its combines SRCDIR and iTestPrefix.
-   *
-   * @param iFile file name, with suffix (eg "toto.lua")
-   * @param iStandardPrefix prefix to use in standard (non-test) mode
-   * @param iTestPrefix prefix to use in test mode (see set_test_mode_)
-   */
-  std::string get_lua_file_name(const char * iFileName, const char * iStandardPrefix, const char * iTestPrefix);
+  std::string get_res_file_name(const char *iResType, const char * iResName);
 
 public:
-  ResourceResolver(const AbstractFileChecker & iChecker) : pChecker_(&iChecker) {
+  PrefixResourceResolver(const AbstractFileChecker & iChecker) : AbstractResourceResolver(), pChecker_(&iChecker)  {
     pPrefix_ = NULL;
-    test_mode_ = false;
   }
-  ~ResourceResolver();
+  ~PrefixResourceResolver();
 
   void set_prefixes(const char* iPrefixes[], int iPrefixCount);
 
@@ -126,14 +104,6 @@ public:
    */
   std::string get_puzzle_lua_file_name(const char *iFileName);
   
-  /**
-   * Make this resource_resolver look for lua files in SRCDIR/engine/lua
-   * instead of using the prefixes.
-   */
-  void set_test_mode(bool iMode) {
-    test_mode_ = iMode;
-  }
-
 };
 
-#endif //_RESOURCE_RESOLVER_HPP_
+#endif //_PREFIX_RESOURCE_RESOLVER_HPP_

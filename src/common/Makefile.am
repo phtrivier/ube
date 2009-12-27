@@ -1,7 +1,8 @@
 lib_LIBRARIES=libube-common.a
 libube_common_a_SOURCES=gettext.h lua_helper.hpp \
 	abstract_file_checker.hpp \
-	resource_resolver.hpp resource_resolver.cpp \
+	abstract_resource_resolver.hpp \
+	prefix_resource_resolver.hpp prefix_resource_resolver.cpp \
 	stat_file_checker.hpp stat_file_checker.cpp
 
 AM_CPPFLAGS=-DSRCDIR=\"${srcdir}\" \
@@ -14,7 +15,7 @@ AM_CPPFLAGS=-DSRCDIR=\"${srcdir}\" \
 # There is one program that aggreatates all tests cases
 check_PROGRAMS = common-tests
 common_tests_SOURCES= tests/common_tests.cpp \
-	tests/resource_resolver_test.cpp \
+	tests/prefix_resource_resolver_test.cpp \
 	tests/mock_file_checker.hpp \
 	tests/stat_file_checker_test.cpp
 

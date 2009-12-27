@@ -1,22 +1,24 @@
-#include <resource_resolver.hpp>
+#include "prefix_resource_resolver.hpp"
+#include "tests/mock_file_checker.hpp"
+
+#include <string>
+using namespace std;
+
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 using ::testing::Return;
 using ::testing::StrEq;
 
-#include "tests/mock_file_checker.hpp"
-#include <string>
-using namespace std;
 
 namespace {
-  class ResourceResolverTest  : public ::testing::Test {
+  class PrefixResourceResolverTest  : public ::testing::Test {
   public:
     MockFileChecker checker_;
-    ResourceResolver * pResolver_;
-    ResourceResolverTest() {
-      pResolver_ = new ResourceResolver(checker_);
+    PrefixResourceResolver * pResolver_;
+    PrefixResourceResolverTest() {
+      pResolver_ = new PrefixResourceResolver(checker_);
     }
-    virtual ~ResourceResolverTest(){
+    virtual ~PrefixResourceResolverTest(){
       delete pResolver_;
     }
 
@@ -33,28 +35,28 @@ namespace {
 
   };
 
-  TEST_F(ResourceResolverTest, UsesEachPrefixInTurnToLookForLocale) {
+  TEST_F(PrefixResourceResolverTest, UsesEachPrefixInTurnToLookForLocale) {
     expectsThreeFolderCheck();
     ASSERT_EQ("baz/share/locale",pResolver_->get_locale_dir());
     // There should be no check the second time
     ASSERT_EQ("baz/share/locale",pResolver_->get_locale_dir());
   }
 
-  TEST_F(ResourceResolverTest, UsesAllPrefixToLookForImages) {
+  TEST_F(PrefixResourceResolverTest, UsesAllPrefixToLookForImages) {
     expectsThreeFolderCheck();
     ASSERT_EQ("baz/share/ube/images/toto.png",pResolver_->get_image_file_name("toto.png"));
     // No checks the second time
     ASSERT_EQ("baz/share/ube/images/toto.png",pResolver_->get_image_file_name("toto.png"));
   }
 
-  TEST_F(ResourceResolverTest, UsesAllPrefixToLookForFonts) {
+  TEST_F(PrefixResourceResolverTest, UsesAllPrefixToLookForFonts) {
     expectsThreeFolderCheck();
     ASSERT_EQ("baz/share/ube/fonts/Vera.ttf",pResolver_->get_font_file_name("Vera.ttf"));
     // No checks the second time
     ASSERT_EQ("baz/share/ube/fonts/Vera.ttf",pResolver_->get_font_file_name("Vera.ttf"));
   }
 
-  TEST_F(ResourceResolverTest, ChecksFoldersAsLittleAsPossible) {
+  TEST_F(PrefixResourceResolverTest, ChecksFoldersAsLittleAsPossible) {
     expectsThreeFolderCheck();
     ASSERT_EQ("baz/share/ube/images/toto.png",pResolver_->get_image_file_name("toto.png"));
     // Only one checks
@@ -62,32 +64,18 @@ namespace {
     ASSERT_EQ("baz/share/locale",pResolver_->get_locale_dir());
   }
 
-  TEST_F(ResourceResolverTest, UsesAllPrefixToLookForEngineLuaFiles) {
+  TEST_F(PrefixResourceResolverTest, UsesAllPrefixToLookForEngineLuaFiles) {
     expectsThreeFolderCheck();
     ASSERT_EQ("baz/share/ube/lua/engine/test.lua",pResolver_->get_engine_lua_file_name("test.lua"));
     // No checks the second time
     ASSERT_EQ("baz/share/ube/lua/engine/test.lua",pResolver_->get_engine_lua_file_name("test.lua"));
   }
 
-  TEST_F(ResourceResolverTest, UsesAllPrefixToLookForPuzzleLuaFiles) {
+  TEST_F(PrefixResourceResolverTest, UsesAllPrefixToLookForPuzzleLuaFiles) {
     expectsThreeFolderCheck();
     ASSERT_EQ("baz/share/ube/lua/puzzles/puzzle1.lua",pResolver_->get_puzzle_lua_file_name("puzzle1.lua"));
     // No checks the second time
     ASSERT_EQ("baz/share/ube/lua/puzzles/puzzle1.lua",pResolver_->get_puzzle_lua_file_name("puzzle1.lua"));
-  }
-
-  TEST_F(ResourceResolverTest, UsesSRCDIRToLookForEngineLuaFilesInTestMode) {
-    pResolver_->set_test_mode(true);
-    std::string expected = SRCDIR;
-    expected.append("/../engine/lua/test.lua");
-    ASSERT_EQ(expected.c_str(),pResolver_->get_engine_lua_file_name("test.lua"));
-  }
-
-  TEST_F(ResourceResolverTest, UsesSRCDIRToLookForLuaFilesInTestMode) {
-    pResolver_->set_test_mode(true);
-    std::string expected = SRCDIR;
-    expected.append("/../engine/tests/lua/foobar/test.lua");
-    ASSERT_EQ(expected.c_str(),pResolver_->get_puzzle_lua_file_name("foobar/test.lua"));
   }
   
 }

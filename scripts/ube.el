@@ -88,9 +88,14 @@
     (set 'compile-command (concat "make -C " folder " check"))
     (recompile)))
 
+(defun ube-compile-common ()
+  (interactive)
+  (ube-compile "common"))
+
 (defun ube-compile-client ()
   (interactive)
   (ube-compile "client"))
+
 
 (defun ube-compile-engine ()
   (interactive)
@@ -101,7 +106,8 @@
 
 (defun ube-compile-all ()
   (interactive)
-  (let ((folder1 (make-folder "engine"))
+  (let ((folder2 (make-folder "common"))
+        (folder1 (make-folder "engine"))
 	(folder2 (make-folder "client")))
     (set 'compilation-directory folder1)
     (set 'compile-command (concat "make -C " folder1 " check && make -C " folder2 " check"))
@@ -115,6 +121,7 @@
 			    :file "~/prj/ube/README.txt"
                             :directory "~/prj/ube"
 			    :include-path '("/include"
+					    "/src/common"
 					    "/src/client"
 					    "/src/engine")
 			    :system-include-path '("/usr/include/c++/4.4.1")))

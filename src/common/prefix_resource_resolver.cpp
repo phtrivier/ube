@@ -1,10 +1,10 @@
-#include "resource_resolver.hpp"
+#include "prefix_resource_resolver.hpp"
 #include "abstract_file_checker.hpp"
 #include <cassert>
 using namespace std;
 
 void 
-ResourceResolver::set_prefixes(const char* iPrefixes[], int iPrefixCount) 
+PrefixResourceResolver::set_prefixes(const char* iPrefixes[], int iPrefixCount) 
 {
   clearPrefixes();
   // Make sure prefixes are check next time get_safe_prefix() is called.
@@ -15,13 +15,13 @@ ResourceResolver::set_prefixes(const char* iPrefixes[], int iPrefixCount)
   
 }
 
-ResourceResolver::~ResourceResolver() 
+PrefixResourceResolver::~PrefixResourceResolver() 
 {
   clearPrefixes();
 }
 
 void
-ResourceResolver::clearPrefixes() 
+PrefixResourceResolver::clearPrefixes() 
 {
   vector<const string*>::iterator it = prefixes_.begin();
   while( it != prefixes_.end()) {
@@ -34,7 +34,7 @@ ResourceResolver::clearPrefixes()
 }
 
 bool
-ResourceResolver::check_prefixes() {
+PrefixResourceResolver::check_prefixes() {
   assert(pChecker_!=NULL);
   vector<const string*>::iterator it = prefixes_.begin();
   bool found = false;
@@ -51,7 +51,7 @@ ResourceResolver::check_prefixes() {
 }
 
 string
-ResourceResolver::get_safe_prefix()
+PrefixResourceResolver::get_safe_prefix()
 {
   string res = "";
   if (pPrefix_ != NULL || check_prefixes()) {
@@ -62,7 +62,7 @@ ResourceResolver::get_safe_prefix()
 }
 
 string 
-ResourceResolver::get_locale_dir() 
+PrefixResourceResolver::get_locale_dir() 
 {
   string res = get_safe_prefix();
   res.append("share/locale");
@@ -70,45 +70,31 @@ ResourceResolver::get_locale_dir()
 }
 
 string 
-ResourceResolver::get_image_file_name(const char * iImageName) 
+PrefixResourceResolver::get_image_file_name(const char * iImageName) 
 {
-  return getResFileName("images", iImageName);
+  return get_res_file_name("images", iImageName);
 }
 
 string 
-ResourceResolver::get_font_file_name(const char * iFontName) 
+PrefixResourceResolver::get_font_file_name(const char * iFontName) 
 {
-  return getResFileName("fonts", iFontName);
+  return get_res_file_name("fonts", iFontName);
+}
+
+string 
+PrefixResourceResolver::get_engine_lua_file_name(const char * iFileName) 
+{
+  return get_res_file_name("lua/engine", iFileName);
+}
+
+string 
+PrefixResourceResolver::get_puzzle_lua_file_name(const char *iFileName)
+{
+  return get_res_file_name("lua/puzzles", iFileName);
 }
 
 string
-ResourceResolver::get_lua_file_name(const char * iFileName, const char * iStandardPrefix, const char * iTestPrefix)
-{
-  string res;
-  if (test_mode_) {
-    res = SRCDIR;
-    res.append(iTestPrefix);
-    res.append(iFileName);
-  } else {
-    res = getResFileName(iStandardPrefix, iFileName);
-  } 
-  return res;
-}
-
-string 
-ResourceResolver::get_engine_lua_file_name(const char * iFileName) 
-{
-  return get_lua_file_name(iFileName, "lua/engine", "/../engine/lua/");
-}
-
-string 
-ResourceResolver::get_puzzle_lua_file_name(const char *iFileName)
-{
-  return get_lua_file_name(iFileName, "lua/puzzles", "/../engine/tests/lua/");
-}
-
-string
-ResourceResolver::getResFileName(const char *iResType, const char * iResName)
+PrefixResourceResolver::get_res_file_name(const char *iResType, const char * iResName)
 {
   string res = get_safe_prefix();
   res.append("share/ube/");
