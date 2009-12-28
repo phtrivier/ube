@@ -76,7 +76,7 @@ SdlView::render_game()
   // If this is the first time we render, load a music and start playing it.
   // This is just for a quick test and should not go into the final code !
   if (!SdlView::music_started_) {
-    SdlView::pMusic_ = Mix_LoadMUS("/home/phtrivier/prj/ube/data/ogg/help.ogg");
+    SdlView::pMusic_ = Mix_LoadMUS("/home/phtrivier/prj/ube/data/ogg/music.ogg");
     if (SdlView::pMusic_ == NULL) {
       printf("Unable to load music file : %s", Mix_GetError());    
       exit(-1);
