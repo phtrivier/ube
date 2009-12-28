@@ -45,16 +45,4 @@ namespace {
     ASSERT_TRUE(p.get_cell_at(1,1)->is_out());
   }
 
-  TEST_F(PuzzleLoaderTest, CannotSetRowIfDimensionAreInvalid) {
-    Puzzle p;
-    p.set_dimensions(2,1);
-
-    ASSERT_THROW(pLoader_->set_row(-1,&p, "IO"), logic_error);
-    ASSERT_THROW(pLoader_->set_row(2,&p, "IO"), logic_error);
-    ASSERT_THROW(pLoader_->set_row(0,&p, "IO-"), logic_error);
-    ASSERT_THROW(pLoader_->set_row(0,&p, "I"), logic_error);
-        
-  }
-
-
 } // Namespace

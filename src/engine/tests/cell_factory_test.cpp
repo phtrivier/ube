@@ -44,7 +44,7 @@ namespace {
     ASSERT_TRUE(cell->is_walkable());
     delete cell;
 
-    ASSERT_THROW(f.make_cell(0,1,'Y'), logic_error);
+    ASSERT_FALSE(f.is_valid_cell_letter('Y'));
   }
 
 } // Namespace

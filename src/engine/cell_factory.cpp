@@ -1,11 +1,28 @@
 #include "cell_factory.hpp"
 #include "cell.hpp"
 
+#include <assert.h>
 #include <sstream>
 #include <iostream>
 #include <stdexcept>
 
-Cell * CellFactory::make_cell(int iI, int iJ, char iLetter) const {
+bool 
+CellFactory::is_valid_cell_letter(char iLetter) const {
+  bool res = false;
+  switch(iLetter) {
+  case 'I':
+  case 'O':
+  case '#':
+  case '-':
+    res = true;
+  }
+  return res;
+}
+
+Cell * 
+CellFactory::make_cell(int iI, int iJ, char iLetter) const {
+
+  assert(is_valid_cell_letter(iLetter));
 
   int type = Cell::EMPTY;
 
@@ -22,10 +39,6 @@ Cell * CellFactory::make_cell(int iI, int iJ, char iLetter) const {
   case '-' :
     type = Cell::WALKABLE;
     break;
-  default : 
-    std::ostringstream msg;
-    msg << "Invalid cell type " << iLetter;
-    throw std::logic_error(msg.str());
   }
   
   return new Cell(iI, iJ, type);

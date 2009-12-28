@@ -29,9 +29,9 @@ public:
    * Set a row on a puzzle, parsing a line of
    * letters representing the cells.
    *
-   * @param i index of the row to fill
-   * @param poPuzzle the puzzle to modify
-   * @param row string representing the row
+   * @param i index of the row to fill (should be a valid row index)
+   * @param poPuzzle the puzzle to modify (should not be null)
+   * @param row string representing the row (should only contain valid characters)
    */
   void set_row(int i, Puzzle * poPuzzle, const char * row);
   

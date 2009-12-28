@@ -24,6 +24,7 @@ int lua_puzzle_set_dimensions(lua_State * ipLuaState) {
   Puzzle * pPuzzle = (Puzzle *) lua_touserdata(ipLuaState,1);
   int w = lua_tointeger(ipLuaState,2);
   int h = lua_tointeger(ipLuaState,3);
+  // TODO(pht) : handle possible negative values here (we're not in the baricade yet !)
   pPuzzle->set_dimensions(w,h);
   return 0;
 }
@@ -33,6 +34,7 @@ int lua_puzzle_loader_set_row(lua_State * ipLuaState) {
   LuaPuzzleLoader * pPuzzleLoader = (LuaPuzzleLoader *) lua_touserdata(ipLuaState,2);
   int i = lua_tointeger(ipLuaState,3);
   const char * row = lua_tostring(ipLuaState, 4);
+  // TODO(pht) : handle possible bad chars in the row (untranslatable ones, we're not in the baricade yet !)
   pPuzzleLoader->set_row(i,pPuzzle,row);
   return 0;
 }

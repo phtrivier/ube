@@ -14,9 +14,8 @@ class Puzzle {
   // Cells
   Cell*** cells_;
 
-  // Check that a position is valid in this puzzle,
-  // and throws a logic_error otherwise
-  void ensure_valid_position(int iI, int iJ) const;
+  // Is a position valid on this board ?
+  bool is_valid_position(int iI, int iJ) const;
 
 public:
 

@@ -16,6 +16,21 @@ class Cell;
 class CellFactory { 
 
 public:
+
+  /**
+   * Is a letter parsable as a cell ? 
+   *
+   * @param iLetter : a letter 
+   */
+  bool is_valid_cell_letter(char iLetter) const;
+
+  /**
+   * Create a cell for a given letter.
+   *
+   * @param iI : a row index (should be positive)
+   * @param iJ : a column index (should be positive)
+   * @param iLetter : a letter representing a cell (should be valid, as defined by is_valid_cell_letter)
+   */
   Cell * make_cell(int iI, int iJ, char iLetter) const;
 };
 

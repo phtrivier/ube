@@ -8,19 +8,17 @@
 using boost::format;
 
 void PuzzleLoader::set_row(int i, Puzzle * poPuzzle, const char * row) {
-   
-  // Dimensions check
-  if (i<0 || i >= poPuzzle->get_h()) {
-    throw std::logic_error(str(format("Bad row index %1%") % i));
-  } else {
-    int w_row = strlen(row);
-    if ( w_row != poPuzzle->get_w()) {
-      throw std::logic_error(str(format("Bad row width %1%") % w_row));
-    }
-  }
-
+  assert(poPuzzle != NULL);
+  assert(row != NULL);
+  assert(i>=0);
+  assert(i < poPuzzle->get_h());
+  assert(((int) strlen(row)) == poPuzzle->get_w());
+  
   for (int j = 0 ; j < poPuzzle->get_w() ; j++) {
-    poPuzzle->add_cell(pFactory_->make_cell(i,j, row[j]));
+    assert(pFactory_->is_valid_cell_letter(row[j]));
+    Cell * pNewCell = pFactory_->make_cell(i,j, row[j]);
+    assert(pNewCell != NULL); // I did check before, so I should not get into any trouble !
+    poPuzzle->add_cell(pNewCell);
   }
 
 }
