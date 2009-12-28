@@ -106,11 +106,11 @@
 
 (defun ube-compile-all ()
   (interactive)
-  (let ((folder2 (make-folder "common"))
-        (folder1 (make-folder "engine"))
-	(folder2 (make-folder "client")))
+  (let ((folder1 (make-folder "common"))
+        (folder2 (make-folder "engine"))
+	(folder3 (make-folder "client")))
     (set 'compilation-directory folder1)
-    (set 'compile-command (concat "make -C " folder1 " check && make -C " folder2 " check"))
+    (set 'compile-command (concat "make -C" folder1 " check && make -C " folder2 " check && make -C " folder3 " check"))
     (recompile)))
 
 

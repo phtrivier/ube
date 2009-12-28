@@ -1,7 +1,7 @@
 #include "lua_puzzle_loader.hpp"
 
 #include "common/lua_helper.hpp"
-#include "common/resource_resolver.hpp"
+#include "common/abstract_resource_resolver.hpp"
 
 #include "puzzle.hpp"
 
@@ -85,7 +85,6 @@ void
 LuaPuzzleLoader::load_lua_engine_file(const char * iFileName)
 {
   load_lua_file(pResolver_->get_engine_lua_file_name(iFileName));
- 
 }
 
 void

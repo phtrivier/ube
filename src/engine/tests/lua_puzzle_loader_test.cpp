@@ -3,13 +3,21 @@
 #include "puzzle.hpp"
 #include "cell_factory.hpp"
 
-#include "common/resource_resolver.hpp"
+#include "common/tests/mock_resource_resolver.hpp"
 #include "common/stat_file_checker.hpp"
 
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
+using ::testing::Return;
+using ::testing::StrEq;
+
+#include "boost/format.hpp"
+using boost::format;
+
 #include <stdexcept>
 using namespace std;
+
+
 
 namespace {
   class LuaPuzzleLoaderTest : public ::testing::Test {
@@ -32,11 +40,14 @@ namespace {
 
     CellFactory f;
 
-    StatFileChecker c;
-    ResourceResolver r(c);
-    r.set_test_mode(true);
+    MockResourceResolver resolver;
+    EXPECT_CALL(resolver, get_engine_lua_file_name(StrEq("puzzle_lib.lua")))
+      .WillOnce(Return(str(format("%1%/lua/puzzle_lib.lua") % SRCDIR)));
+
+    EXPECT_CALL(resolver, get_puzzle_lua_file_name(StrEq("puzzle_loader_test/puzzle1.lua")))
+      .WillOnce(Return(str(format("%1%/tests/lua/puzzle_loader_test/puzzle1.lua") % SRCDIR)));
     
-    LuaPuzzleLoader loader(&f,&r);
+    LuaPuzzleLoader loader(&f,&resolver);
     Puzzle p;
     loader.load_puzzle_file("puzzle_loader_test/puzzle1.lua", &p);
     

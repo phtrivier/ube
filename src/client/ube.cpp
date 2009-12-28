@@ -1,4 +1,4 @@
-#include "common/resource_resolver.hpp"
+#include "common/prefix_resource_resolver.hpp"
 #include "common/stat_file_checker.hpp"
 #include "sdl_view.hpp"
 #include "sdl_controller.hpp"
@@ -58,7 +58,7 @@ int main(int argc, char ** argv) {
   atexit(SDL_Quit);
 
   const StatFileChecker checker;
-  ResourceResolver resolver(checker);
+  PrefixResourceResolver resolver(checker);
   const char* prefixes[2] = { PREFIX, ".."};
   resolver.set_prefixes(prefixes,2);
 

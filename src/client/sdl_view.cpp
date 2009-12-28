@@ -1,6 +1,6 @@
 #include "sdl_view.hpp"
 
-#include "common/resource_resolver.hpp"
+#include "common/abstract_resource_resolver.hpp"
 
 #include <stdlib.h> /* for exit() */
 #include <cassert>
@@ -14,7 +14,7 @@ Mix_Music * SdlView::pMusic_ = NULL;
 
 // TODO : put the SDL ttf code back to also display some text !!
 
-SdlView::SdlView(ResourceResolver * ipResolver)
+SdlView::SdlView(AbstractResourceResolver * ipResolver)
 {
   assert(ipResolver != NULL);
   pResolver_ = ipResolver;
@@ -76,7 +76,7 @@ SdlView::render_game()
   // If this is the first time we render, load a music and start playing it.
   // This is just for a quick test and should not go into the final code !
   if (!SdlView::music_started_) {
-    SdlView::pMusic_ = Mix_LoadMUS("/home/phtrivier/prj/ube/data/ogg/music.ogg");
+    SdlView::pMusic_ = Mix_LoadMUS("/home/phtrivier/prj/ube/data/ogg/help.ogg");
     if (SdlView::pMusic_ == NULL) {
       printf("Unable to load music file : %s", Mix_GetError());    
       exit(-1);
@@ -84,7 +84,7 @@ SdlView::render_game()
       Mix_PlayMusic(SdlView::pMusic_, 0);
       Mix_HookMusicFinished(SdlView::musicDone); 
       // ... so apparently it is *hard* to pass a 
-      // C++ method to a C function ... 
+      // C++ method to a C function ... so I will need to have some singleton here :(
     }
     // Only load once ... 
     music_started_ = true;
