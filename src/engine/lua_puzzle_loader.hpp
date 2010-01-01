@@ -4,7 +4,7 @@
 #include "puzzle_loader.hpp"
 #include <string>
 
-class AbstractResourceResolver;
+class ResourceResolverInterface;
 struct lua_State;
 
 /**
@@ -16,7 +16,7 @@ struct lua_State;
 class LuaPuzzleLoader : public PuzzleLoader { 
 
   // Resolver to look both for engine and puzzle lua files.
-  AbstractResourceResolver * pResolver_;
+  ResourceResolverInterface * pResolver_;
   
   // Lua context
   lua_State * pLuaState_;
@@ -46,7 +46,7 @@ class LuaPuzzleLoader : public PuzzleLoader {
   void close_lua_state();
 
 public:
-  LuaPuzzleLoader(CellFactory * ipFactory, AbstractResourceResolver * ipResolver) : PuzzleLoader(ipFactory), 
+  LuaPuzzleLoader(CellFactory * ipFactory, ResourceResolverInterface * ipResolver) : PuzzleLoader(ipFactory), 
 										    pResolver_(ipResolver) {
     init_lua_state();
   }

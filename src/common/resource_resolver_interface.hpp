@@ -1,19 +1,16 @@
-#ifndef _ABSTRACT_RESOURCE_RESOLVER_HPP_
-#define _ABSTRACT_RESOURCE_RESOLVER_HPP_
+#ifndef _RESOURCE_RESOLVER_INTERFACE_HPP_
+#define _RESOURCE_RESOLVER_INTERFACE_HPP_
 
 #include <string>
 
 /**
  * Interface to reach resources.
  */
-class AbstractResourceResolver { 
+class ResourceResolverInterface { 
 
 public:
 
-  AbstractResourceResolver() {
-  }
-
-  virtual ~AbstractResourceResolver() {
+  virtual ~ResourceResolverInterface() {
   }
 
   /**
@@ -51,4 +48,4 @@ public:
 
 };
 
-#endif // _ABSTRACT_RESOURCE_RESOLVER_HPP_
+#endif // _RESOURCE_RESOLVER_INTERFACE_HPP_

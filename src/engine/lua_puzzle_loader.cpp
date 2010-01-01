@@ -1,7 +1,7 @@
 #include "lua_puzzle_loader.hpp"
 
 #include "common/lua_helper.hpp"
-#include "common/abstract_resource_resolver.hpp"
+#include "common/resource_resolver_interface.hpp"
 
 #include "puzzle.hpp"
 

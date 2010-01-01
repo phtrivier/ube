@@ -2,13 +2,13 @@
 #define _MOCK_RESOURCE_RESOLVER_HPP_
 
 #include <gmock/gmock.h>
-#include "common/abstract_resource_resolver.hpp"
+#include "common/resource_resolver_interface.hpp"
 
 /**
  * Mock resource resolver
  */
 
-class MockResourceResolver : public AbstractResourceResolver {
+class MockResourceResolver : public ResourceResolverInterface {
  public:
   MOCK_METHOD0(get_locale_dir,
       std::string());

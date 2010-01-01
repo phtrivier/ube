@@ -1,14 +1,14 @@
 #ifndef _PREFIX_RESOURCE_RESOLVER_HPP_
 #define _PREFIX_RESOURCE_RESOLVER_HPP_
 
-#include "abstract_resource_resolver.hpp"
+#include "resource_resolver_interface.hpp"
 
 #include <string>
 #include <vector>
 
 class AbstractFileChecker;
 
-class PrefixResourceResolver :  public AbstractResourceResolver {
+class PrefixResourceResolver :  public ResourceResolverInterface {
   // External dependency, to check for folder / file existence
   const AbstractFileChecker * pChecker_;
 
@@ -50,7 +50,7 @@ class PrefixResourceResolver :  public AbstractResourceResolver {
   std::string get_res_file_name(const char *iResType, const char * iResName);
 
 public:
-  PrefixResourceResolver(const AbstractFileChecker & iChecker) : AbstractResourceResolver(), pChecker_(&iChecker)  {
+  PrefixResourceResolver(const AbstractFileChecker & iChecker) : ResourceResolverInterface(), pChecker_(&iChecker)  {
     pPrefix_ = NULL;
   }
   ~PrefixResourceResolver();

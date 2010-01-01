@@ -7,7 +7,7 @@
 // Music test
 #include "SDL_mixer.h"
 
-class AbstractResourceResolver;
+class ResourceResolverInterface;
 
 /**
  * A game view that uses SDL.
@@ -16,7 +16,7 @@ class SdlView : public AbstractView {
 
   SDL_Surface * pScreen_;
 
-  AbstractResourceResolver * pResolver_;
+  ResourceResolverInterface * pResolver_;
 
   SDL_Surface * pGnuImage_;
 
@@ -30,7 +30,7 @@ public:
   static Mix_Music * pMusic_;
   static void musicDone();
 
-  SdlView(AbstractResourceResolver * ipResolver_);
+  SdlView(ResourceResolverInterface * ipResolver_);
 
   ~SdlView();
 

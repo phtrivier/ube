@@ -1,6 +1,6 @@
 #include "sdl_view.hpp"
 
-#include "common/abstract_resource_resolver.hpp"
+#include "common/resource_resolver_interface.hpp"
 
 #include <stdlib.h> /* for exit() */
 #include <cassert>
@@ -14,7 +14,7 @@ Mix_Music * SdlView::pMusic_ = NULL;
 
 // TODO : put the SDL ttf code back to also display some text !!
 
-SdlView::SdlView(AbstractResourceResolver * ipResolver)
+SdlView::SdlView(ResourceResolverInterface * ipResolver)
 {
   assert(ipResolver != NULL);
   pResolver_ = ipResolver;
