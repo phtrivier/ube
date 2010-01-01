@@ -22,7 +22,7 @@ class PuzzleLoader {
 public:
   PuzzleLoader(CellFactory * piFactory) : pFactory_(piFactory) {
   }
-  ~PuzzleLoader() {
+  virtual ~PuzzleLoader() {
   }
 
   /**
