@@ -1,19 +1,19 @@
-#ifndef _ABSTRACT_GAME_MODE_HPP_
-#define _ABSTRACT_GAME_MODE_HPP_
+#ifndef _GAME_MODE_INTERFACE_HPP_
+#define _GAME_MODE_INTERFACE_HPP_
 
 #include "observable.hpp"
 
 /**
  * Base class for game modes
  */
-class AbstractGameMode : public Observable { 
+class GameModeInterface : public Observable { 
 
 public:
 
-  AbstractGameMode() : Observable() {
+  GameModeInterface() : Observable() {
   }
 
-  virtual ~AbstractGameMode() {
+  virtual ~GameModeInterface() {
   }
 
   /**
@@ -31,4 +31,4 @@ public:
 
 };
 
-#endif // _ABSTRACT_GAME_MODE_HPP_
+#endif // _GAME_MODE_INTERFACE_HPP_

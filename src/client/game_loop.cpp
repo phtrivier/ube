@@ -13,7 +13,7 @@ using boost::format;
 #include <cassert>
 
 void 
-GameLoop::register_game_mode(std::string iModeName, AbstractGameMode * ipGameMode)
+GameLoop::register_game_mode(std::string iModeName, GameModeInterface * ipGameMode)
 {
   assert(ipGameMode != NULL);
   assert(!iModeName.empty());

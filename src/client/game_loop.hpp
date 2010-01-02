@@ -6,7 +6,7 @@
 #include <map>
 
 // Forward declare should be enough
-#include "abstract_game_mode.hpp"
+#include "game_mode_interface.hpp"
 class ClockInterface;
 
 /**
@@ -15,10 +15,10 @@ class ClockInterface;
 class GameLoop : public AbstractObserver { 
 
   // Current game mode.
-  AbstractGameMode * pCurrentGameMode_;
+  GameModeInterface * pCurrentGameMode_;
 
   // Map of game modes, by names
-  std::map<std::string, AbstractGameMode *> gameModes_;
+  std::map<std::string, GameModeInterface *> gameModes_;
 
   // Clcok
   ClockInterface * pClock_;
@@ -40,7 +40,7 @@ public:
    * provided by the game mode, and the mode becomes eligible for
    * being set with set_current_game_mode.
    */
-  void register_game_mode(std::string iModeName, AbstractGameMode * ipGameMode);
+  void register_game_mode(std::string iModeName, GameModeInterface * ipGameMode);
   
   /**
    * Force the current game mode.
@@ -53,7 +53,7 @@ public:
   /**
    * The current game mode.
    */
-  AbstractGameMode * get_current_game_mode() {
+  GameModeInterface * get_current_game_mode() {
     return pCurrentGameMode_;
   }
  

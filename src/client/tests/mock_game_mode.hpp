@@ -1,9 +1,9 @@
 #include <gmock/gmock.h>
-#include "abstract_game_mode.hpp"
+#include "game_mode_interface.hpp"
 
 class AbstractObserver;
 
-class MockGameMode : public AbstractGameMode {
+class MockGameMode : public GameModeInterface {
 public:
   
   // TODO(pht) : if possible, get rid of this, it should a
