@@ -2,7 +2,7 @@
 
 #include "common/logging.hpp"
 #include "game_mode.hpp"
-#include "abstract_clock.hpp"
+#include "clock_interface.hpp"
 #include "game_event.hpp"
 
 #include <cstdio>

@@ -1,7 +1,7 @@
 #include <gmock/gmock.h>
-#include "abstract_clock.hpp"
+#include "clock_interface.hpp"
 
-class MockClock : public AbstractClock {
+class MockClock : public ClockInterface {
  public:
   MOCK_METHOD0(init,
       void());

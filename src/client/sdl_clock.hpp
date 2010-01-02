@@ -1,13 +1,13 @@
 #ifndef _SDL_CLOCK_HPP_
 #define _SDL_CLOCK_HPP_
 
-#include "abstract_clock.hpp"
+#include "clock_interface.hpp"
 #include <SDL.h>
 
 /**
  * A clock that uses SDL_GetTicks
  */
-class SdlClock : public AbstractClock{ 
+class SdlClock : public ClockInterface{ 
 
   // Shamelessly inspired from http://dewitters.koonsolo.com/gameloop.html
   

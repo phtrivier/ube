@@ -1,18 +1,18 @@
-#ifndef _ABSTRACT_CLOCK_HPP_
-#define _ABSTRACT_CLOCK_HPP_
+#ifndef _CLOCK_INTERFACE_HPP_
+#define _CLOCK_INTERFACE_HPP_
 
 /**
  * Clock used to time what happens in the game loop
  *
  */
-class AbstractClock { 
+class ClockInterface { 
 
 public:
 
-  AbstractClock() {
+  ClockInterface() {
   }
 
-  virtual ~AbstractClock(){
+  virtual ~ClockInterface(){
   }
 
   /**
@@ -43,4 +43,4 @@ public:
 
 };
 
-#endif // _ABSTRACT_CLOCK_HPP_
+#endif // _CLOCK_INTERFACE_HPP_
