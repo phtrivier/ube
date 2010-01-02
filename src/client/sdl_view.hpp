@@ -2,39 +2,58 @@
 #define _SDL_VIEW_HPP_
 
 #include "abstract_view.hpp"
+#include "abstract_observer.hpp"
 #include "SDL.h"
 
 // Music test
 #include "SDL_mixer.h"
 
 class ResourceResolverInterface;
+class SdlController;
 
 /**
  * A game view that uses SDL.
  */
-class SdlView : public AbstractView { 
-
-  SDL_Surface * pScreen_;
-
-  ResourceResolverInterface * pResolver_;
-
-  SDL_Surface * pGnuImage_;
-
-  SDL_Rect src_;
-  SDL_Rect dest_;
-
+class SdlView : 
+  public AbstractView, 
+  public AbstractObserver 
+{ 
 public:
+
+  // Constructor
+  SdlView(ResourceResolverInterface & dep_resolver,
+	  SdlController & dep_controller);
+  // Desctructor
+  ~SdlView();
 
   // For sound test
   static bool music_started_;
   static Mix_Music * pMusic_;
   static void musicDone();
 
-  SdlView(ResourceResolverInterface * ipResolver_);
-
-  ~SdlView();
-
   void render_game();
+
+  void handle_event(int iEventCode);
+
+private:
+  // Dependencies
+  ResourceResolverInterface & dep_resolver_;
+  SdlController & dep_controller_;
+
+  // Private stuff
+  SDL_Surface * pScreen_;
+
+  SDL_Surface * pGnuImage_;
+
+  SDL_Rect src_;
+  SDL_Rect dest_;
+
+  bool blue_;
+
+  Uint32 green_color_;
+  Uint32 blue_color_;
+
+  bool is_in_gnu();
   
 };
 

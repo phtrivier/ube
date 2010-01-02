@@ -8,6 +8,7 @@ libube_client_a_SOURCES=gettext.h \
 	game_mode.hpp game_mode.cpp \
 	game_event.hpp \
 	game_loop.hpp game_loop.cpp \
+	sdl_logger.hpp \
 	sdl_clock.hpp sdl_clock.cpp \
 	sdl_controller.hpp sdl_controller.cpp \
 	sdl_view.hpp sdl_view.cpp
@@ -47,6 +48,9 @@ client_tests_SOURCES=tests/client_tests.cpp \
 	tests/game_mode_test.cpp \
 	tests/game_loop_test.cpp
 
-client_tests_LDADD=libube-client.a -L$(top_srcdir)/lib -lgtest -lgmock -llua -ldl
+client_tests_LDADD=../common/libube-common.a \
+	../engine/libube-engine.a \
+	libube-client.a \
+	-L$(top_srcdir)/lib -lgtest -lgmock -llua -ldl
 
 TESTS = client-tests

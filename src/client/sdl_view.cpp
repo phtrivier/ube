@@ -1,24 +1,33 @@
 #include "sdl_view.hpp"
 
 #include "common/resource_resolver_interface.hpp"
+#include "common/logging.hpp"
 
-#include <stdlib.h> /* for exit() */
+#include "sdl_controller.hpp"
+#include "game_event.hpp"
+
+#include <cstdio>
 #include <cassert>
 
 #include "SDL.h"
 #include "SDL_image.h"
 
+#include <boost/format.hpp>
+using namespace boost;
 
 bool SdlView::music_started_ = false;
 Mix_Music * SdlView::pMusic_ = NULL;
 
 // TODO : put the SDL ttf code back to also display some text !!
-
-SdlView::SdlView(ResourceResolverInterface * ipResolver)
+SdlView::SdlView(ResourceResolverInterface & dep_resolver,
+		 SdlController & dep_controller) : 
+  AbstractView(),
+  AbstractObserver(),
+  dep_resolver_(dep_resolver),
+  dep_controller_(dep_controller)
 {
-  assert(ipResolver != NULL);
-  pResolver_ = ipResolver;
-  
+  blue_ = true;
+
   // Note : shouln't the screen be shared between all 
   // SDL_Views ?
   pScreen_ = SDL_SetVideoMode(640, 480, 8, SDL_SWSURFACE);
@@ -33,7 +42,7 @@ SdlView::SdlView(ResourceResolverInterface * ipResolver)
 
   // Load the GNU image
   SDL_Surface *temp;
-  temp = IMG_Load(pResolver_->get_image_file_name("gnu.png").c_str());
+  temp = IMG_Load(dep_resolver_.get_image_file_name("gnu.png").c_str());
   if (temp == NULL) {
     printf("Unable to load bitmap: %s\n", SDL_GetError());
     exit(1);
@@ -51,6 +60,10 @@ SdlView::SdlView(ResourceResolverInterface * ipResolver)
   dest_.w = pGnuImage_->w;
   dest_.h = pGnuImage_->h;
 
+  blue_color_ = SDL_MapRGB(pScreen_->format, 0x00, 0x00, 0xff);
+  green_color_ = SDL_MapRGB(pScreen_->format, 0x00, 0xff, 0x00);
+  
+
 }
 
 SdlView::~SdlView() 
@@ -66,10 +79,33 @@ SdlView::musicDone() {
   SdlView::pMusic_ = NULL;
 }
 
+bool
+SdlView::is_in_gnu()
+{
+  int x = dep_controller_.get_mouse_x();
+  int y = dep_controller_.get_mouse_y();
+
+  return (x >= 100 && x <= 250 && y >= 100 && y <= 250);
+}
+
 void
 SdlView::render_game() 
 {
-  SDL_FillRect(pScreen_, NULL, SDL_MapRGB(pScreen_->format, 0x00, 0x00, 0xff));
+
+  LOG_D(str(format("View - drawning, blue is %1%") % blue_), "view");
+
+  if (blue_ && is_in_gnu()) {
+    blue_ = false;
+  } else if (!blue_ && !is_in_gnu()) {
+    blue_ = true;
+  }
+  
+  if (blue_) {
+    SDL_FillRect(pScreen_, NULL, blue_color_);
+  } else {
+    SDL_FillRect(pScreen_, NULL, green_color_);
+  }
+
   SDL_BlitSurface(pGnuImage_, &src_, pScreen_, &dest_);
   SDL_Flip(pScreen_);
 
@@ -90,4 +126,13 @@ SdlView::render_game()
     music_started_ = true;
   }
 
+}
+
+void
+SdlView::handle_event(int iEventCode) {
+  if (iEventCode == GameEvent::MOUSE_IN_GNU) {
+    blue_ = false;
+  } else if (iEventCode == GameEvent::MOUSE_OUT_GNU) {
+    blue_ = true;
+  } 
 }

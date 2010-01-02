@@ -75,18 +75,20 @@
   "   * " _ "\n"
   "   */")
 
-(global-set-key [(control ?c) (control ?j)] 'recompile)
+(define-skeleton cpp-prevent-copying
+  "Include empty copy-constructor and equal operator"
+  ""
+  "  // Prevents copying of the class\n"
+  "  " (class-name) "(const " (class-name) " & other) { } \n"
+  "  " (class-name) " & operator = (const " (class-name) " & other) { } \n")
 
-(set (make-local-variable 'compile-command)
-     "cd ~/prj/ube/builds/linux/current ; make check")
-
-(set 'compilation-directory "~/prj/ube/builds/linux/current/src/client")
+(global-set-key [(control ?c) (control ?j)] 'compile-all-or-recompile)
 
 (defun ube-compile (what)
   (let ((folder (concat "~/prj/ube/builds/linux/current/src/" what)))
     (set 'compilation-directory folder)
     (set 'compile-command (concat "make -C " folder " check"))
-    (recompile)))
+    (compile-or-recompile)))
 
 (defun ube-compile-common ()
   (interactive)
@@ -110,9 +112,20 @@
         (folder2 (make-folder "engine"))
 	(folder3 (make-folder "client")))
     (set 'compilation-directory folder1)
-    (set 'compile-command (concat "make -C" folder1 " check && make -C " folder2 " check && make -C " folder3 " check"))
-    (recompile)))
+    (set 'compile-command (concat "make -C" folder1 " check && make -C " folder2 " check && make -C " folder3 " check" "&& make -C " (make-folder "") " install" ))
+    (compile-or-recompile)))
 
+(defun compile-or-recompile ()
+  (interactive)
+  (if (fboundp 'recompile)
+      (recompile)
+    (compile compile-command)))
+
+(defun compile-all-or-recompile ()
+  (interactive)
+  (if (fboundp 'recompile)
+      (recompile)
+    (ube-compile-all)))
 
 (setq ube-project
       (ede-cpp-root-project "ube"
@@ -121,6 +134,7 @@
 			    :file "~/prj/ube/README.txt"
                             :directory "~/prj/ube"
 			    :include-path '("/include"
+					    "/src"
 					    "/src/common"
 					    "/src/client"
 					    "/src/engine")

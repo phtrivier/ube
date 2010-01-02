@@ -11,7 +11,7 @@ class SdlClock : public AbstractClock{
 
   // Shamelessly inspired from http://dewitters.koonsolo.com/gameloop.html
   
-  static const int TICKS_PER_SECOND = 50;
+  static const int TICKS_PER_SECOND = 100;
   static const int SKIP_TICKS = 1000 / TICKS_PER_SECOND;
   static const int MAX_FRAMESKIP = 10;
 

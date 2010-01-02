@@ -1,4 +1,6 @@
 #include "game_loop.hpp"
+
+#include "common/logging.hpp"
 #include "game_mode.hpp"
 #include "abstract_clock.hpp"
 #include "game_event.hpp"
@@ -39,18 +41,34 @@ GameLoop::loop()
   pClock_->init();
 
   running_ = true;
-  while (running_) {
 
+  Logging::log("prout", "prout");
+
+  while (running_) {
+    LOG_D("----------- LOOP BEGIN --------", "game_loop")
+
+    LOG_D("Restarting clock", "game_loop")
     pClock_->restart();
 
     while (!pClock_->is_time_to_render()) {
-      // printf("Not time to render, updating the game state..\n");
+
+      LOG_D("Not time to render", "game_loop");
+
+      LOG_D("updating mode", "game_loop");
       get_current_game_mode()->update_game(pClock_->get_delta());
+
+      LOG_D("Ticking...", "game_loop");
       pClock_->tick();
     }
 
+    LOG_D("Time to render !", "game_loop")
+    
     // printf("Time to render, will render..\n");
     get_current_game_mode()->render_game();
+
+    LOG_D("Render finished", "game_loop")
+
+    LOG_D("----------- LOOP END --------", "game_loop")
 
   }
 }
@@ -59,7 +77,6 @@ GameLoop::loop()
 void 
 GameLoop::handle_event(int iEventCode) 
 {
-  printf("handling event to quit %d\n", iEventCode);
   if (iEventCode == GameEvent::QUIT) {
     running_ = false;
   }

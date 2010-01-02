@@ -11,6 +11,8 @@ public:
 
   // User request to quit the game
   static const int QUIT = 0;
+  static const int MOUSE_IN_GNU = 1;
+  static const int MOUSE_OUT_GNU = 2;
 
 };
 

@@ -11,11 +11,10 @@
  */
 class SdlController : public AbstractController { 
 
-  SDL_Event lastSdlEvent_;
-  
 public:
 
   SdlController() : AbstractController() {
+    was_in_gnu_ = false;
   }
 
   virtual ~SdlController() {
@@ -25,6 +24,25 @@ public:
   bool check_events();
 
   void handle_event();
+
+  int get_mouse_x() const {
+    return mouse_x_;
+  }
+  
+  int get_mouse_y() const {
+    return mouse_y_;
+  }
+
+private:
+
+  SDL_Event lastSdlEvent_;
+  bool was_in_gnu_;
+  
+  bool is_in_gnu(const SDL_Event & i_event);
+
+  int mouse_x_;
+  int mouse_y_;
+  
 };
 
 #endif // _SDL_CONTROLLER_HPP_

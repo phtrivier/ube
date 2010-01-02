@@ -1,7 +1,10 @@
 lib_LIBRARIES=libube-common.a
 libube_common_a_SOURCES=gettext.h lua_helper.hpp \
+	logging.hpp logging.cpp \
+	logger_interface.hpp \
+	cout_logger.hpp \ silent_logger.hpp \
 	abstract_file_checker.hpp \
-	abstract_resource_resolver.hpp \
+	resource_resolver_interface.hpp \
 	prefix_resource_resolver.hpp prefix_resource_resolver.cpp \
 	stat_file_checker.hpp stat_file_checker.cpp
 

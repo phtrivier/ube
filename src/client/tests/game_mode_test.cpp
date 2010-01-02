@@ -11,12 +11,12 @@ using ::testing::Return;
 using namespace std;
 
 namespace {
-  class GameModeTest : public ::testing::Test {
+  class DISABLED_GameModeTest : public ::testing::Test {
   protected:
-    GameModeTest() {
+    DISABLED_GameModeTest() {
     }
 
-    virtual ~GameModeTest() {
+    virtual ~DISABLED_GameModeTest() {
     }
 
     virtual void SetUp() {
@@ -27,7 +27,7 @@ namespace {
 
   };
 
-  TEST_F(GameModeTest, GetsAndProcessEventsFromController) {
+  TEST_F(DISABLED_GameModeTest, GetsAndProcessEventsFromController) {
 
     MockController mc;
     MockView mv;
@@ -45,7 +45,7 @@ namespace {
 
   }
 
-  TEST_F(GameModeTest, UsesViewToRenderTheContent) {
+  TEST_F(DISABLED_GameModeTest, UsesViewToRenderTheContent) {
     MockController mc;
     MockView mv;
     GameMode gm(&mc, &mv);
@@ -55,7 +55,7 @@ namespace {
     gm.render_game();
   }
 
-  TEST_F(GameModeTest, AddObserversToControllerAndView) {
+  TEST_F(DISABLED_GameModeTest, AddObserversToControllerAndView) {
     MockObserver o;
     MockController mc;
     MockView mv;

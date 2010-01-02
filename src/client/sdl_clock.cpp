@@ -1,17 +1,21 @@
 #include "sdl_clock.hpp"
 
+#include "common/logging.hpp"
+
+#include <boost/format.hpp>
+using namespace boost;
+
+
 bool
 SdlClock::is_time_to_render()
 {
-  /* FIXME(pht) : find a nicer debug solution. boost ? 
-  printf("Checking for time_to_render\n");
-  printf("SDL_GetTIcks() : %d\n", SDL_GetTicks());
-  printf("nextGameTick_ : %d\n", nextGameTick_);
-  printf("loops_ : %d\n", loops_);
-  printf("MAX_FRAMESKIP : %d", MAX_FRAMESKIP);
-  printf("SDL_GetTicks < nextGameTick_ ? %d\n", SDL_GetTicks() < nextGameTick_);
-  */
-  return (SDL_GetTicks() < nextGameTick_ || loops_ > MAX_FRAMESKIP);
+
+  LOG_D(str(format("Ticks : %1%") % SDL_GetTicks() ), "clock");
+  LOG_D(str(format("nextGameTick_ : %1%") % nextGameTick_) , "clock");
+  LOG_D(str(format("loops_ : %1%") % loops_) , "clock");
+
+  return (SDL_GetTicks() < nextGameTick_ || 
+	  loops_ > MAX_FRAMESKIP);
 }
 
 void 
@@ -23,6 +27,8 @@ SdlClock::tick()
   
   nextGameTick_ += SKIP_TICKS;
   loops_++;
-  // Give the other processes a bit of time
-  SDL_Delay(10);
+
+  //test(not to trash the CPU ....)
+  SDL_Delay(5);
+
 }

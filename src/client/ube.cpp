@@ -1,5 +1,9 @@
+#include "common/logging.hpp"
 #include "common/prefix_resource_resolver.hpp"
+#include "common/silent_logger.hpp"
 #include "common/stat_file_checker.hpp"
+
+#include "sdl_logger.hpp"
 #include "sdl_view.hpp"
 #include "sdl_controller.hpp"
 #include "sdl_clock.hpp"
@@ -15,6 +19,8 @@
 #include <stdio.h>
 #include <stdlib.h> /* for exit() */
 using namespace std;
+
+#include <boost/shared_ptr.hpp>
 
 #include "SDL.h"  
 #include "SDL_image.h"
@@ -37,6 +43,10 @@ int main(int argc, char ** argv) {
     return -1;
   }
 
+  //  boost::shared_ptr<LoggerInterface> logger( new SdlLogger());
+  boost::shared_ptr<LoggerInterface> logger( new SilentLogger());
+  Logging::setLogger(*logger);
+
   // Music test
   /* This is where we open up our audio device.  Mix_OpenAudio takes
      as its parameters the audio format we'd /like/ to have. */
@@ -44,7 +54,6 @@ int main(int argc, char ** argv) {
     printf("Unable to open audio!\n");
     return 1;
   }
-
 
   // This function gets the actual info from the audio system.
   // This could be used to compare with the expected one, and check for any inconsistencies? 
@@ -69,7 +78,10 @@ int main(int argc, char ** argv) {
 
   SdlController controller;
 
-  SdlView view(&resolver);
+  SdlView view(resolver,controller);
+  // Or should it be the game_mode's job to do this ?
+  // or a factory whose job would be to create stuff !!
+  controller.add_observer(&view);
 
   GameMode mode(&controller, &view);
 
@@ -79,7 +91,7 @@ int main(int argc, char ** argv) {
   loop.register_game_mode("mode", &mode);
   loop.set_current_game_mode("mode");
 
-  printf("Starting the loop ....\n");
+  LOG_D("Starting the loop", "main");
   loop.loop();
 
   return 0;

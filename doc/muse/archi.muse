@@ -50,35 +50,76 @@ The client should be fully translated using gettext.
 
 This is the place for elements that are not game specific.
 
-*** Defenser
+*** Error Reporting
 
-This class will help the engine communicate error states from the engine to the client. 
+'assert' will be used throughout the code to check for things that should never logically happen. 
 
-This is a fairly general class. It could be named ErrorHandler, but I am fed up with XXXHandlers.
+I will not use exception. 
 
-It has method to : 
+However, any code that handles data coming from outside will have to clean it and report error. 
 
- - check that method arguments are valid
- - check that an assertion holds
- - check that there is any 
+So instead of having this in the Puzzle class : 
 
-(I separate the invalid argument case, because it is particular)
+<example>
+void set_dimensions(i,j) {
+ if (i<0 || j < 0) throw logic_error(...);
+ ...
+}
+</example>
 
-A defenser can be given a reference to an ErrorHandler : a class that executes specific code when an assertion doesn't hold. 
+I'll simply have an assert in the Puzzle class, a bit of dcumentation about params, but it will be the responsibility of any caller of set_dimensions that's outside the baricade (typically, the puzzle loader's outside function). 
 
-A defenser could be use to throw exceptions if you really want, or display a nice error message.
+<example>
+// In puzzle.cpp
+void set_dimension(i,j) {
+  assert(i>=0);
+  assert(j>=0);
+  ...
+}
+</example>
 
-Note : why not exceptions ? I tend to agree with the people that don't like exceptions in C++ too much, as the compiler does not help very much. I am starting to feel that throwing exception is actually an implementation detail in C++ : all you really care about is that something was checked, and it was not true. 
+In the lua puzzle loader : 
 
-Note : Defenser will blury the difference between an expected error and an unexpected one. The difference is bluried anyway : when the user sees a StackTrace, it does not make a big difference from seing a nice popup. The issue is not throwing the error, it is dealing with the error.
+<example>
+ int h = readHeightFromLuaFile();
+ if (h < 0) {
+   // ... report error (see below)
+ }
+ int w = readWidthFromLuaFile();
+ if (w < 0) {
+   // ... report error (see below)
+ }
+</example>
+
+As a rule, any class that read text from any location (lua file, configuration, command line, etc...) is responsible for checking that the text read is valid. 
+
+Is it possible, in situations where it make sense, to sanitaze inputs (read something, fix it and continue), but I prefer not to abuse it too much. Die early, that's better.
+
+A dependency to an "ErrorReporter" will be added to those class that actually have to report an error. 
+An error reporter could be something that prints to the standard error (for parsing of command line arguments, for example), or something that displays a message, or whatever fits. 
+
+The 'observable' pattern could also be used (ErrorReporter has a number of error listeners that get a chance to do something with the error. The interface should be : 
+
+<example>
+ // An error code, a short description, and a detail
+ pErrorReporter->report_error(LuaFileLoader::BAD_DIMENSIONS, _("Error while loading puzzle file"), str(format(_("The dimension of the puzzle should be positive, found (%1%,%2%) instead.")) % h % w);
+</example> 
+
+The error code is there so that an external caller (the errorReporter, or one of its listeners) can do something different for different errors (skip the level, force dimensions, insult the user cleverly, etc...)
+
+Note that any string passed to report_error should be translated with gettext (since it will end up in the user's face).
+
+It is also possible that ErrorReporter will be coupled to a Logger (see below) so that errors are logged amoung other stuffs...
 
 *** Resource management
 
 Sometimes you need to check whether a resource is available, whether a File exists, to get the location of an image, etc... Some of the code to do this : 
 
-- ResourceResolver, to make it possible to locate lua files, images, puzzle files ?
+- AbstractResourceResolver, to make it possible to locate lua files, images, puzzle files ?
 
 - FileChecker, to be able to check for a file existence
+
+- PrefixResourceResolver, to make it possible to 
 
 Note : the resource resolvement will be done using a prefix. A complicated solution is to use a common prefix and look for stuff with complicated rules. Why not simply have a prefix for each kind of resources ? 
 
