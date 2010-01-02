@@ -6,11 +6,11 @@
 #include <string>
 #include <vector>
 
-class AbstractFileChecker;
+class FileCheckerInterface;
 
 class PrefixResourceResolver :  public ResourceResolverInterface {
   // External dependency, to check for folder / file existence
-  const AbstractFileChecker * pChecker_;
+  const FileCheckerInterface * pChecker_;
 
   // List of copies of prefixes set by the user
   std::vector<const std::string *> prefixes_;
@@ -50,7 +50,7 @@ class PrefixResourceResolver :  public ResourceResolverInterface {
   std::string get_res_file_name(const char *iResType, const char * iResName);
 
 public:
-  PrefixResourceResolver(const AbstractFileChecker & iChecker) : ResourceResolverInterface(), pChecker_(&iChecker)  {
+  PrefixResourceResolver(const FileCheckerInterface & iChecker) : ResourceResolverInterface(), pChecker_(&iChecker)  {
     pPrefix_ = NULL;
   }
   ~PrefixResourceResolver();

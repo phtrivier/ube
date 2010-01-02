@@ -1,5 +1,5 @@
 #include "prefix_resource_resolver.hpp"
-#include "abstract_file_checker.hpp"
+#include "file_checker_interface.hpp"
 #include <cassert>
 using namespace std;
 

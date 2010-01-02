@@ -1,10 +1,10 @@
 #ifndef _STAT_FILE_CHECKER_HPP
 #define _STAT_FILE_CHECKER_HPP
 
-#include "abstract_file_checker.hpp"
+#include "file_checker_interface.hpp"
 #include <sys/stat.h>
 
-class StatFileChecker : public AbstractFileChecker {
+class StatFileChecker : public FileCheckerInterface {
   bool has_stat_mode(const std::string iPath, mode_t mode) const;
 public:
   bool is_folder_present(const std::string iPath) const;

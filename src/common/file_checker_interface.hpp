@@ -1,12 +1,12 @@
-#ifndef _ABSTRACT_FILE_CHECKER_HPP_
-#define _ABSTRACT_FILE_CHECKER_HPP_
+#ifndef _FILE_CHECKER_INTERFACE_HPP_
+#define _FILE_CHECKER_INTERFACE_HPP_
 
 #include <string>
 
-class AbstractFileChecker {
+class FileCheckerInterface {
 public:
 
-  virtual ~AbstractFileChecker() {
+  virtual ~FileCheckerInterface() {
   }
 
   /**
@@ -27,4 +27,4 @@ public:
   
 };
 
-#endif // _ABSTRACT_FILE_CHECKER_HPP_
+#endif // _FILE_CHECKER_INTERFACE_HPP_

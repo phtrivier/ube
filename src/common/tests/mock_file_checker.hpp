@@ -1,7 +1,7 @@
 #include <gmock/gmock.h>
-#include "abstract_file_checker.hpp"
+#include "file_checker_interface.hpp"
 
-class MockFileChecker : public AbstractFileChecker {
+class MockFileChecker : public FileCheckerInterface {
  public:
   MOCK_CONST_METHOD1(is_folder_present,
 	       bool(const std::string iPath));
