@@ -1,9 +1,9 @@
 #include "common/logging.hpp"
 #include "common/prefix_resource_resolver.hpp"
+#include "common/cout_logger.hpp"
 #include "common/silent_logger.hpp"
 #include "common/stat_file_checker.hpp"
 
-#include "sdl_logger.hpp"
 #include "sdl_view.hpp"
 #include "sdl_controller.hpp"
 #include "sdl_clock.hpp"
@@ -43,9 +43,11 @@ int main(int argc, char ** argv) {
     return -1;
   }
 
-  //  boost::shared_ptr<LoggerInterface> logger( new SdlLogger());
-  boost::shared_ptr<LoggerInterface> logger( new SilentLogger());
-  Logging::setLogger(*logger);
+  boost::shared_ptr<LoggerInterface> logger( new CoutLogger());
+  // boost::shared_ptr<LoggerInterface> logger( new SilentLogger());
+  Logging::init_logging(*logger);
+  // TODO : add the loading of some configuration for the categories
+  //  Logging::add_logging_category("view");
 
   // Music test
   /* This is where we open up our audio device.  Mix_OpenAudio takes
@@ -91,7 +93,6 @@ int main(int argc, char ** argv) {
   loop.register_game_mode("mode", &mode);
   loop.set_current_game_mode("mode");
 
-  LOG_D("Starting the loop", "main");
   loop.loop();
 
   return 0;

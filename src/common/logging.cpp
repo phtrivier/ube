@@ -1,3 +1,5 @@
 #include <logging.hpp>
 
-LoggerInterface * Logging::ps_logger = NULL;
+Logging * Logging::ps_instance = NULL;
+
+

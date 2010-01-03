@@ -92,8 +92,6 @@ void
 SdlView::render_game() 
 {
 
-  LOG_D(str(format("View - drawning, blue is %1%") % blue_), "view");
-
   if (blue_ && is_in_gnu()) {
     blue_ = false;
   } else if (!blue_ && !is_in_gnu()) {

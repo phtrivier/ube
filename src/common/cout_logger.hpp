@@ -6,7 +6,7 @@
 #include "logger_interface.hpp"
 
 /**
- * A logger that outputs everything to cout / cerr
+ * A logger that outputs everything to cout / cerr.
  */
 class CoutLogger :
   public LoggerInterface
@@ -14,24 +14,14 @@ class CoutLogger :
 
 public:
 
-  CoutLogger() {
+  std::ostream * get_appender(LogLevel::Level i_level) const {
+    return &(std::cout);
+  }
+  
+  void new_line() const {
+    std::cout << std::endl;
   }
 
-  ~CoutLogger() {
-  }
-
-  void debug(std::string i_msg) const {
-    std::cout << i_msg << std::endl;
-  }
-  
-  void log(std::string i_msg) const {
-    std::cout << i_msg << std::endl;
-  }
-  
-  void error(std::string i_msg) const {
-    std::cerr << i_msg << std::endl;
-  }
-  
 };
 
 #endif // _COUT_LOGGER_HPP_

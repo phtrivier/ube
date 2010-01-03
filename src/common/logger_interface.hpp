@@ -1,6 +1,7 @@
 #ifndef _LOGGER_HPP_
 #define _LOGGER_HPP_
 
+#include "log_level.hpp"
 #include <string>
 
 /**
@@ -12,9 +13,10 @@ public:
   virtual ~LoggerInterface() {
   }
 
-  virtual void debug(std::string i_msg) const =0;
-  virtual void log(std::string i_msg) const = 0;
-  virtual void error(std::string i_msg) const =0;
+  // TODO : use an enum instead of int for the level
+  virtual std::ostream * get_appender(enum LogLevel::Level) const = 0;
+
+  virtual void new_line() const = 0;
 
 };
 

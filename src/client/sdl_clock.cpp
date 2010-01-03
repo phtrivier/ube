@@ -10,9 +10,9 @@ bool
 SdlClock::is_time_to_render()
 {
 
-  LOG_D(str(format("Ticks : %1%") % SDL_GetTicks() ), "clock");
-  LOG_D(str(format("nextGameTick_ : %1%") % nextGameTick_) , "clock");
-  LOG_D(str(format("loops_ : %1%") % loops_) , "clock");
+  LOG_D("clock") << "Ticks : " << SDL_GetTicks();
+  LOG_D("clock") << "NextGameTick : " << nextGameTick_;
+  LOG_D("clock") << "loop_s :" << loops_;
 
   return (SDL_GetTicks() < nextGameTick_ || 
 	  loops_ > MAX_FRAMESKIP);

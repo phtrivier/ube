@@ -42,33 +42,29 @@ GameLoop::loop()
 
   running_ = true;
 
-  Logging::log("prout", "prout");
-
   while (running_) {
-    LOG_D("----------- LOOP BEGIN --------", "game_loop")
+    LOG_D("loop") << "----------- LOOP BEGIN --------";
 
-    LOG_D("Restarting clock", "game_loop")
+    LOG_D("loop") << "Restarting clock";
     pClock_->restart();
 
     while (!pClock_->is_time_to_render()) {
 
-      LOG_D("Not time to render", "game_loop");
+      LOG_D("game-loop") << "Not time to render";
 
-      LOG_D("updating mode", "game_loop");
+      LOG_D("game-loop") << "Updating game";
       get_current_game_mode()->update_game(pClock_->get_delta());
 
-      LOG_D("Ticking...", "game_loop");
+      LOG_D("game-loop") << "Ticking";
       pClock_->tick();
     }
 
-    LOG_D("Time to render !", "game_loop")
+    LOG_D("game-loop") << "Time to render !";
     
     // printf("Time to render, will render..\n");
     get_current_game_mode()->render_game();
 
-    LOG_D("Render finished", "game_loop")
-
-    LOG_D("----------- LOOP END --------", "game_loop")
+    LOG_D("game-loop") << "----------- LOOP END --------";
 
   }
 }
