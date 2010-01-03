@@ -28,7 +28,7 @@ GameMode::render_game()
 }
 
 void
-GameMode::add_observer(AbstractObserver *o)
+GameMode::add_observer(ObserverInterface *o)
 {
   Observable::add_observer(o);
   pController_->add_observer(o);

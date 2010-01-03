@@ -5,7 +5,7 @@
 
 class ControllerInterface;
 class ViewInterface;
-class AbstractObserver;
+class ObserverInterface;
 
 /**
  * Compose Controler and View to handle a part of the game.
@@ -27,7 +27,7 @@ public:
 
   void render_game();
 
-  void add_observer(AbstractObserver *o);
+  void add_observer(ObserverInterface *o);
   
 };
 

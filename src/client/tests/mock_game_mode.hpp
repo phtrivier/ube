@@ -1,14 +1,14 @@
 #include <gmock/gmock.h>
 #include "game_mode_interface.hpp"
 
-class AbstractObserver;
+class ObserverInterface;
 
 class MockGameMode : public GameModeInterface {
 public:
   
   // TODO(pht) : if possible, get rid of this, it should a
   MOCK_METHOD1(add_observer,
-	       void(AbstractObserver *));
+	       void(ObserverInterface *));
 
   MOCK_METHOD1(update_game,
 	       void(int));

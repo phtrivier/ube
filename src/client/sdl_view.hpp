@@ -2,7 +2,7 @@
 #define _SDL_VIEW_HPP_
 
 #include "view_interface.hpp"
-#include "abstract_observer.hpp"
+#include "observer_interface.hpp"
 #include "SDL.h"
 
 // Music test
@@ -16,7 +16,7 @@ class SdlController;
  */
 class SdlView : 
   public ViewInterface, 
-  public AbstractObserver 
+  public ObserverInterface 
 { 
 public:
 

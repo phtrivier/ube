@@ -22,7 +22,7 @@ Mix_Music * SdlView::pMusic_ = NULL;
 SdlView::SdlView(ResourceResolverInterface & dep_resolver,
 		 SdlController & dep_controller) : 
   ViewInterface(),
-  AbstractObserver(),
+  ObserverInterface(),
   dep_resolver_(dep_resolver),
   dep_controller_(dep_controller)
 {

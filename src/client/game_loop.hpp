@@ -1,7 +1,7 @@
 #ifndef _GAME_LOOP_HPP_
 #define _GAME_LOOP_HPP_
 
-#include "abstract_observer.hpp"
+#include "observer_interface.hpp"
 #include <string>
 #include <map>
 
@@ -12,7 +12,7 @@ class ClockInterface;
 /**
  * Main game loop.
  */
-class GameLoop : public AbstractObserver { 
+class GameLoop : public ObserverInterface { 
 
   // Current game mode.
   GameModeInterface * pCurrentGameMode_;

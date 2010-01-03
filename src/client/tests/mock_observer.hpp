@@ -1,7 +1,7 @@
 #include <gmock/gmock.h>
-#include "abstract_observer.hpp"
+#include "observer_interface.hpp"
 
-class MockObserver : public AbstractObserver {
+class MockObserver : public ObserverInterface {
  public:
   MOCK_METHOD1(handle_event,void(int iEventCode));
 };

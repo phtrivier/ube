@@ -3,14 +3,14 @@
 
 #include <vector>
 
-class AbstractObserver;
+class ObserverInterface;
 
 /**
  * Things that can fire event.
  */
 class Observable { 
 
-  std::vector<AbstractObserver *> observers_;
+  std::vector<ObserverInterface *> observers_;
 
 public:
 
@@ -24,7 +24,7 @@ public:
    * Add an observer.
    *
    */
-  virtual void add_observer(AbstractObserver * ipObserver);
+  virtual void add_observer(ObserverInterface * ipObserver);
 
   /**
    * Notify all registered observers
