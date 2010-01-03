@@ -1,6 +1,6 @@
 #include "game_mode.hpp"
 #include "abstract_controller.hpp"
-#include "abstract_view.hpp"
+#include "view_interface.hpp"
 
 #include <cassert>
 

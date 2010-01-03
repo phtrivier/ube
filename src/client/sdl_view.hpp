@@ -1,7 +1,7 @@
 #ifndef _SDL_VIEW_HPP_
 #define _SDL_VIEW_HPP_
 
-#include "abstract_view.hpp"
+#include "view_interface.hpp"
 #include "abstract_observer.hpp"
 #include "SDL.h"
 
@@ -15,7 +15,7 @@ class SdlController;
  * A game view that uses SDL.
  */
 class SdlView : 
-  public AbstractView, 
+  public ViewInterface, 
   public AbstractObserver 
 { 
 public:

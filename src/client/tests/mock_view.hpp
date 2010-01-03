@@ -1,9 +1,9 @@
 #include <gmock/gmock.h>
-#include "abstract_view.hpp"
+#include "view_interface.hpp"
 
 class AbstractObserver;
 
-class MockView : public AbstractView {
+class MockView : public ViewInterface {
  public:
   MOCK_METHOD1(add_observer,
 	       void(AbstractObserver *));

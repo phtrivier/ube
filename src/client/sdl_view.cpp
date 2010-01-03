@@ -21,7 +21,7 @@ Mix_Music * SdlView::pMusic_ = NULL;
 // TODO : put the SDL ttf code back to also display some text !!
 SdlView::SdlView(ResourceResolverInterface & dep_resolver,
 		 SdlController & dep_controller) : 
-  AbstractView(),
+  ViewInterface(),
   AbstractObserver(),
   dep_resolver_(dep_resolver),
   dep_controller_(dep_controller)

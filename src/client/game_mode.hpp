@@ -4,7 +4,7 @@
 #include "game_mode_interface.hpp"
 
 class AbstractController;
-class AbstractView;
+class ViewInterface;
 class AbstractObserver;
 
 /**
@@ -13,11 +13,11 @@ class AbstractObserver;
 class GameMode : public GameModeInterface { 
 
   AbstractController * pController_;
-  AbstractView * pView_;
+  ViewInterface * pView_;
 
 public:
 
-  GameMode(AbstractController * ipController, AbstractView * ipView) : 
+  GameMode(AbstractController * ipController, ViewInterface * ipView) : 
     GameModeInterface(), 
     pController_(ipController), 
     pView_(ipView) {
