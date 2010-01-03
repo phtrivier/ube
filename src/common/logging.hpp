@@ -8,7 +8,6 @@
 
 #include <string>
 #include <list>
-#include <algorithm>
 
 /**
  * Singleton class with facilities for logging.
@@ -22,8 +21,9 @@
  *
  * LOG_D("toto") << "Foo : " << 12 << ", bar : " << 13;
  *
- * Note that there is normally no need to manually add newlines, since each Logger should provide
- * a way to do this.
+ * Note that to compile a main program that does use logging, you will have to use Logging::disable_logging().
+ *
+ * I know, this sucks.
  *
  * The idea is that those macros can be brutally redefined so that nothings can logged
  * in the actual application. 
@@ -31,6 +31,14 @@
  */
 class Logging {
 public:
+
+  /**
+   * Disable logging.
+   * This function is defined in the logging.cpp file, so
+   * calling this simply makes sure that the static symbols
+   * defined here are available. This is a hack, it will be fixed.
+   */
+  static void disable_logging();
 
   // Utility method to set the logger of the Logging singleton
   static void init_logging(LoggerInterface & i_logger) {
@@ -103,36 +111,23 @@ protected:
     return p_default_appender_;
   }
   
-  // TODO(pht):improve this so that if a category is added at level LOG, DEBUG is enabled
-  bool is_category_enabled(LogLevel::Level i_level, std::string & i_category) {
-    bool res = false;
-    if (i_level == LogLevel::ERROR) {
-      res = true;
-    } else {
-      if (get_categories() != NULL) {
-	std::list<std::string> * c  = get_categories();
-	return std::find(c->begin(), c->end(), i_category) != c->end();
-      }
-    }
-    return res;
-  }
+  bool is_category_enabled(LogLevel::Level i_level, 
+			   std::string & i_category);
+
 
   void add_category(std::string i_category) {
     assert(p_categories_ != NULL);
     p_categories_->push_front(i_category);
   }
 
-  std::ostream & get_ostream(LogLevel::Level i_level, std::string i_category="") {
-    std::ostream * res = get_default_appender();
-    if (get_logger()!=NULL && is_category_enabled(i_level, i_category)) {
-      get_logger() -> new_line(); 
-      res = get_logger() -> get_appender(i_level);
-    }
-    return *res;
-  }
+  std::ostream & get_ostream(LogLevel::Level i_level, std::string i_category="");
 
 };
 
+/**
+ * Those are the actual macros to use.
+ * TODO(pht) : if NDEBUG or something, get rid of the logs completely !
+ */
 #define LOG_D(category) Logging::debug_ostream(category) 
 #define LOG_L(category) Logging::log_ostream(category) 
 #define LOG_E() Logging::error_ostream()

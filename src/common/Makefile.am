@@ -1,7 +1,7 @@
 lib_LIBRARIES=libube-common.a
 libube_common_a_SOURCES=gettext.h lua_helper.hpp \
 	silent_ostream.hpp \
-	logging.hpp \
+	logging.hpp logging.cpp \
 	logger_interface.hpp \
 	cout_logger.hpp \
 	silent_logger.hpp \
