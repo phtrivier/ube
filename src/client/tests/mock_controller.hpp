@@ -13,4 +13,9 @@ class MockController : public ControllerInterface {
       bool());
   MOCK_METHOD0(handle_event,
       void());
+  MOCK_CONST_METHOD0(mouse_x,
+      int());
+  MOCK_CONST_METHOD0(mouse_y,
+      int());
+
 };

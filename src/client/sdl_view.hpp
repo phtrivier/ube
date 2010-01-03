@@ -9,7 +9,7 @@
 #include "SDL_mixer.h"
 
 class ResourceResolverInterface;
-class SdlController;
+class ControllerInterface;
 
 /**
  * A game view that uses SDL.
@@ -22,7 +22,7 @@ public:
 
   // Constructor
   SdlView(ResourceResolverInterface & dep_resolver,
-	  SdlController & dep_controller);
+	  ControllerInterface & dep_controller);
   // Desctructor
   ~SdlView();
 
@@ -38,9 +38,9 @@ public:
 private:
   // Dependencies
   ResourceResolverInterface & dep_resolver_;
-  SdlController & dep_controller_;
+  ControllerInterface & dep_controller_;
 
-  // Private stuff
+  // Owned resources
   SDL_Surface * pScreen_;
 
   SDL_Surface * pGnuImage_;

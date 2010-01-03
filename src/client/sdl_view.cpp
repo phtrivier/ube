@@ -20,7 +20,7 @@ Mix_Music * SdlView::pMusic_ = NULL;
 
 // TODO : put the SDL ttf code back to also display some text !!
 SdlView::SdlView(ResourceResolverInterface & dep_resolver,
-		 SdlController & dep_controller) : 
+		 ControllerInterface & dep_controller) : 
   ViewInterface(),
   ObserverInterface(),
   dep_resolver_(dep_resolver),
@@ -82,8 +82,8 @@ SdlView::musicDone() {
 bool
 SdlView::is_in_gnu()
 {
-  int x = dep_controller_.get_mouse_x();
-  int y = dep_controller_.get_mouse_y();
+  int x = dep_controller_.mouse_x();
+  int y = dep_controller_.mouse_y();
 
   return (x >= 100 && x <= 250 && y >= 100 && y <= 250);
 }
@@ -130,9 +130,6 @@ SdlView::render_game()
 
 void
 SdlView::handle_event(int iEventCode) {
-  if (iEventCode == GameEvent::MOUSE_IN_GNU) {
-    blue_ = false;
-  } else if (iEventCode == GameEvent::MOUSE_OUT_GNU) {
-    blue_ = true;
-  } 
+  // TODO : If there is a click on the mouse, 
+  // maybe something has to be done ... ?
 }

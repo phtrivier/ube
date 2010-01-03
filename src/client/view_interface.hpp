@@ -9,8 +9,6 @@ class ViewInterface {
 
 public:
 
-  ViewInterface(){
-  }
   virtual ~ViewInterface() {
   }
 
