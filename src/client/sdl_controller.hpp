@@ -1,7 +1,7 @@
 #ifndef _SDL_CONTROLLER_HPP_
 #define _SDL_CONTROLLER_HPP_
 
-#include "abstract_controller.hpp"
+#include "controller_interface.hpp"
 
 // Forward declaration possible ? 
 #include "SDL.h"
@@ -9,11 +9,11 @@
 /**
  * A basic controller that uses SDL to poll the keyboard.
  */
-class SdlController : public AbstractController { 
+class SdlController : public ControllerInterface { 
 
 public:
 
-  SdlController() : AbstractController() {
+  SdlController() : ControllerInterface() {
     was_in_gnu_ = false;
   }
 

@@ -1,5 +1,5 @@
-#ifndef _ABSTRACT_CONTROLLER_HPP_
-#define _ABSTRACT_CONTROLLER_HPP_
+#ifndef _CONTROLLER_INTERFACE_HPP_
+#define _CONTROLLER_INTERFACE_HPP_
 
 #include "observable.hpp"
 
@@ -8,14 +8,14 @@
 /**
  * Base class for controllers.
  */
-class AbstractController : public Observable { 
+class ControllerInterface : public Observable { 
 
 public:
 
-  AbstractController() : Observable() {
+  ControllerInterface() : Observable() {
   }
 
-  virtual ~AbstractController() {
+  virtual ~ControllerInterface() {
   }
 
   /**
@@ -29,4 +29,4 @@ public:
   virtual void handle_event() = 0;
 };
 
-#endif // _ABSTRACT_CONTROLLER_HPP_
+#endif // _CONTROLLER_INTERFACE_HPP_

@@ -1,9 +1,9 @@
 #include <gmock/gmock.h>
-#include "abstract_controller.hpp"
+#include "controller_interface.hpp"
 
 class AbstractObserver;
 
-class MockController : public AbstractController {
+class MockController : public ControllerInterface {
  public:
 
   MOCK_METHOD1(add_observer,

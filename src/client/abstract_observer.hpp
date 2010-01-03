@@ -8,7 +8,7 @@ class AbstractObserver {
 
 public:
 
-  ~AbstractObserver(){
+  virtual ~AbstractObserver() {
   }
 
   virtual void handle_event(int iEventCode) = 0;
