@@ -42,3 +42,5 @@ ube-*.*
 sandbox/*
 
 semantic.cache
+
+*.bak
