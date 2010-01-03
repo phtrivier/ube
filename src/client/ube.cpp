@@ -47,7 +47,9 @@ int main(int argc, char ** argv) {
   // boost::shared_ptr<LoggerInterface> logger( new SilentLogger());
   Logging::init_logging(*logger);
   // TODO : add the loading of some configuration for the categories
-  //  Logging::add_logging_category("view");
+  Logging::add_logging_category("main");
+
+  LOG_D("main") << "Hello !" << std::endl;
 
   // Music test
   /* This is where we open up our audio device.  Mix_OpenAudio takes

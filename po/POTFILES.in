@@ -1,3 +1,1 @@
 # List of source files which contain translatable strings.
-src/engine/greeter.cpp
-src/client/ube.cpp

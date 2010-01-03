@@ -1,14 +1,13 @@
 lib_LIBRARIES=libube-client.a
 libube_client_a_SOURCES=gettext.h \
-	abstract_observer.hpp \
-	abstract_controller.hpp \
-	abstract_view.hpp \
-	abstract_clock.hpp \
+	observer_interface.hpp \
+	controller_interface.hpp \
+	view_interface.hpp \
+	clock_interface.hpp \
 	observable.hpp observable.cpp \
 	game_mode.hpp game_mode.cpp \
 	game_event.hpp \
 	game_loop.hpp game_loop.cpp \
-	sdl_logger.hpp \
 	sdl_clock.hpp sdl_clock.cpp \
 	sdl_controller.hpp sdl_controller.cpp \
 	sdl_view.hpp sdl_view.cpp

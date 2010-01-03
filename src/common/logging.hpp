@@ -13,54 +13,66 @@
 /**
  * Singleton class with facilities for logging.
  *
+ * Logging is enabled by using the Logging::init_logging(..) method.
+ * A Logger must be configured to do this ; for convenience, the SilentLogger class 
+ * can be used to prevent any logging.
+ *
  * The methods of Logging should not be used by themselves. Rather, one should use the 
- * LOG_D, LOG_L, LOG_E macros.
+ * LOG_D, LOG_L, LOG_E macros, in this form : 
+ *
+ * LOG_D("toto") << "Foo : " << 12 << ", bar : " << 13;
+ *
+ * Note that there is normally no need to manually add newlines, since each Logger should provide
+ * a way to do this.
  *
  * The idea is that those macros can be brutally redefined so that nothings can logged
  * in the actual application. 
+ *
  */
 class Logging {
 public:
 
   // Utility method to set the logger of the Logging singleton
   static void init_logging(LoggerInterface & i_logger) {
-    get_instance()->set_logger(i_logger);
+    get_instance().set_logger(i_logger);
   }
 
   // Utility method to add a category to the Logging singleton
   static void add_logging_category(std::string i_category) {
-    get_instance()->add_category(i_category);
+    get_instance().add_category(i_category);
   }
 
   static std::ostream & debug_ostream(std::string i_category) {
-    std::ostream * res = Logging::get_instance()->get_default_appender();
-    if (Logging::get_instance()->is_category_enabled(LogLevel::DEBUG, i_category)) {
-      Logging::get_instance()->new_line(); 
-      res = (Logging::get_instance()->get_appender(LogLevel::DEBUG, std::string(i_category)));
-    }
-    return *res;
+    return Logging::get_instance().get_ostream(LogLevel::DEBUG, i_category);
+  }
+
+  static std::ostream & log_ostream(std::string i_category) {
+    return Logging::get_instance().get_ostream(LogLevel::LOG, i_category);
+  }
+
+  static std::ostream & error_ostream() {
+    return Logging::get_instance().get_ostream(LogLevel::ERROR);
   }
 
 protected:
 
   Logging() {
-    // Init stuff (like the default appender, or stuff like that)
     p_default_appender_ = new SilentOstream();
     p_categories_ = new std::list<std::string>();
   }
 
   ~Logging() {
-    // Dealocate everything you own ...
+    // This is called because the singleton is defined as a static, local variable
+    // (this is a Meyers Singleton)
+    delete p_default_appender_;
+    p_categories_->clear();
+    delete p_categories_;
   }
 
-  // This should be the only ps_instance
-  static Logging * ps_instance;
-
-  static Logging * get_instance() {
-    if (ps_instance == NULL) {
-      ps_instance = new Logging();
-    }
-    return ps_instance;
+  static Logging & get_instance() {
+    // Meyers singleton
+    static Logging s_local_instance;
+    return s_local_instance;
   }
  
   LoggerInterface * dep_logger_;
@@ -91,38 +103,38 @@ protected:
     return p_default_appender_;
   }
   
+  // TODO(pht):improve this so that if a category is added at level LOG, DEBUG is enabled
   bool is_category_enabled(LogLevel::Level i_level, std::string & i_category) {
     bool res = false;
-    if (get_categories() != NULL) {
-      std::list<std::string> * c  = get_categories();
-      return std::find(c->begin(), c->end(), i_category) != c->end();
+    if (i_level == LogLevel::ERROR) {
+      res = true;
+    } else {
+      if (get_categories() != NULL) {
+	std::list<std::string> * c  = get_categories();
+	return std::find(c->begin(), c->end(), i_category) != c->end();
+      }
     }
     return res;
   }
 
-  std::ostream * get_appender(LogLevel::Level i_level, std::string i_category) {
-    std::ostream * res = get_default_appender();
-    if (get_logger() != NULL && is_category_enabled(i_level, i_category)) {
-      res = get_logger()->get_appender(i_level);
-    }
-    return res;
-  }
- 
   void add_category(std::string i_category) {
     assert(p_categories_ != NULL);
     p_categories_->push_front(i_category);
   }
 
-  void new_line() {
-    if (get_logger() != NULL) {
-      get_logger()->new_line();
+  std::ostream & get_ostream(LogLevel::Level i_level, std::string i_category="") {
+    std::ostream * res = get_default_appender();
+    if (get_logger()!=NULL && is_category_enabled(i_level, i_category)) {
+      get_logger() -> new_line(); 
+      res = get_logger() -> get_appender(i_level);
     }
+    return *res;
   }
 
 };
 
 #define LOG_D(category) Logging::debug_ostream(category) 
-
-// TODO : LOG_D, LOG_E
+#define LOG_L(category) Logging::log_ostream(category) 
+#define LOG_E() Logging::error_ostream()
 
 #endif // _LOGGING_HPP_
