@@ -30,12 +30,13 @@ AM_CPPFLAGS= -DLOCALEDIR=\"${datadir}/locale\" \
 
 SDL_TTF_LIBS = -lSDL_ttf -lfreetype
 SDL_IMAGE_LIBS = -lSDL_image -lpng -ltiff -ljpeg -lz
+SDL_MIXER_LIBS = -lSDL_mixer
 
 ube_LDADD=../common/libube-common.a \
 	../engine/libube-engine.a \
 	libube-client.a \
 	$(LUA_LIB) $(LIBINTL) \
-	$(SDL_LIBS) $(SDL_IMAGE_LIBS) $(SDL_TTF_LIBS)
+	$(SDL_LIBS) $(SDL_IMAGE_LIBS) $(SDL_TTF_LIBS) $(SDL_MIXER_LIBS)
 
 check_PROGRAMS=client-tests
 client_tests_SOURCES=tests/client_tests.cpp \

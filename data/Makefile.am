@@ -1,1 +1,1 @@
-SUBDIRS=images fonts
+SUBDIRS=images fonts ogg

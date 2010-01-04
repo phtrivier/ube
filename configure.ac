@@ -41,6 +41,7 @@ AC_CONFIG_FILES([
 	data/Makefile
 	data/images/Makefile
 	data/fonts/Makefile
+	data/ogg/Makefile
 ])
 AC_OUTPUT
 		
