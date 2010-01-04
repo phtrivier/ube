@@ -77,5 +77,11 @@ namespace {
     // No checks the second time
     ASSERT_EQ("baz/share/ube/lua/puzzles/puzzle1.lua",pResolver_->get_puzzle_lua_file_name("puzzle1.lua"));
   }
+
+  TEST_F(PrefixResourceResolverTest, UsesAllPrefixToLookForOggFiles) {
+    expectsThreeFolderCheck();
+    ASSERT_EQ("baz/share/ube/ogg/music.ogg",pResolver_->get_music_file_name("music.ogg"));
+    ASSERT_EQ("baz/share/ube/ogg/music.ogg",pResolver_->get_music_file_name("music.ogg"));
+  }
   
 }

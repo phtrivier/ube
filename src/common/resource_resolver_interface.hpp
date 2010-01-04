@@ -26,25 +26,32 @@ public:
   virtual std::string get_image_file_name(const char * iImageName) = 0;
 
   /**
-   * Gives the expected location of a font file
+   * The expected location of a font file
    * 
    * @param iFontName name of the font, with suffix (eg "Vera.ttf")
    */
   virtual std::string get_font_file_name(const char * iFontName) = 0;
 
   /**
-   * Gives the expected location of an engine Lua file
+   * The expected location of an engine Lua file
    * 
-   * @param iFontName name of the file, with suffix (eg "story_lib.lua")
+   * @param iFileName name of the file, with suffix (eg "story_lib.lua")
    */
   virtual std::string get_engine_lua_file_name(const char *iFileName) = 0;
 
   /**
-   * Gives the expected location of a puzzle Lua file
+   * The expected location of a puzzle Lua file
    * 
-   * @param iFontName name of the file, with suffix (eg "puzzle.lua")
+   * @param iFiletName name of the file, with suffix (eg "puzzle.lua")
    */
   virtual std::string get_puzzle_lua_file_name(const char *iFileName) = 0;
+
+  /**
+   * The expected location of a music file
+   *
+   * @param  iMusicName name of the file, with suffix (eg "music.ogg")
+   */
+  virtual std::string get_music_file_name(const char *iMusicName) = 0;
 
 };
 

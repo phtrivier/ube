@@ -20,6 +20,8 @@ class MockResourceResolver : public ResourceResolverInterface {
       std::string(const char *iFileName));
   MOCK_METHOD1(get_puzzle_lua_file_name,
       std::string(const char *iFileName));
+  MOCK_METHOD1(get_music_file_name,
+      std::string(const char *iFileName));
 };
 
 #endif // _MOCK_RESOURCE_RESOLVER_HPP_

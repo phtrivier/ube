@@ -103,6 +103,8 @@ public:
    * @param iFontName name of the file, with suffix (eg "puzzle.lua")
    */
   std::string get_puzzle_lua_file_name(const char *iFileName);
+
+  std::string get_music_file_name(const char * iMusicName);
   
 };
 

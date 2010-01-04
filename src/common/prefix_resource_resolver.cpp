@@ -93,6 +93,12 @@ PrefixResourceResolver::get_puzzle_lua_file_name(const char *iFileName)
   return get_res_file_name("lua/puzzles", iFileName);
 }
 
+string 
+PrefixResourceResolver::get_music_file_name(const char * iFileName) 
+{
+  return get_res_file_name("ogg", iFileName);
+}
+
 string
 PrefixResourceResolver::get_res_file_name(const char *iResType, const char * iResName)
 {
@@ -103,3 +109,4 @@ PrefixResourceResolver::get_res_file_name(const char *iResType, const char * iRe
   res.append(iResName);
   return res;
 }
+
