@@ -1,6 +1,3 @@
-#ifndef _LUA_PUZZLE_HPP_
-#define _LUA_PUZZLE_HPP_
-
 #include "lua_puzzle.hpp"
 
 // So if the function is not called
@@ -10,5 +7,3 @@ int lua_puzzle_set_name(lua_State * L) {
   a_ptr_puzzle->set_name(name);
   return 0;
 }
-
-#endif //_LUA_PUZZLE_HPP_
