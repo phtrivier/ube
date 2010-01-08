@@ -25,6 +25,9 @@ public:
   static const int IN = 1;
   static const int OUT = 2;
   static const int WALKABLE = 3;
+
+  static const int CELL_TYPES[];
+  static const int CELL_TYPES_COUNT = 4;
   
   Cell(int iI, int iJ, int iType) : i_(iI), j_(iJ), type_(iType) {
   }
@@ -51,6 +54,10 @@ public:
 
   bool is_walkable() {
     return type_ == WALKABLE;
+  }
+
+  int get_type() {
+    return type_;
   }
   
 };

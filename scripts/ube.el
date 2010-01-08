@@ -112,7 +112,7 @@
         (folder2 (make-folder "engine"))
 	(folder3 (make-folder "client")))
     (set 'compilation-directory folder1)
-    (set 'compile-command (concat "make -C" folder1 " check && make -C " folder2 " check && make -C " folder3 " check" "&& make -C " (make-folder "") " install" ))
+    (set 'compile-command (concat "make -C" folder1 " check && make -C " folder2 " check && make -C " folder3 " check" "&& make -C " (make-folder "../") " install" ))
     (compile-or-recompile)))
 
 (defun compile-or-recompile ()

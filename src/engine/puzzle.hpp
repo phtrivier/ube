@@ -45,6 +45,8 @@ public:
   /**
    * Add a cell to the puzzle.
    * The cell is added a its corresponding (i,j) position.
+   *
+   * FIXME(pht) : does the puzzle take ownership of the cell ? 
    * @param ipCell a pointer to a cell.
    */
   void add_cell(Cell * ipCell);

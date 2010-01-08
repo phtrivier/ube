@@ -39,6 +39,7 @@ public:
    * Register a game mode. The game loop starts observing any event 
    * provided by the game mode, and the mode becomes eligible for
    * being set with set_current_game_mode.
+   * TODO(pht) : use a reference instead of a pointer, the game loop does not own the game mode.
    */
   void register_game_mode(std::string iModeName, GameModeInterface * ipGameMode);
   

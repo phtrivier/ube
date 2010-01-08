@@ -1,5 +1,5 @@
 lib_LIBRARIES=libube-engine.a
-libube_engine_a_SOURCES=cell.hpp \
+libube_engine_a_SOURCES=cell.hpp cell.cpp \
 	cell_factory.hpp cell_factory.cpp \
 	puzzle.hpp puzzle.cpp \
 	puzzle_loader.hpp puzzle_loader.cpp \

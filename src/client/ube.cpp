@@ -9,6 +9,9 @@
 #include "sdl_clock.hpp"
 #include "game_mode.hpp"
 #include "game_loop.hpp"
+#include "in_game_model.hpp"
+#include "sdl_in_game_renderer.hpp"
+#include "in_game_mode_factory.hpp"
 
 #include <config.h>
 #include <locale.h>
@@ -47,9 +50,7 @@ int main(int argc, char ** argv) {
   // boost::shared_ptr<LoggerInterface> logger( new SilentLogger());
   Logging::init_logging(*logger);
   // TODO : add the loading of some configuration for the categories
-  Logging::add_logging_category("main");
-
-  LOG_D("main") << "Hello !" << std::endl;
+  Logging::add_logging_category("sdl_in_game_renderer");
 
   // Music test
   /* This is where we open up our audio device.  Mix_OpenAudio takes
@@ -65,7 +66,6 @@ int main(int argc, char ** argv) {
      program we don't, but I'm showing the function call here anyway
      in case we'd want to know later. */
   // Mix_QuerySpec(&audio_rate, &audio_format, &audio_channels);
-
   
   /* Clean up on exit */
   atexit(SDL_Quit);
@@ -80,20 +80,33 @@ int main(int argc, char ** argv) {
   bindtextdomain (PACKAGE, resolver.get_locale_dir().c_str());
   textdomain(PACKAGE);
 
-  SdlController controller;
+  // SdlInGameRenderer renderer(resolver);
+  // int res = renderer.init();
+  // if (res != 0) {
+  //   printf("Error while initializing sdl_renderer : %s\n", SDL_GetError());
+  //   return -1;
+  // }
+  //  SdlController controller;
+  // SdlView view(resolver,controller);
+  // // Or should it be the game_mode's job to do this ?
+  // // or a factory whose job would be to create stuff !!
+  // controller.add_observer(&view);
 
-  SdlView view(resolver,controller);
-  // Or should it be the game_mode's job to do this ?
-  // or a factory whose job would be to create stuff !!
-  controller.add_observer(&view);
+  InGameModeFactory in_game_mode_factory(resolver);
+  int res = in_game_mode_factory.create_mode();
+  if (res != 0) {
+    printf("Error while creating in_game_mode : %s", SDL_GetError());
+    return -1;
+  }
+  boost::shared_ptr<GameMode> mode = in_game_mode_factory.get_mode();
 
-  GameMode mode(&controller, &view);
+  // GameMode mode(&controller, &view);
 
   SdlClock clock;
   GameLoop loop(&clock);
 
-  loop.register_game_mode("mode", &mode);
-  loop.set_current_game_mode("mode");
+  loop.register_game_mode("in-game", mode.get()); // FIXME : it would be better to use a reference here, wouldn't it ?
+  loop.set_current_game_mode("in-game");
 
   loop.loop();
 

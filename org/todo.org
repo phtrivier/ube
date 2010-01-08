@@ -1,7 +1,7 @@
 * To do list
-** Coding [0/6]
-   - [ ] add the notion of a renderer (render image by name at a given point, flush the display, etc...)
-   - [ ] in_game_view to render a puzzle delegating stuff to a renderer
+** Coding [2/6]
+   - [X] add the notion of a renderer (render image by name at a given point, flush the display, etc...)
+   - [X] in_game_view to render a puzzle delegating stuff to a renderer
    - [ ] sdl_renderer that actually uses, ahem, SDL
    - [ ] in_game_mode that uses an in_game_view and an sdl_controller to load and display one single puzzle (uses a factory to create stuff...)
    - [ ] First version of the game that loads a known puzzle
