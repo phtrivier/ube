@@ -62,11 +62,13 @@ client_tests_SOURCES=tests/client_tests.cpp \
 	tests/game_mode_test.cpp \
 	tests/game_loop_test.cpp \
 	tests/in_game_view_test.cpp \
-	tests/option_parser_test.cpp
+	tests/option_parser_test.cpp \
+	tests/sdl_in_game_renderer_test.cpp
 
 client_tests_LDADD=../common/libube-common.a \
 	../engine/libube-engine.a \
 	libube-client.a \
+	../engine/cell.o \
 	-L$(top_srcdir)/lib -lgtest -lgmock -llua -ldl -lpopt
 
 TESTS = client-tests

@@ -15,13 +15,15 @@ using namespace boost;
 
 SdlInGameRenderer::~SdlInGameRenderer() {
   for (int cell_type = 0 ; cell_type < Cell::CELL_TYPES_COUNT ; cell_type++) {
-
     if (cell_images_.find(cell_type) != cell_images_.end()) {
       SDL_Surface * p_cell_image = cell_images_[cell_type];
       if (p_cell_image != NULL) {
 	SDL_FreeSurface(p_cell_image);
       }
     }
+  }
+  if (p_selected_cell_image_ != NULL) {
+    SDL_FreeSurface(p_selected_cell_image_);
   }
 }
 
@@ -33,6 +35,7 @@ SdlInGameRenderer::init() {
   if (p_screen_ != NULL) {
     res = load_cell_images();
     black_ = SDL_MapRGB(p_screen_->format, 0x00, 0x00, 0x00);
+    res = load_image("selected_cell.png", &p_selected_cell_image_);
   }
 
   return res;
@@ -73,6 +76,49 @@ SdlInGameRenderer::flush() {
   SDL_Flip(p_screen_);
 }
 
+
+int
+SdlInGameRenderer::mouse_x_as_puzzle_column(int i_x) {
+  // TODO(pht) : Handler case where the position is bigger than the screen size
+  int res = -1;
+  if (i_x >= 0) {
+    res = (i_x / 32);
+  }
+  return res;
+}
+
+int
+SdlInGameRenderer::mouse_y_as_puzzle_line(int i_y) {
+  // TODO(pht) : Handler case where the position is bigger than the screen size
+  int res = -1;
+  if (i_y >= 0) {
+    res = (i_y / 32);
+  }
+  return res;
+}
+
+void
+SdlInGameRenderer::render_selected_cell(int i_i, int i_j) {
+  // TODO : make this a constant instead of recreating
+  SDL_Rect src;
+  src.x = 0;
+  src.y = 0;
+  src.w = 32;
+  src.h = 32;
+  // TODO : Optimize the computation, the multiplication is not
+  // needed everytime. Plus, make it a constant !
+  SDL_Rect dst;
+  dst.x = i_j * 32;
+  dst.y = i_i * 32;
+  dst.w = 32;
+  dst.h = 32;
+
+  assert(p_selected_cell_image_ != NULL);
+  SDL_BlitSurface(p_selected_cell_image_, &src, p_screen_, &dst);
+}
+
+/* ----------------- */
+
 int
 SdlInGameRenderer::load_cell_images() {
   int res = 0;
@@ -95,16 +141,22 @@ SdlInGameRenderer::load_cell_images() {
 int
 SdlInGameRenderer::load_cell_image(int i_cell_type, SDL_Surface ** o_pp_surface) {
   int res = -1;
-  SDL_Surface * p_tmp;
 
   std::string image_name = str(format("cell_%1%.png") % i_cell_type);
 
-  p_tmp = IMG_Load(dep_resolver_.get_image_file_name(image_name.c_str()).c_str());
+  res = load_image(image_name, o_pp_surface);
+
+  return res;
+}
+
+int
+SdlInGameRenderer::load_image(std::string i_image_name, SDL_Surface ** o_pp_surface) {
+  int res = -1;
+  SDL_Surface * p_tmp = IMG_Load(dep_resolver_.get_image_file_name(i_image_name.c_str()).c_str());
   if (p_tmp != NULL) {
     *o_pp_surface = SDL_DisplayFormat(p_tmp);
     SDL_FreeSurface(p_tmp);
     res = 0;
   }
-
   return res;
 }

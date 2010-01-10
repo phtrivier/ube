@@ -3,19 +3,12 @@
 
 class Cell;
 
+
+
 /**
  * The board of the game.
  */
 class Puzzle { 
-
-  // Dimensions
-  int w_,h_;
-
-  // Cells
-  Cell*** cells_;
-
-  // Is a position valid on this board ?
-  bool is_valid_position(int iI, int iJ) const;
 
 public:
 
@@ -58,6 +51,17 @@ public:
    * @return a pointer to the corresponding cell (might be NULL)
    */
   Cell* get_cell_at(int iI, int iJ) const;
+
+  // Is a position valid on this board ?
+  bool is_valid_position(int iI, int iJ) const;
+
+private:
+
+  // Dimensions
+  int w_,h_;
+
+  // Cells
+  Cell*** cells_;
 
 };
 

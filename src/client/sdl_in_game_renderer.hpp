@@ -4,6 +4,7 @@
 #include "in_game_renderer_interface.hpp"
 
 #include <map>
+#include <string>
 
 #include "SDL.h"
 
@@ -20,11 +21,13 @@ class SdlInGameRenderer :
 { 
 
 public:
-  SdlInGameRenderer(ResourceResolverInterface & dep_resolver) : 
+  explicit SdlInGameRenderer(ResourceResolverInterface & dep_resolver) : 
     InGameRendererInterface(),
-    dep_resolver_(dep_resolver)
+    dep_resolver_(dep_resolver),
+    p_screen_(NULL),
+    p_selected_cell_image_(NULL)
   {
-    // Note that SDL_Surface is not created here, but in the Init Method...
+
   }
 
   ~SdlInGameRenderer();
@@ -43,6 +46,12 @@ public:
 
   void flush();
 
+  int mouse_x_as_puzzle_column(int i_x);
+
+  int mouse_y_as_puzzle_line(int i_y);
+
+  void render_selected_cell(int i_x, int i_y);
+
 private:
 
   ResourceResolverInterface & dep_resolver_;
@@ -51,6 +60,8 @@ private:
 
   SDL_Surface * p_screen_;
 
+  SDL_Surface * p_selected_cell_image_;
+  
   Uint32 black_;
 
   /**
@@ -66,9 +77,19 @@ private:
    * 
    * @param i_cell_type 
    * @param o_pp_surface output address of the image after loading
-   * @returns 0 if cell was loaded, -1 otherwise
+   * @returns 0 if cell was loaded, -1 otherwise.
    */
   int load_cell_image(int i_cell_type, SDL_Surface ** o_pp_surface);
+
+  /**
+   * Loads an image by its name.
+   *
+   * @param i_image_name name with suffix (eg "cell_0.png")
+   * @param o_pp_surface output address of the surface afer loading
+   * @returns 0 if image was loaded, -1 otherwise.
+   */
+  int load_image(std::string i_image_name, SDL_Surface ** o_pp_surface);
+  
 
 };
 

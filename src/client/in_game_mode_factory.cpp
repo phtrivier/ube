@@ -45,8 +45,8 @@ InGameModeFactory::create_mode() {
     // Bring things together
     p_model_ = new InGameModel();
     p_model_->set_puzzle(*p_puzzle_);
-    p_view_ = new InGameView(dep_renderer_, *p_model_);
     p_controller_ = new SdlController();
+    p_view_ = new InGameView(dep_renderer_, *p_model_, *p_controller_);
     mode_ = boost::shared_ptr<GameMode>(new GameMode(p_controller_, p_view_));
   }
 
