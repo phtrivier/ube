@@ -29,6 +29,8 @@ InGameModeFactory::~InGameModeFactory() {
 
 int
 InGameModeFactory::create_mode() {
+  int res = 0;
+
   // TODO : initialize the model better than this ? Or what ? 
   CellFactory factory;
 
@@ -37,20 +39,18 @@ InGameModeFactory::create_mode() {
 
   p_puzzle_ = new Puzzle();
 
-  loader.load_puzzle_file("puzzle1.lua", p_puzzle_);
+  res = loader.load_puzzle_file(puzzle_file_name_.c_str(), p_puzzle_);
 
-  // p_puzzle_->set_dimensions(2,2);
-  // loader.set_row(0, p_puzzle_, "#I");
-  // loader.set_row(1, p_puzzle_, "-O");
+  if (res == 0) {
+    // Bring things together
+    p_model_ = new InGameModel();
+    p_model_->set_puzzle(*p_puzzle_);
+    p_view_ = new InGameView(dep_renderer_, *p_model_);
+    p_controller_ = new SdlController();
+    mode_ = boost::shared_ptr<GameMode>(new GameMode(p_controller_, p_view_));
+  }
 
-  // Bring things together
-  p_model_ = new InGameModel();
-  p_model_->set_puzzle(*p_puzzle_);
-  p_view_ = new InGameView(dep_renderer_, *p_model_);
-  p_controller_ = new SdlController();
-  mode_ = boost::shared_ptr<GameMode>(new GameMode(p_controller_, p_view_));
-
-  return 0;
+  return res;
 }
 
 boost::shared_ptr<GameMode> &

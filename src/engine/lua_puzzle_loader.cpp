@@ -95,7 +95,7 @@ LuaPuzzleLoader::load_lua_puzzle_file(const char * iFileName)
   load_lua_file(pResolver_->get_puzzle_lua_file_name(iFileName));
 }
 
-void 
+int
 LuaPuzzleLoader::load_puzzle_file(const char * iFileName, 
 				  Puzzle * oPuzzle) {
 
@@ -105,4 +105,6 @@ LuaPuzzleLoader::load_puzzle_file(const char * iFileName,
   lua_setglobal(pLuaState_, "cpp_puzzle");
 
   load_lua_puzzle_file(iFileName);
+  // TODO(pht) : propagate error codes
+  return 0;
 }

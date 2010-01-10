@@ -1,6 +1,8 @@
 #ifndef _IN_GAME_MODE_FACTORY_HPP_
 #define _IN_GAME_MODE_FACTORY_HPP_
 
+#include <string>
+
 #include <boost/shared_ptr.hpp>
 class GameMode;
 class ResourceResolverInterface;
@@ -19,9 +21,11 @@ public:
 
   // FIXME(pht) : shouldn't the renderer be a dependency, also ? 
   InGameModeFactory(ResourceResolverInterface & dep_resolver,
-		    InGameRendererInterface & dep_renderer) :
+		    InGameRendererInterface & dep_renderer,
+		    std::string puzzle_file_name) :
     dep_resolver_(dep_resolver),
-    dep_renderer_(dep_renderer)
+    dep_renderer_(dep_renderer),
+    puzzle_file_name_(puzzle_file_name)
   {
   }
 
@@ -35,6 +39,8 @@ private:
 
   ResourceResolverInterface & dep_resolver_;
   InGameRendererInterface & dep_renderer_;
+
+  std::string puzzle_file_name_;
 
   SdlController * p_controller_;
   InGameView * p_view_;

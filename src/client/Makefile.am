@@ -15,7 +15,8 @@ libube_client_a_SOURCES=gettext.h \
 	in_game_model \
 	in_game_view.hpp in_game_view.cpp \
 	sdl_in_game_renderer.hpp sdl_in_game_renderer.cpp \
-	in_game_mode_factory.hpp in_game_mode_factory.cpp
+	in_game_mode_factory.hpp in_game_mode_factory.cpp \
+	option_parser.hpp option_parser.cpp
 
 bin_PROGRAMS = ube
 ube_SOURCES = ube.cpp
@@ -23,7 +24,7 @@ ube_SOURCES = ube.cpp
 # TODO : Find a way not to have to repeat this ... 
 luadir=${datadir}/@PACKAGE@/lua
 
-AM_CPPFLAGS= -DLOCALEDIR=\"${datadir}/locale\" \
+AM_CPPFLAGS= -g -DLOCALEDIR=\"${datadir}/locale\" \
 	-DDATADIR=\"${datadir}/@PACKAGE@\" \
 	-DLUADIR=\"${luadir}\" \
 	-DPREFIX=\"${prefix}\" \
@@ -42,13 +43,13 @@ ube_LDADD=../common/libube-common.a \
 	../engine/libube-engine.a \
 	libube-client.a \
 	../engine/cell.o \
-	../common/logging.o \
 	../engine/puzzle.o \
 	../engine/puzzle_loader.o \
 	../engine/cell_factory.o \
 	../engine/lua_puzzle_loader.o \
 	$(LUA_LIB) $(LIBINTL) \
-	$(SDL_LIBS) $(SDL_IMAGE_LIBS) $(SDL_TTF_LIBS) $(SDL_MIXER_LIBS)
+	$(SDL_LIBS) $(SDL_IMAGE_LIBS) $(SDL_TTF_LIBS) $(SDL_MIXER_LIBS) \
+	-lpopt
 
 check_PROGRAMS=client-tests
 client_tests_SOURCES=tests/client_tests.cpp \
@@ -60,11 +61,12 @@ client_tests_SOURCES=tests/client_tests.cpp \
 	tests/observable_test.cpp \
 	tests/game_mode_test.cpp \
 	tests/game_loop_test.cpp \
-	tests/in_game_view_test.cpp
+	tests/in_game_view_test.cpp \
+	tests/option_parser_test.cpp
 
 client_tests_LDADD=../common/libube-common.a \
 	../engine/libube-engine.a \
 	libube-client.a \
-	-L$(top_srcdir)/lib -lgtest -lgmock -llua -ldl
+	-L$(top_srcdir)/lib -lgtest -lgmock -llua -ldl -lpopt
 
 TESTS = client-tests

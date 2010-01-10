@@ -4,6 +4,7 @@
 #include "common/silent_logger.hpp"
 #include "common/stat_file_checker.hpp"
 
+#include "option_parser.hpp"
 #include "sdl_view.hpp"
 #include "sdl_controller.hpp"
 #include "sdl_clock.hpp"
@@ -31,7 +32,7 @@ using namespace std;
 #include "SDL_mixer.h"
 
 
-int main(int argc, char ** argv) {
+int main(int argc, const char ** argv) {
 
 /* We're going to be requesting certain things from our audio
      device, so we set them up beforehand */
@@ -51,6 +52,8 @@ int main(int argc, char ** argv) {
   Logging::init_logging(*logger);
   // TODO : add the loading of some configuration for the categories
   Logging::add_logging_category("sdl_in_game_renderer");
+  Logging::add_logging_category("main");
+  Logging::add_logging_category("parser");
 
   // Music test
   /* This is where we open up our audio device.  Mix_OpenAudio takes
@@ -92,14 +95,33 @@ int main(int argc, char ** argv) {
   // // or a factory whose job would be to create stuff !!
   // controller.add_observer(&view);
 
-  InGameModeFactory in_game_mode_factory(resolver, renderer);
-  if (in_game_mode_factory.create_mode() != 0) {
+  OptionParser parser;
+  if (parser.parse_options(argc, argv) != 0) {
+    printf("Error while parsing options ... TODO : use popt to generate a nice message\n");
+    return -1;
+  }
+
+  std::string puzzle_file_name = "puzzle1.lua";
+
+  LOG_D("main") << "Do we have a puzzle name ? " << parser.has_puzzle_file_name() << std::endl;
+
+  if (parser.has_puzzle_file_name()) {
+    LOG_D("main") << "Getting puzzle file name" << std::endl;
+    puzzle_file_name = parser.get_puzzle_file_name();
+  }
+  
+  LOG_D("main") << "Puzzle file name : " << puzzle_file_name << std::endl;
+  LOG_D("main") << "Puzzle file name's c_str() : " << puzzle_file_name.c_str() << std::endl;
+
+  InGameModeFactory in_game_mode_factory(resolver, renderer, puzzle_file_name);
+  int creation_res = in_game_mode_factory.create_mode();
+  LOG_D("main") << "Creation of mode resulted in " << creation_res << std::endl;
+  if ( creation_res != 0) {
     printf("Error while creating in_game_mode : %s", SDL_GetError());
     return -1;
   }
   boost::shared_ptr<GameMode> mode = in_game_mode_factory.get_mode();
-
-  // GameMode mode(&controller, &view);
+  assert(mode.get() != NULL);
 
   SdlClock clock;
   GameLoop loop(&clock);

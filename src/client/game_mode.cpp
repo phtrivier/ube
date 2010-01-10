@@ -11,13 +11,6 @@ GameMode::update_game(int iDelta)
     pController_->handle_event();
   }
   
-  /*
-  int i = 0;
-  while (i < 10 && pController_->check_events()) {
-    pController_->handle_event();
-    i++;
-  }
-  */
 }
 
 void

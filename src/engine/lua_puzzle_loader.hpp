@@ -32,8 +32,9 @@ public:
    * @param iFileName name of the puzzle file. The resource resolver will be used to locate the file.
    *   The file name should have extension, but no prefix (eg 'puzzle1.lua'.)
    * @param oPuzzle the puzzle to be initialized.
+   * @return TODO(pht) error code in case something goes wrong
    */
-  void load_puzzle_file(const char * iFileName, Puzzle * oPuzzle);
+  int load_puzzle_file(const char * iFileName, Puzzle * oPuzzle);
 
 private:
 
