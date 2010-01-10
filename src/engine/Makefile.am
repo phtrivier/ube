@@ -1,4 +1,4 @@
-lib_LIBRARIES=libube-engine.a
+noinst_LIBRARIES=libube-engine.a
 libube_engine_a_SOURCES=cell.hpp cell.cpp \
 	cell_factory.hpp cell_factory.cpp \
 	puzzle.hpp puzzle.cpp \
@@ -7,7 +7,7 @@ libube_engine_a_SOURCES=cell.hpp cell.cpp \
 
 # TODO : Find a way to make sure this file is available ...
 luadir=${datadir}/@PACKAGE@/lua/engine
-lua_DATA=lua/story_lib.lua
+lua_DATA=lua/puzzle_lib.lua
 
 AM_CPPFLAGS=-DSRCDIR=\"${srcdir}\" \
 	-DLUADIR=\"${luadir}\" \

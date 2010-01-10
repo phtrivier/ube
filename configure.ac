@@ -42,6 +42,8 @@ AC_CONFIG_FILES([
 	data/images/Makefile
 	data/fonts/Makefile
 	data/ogg/Makefile
+	data/lua/Makefile
+	data/lua/puzzles/Makefile
 ])
 AC_OUTPUT
 		

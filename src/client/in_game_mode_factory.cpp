@@ -3,12 +3,13 @@
 #include "engine/cell_factory.hpp"
 #include "engine/puzzle.hpp"
 #include "engine/puzzle_loader.hpp"
+#include "engine/lua_puzzle_loader.hpp"
 
 #include "game_mode.hpp"
 #include "in_game_model.hpp"
 #include "in_game_view.hpp"
 #include "sdl_controller.hpp"
-#include "sdl_in_game_renderer.hpp"
+#include "in_game_renderer_interface.hpp"
 
 InGameModeFactory::~InGameModeFactory() {
   mode_.reset();
@@ -28,29 +29,28 @@ InGameModeFactory::~InGameModeFactory() {
 
 int
 InGameModeFactory::create_mode() {
-  int res = -1;
+  // TODO : initialize the model better than this ? Or what ? 
+  CellFactory factory;
 
-  p_renderer_ = new SdlInGameRenderer(dep_resolver_);
-  res = p_renderer_->init();
+  LuaPuzzleLoader loader(&factory, &dep_resolver_);
+  //  PuzzleLoader loader(&factory);
 
-  if (res == 0) {
-    // TODO : initialize the model better than this ? Or what ? 
-    CellFactory factory;
-    PuzzleLoader loader(&factory);
-    p_puzzle_ = new Puzzle();
-    p_puzzle_->set_dimensions(2,2);
-    loader.set_row(0, p_puzzle_, "#I");
-    loader.set_row(1, p_puzzle_, "-O");
+  p_puzzle_ = new Puzzle();
 
-    // Bring things together
-    p_model_ = new InGameModel();
-    p_model_->set_puzzle(*p_puzzle_);
-    p_view_ = new InGameView(*p_renderer_, *p_model_);
-    p_controller_ = new SdlController();
-    mode_ = boost::shared_ptr<GameMode>(new GameMode(p_controller_, p_view_));
-  }
+  loader.load_puzzle_file("puzzle1.lua", p_puzzle_);
 
-  return res;
+  // p_puzzle_->set_dimensions(2,2);
+  // loader.set_row(0, p_puzzle_, "#I");
+  // loader.set_row(1, p_puzzle_, "-O");
+
+  // Bring things together
+  p_model_ = new InGameModel();
+  p_model_->set_puzzle(*p_puzzle_);
+  p_view_ = new InGameView(dep_renderer_, *p_model_);
+  p_controller_ = new SdlController();
+  mode_ = boost::shared_ptr<GameMode>(new GameMode(p_controller_, p_view_));
+
+  return 0;
 }
 
 boost::shared_ptr<GameMode> &

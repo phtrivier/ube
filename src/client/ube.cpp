@@ -80,21 +80,20 @@ int main(int argc, char ** argv) {
   bindtextdomain (PACKAGE, resolver.get_locale_dir().c_str());
   textdomain(PACKAGE);
 
-  // SdlInGameRenderer renderer(resolver);
-  // int res = renderer.init();
-  // if (res != 0) {
-  //   printf("Error while initializing sdl_renderer : %s\n", SDL_GetError());
-  //   return -1;
-  // }
+  SdlInGameRenderer renderer(resolver);
+  int res = renderer.init();
+  if (res != 0) {
+    printf("Error while initializing sdl_renderer : %s\n", SDL_GetError());
+    return -1;
+  }
   //  SdlController controller;
   // SdlView view(resolver,controller);
   // // Or should it be the game_mode's job to do this ?
   // // or a factory whose job would be to create stuff !!
   // controller.add_observer(&view);
 
-  InGameModeFactory in_game_mode_factory(resolver);
-  int res = in_game_mode_factory.create_mode();
-  if (res != 0) {
+  InGameModeFactory in_game_mode_factory(resolver, renderer);
+  if (in_game_mode_factory.create_mode() != 0) {
     printf("Error while creating in_game_mode : %s", SDL_GetError());
     return -1;
   }
@@ -109,6 +108,9 @@ int main(int argc, char ** argv) {
   loop.set_current_game_mode("in-game");
 
   loop.loop();
+
+  std::cout << std::endl;
+  std::cout << "Thanks for playing !" << std::endl;
 
   return 0;
 }

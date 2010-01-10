@@ -14,6 +14,28 @@ struct lua_State;
  * to find lua files.
  */
 class LuaPuzzleLoader : public PuzzleLoader { 
+public:
+  LuaPuzzleLoader(CellFactory * ipFactory, ResourceResolverInterface * ipResolver) : 
+    PuzzleLoader(ipFactory), 
+    pResolver_(ipResolver) 
+  {
+    init_lua_state();
+  }
+
+  ~LuaPuzzleLoader() {
+    close_lua_state();
+  }
+
+  /**
+   * Initialize a puzzle from a lua file.
+   *
+   * @param iFileName name of the puzzle file. The resource resolver will be used to locate the file.
+   *   The file name should have extension, but no prefix (eg 'puzzle1.lua'.)
+   * @param oPuzzle the puzzle to be initialized.
+   */
+  void load_puzzle_file(const char * iFileName, Puzzle * oPuzzle);
+
+private:
 
   // Resolver to look both for engine and puzzle lua files.
   ResourceResolverInterface * pResolver_;
@@ -44,25 +66,6 @@ class LuaPuzzleLoader : public PuzzleLoader {
 
   void init_lua_state();
   void close_lua_state();
-
-public:
-  LuaPuzzleLoader(CellFactory * ipFactory, ResourceResolverInterface * ipResolver) : PuzzleLoader(ipFactory), 
-										    pResolver_(ipResolver) {
-    init_lua_state();
-  }
-
-  ~LuaPuzzleLoader() {
-    close_lua_state();
-  }
-
-  /**
-   * Initialize a puzzle from a lua file.
-   *
-   * @param iFileName name of the puzzle file. The resource resolver will be used to locate the file.
-   *   The file name should have extension, but no prefix (eg 'puzzle1.lua'.)
-   * @param oPuzzle the puzzle to be initialized.
-   */
-  void load_puzzle_file(const char * iFileName, Puzzle * oPuzzle);
 
 };
 

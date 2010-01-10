@@ -1,1 +1,1 @@
-SUBDIRS=images fonts ogg
+SUBDIRS=images fonts ogg lua

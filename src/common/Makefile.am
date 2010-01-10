@@ -1,4 +1,4 @@
-lib_LIBRARIES=libube-common.a
+noinst_LIBRARIES=libube-common.a
 libube_common_a_SOURCES=gettext.h lua_helper.hpp \
 	silent_ostream.hpp \
 	logging.hpp logging.cpp \

@@ -46,6 +46,7 @@ ube_LDADD=../common/libube-common.a \
 	../engine/puzzle.o \
 	../engine/puzzle_loader.o \
 	../engine/cell_factory.o \
+	../engine/lua_puzzle_loader.o \
 	$(LUA_LIB) $(LIBINTL) \
 	$(SDL_LIBS) $(SDL_IMAGE_LIBS) $(SDL_TTF_LIBS) $(SDL_MIXER_LIBS)
 
