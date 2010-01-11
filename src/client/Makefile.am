@@ -39,14 +39,9 @@ SDL_IMAGE_LIBS = -lSDL_image -lpng -ltiff -ljpeg -lz
 SDL_MIXER_LIBS = -lSDL_mixer
 
 # Ok, I must be compiling libube-engine and common the wrong way, since so many symbols are not available...
-ube_LDADD=../common/libube-common.a \
+ube_LDADD=libube-client.a \
 	../engine/libube-engine.a \
-	libube-client.a \
-	../engine/cell.o \
-	../engine/puzzle.o \
-	../engine/puzzle_loader.o \
-	../engine/cell_factory.o \
-	../engine/lua_puzzle_loader.o \
+	../common/libube-common.a \
 	$(LUA_LIB) $(LIBINTL) \
 	$(SDL_LIBS) $(SDL_IMAGE_LIBS) $(SDL_TTF_LIBS) $(SDL_MIXER_LIBS) \
 	-lpopt
@@ -65,10 +60,9 @@ client_tests_SOURCES=tests/client_tests.cpp \
 	tests/option_parser_test.cpp \
 	tests/sdl_in_game_renderer_test.cpp
 
-client_tests_LDADD=../common/libube-common.a \
+client_tests_LDADD=libube-client.a \
 	../engine/libube-engine.a \
-	libube-client.a \
-	../engine/cell.o \
+	../common/libube-common.a \
 	-L$(top_srcdir)/lib -lgtest -lgmock -llua -ldl -lpopt
 
 TESTS = client-tests
