@@ -4,7 +4,8 @@
 # Version 2.9 at least is required.
 
 # Change this path as appropriate
-export MW32=$HOME/sandbox/src/mingw-cross-env
+#export MW32=$HOME/sandbox/src/mingw-cross-env
+export MW32=$HOME/src/mingw-cross-env-2.10
 
 # Tools from mingw-cross-env should be available
 export PATH=$MW32/usr/bin:$MW32/usr/i686-pc-mingw32/bin:$PATH
@@ -56,8 +57,8 @@ prepare_folders() {
 build_cc() {
     autoreconf
     cd $BUILD_FOLDER
-    ../../../configure --prefix $INSTALL_FOLDER --host=i686-pc-mingw32 --build=i686-pc-linux-gnu
-    make && make install && rm -rf $BUILD_FOLDER && rm -rf $LATEST && ln -sf $INSTALL_FOLDER $LATEST
+    ../../../configure  --includedir=$MW32/usr/i686-pc-mingw32/include --oldincludedir=$MW32/usr/i686-pc-mingw32/include --prefix $INSTALL_FOLDER --host=i686-pc-mingw32 --build=i686-pc-linux-gnu 
+    make  && make install && rm -rf $BUILD_FOLDER && rm -rf $LATEST && ln -sf $INSTALL_FOLDER $LATEST
 }
 
 build_nsis() {

@@ -58,7 +58,10 @@ namespace {
     ASSERT_TRUE(p.get_cell_at(1,2)->is_out());
     ASSERT_TRUE(p.get_cell_at(0,0)->is_empty());
     ASSERT_TRUE(p.get_cell_at(2,1)->is_walkable());
-    
+
+    ASSERT_EQ(2, (int) p.moves().size());
+    ASSERT_EQ(MoveType::DOUBLE, p.moves().at(0).type());
+    ASSERT_TRUE(p.moves().at(0).available());
   }
 
 } // Namespace

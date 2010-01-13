@@ -71,12 +71,13 @@ int Puzzle::put_player(int i_i, int i_j) {
 }
 
 void Puzzle::add_move(int i_type) {
-  
+  Move move(i_type);
+  moves_.push_back(move);
 }
 
 int Puzzle::use_move(int i_index) {
   int res = -1;
-  assert(i_index > 0);
+  assert(i_index >= 0);
   assert(moves_.size() - i_index > 0);
   if (moves_[i_index].available()) {
     moves_[i_index].use();
@@ -87,7 +88,7 @@ int Puzzle::use_move(int i_index) {
 
 int Puzzle::revert_move(int i_index) {
   int res = -1;
-  assert(i_index > 0);
+  assert(i_index >= 0);
   assert(moves_.size() - i_index > 0);
   if (!moves_[i_index].available()) {
     moves_[i_index].revert();

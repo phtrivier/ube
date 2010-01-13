@@ -12,3 +12,15 @@ function set_puzzle_rows(rows)
 				i-1,row)
    end
 end
+
+-- This should stay in sync with move.hpp (unless I find
+-- a better way to deal with it ...)
+Move = {}
+Move.DOUBLE = 0;
+Move.KNIGHT = 1;
+
+function set_puzzle_moves(moves)
+   for i,move in ipairs(moves) do 
+      cpp_puzzle_add_move(cpp_puzzle, move)
+   end
+end

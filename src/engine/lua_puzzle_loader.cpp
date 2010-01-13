@@ -39,6 +39,15 @@ int lua_puzzle_loader_set_row(lua_State * ipLuaState) {
   return 0;
 }
 
+int lua_puzzle_add_move(lua_State * i_p_lua_state) {
+  Puzzle * p_puzzle = (Puzzle *) lua_touserdata(i_p_lua_state, 1);
+  int move_type = lua_tointeger(i_p_lua_state,2);
+  assert(p_puzzle != NULL);
+  assert(move_type >= 0);
+  p_puzzle->add_move(move_type);
+  return 0;
+}
+
 void 
 LuaPuzzleLoader::init_lua_state() 
 {
@@ -55,6 +64,9 @@ LuaPuzzleLoader::init_lua_state()
 
   lua_pushcfunction(pLuaState_, lua_puzzle_loader_set_row);
   lua_setglobal(pLuaState_, "cpp_puzzle_loader_set_row");
+
+  lua_pushcfunction(pLuaState_, lua_puzzle_add_move);
+  lua_setglobal(pLuaState_, "cpp_puzzle_add_move");
 
   load_lua_engine_file("puzzle_lib.lua");
 

@@ -65,7 +65,14 @@ private:
    */
   void load_lua_file(std::string iFilePath);
 
+  /**
+   * Init the lua state machine
+   */
   void init_lua_state();
+
+  /**
+   * Shut down the lua state machine
+   */
   void close_lua_state();
 
 };

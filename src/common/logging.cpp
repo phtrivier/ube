@@ -1,4 +1,5 @@
 #include "logging.hpp"
+
 #include <algorithm>
 
 void 

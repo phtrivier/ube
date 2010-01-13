@@ -1,6 +1,6 @@
 (global-set-key [(control ?c) (control ?j)] 'compile-all-or-recompile)
 
-(defconst ube-dir "~/prj/fun/ube")
+(defconst ube-dir "~/prj/ube")
 
 (defun ube-compile (what)
   (let ((folder (concat ube-dir "/builds/linux/current/src/" what)))

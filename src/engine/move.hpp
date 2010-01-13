@@ -13,7 +13,10 @@ class Move {
   
 public:
 
-  Move() : available_(true) {
+  explicit Move(int i_type) : 
+    available_(true),
+    type_(i_type)
+  {
   }
 
   
