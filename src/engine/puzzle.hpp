@@ -1,9 +1,10 @@
 #ifndef _PUZZLE_HPP_
 #define _PUZZLE_HPP_
 
+#include "move.hpp"
+#include <vector>
+
 class Cell;
-
-
 
 /**
  * The board of the game.
@@ -14,6 +15,7 @@ public:
 
   Puzzle() {
     w_ = h_ = -1;
+    player_i_ = player_j_ = -1;
   }
 
   ~Puzzle() {
@@ -55,6 +57,49 @@ public:
   // Is a position valid on this board ?
   bool is_valid_position(int iI, int iJ) const;
 
+  /**
+   * Puts the player at the entrance of the puzzle.
+   * @return -1 if no entrance was defined in the puzzle, 0 otherwise.
+   */
+  int enters_player();
+
+  /**
+   * Position of the player. -1 if not set.
+   */
+  int get_player_i() {
+    return player_i_;
+  }
+
+  /**
+   * Position of the player. -1 if not set.
+   */
+  int get_player_j() {
+    return player_j_;
+  }
+
+  /**
+   * Changes the position of the player.
+   * @returns -1 if the player cannot be moved becaused the position is invalid or empty.
+   *  0 otherwise.
+   */
+  int put_player(int i_i, int i_j);
+
+  /**
+   * Moves that can be used.
+   */
+  std::vector<Move> moves() {
+    return moves_;
+  }
+
+  void add_move(int i_type);
+
+  /**
+   * Mark moves at a given index as unuvailable
+   */
+  int use_move(int i_index);
+
+  int revert_move(int i_index);
+
 private:
 
   // Dimensions
@@ -62,6 +107,13 @@ private:
 
   // Cells
   Cell*** cells_;
+
+  // Position of the player
+  int player_i_;
+  int player_j_;
+
+  // Moves
+  std::vector<Move> moves_;
 
 };
 
