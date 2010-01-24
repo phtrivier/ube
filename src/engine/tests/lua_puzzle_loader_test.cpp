@@ -47,7 +47,7 @@ namespace {
     EXPECT_CALL(resolver, get_puzzle_lua_file_name(StrEq("puzzle_loader_test/puzzle1.lua")))
       .WillOnce(Return(str(format("%1%/tests/lua/puzzle_loader_test/puzzle1.lua") % SRCDIR)));
     
-    LuaPuzzleLoader loader(&f,&resolver);
+    LuaPuzzleLoader loader(&f,resolver);
     Puzzle p;
     loader.load_puzzle_file("puzzle_loader_test/puzzle1.lua", &p);
     

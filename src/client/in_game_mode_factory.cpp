@@ -34,7 +34,7 @@ InGameModeFactory::create_mode() {
   // TODO : initialize the model better than this ? Or what ? 
   CellFactory factory;
 
-  LuaPuzzleLoader loader(&factory, &dep_resolver_);
+  LuaPuzzleLoader loader(&factory, dep_resolver_);
   //  PuzzleLoader loader(&factory);
 
   p_puzzle_ = new Puzzle();

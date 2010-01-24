@@ -4,7 +4,8 @@ libube_engine_a_SOURCES=cell.hpp cell.cpp \
 	move.hpp move.cpp \
 	puzzle.hpp puzzle.cpp \
 	puzzle_loader.hpp puzzle_loader.cpp \
-	lua_puzzle_loader.hpp lua_puzzle_loader.cpp
+	lua_puzzle_loader.hpp lua_puzzle_loader.cpp \
+	lua_state_holder.hpp lua_state_holder.cpp
 
 # TODO : Find a way to make sure this file is available ...
 luadir=${datadir}/@PACKAGE@/lua/engine

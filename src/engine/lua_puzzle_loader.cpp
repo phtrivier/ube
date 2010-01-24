@@ -1,24 +1,26 @@
 #include "lua_puzzle_loader.hpp"
 
+#include "common/logging.hpp"
 #include "common/lua_helper.hpp"
 #include "common/resource_resolver_interface.hpp"
 
 #include "puzzle.hpp"
 
+#include <assert.h>
 #include <stdio.h>
 #include <string.h>
 #include <cstdlib>
 #include <iostream>
 using namespace std;
 
-#include "boost/format.hpp"
-using boost::format;
-
+// COMMON
+/*
 void
 LuaPuzzleLoader::close_lua_state()
 {
   lua_close(pLuaState_);
 }
+*/
 
 int lua_puzzle_set_dimensions(lua_State * ipLuaState) {
   Puzzle * pPuzzle = (Puzzle *) lua_touserdata(ipLuaState,1);
@@ -48,31 +50,44 @@ int lua_puzzle_add_move(lua_State * i_p_lua_state) {
   return 0;
 }
 
+/*
 void 
 LuaPuzzleLoader::init_lua_state() 
 {
   pLuaState_ = lua_open();
   luaL_openlibs(pLuaState_);
 
-  // This puzzle loader will be accessible to the script as "cpp_puzzle_loader"
+*/
+
+void
+LuaPuzzleLoader::register_lua_functions() 
+{
+
+  std::cout << "Registering in child version ... " << std::endl;
+
+  LOG_D("lua") << "Registering functions for puzzle loader" << std::endl;
+
+  // This puzzle loader will be accessible 
+  // to the script as "cpp_puzzle_loader"
   // Fixme : this might onl
-  lua_pushlightuserdata(pLuaState_,this);
-  lua_setglobal(pLuaState_, "cpp_puzzle_loader");
+  lua_pushlightuserdata(get_lua_state(),this);
+  lua_setglobal(get_lua_state(), "cpp_puzzle_loader");
 
-  lua_pushcfunction(pLuaState_, lua_puzzle_set_dimensions);
-  lua_setglobal(pLuaState_, "cpp_puzzle_set_dimensions");
+  lua_pushcfunction(get_lua_state(), lua_puzzle_set_dimensions);
+  lua_setglobal(get_lua_state(), "cpp_puzzle_set_dimensions");
 
-  lua_pushcfunction(pLuaState_, lua_puzzle_loader_set_row);
-  lua_setglobal(pLuaState_, "cpp_puzzle_loader_set_row");
+  lua_pushcfunction(get_lua_state(), lua_puzzle_loader_set_row);
+  lua_setglobal(get_lua_state(), "cpp_puzzle_loader_set_row");
 
-  lua_pushcfunction(pLuaState_, lua_puzzle_add_move);
-  lua_setglobal(pLuaState_, "cpp_puzzle_add_move");
+  lua_pushcfunction(get_lua_state(), lua_puzzle_add_move);
+  lua_setglobal(get_lua_state(), "cpp_puzzle_add_move");
 
   load_lua_engine_file("puzzle_lib.lua");
 
 }
 
 // Might not be very usefull, actually ... 
+/* K
 void
 LuaPuzzleLoader::error(const char * fmt, ...)
 {
@@ -85,26 +100,24 @@ LuaPuzzleLoader::error(const char * fmt, ...)
   lua_close(pLuaState_);
   exit(-1);
 }
+*/
 
+   /*K
 void
 LuaPuzzleLoader::load_lua_file(std::string iFileName)
 {
-  if (luaL_loadfile(pLuaState_, iFileName.c_str()) || 
-      lua_pcall(pLuaState_, 0, 0, 0)) {
-    throw runtime_error(str(format("cannot run lua file: %1%") % lua_tostring(pLuaState_, -1)));
+  if (luaL_loadfile(get_lua_state(), iFileName.c_str()) || 
+      lua_pcall(get_lua_state(), 0, 0, 0)) {
+    throw runtime_error(str(format("cannot run lua file: %1%") % lua_tostring(get_lua_state(), -1)));
   }
 }
 
-void
-LuaPuzzleLoader::load_lua_engine_file(const char * iFileName)
-{
-  load_lua_file(pResolver_->get_engine_lua_file_name(iFileName));
-}
+   */
 
 void
 LuaPuzzleLoader::load_lua_puzzle_file(const char * iFileName)
 {
-  load_lua_file(pResolver_->get_puzzle_lua_file_name(iFileName));
+  load_lua_file(get_resolver().get_puzzle_lua_file_name(iFileName));
 }
 
 int
@@ -113,8 +126,8 @@ LuaPuzzleLoader::load_puzzle_file(const char * iFileName,
 
   // The puzzle will be accessible to the script as 
   // a global "cpp_puzzle" variable.
-  lua_pushlightuserdata(pLuaState_, oPuzzle);
-  lua_setglobal(pLuaState_, "cpp_puzzle");
+  lua_pushlightuserdata(get_lua_state(), oPuzzle);
+  lua_setglobal(get_lua_state(), "cpp_puzzle");
 
   load_lua_puzzle_file(iFileName);
   // TODO(pht) : propagate error codes
