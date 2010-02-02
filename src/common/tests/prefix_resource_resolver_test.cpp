@@ -71,6 +71,14 @@ namespace {
     ASSERT_EQ("baz/share/ube/lua/engine/test.lua",pResolver_->get_engine_lua_file_name("test.lua"));
   }
 
+  TEST_F(PrefixResourceResolverTest, UsesPrefixToComputeLuaPath) {
+    expectsThreeFolderCheck();
+    ASSERT_EQ("baz/share/ube/lua/engine/?.lua", pResolver_->get_engine_lua_path());
+    // No checks the second time
+    ASSERT_EQ("baz/share/ube/lua/engine/?.lua", pResolver_->get_engine_lua_path());
+  }
+
+
   TEST_F(PrefixResourceResolverTest, UsesAllPrefixToLookForPuzzleLuaFiles) {
     expectsThreeFolderCheck();
     ASSERT_EQ("baz/share/ube/lua/puzzles/puzzle1.lua",pResolver_->get_puzzle_lua_file_name("puzzle1.lua"));
@@ -83,5 +91,7 @@ namespace {
     ASSERT_EQ("baz/share/ube/ogg/music.ogg",pResolver_->get_music_file_name("music.ogg"));
     ASSERT_EQ("baz/share/ube/ogg/music.ogg",pResolver_->get_music_file_name("music.ogg"));
   }
+
+
   
 }

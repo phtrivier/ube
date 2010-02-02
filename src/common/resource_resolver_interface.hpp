@@ -33,6 +33,15 @@ public:
   virtual std::string get_font_file_name(const char * iFontName) = 0;
 
   /**
+   * The lua path to load engine lua files.
+   *
+   * This can be used to replace 'package.path" in lua scripts to allow require.
+   *
+   * Should be something like "foo/bar/whatever/engine/lua/?.lua
+   */
+  virtual std::string get_engine_lua_path() = 0;
+
+  /**
    * The expected location of an engine Lua file
    * 
    * @param iFileName name of the file, with suffix (eg "story_lib.lua")

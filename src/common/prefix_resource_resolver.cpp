@@ -81,6 +81,13 @@ PrefixResourceResolver::get_font_file_name(const char * iFontName)
   return get_res_file_name("fonts", iFontName);
 }
 
+string
+PrefixResourceResolver::get_engine_lua_path() 
+{
+  // Slighly hackish ; I need to generate a string like "foo/bar/baz/lua/engine/?.lua"
+  return get_res_file_name("lua/engine", "?.lua");
+}
+
 string 
 PrefixResourceResolver::get_engine_lua_file_name(const char * iFileName) 
 {

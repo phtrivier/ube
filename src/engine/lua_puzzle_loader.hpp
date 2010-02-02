@@ -27,13 +27,10 @@ public:
     LuaStateHolder(dep_resolver), 
     PuzzleLoader(ipFactory)
   {
-    //K init_lua_state();
-    cout << "ctor puzzle_loader" << endl;
     register_lua_functions();
   }
 
   ~LuaPuzzleLoader() {
-    //K close_lua_state();
   }
 
   /**
@@ -49,19 +46,7 @@ public:
   void register_lua_functions();
 
 private:
-
-  // Resolver to look both for engine and puzzle lua files.
-  //K ResourceResolverInterface * pResolver_;
-  
-  // Lua context
-  //K  lua_State * pLuaState_;
-
-  /**
-   * Report an error with its state. Kills the program
-   * TODO : make if throw instead.
-   */
-  // K void error(const char * fmt, ...);
-  
+ 
   /**
    * Try and load an puzzle lua file, using the resource resolver to find it.
    */

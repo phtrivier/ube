@@ -13,15 +13,6 @@
 #include <iostream>
 using namespace std;
 
-// COMMON
-/*
-void
-LuaPuzzleLoader::close_lua_state()
-{
-  lua_close(pLuaState_);
-}
-*/
-
 int lua_puzzle_set_dimensions(lua_State * ipLuaState) {
   Puzzle * pPuzzle = (Puzzle *) lua_touserdata(ipLuaState,1);
   int w = lua_tointeger(ipLuaState,2);
@@ -50,15 +41,6 @@ int lua_puzzle_add_move(lua_State * i_p_lua_state) {
   return 0;
 }
 
-/*
-void 
-LuaPuzzleLoader::init_lua_state() 
-{
-  pLuaState_ = lua_open();
-  luaL_openlibs(pLuaState_);
-
-*/
-
 void
 LuaPuzzleLoader::register_lua_functions() 
 {
@@ -85,34 +67,6 @@ LuaPuzzleLoader::register_lua_functions()
   load_lua_engine_file("puzzle_lib.lua");
 
 }
-
-// Might not be very usefull, actually ... 
-/* K
-void
-LuaPuzzleLoader::error(const char * fmt, ...)
-{
-  // TODO(pht) : throw instead of killing
-  // The problem is formatting the message ... 
-  va_list argp;
-  va_start(argp, fmt);
-  vfprintf(stderr, fmt, argp);
-  va_end(argp);
-  lua_close(pLuaState_);
-  exit(-1);
-}
-*/
-
-   /*K
-void
-LuaPuzzleLoader::load_lua_file(std::string iFileName)
-{
-  if (luaL_loadfile(get_lua_state(), iFileName.c_str()) || 
-      lua_pcall(get_lua_state(), 0, 0, 0)) {
-    throw runtime_error(str(format("cannot run lua file: %1%") % lua_tostring(get_lua_state(), -1)));
-  }
-}
-
-   */
 
 void
 LuaPuzzleLoader::load_lua_puzzle_file(const char * iFileName)

@@ -41,6 +41,10 @@ namespace {
     CellFactory f;
 
     MockResourceResolver resolver;
+
+    EXPECT_CALL(resolver, get_engine_lua_path()).
+      WillOnce(Return(str(format("%1%/lua/?.lua") % SRCDIR)));
+
     EXPECT_CALL(resolver, get_engine_lua_file_name(StrEq("puzzle_lib.lua")))
       .WillOnce(Return(str(format("%1%/lua/puzzle_lib.lua") % SRCDIR)));
 

@@ -1,8 +1,8 @@
 * To do list
-** Coding [3/6]
+** Coding [4/6]
    - [X] Know the entrance of the puzzle (if there is any ...)
    - [X] Know the position of the player (initialy at the puzzle's entrance, if there is any ...)
    - [ ] Be able to shout if a puzzle is loaded without an entrance ?
    - [X] Be able to move the player to another position (shouting if the position is empty or walkable)
-   - [ ] Be able to load the various "moves" inside a puzzle
+   - [X] Be able to load the various "moves" inside a puzzle
    - [ ] Be able to know if a position of the puzzle is reachable from another position (and return a path if it is possible ...)

@@ -13,6 +13,10 @@ LuaStateHolder::init_lua_state()
 {
   pLuaState_ = lua_open();
   luaL_openlibs(pLuaState_);
+
+  lua_pushstring(pLuaState_, dep_resolver_.get_engine_lua_path().c_str());
+  lua_setglobal(pLuaState_, "ube_engine_lua_path");
+		 
 }
 
 void

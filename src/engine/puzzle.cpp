@@ -96,3 +96,24 @@ int Puzzle::revert_move(int i_index) {
   }
   return res;
 }
+
+void
+Puzzle::mark_in_path(int i_i, int i_j) 
+{
+  assert(is_valid_position(i_i, i_j));
+  if (get_cell_at(i_i, i_j) != NULL) {
+    get_cell_at(i_i,i_j)->set_in_path(true);
+  }  
+}
+
+void
+Puzzle::clear_path()
+{
+  for (int i = 0 ; i < h_ ; i++) {
+    for (int j = 0 ; j < w_ ; j++) {
+      if (get_cell_at(i,j) != NULL) {
+	get_cell_at(i,j)->set_in_path(false);
+      }
+    }
+  }
+}

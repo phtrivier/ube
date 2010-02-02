@@ -84,6 +84,8 @@ public:
    */
   std::string get_font_file_name(const char * iFontName);
 
+  std::string get_engine_lua_path();
+
   /**
    * Gives the expected location of an engine Lua file
    * 

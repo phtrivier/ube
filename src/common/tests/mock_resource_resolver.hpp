@@ -16,6 +16,8 @@ class MockResourceResolver : public ResourceResolverInterface {
       std::string(const char * iImageName));
   MOCK_METHOD1(get_font_file_name,
       std::string(const char * iFontName));
+  MOCK_METHOD0(get_engine_lua_path,
+	       std::string());
   MOCK_METHOD1(get_engine_lua_file_name,
       std::string(const char *iFileName));
   MOCK_METHOD1(get_puzzle_lua_file_name,

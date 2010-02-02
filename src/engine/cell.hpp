@@ -6,14 +6,6 @@
  */
 class Cell { 
 
-  // Position on the board. 
-  // Should be positive.
-  int i_, j_;
-
-  // Type of cell. 
-  // Should be one of the constants defined below.
-  int type_;
-
 public:
 
   // Constants to represent cell types.
@@ -29,7 +21,7 @@ public:
   static const int CELL_TYPES[];
   static const int CELL_TYPES_COUNT = 4;
   
-  Cell(int iI, int iJ, int iType) : i_(iI), j_(iJ), type_(iType) {
+  Cell(int iI, int iJ, int iType) : i_(iI), j_(iJ), type_(iType) , in_path_(false) {
   }
 
   int get_i() {
@@ -60,6 +52,27 @@ public:
     return type_;
   }
   
+  bool is_in_path() {
+    return in_path_;
+  }
+
+  void set_in_path(bool i_in_path) {
+    in_path_ = i_in_path;
+  }
+
+private:
+
+  // Position on the board. 
+  // Should be positive.
+  int i_, j_;
+
+  // Type of cell. 
+  // Should be one of the constants defined below.
+  int type_;
+
+  // Is the cell in the last path computed on this puzzle ? 
+  bool in_path_;
+
 };
 
 #endif // _CELL_HPP_

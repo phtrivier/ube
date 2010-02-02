@@ -2,8 +2,9 @@
 #define _MOVE_HPP_
 
 namespace MoveType {
-  static const int DOUBLE = 0;
-  static const int KNIGHT = 1;
+  static const int SINGLE = 0;
+  static const int DOUBLE = 1;
+  static const int KNIGHT = 2;
 }
 
 /**

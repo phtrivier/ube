@@ -100,6 +100,18 @@ public:
 
   int revert_move(int i_index);
 
+  /**
+   * Mark a position as being in the last 
+   * computed path.
+   */
+  void mark_in_path(int i_i, int i_j);
+
+  /**
+   * Unmark all the cells previously marked as
+   * in the last computed path.
+   */
+  void clear_path();
+  
 private:
 
   // Dimensions
