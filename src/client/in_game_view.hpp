@@ -39,6 +39,10 @@ public:
   
   void render_selected_cell(const Puzzle & i_puzzle);
 
+  void update_goal(InGameModel & i_model);
+
+  void render_path(InGameModel & i_model);
+
 private:
 
   // Dependencies

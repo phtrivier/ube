@@ -12,12 +12,10 @@ class ObserverInterface;
  */
 class GameMode : public GameModeInterface { 
 
-  ControllerInterface * pController_;
-  ViewInterface * pView_;
-
 public:
 
-  GameMode(ControllerInterface * ipController, ViewInterface * ipView) : 
+  GameMode(ControllerInterface * ipController, 
+	   ViewInterface * ipView) : 
     GameModeInterface(), 
     pController_(ipController), 
     pView_(ipView) {
@@ -28,6 +26,10 @@ public:
   void render_game();
 
   void add_observer(ObserverInterface *o);
+
+private:
+  ControllerInterface * pController_;
+  ViewInterface * pView_;
   
 };
 

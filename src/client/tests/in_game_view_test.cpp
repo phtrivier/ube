@@ -4,6 +4,7 @@
 #include "engine/puzzle_loader.hpp"
 #include "engine/cell_factory.hpp"
 #include "engine/cell.hpp"
+#include "engine/tests/mock_path_finder.hpp"
 
 #include "in_game_model.hpp"
 
@@ -45,7 +46,8 @@ namespace {
     loader.set_row(1,&p, "I-O");
 
     // TODO : MockController c; ... and also a model, maybe ? 
-    InGameModel model;
+    MockPathFinder pf;
+    InGameModel model(pf);
     MockInGameRenderer renderer;
     MockController controller;
     InGameView v(renderer,model, controller);
@@ -73,15 +75,16 @@ namespace {
 
     MockController controller;
     
-    InGameModel model;
+    MockPathFinder pf;
+    InGameModel model(pf);
     model.set_puzzle(p);
     
     InGameView v(renderer, model, controller);
 
     EXPECT_CALL(renderer, clear());
-    EXPECT_CALL(controller, mouse_x()).WillOnce(Return(12));
-    EXPECT_CALL(controller, mouse_y()).WillOnce(Return(42));
-    EXPECT_CALL(renderer, mouse_x_as_puzzle_column(12)).WillOnce(Return(-1));
+    EXPECT_CALL(controller, mouse_x()).WillRepeatedly(Return(12));
+    EXPECT_CALL(controller, mouse_y()).WillRepeatedly(Return(42));
+    EXPECT_CALL(renderer, mouse_x_as_puzzle_column(12)).WillRepeatedly(Return(-1));
     EXPECT_CALL(renderer, render_cell(0,0,Cell::EMPTY));
     EXPECT_CALL(renderer, flush());
 
@@ -99,16 +102,17 @@ namespace {
 
     MockController controller;
     
-    InGameModel model;
+    MockPathFinder pf;
+    InGameModel model(pf);
     model.set_puzzle(p);
     
     InGameView v(renderer, model, controller);
 
     EXPECT_CALL(renderer, clear());
-    EXPECT_CALL(controller, mouse_x()).WillOnce(Return(10));
-    EXPECT_CALL(controller, mouse_y()).WillOnce(Return(11));
-    EXPECT_CALL(renderer, mouse_x_as_puzzle_column(10)).WillOnce(Return(0));
-    EXPECT_CALL(renderer, mouse_y_as_puzzle_line(11)).WillOnce(Return(0));
+    EXPECT_CALL(controller, mouse_x()).WillRepeatedly(Return(10));
+    EXPECT_CALL(controller, mouse_y()).WillRepeatedly(Return(11));
+    EXPECT_CALL(renderer, mouse_x_as_puzzle_column(10)).WillRepeatedly(Return(0));
+    EXPECT_CALL(renderer, mouse_y_as_puzzle_line(11)).WillRepeatedly(Return(0));
     EXPECT_CALL(renderer, render_selected_cell(_,_)).Times(0);
     EXPECT_CALL(renderer, render_cell(0,0,Cell::EMPTY));
     EXPECT_CALL(renderer, flush());
@@ -133,16 +137,18 @@ namespace {
     MockInGameRenderer renderer;
     MockController controller;
     
-    InGameModel model;
+    MockPathFinder pf;
+    InGameModel model(pf);
+
     model.set_puzzle(p);
     
     InGameView v(renderer, model, controller);
 
     EXPECT_CALL(renderer, clear());
-    EXPECT_CALL(controller, mouse_x()).WillOnce(Return(42));
-    EXPECT_CALL(controller, mouse_y()).WillOnce(Return(12));
-    EXPECT_CALL(renderer, mouse_x_as_puzzle_column(42)).WillOnce(Return(1));
-    EXPECT_CALL(renderer, mouse_y_as_puzzle_line(12)).WillOnce(Return(0));
+    EXPECT_CALL(controller, mouse_x()).WillRepeatedly(Return(42));
+    EXPECT_CALL(controller, mouse_y()).WillRepeatedly(Return(12));
+    EXPECT_CALL(renderer, mouse_x_as_puzzle_column(42)).WillRepeatedly(Return(1));
+    EXPECT_CALL(renderer, mouse_y_as_puzzle_line(12)).WillRepeatedly(Return(0));
     EXPECT_CALL(renderer, render_cell(0,0,Cell::IN));
     EXPECT_CALL(renderer, render_cell(0,1,Cell::WALKABLE));
     EXPECT_CALL(renderer, render_cell(0,2,Cell::OUT));

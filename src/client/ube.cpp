@@ -54,7 +54,7 @@ int main(int argc, const char ** argv) {
   Logging::add_logging_category("sdl_in_game_renderer");
   Logging::add_logging_category("main");
   Logging::add_logging_category("parser");
-  Logging::add_logging_category("view");
+  //  Logging::add_logging_category("view");
   
   // Music test
   /* This is where we open up our audio device.  Mix_OpenAudio takes

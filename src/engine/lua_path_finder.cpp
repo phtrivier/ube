@@ -51,8 +51,14 @@ int lua_is_cell_reachable(lua_State * i_p_state)
   int i = lua_tointeger(i_p_state, 2);
   int j = lua_tointeger(i_p_state, 3);
 
-  bool res = p_puzzle->is_valid_position(i,j) && 
-    p_puzzle->get_cell_at(i,j)->is_walkable();
+  bool res = false;
+
+  if (p_puzzle->is_valid_position(i,j)) {
+    Cell * cell = p_puzzle->get_cell_at(i,j);
+    // Fixme : improve this, some cells
+    // will be empty but not walkable ;)
+    res = !cell->is_empty();
+  }
 
   lua_pushboolean(i_p_state, res);
   return 1;

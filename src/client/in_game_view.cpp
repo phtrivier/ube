@@ -15,6 +15,8 @@ InGameView::render_game() {
   dep_renderer_.clear();
   render_puzzle(dep_model_.get_puzzle());
   render_selected_cell(dep_model_.get_puzzle());
+  render_path(dep_model_);
+  update_goal(dep_model_);
   dep_renderer_.flush();
 }
 
@@ -48,4 +50,36 @@ InGameView::render_selected_cell(const Puzzle & i_puzzle) {
       }
     }
   }
+}
+
+void 
+InGameView::update_goal(InGameModel & i_model) {
+  // Update the position of the cursor
+  int mouse_x = dep_controller_.mouse_x();
+  int mouse_y = dep_controller_.mouse_y();
+  int j = dep_renderer_.mouse_x_as_puzzle_column(mouse_x);
+  if (j != -1) {
+    int i = dep_renderer_.mouse_y_as_puzzle_line(mouse_y);
+    if (i != -1) {
+      i_model.set_goal(i,j);
+    }
+  }
+}
+
+void
+InGameView::render_path(InGameModel & i_model) {
+  
+  // Render the existing path if any (note that both stuff
+  // could be done in another order, but one frame
+  // should not be too much to cause a glitch)
+  Puzzle & puzzle = i_model.get_puzzle();
+  for (int i = 0 ; i < puzzle.get_h() ; i++) {
+    for (int j = 0 ; j < puzzle.get_w() ; j++) {
+      if (puzzle.get_cell_at(i,j)->is_in_path()) {
+	// TODO : render other kind of cell
+	dep_renderer_.render_selected_cell(i,j);
+      }
+    }
+  }
+  
 }

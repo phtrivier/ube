@@ -15,6 +15,8 @@ end
 -- path finder algorithm
 function find_path(puzzle, i0,j0, i1,j1, move_type)
 
+   print("Finding path between " .. i0..","..j0.." and "..i1..","..j1)
+
    local res = -1;
 
    local agenda = Agenda:new()

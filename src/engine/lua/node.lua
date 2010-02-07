@@ -38,10 +38,10 @@ function Node:successors(puzzle, move_type)
       i = position[1]
       j = position[2]
       if (cpp_is_cell_reachable(puzzle, i,j)) then
-	 print("Sucessor found at "..i..","..j)
+	 -- print("Sucessor found at "..i..","..j)
    	 table.insert(res, Node:new(i,j,self))
       else
-	 print("Cell not reachabile at "..i..","..j)
+	 -- print("Cell not reachabile at "..i..","..j)
       end
    end
    return res

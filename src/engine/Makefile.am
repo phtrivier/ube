@@ -13,7 +13,8 @@ luadir=${datadir}/@PACKAGE@/lua/engine
 lua_DATA=lua/puzzle_lib.lua \
 	lua/path_finder_lib.lua \
 	lua/agenda.lua \
-	lua/node.lua 
+	lua/node.lua \
+	lua/move.lua
 
 AM_CPPFLAGS=-DSRCDIR=\"${srcdir}\" \
 	-DLUADIR=\"${luadir}\" \

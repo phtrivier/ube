@@ -12,8 +12,9 @@ libube_client_a_SOURCES=gettext.h \
 	sdl_controller.hpp sdl_controller.cpp \
 	sdl_view.hpp sdl_view.cpp \
 	in_game_renderer_interface.hpp \
-	in_game_model \
+	in_game_model.hpp in_game_model.cpp \
 	in_game_view.hpp in_game_view.cpp \
+	in_game_mode.hpp in_game_mode.cpp \
 	sdl_in_game_renderer.hpp sdl_in_game_renderer.cpp \
 	in_game_mode_factory.hpp in_game_mode_factory.cpp \
 	option_parser.hpp option_parser.cpp
