@@ -16,4 +16,7 @@ class MockInGameRenderer : public InGameRendererInterface {
 	       int(int i_y));
   MOCK_METHOD2(render_selected_cell,
 	       void (int i_i, int i_j));
+  MOCK_METHOD2(render_player,
+	       void (int i_i, int i_j));
+
 };

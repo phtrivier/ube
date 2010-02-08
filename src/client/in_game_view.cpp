@@ -16,6 +16,7 @@ InGameView::render_game() {
   render_puzzle(dep_model_.get_puzzle());
   render_selected_cell(dep_model_.get_puzzle());
   render_path(dep_model_);
+  render_player(dep_model_.get_puzzle());
   update_goal(dep_model_);
   dep_renderer_.flush();
 }
@@ -82,4 +83,12 @@ InGameView::render_path(InGameModel & i_model) {
     }
   }
   
+}
+
+void
+InGameView::render_player(const Puzzle & i_puzzle) {
+  if (i_puzzle.get_player_i() != -1 &&
+      i_puzzle.get_player_j() != -1) {
+    dep_renderer_.render_player(i_puzzle.get_player_i(), i_puzzle.get_player_j());
+  }
 }

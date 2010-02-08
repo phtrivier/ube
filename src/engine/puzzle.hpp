@@ -66,14 +66,14 @@ public:
   /**
    * Position of the player. -1 if not set.
    */
-  int get_player_i() {
+  int get_player_i() const {
     return player_i_;
   }
 
   /**
    * Position of the player. -1 if not set.
    */
-  int get_player_j() {
+  int get_player_j() const {
     return player_j_;
   }
 

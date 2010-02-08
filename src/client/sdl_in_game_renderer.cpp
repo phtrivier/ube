@@ -30,12 +30,21 @@ SdlInGameRenderer::~SdlInGameRenderer() {
 int
 SdlInGameRenderer::init() {
   int res = -1;
-
+  bool done = false;
   p_screen_ = SDL_SetVideoMode(640, 480, 8, SDL_SWSURFACE);
   if (p_screen_ != NULL) {
     res = load_cell_images();
     black_ = SDL_MapRGB(p_screen_->format, 0x00, 0x00, 0x00);
-    res = load_image("selected_cell.png", &p_selected_cell_image_);
+
+    while (!done && res != -1) {
+      res = load_image("selected_cell.png", &p_selected_cell_image_);
+      res = load_image("player.png", &p_player_image_);      
+      /*
+      res = load_image("player.png", &p_player_      
+      res = SDL_SetAlpha(p_player_image_, SDL_SRCALPHA, SDL_ALPHA_OPAQUE);
+      */
+      done = true;
+    }
   }
 
   return res;
@@ -117,6 +126,26 @@ SdlInGameRenderer::render_selected_cell(int i_i, int i_j) {
   SDL_BlitSurface(p_selected_cell_image_, &src, p_screen_, &dst);
 }
 
+void
+SdlInGameRenderer::render_player(int i_i, int i_j) {
+  // TODO : make this a constant instead of recreating
+  SDL_Rect src;
+  src.x = 0;
+  src.y = 0;
+  src.w = 32;
+  src.h = 32;
+  // TODO : Optimize the computation, the multiplication is not
+  // needed everytime. Plus, make it a constant !
+  SDL_Rect dst;
+  dst.x = i_j * 32;
+  dst.y = i_i * 32;
+  dst.w = 32;
+  dst.h = 32;
+
+  assert(p_selected_cell_image_ != NULL);
+  SDL_BlitSurface(p_player_image_, &src, p_screen_, &dst);
+}
+
 /* ----------------- */
 
 int
@@ -154,7 +183,7 @@ SdlInGameRenderer::load_image(std::string i_image_name, SDL_Surface ** o_pp_surf
   int res = -1;
   SDL_Surface * p_tmp = IMG_Load(dep_resolver_.get_image_file_name(i_image_name.c_str()).c_str());
   if (p_tmp != NULL) {
-    *o_pp_surface = SDL_DisplayFormat(p_tmp);
+    *o_pp_surface = SDL_DisplayFormatAlpha(p_tmp);
     SDL_FreeSurface(p_tmp);
     res = 0;
   }

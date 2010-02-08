@@ -50,7 +50,9 @@ public:
 
   int mouse_y_as_puzzle_line(int i_y);
 
-  void render_selected_cell(int i_x, int i_y);
+  void render_selected_cell(int i_i, int i_j);
+
+  void render_player(int i_i, int i_j);
 
 private:
 
@@ -62,6 +64,8 @@ private:
 
   SDL_Surface * p_selected_cell_image_;
   
+  SDL_Surface * p_player_image_;
+
   Uint32 black_;
 
   /**

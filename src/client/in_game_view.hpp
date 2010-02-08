@@ -43,6 +43,8 @@ public:
 
   void render_path(InGameModel & i_model);
 
+  void render_player(const Puzzle & i_puzzle);
+
 private:
 
   // Dependencies

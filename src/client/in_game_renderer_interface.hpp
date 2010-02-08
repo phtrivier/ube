@@ -50,6 +50,12 @@ public:
    * Marks the cell at a given position as the selected one.
    */
   virtual void render_selected_cell(int i_i, int i_j) = 0;
+
+  /**
+   * Display the player in the maze.
+   */
+  virtual void render_player(int i_i, int i_j) = 0;
+
 };
 
 #endif // _IN_GAME_RENDERER_INTERFACE_HPP_
