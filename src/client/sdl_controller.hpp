@@ -3,11 +3,14 @@
 
 #include "controller_interface.hpp"
 
+class InGameModel;
+
 // Forward declaration possible ? 
 #include "SDL.h"
 
 /**
  * A basic controller that uses SDL to poll the keyboard.
+ * TODO(pht) : extract an InGameController how of this (rather than a 'controller !!)
  */
 class SdlController : public ControllerInterface { 
 
@@ -37,7 +40,7 @@ private:
 
   int mouse_x_;
   int mouse_y_;
-  
+ 
 };
 
 #endif // _SDL_CONTROLLER_HPP_

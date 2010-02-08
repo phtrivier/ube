@@ -2,6 +2,7 @@
 
 #include "common/logging.hpp"
 #include "game_event.hpp"
+#include "in_game_model.hpp"
 
 #include <cstdio>
 
@@ -26,8 +27,7 @@ SdlController::handle_event() {
   } else if (last_sdl_event_.type == SDL_MOUSEMOTION) {
     mouse_x_ = last_sdl_event_.motion.x;
     mouse_y_ = last_sdl_event_.motion.y;
+  } else if (last_sdl_event_.type == SDL_MOUSEBUTTONDOWN) {
+    fire_event(GameEvent::MOUSE_CLICKED);
   }
-  // TODO(pht) : if there is a button clicked, send
-  // GameEvent::MOUSE_0_CLICKED ; the view is responsible
-  // for interpretating it in terms of display
 }

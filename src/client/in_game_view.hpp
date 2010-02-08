@@ -32,6 +32,8 @@ public:
 
   void render_game();
 
+  void handle_event(int iEventCode);
+
   /**
    * Render the content of a puzzle to the screen.
    */

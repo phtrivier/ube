@@ -10,7 +10,6 @@ libube_client_a_SOURCES=gettext.h \
 	game_loop.hpp game_loop.cpp \
 	sdl_clock.hpp sdl_clock.cpp \
 	sdl_controller.hpp sdl_controller.cpp \
-	sdl_view.hpp sdl_view.cpp \
 	in_game_renderer_interface.hpp \
 	in_game_model.hpp in_game_model.cpp \
 	in_game_view.hpp in_game_view.cpp \

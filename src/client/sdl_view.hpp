@@ -15,8 +15,8 @@ class ControllerInterface;
  * A game view that uses SDL.
  */
 class SdlView : 
-  public ViewInterface, 
-  public ObserverInterface 
+  public ViewInterface,
+  public ObserverInterface
 { 
 public:
 
@@ -26,7 +26,7 @@ public:
   // Desctructor
   ~SdlView();
 
-  // For sound test
+  // For sound tests
   static bool music_started_;
   static Mix_Music * pMusic_;
   static void musicDone();

@@ -4,6 +4,7 @@
 #include "engine/cell.hpp"
 #include "engine/puzzle.hpp"
 
+#include "game_event.hpp"
 #include "in_game_model.hpp"
 #include "in_game_renderer_interface.hpp"
 #include "controller_interface.hpp"
@@ -19,6 +20,23 @@ InGameView::render_game() {
   render_player(dep_model_.get_puzzle());
   update_goal(dep_model_);
   dep_renderer_.flush();
+}
+
+void
+InGameView::handle_event(int iEventCode) {
+  if (iEventCode == GameEvent::MOUSE_CLICKED) {
+    int mouse_x = dep_controller_.mouse_x();
+    int mouse_y = dep_controller_.mouse_y();
+    int i = dep_renderer_.mouse_y_as_puzzle_line(mouse_y);
+    int j = dep_renderer_.mouse_x_as_puzzle_column(mouse_x);
+    if (i!=-1 && j!=-1 && 
+	dep_model_.get_puzzle().is_valid_position(i,j)) {
+      
+      if (dep_model_.get_puzzle().get_cell_at(i,j)->is_in_path()) {
+	dep_model_.get_puzzle().put_player(i,j);
+      }
+    }
+  }
 }
 
 void

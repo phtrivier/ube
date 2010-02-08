@@ -10,4 +10,8 @@ class MockView : public ViewInterface {
 
   MOCK_METHOD0(render_game,
       void());
+
+  MOCK_METHOD1(handle_event,
+	       void(int));
+
 };

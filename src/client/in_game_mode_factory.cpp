@@ -52,6 +52,9 @@ InGameModeFactory::create_mode() {
     p_controller_ = new SdlController();
     p_view_ = new InGameView(dep_renderer_, *p_model_, *p_controller_);
     mode_ = boost::shared_ptr<InGameMode>(new InGameMode(*p_controller_, *p_view_, *p_model_));
+    if (p_controller_ != NULL && p_view_ != NULL) {
+      p_controller_->add_observer(p_view_);
+    }
   }
 
   return res;

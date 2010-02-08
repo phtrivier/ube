@@ -25,7 +25,8 @@ public:
     InGameRendererInterface(),
     dep_resolver_(dep_resolver),
     p_screen_(NULL),
-    p_selected_cell_image_(NULL)
+    p_selected_cell_image_(NULL),
+    p_player_image_(NULL)
   {
 
   }

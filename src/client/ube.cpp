@@ -5,7 +5,6 @@
 #include "common/stat_file_checker.hpp"
 
 #include "option_parser.hpp"
-#include "sdl_view.hpp"
 #include "sdl_controller.hpp"
 #include "sdl_clock.hpp"
 #include "game_mode.hpp"

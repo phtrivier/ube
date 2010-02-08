@@ -14,17 +14,27 @@
 using namespace boost;
 
 SdlInGameRenderer::~SdlInGameRenderer() {
-  for (int cell_type = 0 ; cell_type < Cell::CELL_TYPES_COUNT ; cell_type++) {
+  for (int cell_type = 0 ;  
+       cell_type < Cell::CELL_TYPES_COUNT ; 
+       cell_type++) {
+
     if (cell_images_.find(cell_type) != cell_images_.end()) {
       SDL_Surface * p_cell_image = cell_images_[cell_type];
       if (p_cell_image != NULL) {
 	SDL_FreeSurface(p_cell_image);
       }
     }
+
   }
+
   if (p_selected_cell_image_ != NULL) {
     SDL_FreeSurface(p_selected_cell_image_);
   }
+
+  if (p_player_image_ != NULL) {
+    SDL_FreeSurface(p_player_image_);
+  }
+
 }
 
 int
@@ -39,10 +49,6 @@ SdlInGameRenderer::init() {
     while (!done && res != -1) {
       res = load_image("selected_cell.png", &p_selected_cell_image_);
       res = load_image("player.png", &p_player_image_);      
-      /*
-      res = load_image("player.png", &p_player_      
-      res = SDL_SetAlpha(p_player_image_, SDL_SRCALPHA, SDL_ALPHA_OPAQUE);
-      */
       done = true;
     }
   }
