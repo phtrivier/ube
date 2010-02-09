@@ -15,7 +15,7 @@ end
 -- path finder algorithm
 function find_path(puzzle, i0,j0, i1,j1, move_type)
 
-   print("Finding path between " .. i0..","..j0.." and "..i1..","..j1)
+   -- print("Finding path between " .. i0..","..j0.." and "..i1..","..j1)
 
    local res = -1;
 
@@ -38,7 +38,7 @@ function find_path(puzzle, i0,j0, i1,j1, move_type)
 	 for k,successor in ipairs(successors) do
 	    i = successor.i
 	    j = successor.j
-	    print("Adding successor " .. i .. ",".. j .. " to agenda")
+	    -- print("Adding successor " .. i .. ",".. j .. " to agenda")
 	    if (not current:has_ancestor_at(i,j)) then
 	       -- todo : how do I compute the priority ? 
 	       -- using the manhattan distance, for example ? 
