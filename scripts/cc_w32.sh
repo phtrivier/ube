@@ -5,10 +5,12 @@
 
 # Change this path as appropriate
 #export MW32=$HOME/sandbox/src/mingw-cross-env
-export MW32=$HOME/src/mingw-cross-env-2.10
+#export MW32=$HOME/src/mingw-cross-env-2.10
+export MW32=$HOME/src/mingw-cross-env-trunk
 
 # Tools from mingw-cross-env should be available
 export PATH=$MW32/usr/bin:$MW32/usr/i686-pc-mingw32/bin:$PATH
+#export PATH=$MW32/usr/i686-pc-mingw32/bin:$MW32/usr/bin:$PATH
 
 # Check that mingw_cross_env has been installed
 check_mingw_cross_env() {
@@ -57,7 +59,7 @@ prepare_folders() {
 build_cc() {
     autoreconf
     cd $BUILD_FOLDER
-    ../../../configure  --includedir=$MW32/usr/i686-pc-mingw32/include --oldincludedir=$MW32/usr/i686-pc-mingw32/include --prefix $INSTALL_FOLDER --host=i686-pc-mingw32 --build=i686-pc-linux-gnu 
+    ../../../configure --prefix $INSTALL_FOLDER --host=i686-pc-mingw32 --build=i686-pc-linux-gnu  --with-boost=$MW32/usr/i686-pc-mingw32/include --with-boost-libdir=$MW32/usr/i686-pc-mingw32/lib
     make  && make install && rm -rf $BUILD_FOLDER && rm -rf $LATEST && ln -sf $INSTALL_FOLDER $LATEST
 }
 

@@ -18,6 +18,7 @@ InGameView::render_game() {
   render_selected_cell(dep_model_.get_puzzle());
   render_path(dep_model_);
   render_player(dep_model_.get_puzzle());
+  dep_renderer_.render_moves(dep_model_.get_puzzle().moves());
   update_goal(dep_model_);
   dep_renderer_.flush();
 }

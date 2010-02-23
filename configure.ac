@@ -23,6 +23,10 @@ AC_SEARCH_LIBS(Mix_LoadMUS, SDL_mixer, ,
              AC_MSG_WARN([*** Unable to find SDL_mixer library.
                               Are you cross compiling ? ]))			    
 
+dnl PKG_CHECK_MODULES([SDL],       [sdl >= 1.2.13], , )
+dnl PKG_CHECK_MODULES([SDL_image], [SDL_image],     , )
+dnl PKG_CHECK_MODULES([SDL_mixer], [SDL_mixer],     , )
+dnl AC_CHECK_LIB(SDL_ttf, TTF_OpenFontRW, , )
 
 # You might need to define --with-lua-prefix and --with-lua-suffix to use this
 AX_LUA_HEADERS

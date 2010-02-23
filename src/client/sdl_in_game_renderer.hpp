@@ -5,8 +5,11 @@
 
 #include <map>
 #include <string>
+#include <vector>
 
 #include "SDL.h"
+
+class Move;
 
 class ResourceResolverInterface;
 
@@ -55,11 +58,15 @@ public:
 
   void render_player(int i_i, int i_j);
 
+  void render_moves(std::vector<Move> & i_moves);
+
 private:
 
   ResourceResolverInterface & dep_resolver_;
 
   std::map<int, SDL_Surface *> cell_images_;
+
+  std::map<int, SDL_Surface *> move_images_;
 
   SDL_Surface * p_screen_;
 
@@ -73,9 +80,17 @@ private:
    * Load all the images necessary to display
    * cells.
    *
-   * @returns 0 if cell was loaded, -1 otherwise
+   * @returns 0 if image was loaded, -1 otherwise
    */
   int load_cell_images();
+
+  /**
+   * Load all the images necessary to display
+   * moves.
+   *
+   * @returns 0 if image was loaded, -1 otherwise
+   */
+  int load_move_images();
 
   /**
    * Load the image necessary to display a cell.
@@ -87,6 +102,15 @@ private:
   int load_cell_image(int i_cell_type, SDL_Surface ** o_pp_surface);
 
   /**
+   * Load the image necessary to display a move.
+   * 
+   * @param i_move_type 
+   * @param o_pp_surface output address of the image after loading
+   * @returns 0 if cell was loaded, -1 otherwise.
+   */
+  int load_move_image(int i_move_type, SDL_Surface ** o_pp_surface);
+
+  /**
    * Loads an image by its name.
    *
    * @param i_image_name name with suffix (eg "cell_0.png")
@@ -94,7 +118,14 @@ private:
    * @returns 0 if image was loaded, -1 otherwise.
    */
   int load_image(std::string i_image_name, SDL_Surface ** o_pp_surface);
-  
+
+  /**
+   * Display the icon of a given move.
+   *
+   * @param i_move : the move which icon has to be displayed
+   * @param i_index : index of the move icon
+   */
+  void render_move(Move & i_move, int i_index);
 
 };
 

@@ -15,6 +15,8 @@
 #include <gmock/gmock.h>
 using ::testing::Return;
 using ::testing::_;
+using ::testing::Eq;
+using ::testing::NiceMock;
 
 #include <stdexcept>
 using namespace std;
@@ -136,7 +138,6 @@ namespace {
 
     MockInGameRenderer renderer;
     MockController controller;
-    
     MockPathFinder pf;
     InGameModel model(pf);
 
@@ -157,5 +158,37 @@ namespace {
     v.render_game();
   }
 
+
+  TEST_F(InGameViewTest, RendersEveryAvailableMoves) {
+    
+    Cell c1(0,0,Cell::IN);
+    Cell c2(0,1,Cell::WALKABLE);
+    Cell c3(0,2,Cell::OUT);
+        
+    Puzzle p;
+    p.set_dimensions(3,1);
+    p.add_cell(&c1);
+    p.add_cell(&c2);
+    p.add_cell(&c3);
+
+    p.add_move(MoveType::DOUBLE);
+    p.add_move(MoveType::SINGLE);
+
+    NiceMock<MockInGameRenderer> renderer;
+    MockController controller;
+    MockPathFinder pf;
+    InGameModel model(pf);
+    model.set_puzzle(p);
+
+    InGameView v(renderer, model, controller);
+
+    /** FIXME : be more precise
+    EXPECT_CALL(renderer, render_moves(Eq(p.moves())));
+    */
+    EXPECT_CALL(renderer, render_moves(_));
+
+    v.render_game();
+
+  }
   
 } // Namespace
