@@ -9,6 +9,7 @@ export MW32=$HOME/sandbox/mingw-cross-env-trunk
 
 # Tools from mingw-cross-env should be available
 export PATH=$MW32/usr/bin:$MW32/usr/i686-pc-mingw32/bin:$PATH
+#export PATH=$MW32/usr/i686-pc-mingw32/bin:$MW32/usr/bin:$PATH
 
 # Check that mingw_cross_env has been installed
 check_mingw_cross_env() {

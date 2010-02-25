@@ -11,3 +11,5 @@ set_puzzle_rows({"##########",
 		 "##########",
 		 "##########",
 		 "##########"})
+
+set_puzzle_moves({Move.SINGLE, Move.DOUBLE, Move.SINGLE})

@@ -87,7 +87,7 @@ public:
   /**
    * Moves that can be used.
    */
-  std::vector<Move> moves() {
+  std::vector<Move> & moves() {
     return moves_;
   }
 

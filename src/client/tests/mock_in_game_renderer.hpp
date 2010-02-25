@@ -1,6 +1,10 @@
 #include "in_game_renderer_interface.hpp"
 #include <gmock/gmock.h>
 
+#include <vector>
+
+class Move;
+
 class MockInGameRenderer : public InGameRendererInterface {
  public:
   MOCK_METHOD0(clear,
@@ -18,5 +22,7 @@ class MockInGameRenderer : public InGameRendererInterface {
 	       void (int i_i, int i_j));
   MOCK_METHOD2(render_player,
 	       void (int i_i, int i_j));
+  MOCK_METHOD1(render_moves,
+	       void (std::vector<Move> & i_moves));
 
 };

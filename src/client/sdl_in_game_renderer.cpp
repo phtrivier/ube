@@ -4,11 +4,14 @@
 #include "common/resource_resolver_interface.hpp"
 
 #include "engine/cell.hpp"
+#include "engine/move.hpp"
 
 #include <assert.h>
 
 #include "SDL.h"
 #include "SDL_image.h"
+
+#include <vector>
 
 #include "boost/format.hpp"
 using namespace boost;
@@ -25,6 +28,16 @@ SdlInGameRenderer::~SdlInGameRenderer() {
       }
     }
 
+  }
+
+  // FIXME(pht) : use a nicer list of move types, make it more dynamic, etc..
+  for (int move_type = 0 ; move_type <= MoveType::KNIGHT ; move_type++) {
+    if (move_images_.find(move_type) != move_images_.end()) {
+      SDL_Surface * p_move_image = move_images_[move_type];
+      if (p_move_image != NULL) {
+	SDL_FreeSurface(p_move_image);
+      }
+    }
   }
 
   if (p_selected_cell_image_ != NULL) {
@@ -44,8 +57,8 @@ SdlInGameRenderer::init() {
   p_screen_ = SDL_SetVideoMode(640, 480, 8, SDL_SWSURFACE);
   if (p_screen_ != NULL) {
     res = load_cell_images();
+    res = load_move_images();
     black_ = SDL_MapRGB(p_screen_->format, 0x00, 0x00, 0x00);
-
     while (!done && res != -1) {
       res = load_image("selected_cell.png", &p_selected_cell_image_);
       res = load_image("player.png", &p_player_image_);      
@@ -152,7 +165,40 @@ SdlInGameRenderer::render_player(int i_i, int i_j) {
   SDL_BlitSurface(p_player_image_, &src, p_screen_, &dst);
 }
 
+void
+SdlInGameRenderer::render_moves(std::vector<Move> & i_moves)
+{
+  std::vector<Move>::iterator it = i_moves.begin();
+  for ( int index = 0 ; it != i_moves.end() ; ++it ) {
+    Move current = *it;
+    render_move(current, index);
+    index++;
+  }
+
+}
+
+
 /* ----------------- */
+
+void
+SdlInGameRenderer::render_move(Move & i_move, int i_index) 
+{
+  SDL_Rect src;
+  src.x = src.y = 0;
+  src.w = 64;
+  src.h = 128;
+
+  SDL_Rect dst;
+  dst.x = 40 + i_index*(64 + 10);
+  dst.y = 350;
+  dst.w = 64;
+  dst.h = 128;
+
+  assert(move_images_.find(i_move.type()) != move_images_.end());
+  assert(move_images_[i_move.type()] != NULL);
+  SDL_BlitSurface(move_images_[i_move.type()], &src, p_screen_, &dst);
+}
+
 
 int
 SdlInGameRenderer::load_cell_images() {
@@ -174,13 +220,36 @@ SdlInGameRenderer::load_cell_images() {
 }
 
 int
+SdlInGameRenderer::load_move_images() {
+  int res = 0;
+  // FIXME(pht) : use nicer list of move types
+  for (int move_type = 0 ; move_type <= MoveType::KNIGHT ; move_type ++) {
+    SDL_Surface * p_new_surface = NULL;
+    LOG_D("sdl_in_game_renderer") << "Loading image for move_type : " << move_type;
+    res = load_move_image(move_type, &p_new_surface);
+    if (res == 0) {
+      assert(p_new_surface != NULL);
+      move_images_[move_type] = p_new_surface;
+    } 
+  }
+  return res;
+}
+
+
+int
 SdlInGameRenderer::load_cell_image(int i_cell_type, SDL_Surface ** o_pp_surface) {
   int res = -1;
-
   std::string image_name = str(format("cell_%1%.png") % i_cell_type);
-
   res = load_image(image_name, o_pp_surface);
+  return res;
+}
 
+// TODO(pht) : refactor both codes
+int
+SdlInGameRenderer::load_move_image(int i_move_type, SDL_Surface ** o_pp_surface) {
+  int res = -1;
+  std::string image_name = str(format("move_%1%.png") % i_move_type);
+  res = load_image(image_name, o_pp_surface);
   return res;
 }
 

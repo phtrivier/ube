@@ -1,6 +1,9 @@
 #ifndef _IN_GAME_RENDERER_INTERFACE_HPP_
 #define _IN_GAME_RENDERER_INTERFACE_HPP_
 
+#include <vector>
+
+class Move;
 
 /**
  * renderer for in game view.
@@ -55,6 +58,11 @@ public:
    * Display the player in the maze.
    */
   virtual void render_player(int i_i, int i_j) = 0;
+
+  /**
+   * Displays the list of available moves
+   */
+  virtual void render_moves(std::vector<Move> & i_moves) = 0;
 
 };
 
