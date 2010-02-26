@@ -191,13 +191,21 @@ void
 SdlInGameRenderer::render_moves(InGameModel & i_model)
 {
   // Hack : the current move first
-  render_current_move(i_model.current_move_index());
+  if (i_model.current_move_index() != -1) {
+    render_current_move(i_model.current_move_index());
+  }
   // THen the other available move
   std::vector<Move> & moves = i_model.get_puzzle().moves();
   std::vector<Move>::iterator it = moves.begin();
   for ( int index = 0 ; it != moves.end() ; ++it ) {
     Move current = *it;
-    render_move(current, index);
+
+    // TODO(pht) : if the move is not available, 
+    // display it with another color, or something
+    if (i_model.get_puzzle().moves()[index].available()) {
+      render_move(current, index);
+    }
+
     index++;
   }
 }
@@ -228,7 +236,7 @@ void
 SdlInGameRenderer::render_current_move(int i_move_index) {
 SDL_Rect dst;
   dst.x = 40 + i_move_index*(64 + 10) - 5;
-  dst.y = 300 + 5;
+  dst.y = 300 - 5;
   dst.w = 64 + 10;
   dst.h = 128 + 10;
   SDL_FillRect(p_screen_, &dst, SDL_MapRGB(p_screen_->format, 255,0,0));

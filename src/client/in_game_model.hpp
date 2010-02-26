@@ -6,6 +6,8 @@
 
 class PathFinderInterface;
 
+class Move;
+
 /**
  * Model for the bulk of the game
  */
@@ -51,7 +53,13 @@ public:
     current_move_index_ = i_index;
   }
 
+  Move & current_move() {
+    assert(current_move_index_ < (int) dep_puzzle_->moves().size());
+    return dep_puzzle_->moves()[current_move_index_];
+  }
  
+  void set_next_available_move_as_current();
+
 private:
   Puzzle * dep_puzzle_;
   PathFinderInterface & dep_path_finder_;
