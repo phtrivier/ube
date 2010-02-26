@@ -137,7 +137,7 @@ SdlInGameRenderer::mouse_position_as_move_index(int i_x, int i_y)
   int y = i_y - 300;
   int w = 64 + 10;
 
-  if (y < 128) {
+  if (y >0 && y < 128) {
     if (x % w < 64) {
       res = x / w;
     }
@@ -214,7 +214,7 @@ SdlInGameRenderer::render_move(Move & i_move, int i_index)
 
   SDL_Rect dst;
   dst.x = 40 + i_index*(64 + 10);
-  dst.y = 350;
+  dst.y = 300;
   dst.w = 64;
   dst.h = 128;
 
@@ -228,7 +228,7 @@ void
 SdlInGameRenderer::render_current_move(int i_move_index) {
 SDL_Rect dst;
   dst.x = 40 + i_move_index*(64 + 10) - 5;
-  dst.y = 350 + 5;
+  dst.y = 300 + 5;
   dst.w = 64 + 10;
   dst.h = 128 + 10;
   SDL_FillRect(p_screen_, &dst, SDL_MapRGB(p_screen_->format, 255,0,0));

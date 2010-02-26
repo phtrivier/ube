@@ -15,12 +15,16 @@ InGameModel::update_path()
     assert(goal_j_ != -1);
 
     dep_puzzle_->clear_path();
+
+    assert(current_move_index_ < (int) dep_puzzle_->moves().size());
+    int move_type = dep_puzzle_->moves()[current_move_index_].type();
+    
     dep_path_finder_.find_path(dep_puzzle_,
 			       dep_puzzle_->get_player_i(),
 			       dep_puzzle_->get_player_j(),
 			       goal_i_,
 			       goal_j_,
-			       MoveType::SINGLE);
+			       move_type);
 
     last_goal_i_ = goal_i_;
     last_goal_i_ = goal_j_;
