@@ -30,15 +30,7 @@ using namespace std;
 #include "SDL_ttf.h"
 #include "SDL_mixer.h"
 
-
-int main(int argc, const char ** argv) {
-
-/* We're going to be requesting certain things from our audio
-     device, so we set them up beforehand */
-  int audio_rate = 22050;
-  Uint16 audio_format = AUDIO_S16; /* 16-bit stereo */
-  int audio_channels = 2;
-  int audio_buffers = 4096;
+int main(int argc, char ** argv) {
 
   /* Initialize defaults, Video and Audio subsystems */
   if((SDL_Init(SDL_INIT_VIDEO|SDL_INIT_AUDIO)==-1)) { 
@@ -58,10 +50,20 @@ int main(int argc, const char ** argv) {
   // Music test
   /* This is where we open up our audio device.  Mix_OpenAudio takes
      as its parameters the audio format we'd /like/ to have. */
+/* We're going to be requesting certain things from our audio
+     device, so we set them up beforehand */
+
+  /* FIXME(pht) : no audio for the moment, right ? 
+  int audio_rate = 22050;
+  Uint16 audio_format = AUDIO_S16; // 16-bit stereo 
+  int audio_channels = 2;
+  int audio_buffers = 4096;
+
   if(Mix_OpenAudio(audio_rate, audio_format, audio_channels, audio_buffers)) {
     printf("Unable to open audio!\n");
     return 1;
   }
+  */
 
   // This function gets the actual info from the audio system.
   // This could be used to compare with the expected one, and check for any inconsistencies? 
@@ -96,7 +98,7 @@ int main(int argc, const char ** argv) {
   // controller.add_observer(&view);
 
   OptionParser parser;
-  if (parser.parse_options(argc, argv) != 0) {
+  if (parser.parse_options(argc, (const char **) argv) != 0) {
     printf("Error while parsing options ... TODO : use popt to generate a nice message\n");
     return -1;
   }

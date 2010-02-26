@@ -36,14 +36,25 @@ AM_CPPFLAGS= -g -DLOCALEDIR=\"${datadir}/locale\" \
 
 SDL_TTF_LIBS = -lSDL_ttf -lfreetype
 SDL_IMAGE_LIBS = -lSDL_image -lpng -ltiff -ljpeg -lz
-SDL_MIXER_LIBS =  -lSDL_mixer -logg -lvorbis -lsmpeg
+SDL_MIXER_LIBS = -lSDL_mixer
+POPT_LIBS=-lpopt
+
+# Ok, I must be compiling libube-engine and common the wrong way, since so many symbols are not available...
+# ube_LDADD=libube-client.a \
+# 	../engine/libube-engine.a \
+# 	../common/libube-common.a \
+# 	$(LUA_LIB) $(LIBINTL) \
+# 	$(SDL_LIBS) $(SDL_IMAGE_LIBS) $(SDL_TTF_LIBS) $(SDL_MIXER_LIBS) \
+# 	-lpopt
 
 ube_LDADD=libube-client.a \
 	../engine/libube-engine.a \
 	../common/libube-common.a \
-	-lpopt \
-	$(SDL_MIXER_LIBS) $(SDL_LIBS) $(SDL_IMAGE_LIBS) $(SDL_TTF_LIBS) \
-	$(LUA_LIB) $(LIBINTL)
+	$(POPT_LIBS) \
+	$(SDL_image_LIBS) $(SDL_TTF_LIBS) $(SDL_mixer_LIBS) \
+	$(SDL_IMAGE_LIBS) $(SDL_MIXER_LIBS) \
+	$(LUA_LIB) $(LIBINTL) 
+
 
 check_PROGRAMS=client-tests
 client_tests_SOURCES=tests/client_tests.cpp \
@@ -62,6 +73,11 @@ client_tests_SOURCES=tests/client_tests.cpp \
 client_tests_LDADD=libube-client.a \
 	../engine/libube-engine.a \
 	../common/libube-common.a \
-	-L$(top_srcdir)/lib -lgtest -lgmock -llua -ldl -lpopt
+	-L$(top_srcdir)/lib -lgtest -lgmock \
+	$(POPT_LIBS) \
+	$(SDL_image_LIBS) $(SDL_TTF_LIBS) $(SDL_mixer_LIBS) \
+	$(SDL_IMAGE_LIBS) $(SDL_MIXER_LIBS) \
+	$(LUA_LIB) $(LIBINTL) 
+
 
 TESTS = client-tests

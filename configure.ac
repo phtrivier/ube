@@ -5,29 +5,51 @@ AM_GNU_GETTEXT_VERSION([0.17])
 AC_PROG_CXX
 AC_PROG_RANLIB
 
-SDL_VERSION=1.2.13
-AM_PATH_SDL($SDL_VERSION, :,
-            AC_MSG_ERROR([*** SDL version $SDL_VERSION not found!]))
+PKG_CHECK_MODULES([SDL], [sdl >= 1.2.13])
 
-# Check for SDL_image library
-AC_SEARCH_LIBS(IMG_LoadPNG_RW, SDL_image, , 
- 	     AC_MSG_WARN([*** Unable to find SDL_image libary with PNG support
-	     		      Are you cross compiling ?
-	     		       (http://www.libsdl.org/projects/SDL_image/)]))
+PKG_CHECK_EXISTS([SDL_image], 
+			      PKG_CHECK_MODULES([SDL_image], [SDL_image], , 
+               			      AC_CHECK_LIB(SDL_image, IMG_LoadPNG_RW)))
 
-AC_SEARCH_LIBS(TTF_OpenFontRW, SDL_ttf, , 
- 	     AC_MSG_WARN([*** Unable to find SDL_ttf library.
-	     		      Are you cross compiling ?]))
+PKG_CHECK_EXISTS([SDL_mixer], 
+			      PKG_CHECK_MODULES([SDL_mixer], [SDL_mixer], ,
+	 			      AC_CHECK_LIB(SDL_mixer, Mix_LoadMUS)))
 
-AC_SEARCH_LIBS(Mix_LoadMUS, SDL_mixer, , 
-             AC_MSG_WARN([*** Unable to find SDL_mixer library.
-                              Are you cross compiling ? ]))			    
+AC_CHECK_LIB([SDL_ttf], [TTF_Init], , AC_MSG_WARN([Could not find ttf lib]))
 
-dnl PKG_CHECK_MODULES([SDL],       [sdl >= 1.2.13], , )
-dnl PKG_CHECK_MODULES([SDL_image], [SDL_image],     , )
-dnl PKG_CHECK_MODULES([SDL_mixer], [SDL_mixer],     , )
-dnl AC_CHECK_LIB(SDL_ttf, TTF_OpenFontRW, , )
+AC_CHECK_LIB([popt], [poptGetContext], , AC_MSG_WARN([Could not find popt lib]))
 
+dnl PKG_CHECK_EXISTS([SDL_image],
+dnl   PKG_CHECK_MODULES([SDL_image],
+dnl      AC_CHECK_LIB(SDL_image, IMG_LoadPNG_RW)))
+
+dnl AC_CHECK_LIB(SDL_image, IMG_LoadPNG_RW, , ,)
+dnl AC_CHECK_LIB(SDL_mixer, MIX_LoadMUS, , ,)
+dnl AC_CHECK_LIB(SDL_ttf, TTF_OpenFontRW, , ,)
+dnl PKG_CHECK_MODULES([SDL_image], [SDL_image])
+dnl PKG_CHECK_MODULES([SDL_mixer], [SDL_mixer])
+#PKG_CHECK_MODULES([SDL_ttf], [SDL_ttf])
+dnl PKG_CHECK_MODULES([SDL_mixer])
+dnl PKG_CHECK_MODULES([SDL_ttf])
+
+dnl SDL_VERSION=1.2.13
+dnl AM_PATH_SDL($SDL_VERSION, :,
+dnl             AC_MSG_ERROR([*** SDL version $SDL_VERSION not found!]))
+
+dnl # Check for SDL_image library
+dnl AC_SEARCH_LIBS(IMG_LoadPNG_RW, SDL_image, , 
+dnl  	     AC_MSG_WARN([*** Unable to find SDL_image libary with PNG support
+dnl 	     		      Are you cross compiling ?
+dnl 	     		       (http://www.libsdl.org/projects/SDL_image/)]))
+
+dnl AC_SEARCH_LIBS(TTF_OpenFontRW, SDL_ttf, , 
+dnl  	     AC_MSG_WARN([*** Unable to find SDL_ttf library.
+dnl 	     		      Are you cross compiling ?]))
+
+dnl AC_SEARCH_LIBS(Mix_LoadMUS, SDL_mixer, , 
+dnl              AC_MSG_WARN([*** Unable to find SDL_mixer library.
+dnl                               Are you cross compiling ? ]))			
+			    
 # You might need to define --with-lua-prefix and --with-lua-suffix to use this
 AX_LUA_HEADERS
 AX_LUA_LIBS
