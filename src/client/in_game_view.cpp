@@ -18,7 +18,7 @@ InGameView::render_game() {
   render_selected_cell(dep_model_.get_puzzle());
   render_path(dep_model_);
   render_player(dep_model_.get_puzzle());
-  dep_renderer_.render_moves(dep_model_.get_puzzle().moves());
+  dep_renderer_.render_moves(dep_model_);
   update_goal(dep_model_);
   dep_renderer_.flush();
 }
@@ -36,6 +36,12 @@ InGameView::handle_event(int iEventCode) {
       if (dep_model_.get_puzzle().get_cell_at(i,j)->is_in_path()) {
 	dep_model_.get_puzzle().put_player(i,j);
       }
+    }
+
+    int move_index = dep_renderer_.mouse_position_as_move_index(mouse_x, mouse_y);
+    if (move_index != -1 && 
+	move_index < (int) dep_model_.get_puzzle().moves().size()) {
+      dep_model_.set_current_move_index(move_index);
     }
   }
 }

@@ -23,10 +23,10 @@ public:
   }
 
   void update_game(int iDelta);
-
+ 
 private:
   InGameModel & dep_model_;
-  
+
 };
 
 #endif // _IN_GAME_MODE_HPP_

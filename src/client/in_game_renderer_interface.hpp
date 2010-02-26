@@ -1,9 +1,7 @@
 #ifndef _IN_GAME_RENDERER_INTERFACE_HPP_
 #define _IN_GAME_RENDERER_INTERFACE_HPP_
 
-#include <vector>
-
-class Move;
+class InGameModel;
 
 /**
  * renderer for in game view.
@@ -48,6 +46,11 @@ public:
    */
   virtual int mouse_y_as_puzzle_line(int i_y) = 0;
 
+  /**
+   * The mouse position as a "move" button index, or 
+   * -1 if it is not on top of a "move" button.
+   */
+  virtual int mouse_position_as_move_index(int i_x, int i_y) = 0;
 
   /**
    * Marks the cell at a given position as the selected one.
@@ -62,7 +65,9 @@ public:
   /**
    * Displays the list of available moves
    */
-  virtual void render_moves(std::vector<Move> & i_moves) = 0;
+  virtual void render_moves(InGameModel & i_model) = 0;
+
+ 
 
 };
 

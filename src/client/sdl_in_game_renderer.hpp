@@ -9,6 +9,8 @@
 
 #include "SDL.h"
 
+class InGameModel;
+
 class Move;
 
 class ResourceResolverInterface;
@@ -54,11 +56,13 @@ public:
 
   int mouse_y_as_puzzle_line(int i_y);
 
+  int mouse_position_as_move_index(int i_x, int i_y);
+  
   void render_selected_cell(int i_i, int i_j);
 
   void render_player(int i_i, int i_j);
 
-  void render_moves(std::vector<Move> & i_moves);
+  void render_moves(InGameModel & i_model);
 
 private:
 
@@ -126,6 +130,12 @@ private:
    * @param i_index : index of the move icon
    */
   void render_move(Move & i_move, int i_index);
+
+  /**
+   * Render the currently selected move
+   */
+  void render_current_move(int i_move_index);
+
 
 };
 

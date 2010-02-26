@@ -1,9 +1,10 @@
 #ifndef _IN_GAME_MODEL_HPP_
 #define _IN_GAME_MODEL_HPP_
 
-class PathFinderInterface;
+#include "engine/puzzle.hpp"
+#include <assert.h>
 
-class Puzzle;
+class PathFinderInterface;
 
 /**
  * Model for the bulk of the game
@@ -18,7 +19,8 @@ public:
     goal_i_(-1),
     goal_j_(-1),
     last_goal_i_(-1),
-    last_goal_j_(-1)
+    last_goal_j_(-1),
+    current_move_index_(0)
   {
   }
 
@@ -40,6 +42,15 @@ public:
     goal_j_ = i_j;
   }
 
+  int current_move_index() {
+    return current_move_index_;
+  }
+
+  void set_current_move_index(int i_index) {
+    assert(i_index < (int) dep_puzzle_->moves().size());
+    current_move_index_ = i_index;
+  }
+
  
 private:
   Puzzle * dep_puzzle_;
@@ -53,6 +64,9 @@ private:
   // was computed
   int last_goal_i_;
   int last_goal_j_;
+
+  // Index of the move currently selected in the puzzle.
+  int current_move_index_;
 
   bool has_goal_changed();
 

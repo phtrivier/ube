@@ -6,6 +6,8 @@
 #include "engine/cell.hpp"
 #include "engine/move.hpp"
 
+#include "in_game_model.hpp"
+
 #include <assert.h>
 
 #include "SDL.h"
@@ -125,8 +127,28 @@ SdlInGameRenderer::mouse_y_as_puzzle_line(int i_y) {
   return res;
 }
 
+int
+SdlInGameRenderer::mouse_position_as_move_index(int i_x, int i_y) 
+{
+
+  int res = -1;
+  
+  int x = i_x - 40;
+  int y = i_y - 300;
+  int w = 64 + 10;
+
+  if (y < 128) {
+    if (x % w < 64) {
+      res = x / w;
+    }
+  }
+
+  return res;
+}
+
 void
-SdlInGameRenderer::render_selected_cell(int i_i, int i_j) {
+SdlInGameRenderer::render_selected_cell(int i_i, int i_j) 
+{
   // TODO : make this a constant instead of recreating
   SDL_Rect src;
   src.x = 0;
@@ -166,17 +188,19 @@ SdlInGameRenderer::render_player(int i_i, int i_j) {
 }
 
 void
-SdlInGameRenderer::render_moves(std::vector<Move> & i_moves)
+SdlInGameRenderer::render_moves(InGameModel & i_model)
 {
-  std::vector<Move>::iterator it = i_moves.begin();
-  for ( int index = 0 ; it != i_moves.end() ; ++it ) {
+  // Hack : the current move first
+  render_current_move(i_model.current_move_index());
+  // THen the other available move
+  std::vector<Move> & moves = i_model.get_puzzle().moves();
+  std::vector<Move>::iterator it = moves.begin();
+  for ( int index = 0 ; it != moves.end() ; ++it ) {
     Move current = *it;
     render_move(current, index);
     index++;
   }
-
 }
-
 
 /* ----------------- */
 
@@ -197,6 +221,17 @@ SdlInGameRenderer::render_move(Move & i_move, int i_index)
   assert(move_images_.find(i_move.type()) != move_images_.end());
   assert(move_images_[i_move.type()] != NULL);
   SDL_BlitSurface(move_images_[i_move.type()], &src, p_screen_, &dst);
+}
+
+// TODO(pht) : fix this
+void
+SdlInGameRenderer::render_current_move(int i_move_index) {
+SDL_Rect dst;
+  dst.x = 40 + i_move_index*(64 + 10) - 5;
+  dst.y = 350 + 5;
+  dst.w = 64 + 10;
+  dst.h = 128 + 10;
+  SDL_FillRect(p_screen_, &dst, SDL_MapRGB(p_screen_->format, 255,0,0));
 }
 
 

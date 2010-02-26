@@ -1,9 +1,7 @@
 #include "in_game_renderer_interface.hpp"
 #include <gmock/gmock.h>
 
-#include <vector>
-
-class Move;
+class InGameModel;
 
 class MockInGameRenderer : public InGameRendererInterface {
  public:
@@ -18,11 +16,16 @@ class MockInGameRenderer : public InGameRendererInterface {
 	       int(int i_x));
   MOCK_METHOD1(mouse_y_as_puzzle_line,
 	       int(int i_y));
+
+  MOCK_METHOD2(mouse_position_as_move_index,
+	       int(int i_x, int i_y));
+
   MOCK_METHOD2(render_selected_cell,
 	       void (int i_i, int i_j));
+
   MOCK_METHOD2(render_player,
 	       void (int i_i, int i_j));
-  MOCK_METHOD1(render_moves,
-	       void (std::vector<Move> & i_moves));
 
+  MOCK_METHOD1(render_moves,
+	       void (InGameModel & i_model));
 };
