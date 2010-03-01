@@ -49,7 +49,7 @@
       (ede-cpp-root-project "ube"
 			    :name "ube-pht"
 			    :version "0.1.0"
-			    :file "~/prj/ube/README.txt"
+			    :file "~/prj/ube/README.textile"
                             :directory "~/prj/ube"
 			    :include-path '("/include"
 					    "/src"

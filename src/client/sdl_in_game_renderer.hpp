@@ -61,6 +61,8 @@ public:
   
   void render_selected_cell(int i_i, int i_j);
 
+  void render_banned_cell(int i_i, int i_j);
+
   void render_player(int i_i, int i_j);
 
   void render_moves(InGameModel & i_model);
@@ -139,7 +141,10 @@ private:
    */
   void render_current_move(int i_move_index);
 
-
+  /**
+   * Render an image on a cell.
+   */
+  void render_cell_image(int i_i, int i_j, SDL_Surface * i_p_surface);
 };
 
 #endif // _SDL_IN_GAME_RENDERER_HPP_

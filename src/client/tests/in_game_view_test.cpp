@@ -153,7 +153,7 @@ namespace {
     EXPECT_CALL(renderer, render_cell(0,0,Cell::IN));
     EXPECT_CALL(renderer, render_cell(0,1,Cell::WALKABLE));
     EXPECT_CALL(renderer, render_cell(0,2,Cell::OUT));
-    EXPECT_CALL(renderer, render_selected_cell(0,1));
+    EXPECT_CALL(renderer, render_banned_cell(0,1));
     EXPECT_CALL(renderer, flush());
     v.render_game();
   }

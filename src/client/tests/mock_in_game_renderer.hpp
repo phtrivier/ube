@@ -9,6 +9,7 @@ class MockInGameRenderer : public InGameRendererInterface {
 	       void());
   MOCK_METHOD3(render_cell,
       void(int i_i, int i_j, int i_cell_type));
+
   MOCK_METHOD0(flush,
 	       void());
 
@@ -21,6 +22,9 @@ class MockInGameRenderer : public InGameRendererInterface {
 	       int(int i_x, int i_y));
 
   MOCK_METHOD2(render_selected_cell,
+	       void (int i_i, int i_j));
+
+  MOCK_METHOD2(render_banned_cell,
 	       void (int i_i, int i_j));
 
   MOCK_METHOD2(render_player,
