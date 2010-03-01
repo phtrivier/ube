@@ -46,6 +46,10 @@ SdlInGameRenderer::~SdlInGameRenderer() {
     SDL_FreeSurface(p_selected_cell_image_);
   }
 
+  if (p_banned_cell_image_ != NULL) {
+    SDL_FreeSurface(p_banned_cell_image_);
+  }
+
   if (p_player_image_ != NULL) {
     SDL_FreeSurface(p_player_image_);
   }
@@ -61,11 +65,14 @@ SdlInGameRenderer::init() {
     res = load_cell_images();
     res = load_move_images();
     black_ = SDL_MapRGB(p_screen_->format, 0x00, 0x00, 0x00);
-    while (!done && res != -1) {
-      res = load_image("selected_cell.png", &p_selected_cell_image_);
-      res = load_image("player.png", &p_player_image_);      
-      done = true;
-    }
+    //    while (!done && res != -1) {
+    // FIXME(pht) : use a clever loop to try and load images and 
+    // report the first error ...
+    res = load_image("selected_cell.png", &p_selected_cell_image_);
+    res = load_image("banned_cell.png", &p_banned_cell_image_);
+    res = load_image("player.png", &p_player_image_);      
+    done = true;
+    //}
   }
 
   return res;
@@ -164,7 +171,8 @@ SdlInGameRenderer::render_selected_cell(int i_i, int i_j)
   dst.h = 32;
 
   assert(p_selected_cell_image_ != NULL);
-  SDL_BlitSurface(p_selected_cell_image_, &src, p_screen_, &dst);
+  // SDL_BlitSurface(p_selected_cell_image_, &src, p_screen_, &dst);
+  SDL_BlitSurface(p_banned_cell_image_, &src, p_screen_, &dst);
 }
 
 void

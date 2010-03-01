@@ -31,6 +31,7 @@ public:
     dep_resolver_(dep_resolver),
     p_screen_(NULL),
     p_selected_cell_image_(NULL),
+    p_banned_cell_image_(NULL),
     p_player_image_(NULL)
   {
 
@@ -75,6 +76,8 @@ private:
   SDL_Surface * p_screen_;
 
   SDL_Surface * p_selected_cell_image_;
+
+  SDL_Surface * p_banned_cell_image_;
   
   SDL_Surface * p_player_image_;
 

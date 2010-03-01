@@ -57,6 +57,8 @@ public:
    */
   virtual void render_selected_cell(int i_i, int i_j) = 0;
 
+  virtual void render_banned_cell(int i_i, int i_j) = 0;
+
   /**
    * Display the player in the maze.
    */
