@@ -18,6 +18,8 @@ libube_client_a_SOURCES=gettext.h \
 	in_game_mode_factory.hpp in_game_mode_factory.cpp \
 	option_parser.hpp option_parser.cpp \
 	command_factory_interface.hpp \
+	in_game_command_factory.hpp in_game_command_factory.cpp \
+	move_command.hpp move_command.cpp \
 	in_game_command_stack.hpp in_game_command_stack.cpp
 
 bin_PROGRAMS = ube
