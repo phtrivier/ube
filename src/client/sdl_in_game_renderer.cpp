@@ -20,8 +20,8 @@ using namespace boost;
 
 #define MOVES_X 20
 #define MOVES_Y 450
-#define MOVES_H 128
-#define MOVES_W 64
+#define MOVES_H 64
+#define MOVES_W 128
 
 #define CELLS_X 40
 #define CELLS_Y 40
