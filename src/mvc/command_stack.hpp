@@ -15,7 +15,7 @@ public:
   CommandStack() : undo_index_(-1), redo_index_(-1) {
   }
 
-  ~CommandStack();
+  virtual ~CommandStack();
 
   /**
    * Execute a command and set it as the top

@@ -16,7 +16,9 @@ libube_client_a_SOURCES=gettext.h \
 	in_game_mode.hpp in_game_mode.cpp \
 	sdl_in_game_renderer.hpp sdl_in_game_renderer.cpp \
 	in_game_mode_factory.hpp in_game_mode_factory.cpp \
-	option_parser.hpp option_parser.cpp
+	option_parser.hpp option_parser.cpp \
+	command_factory_interface.hpp \
+	in_game_command_stack.hpp in_game_command_stack.cpp
 
 bin_PROGRAMS = ube
 ube_SOURCES = ube.cpp
@@ -47,9 +49,12 @@ POPT_LIBS=-lpopt
 # 	$(SDL_LIBS) $(SDL_IMAGE_LIBS) $(SDL_TTF_LIBS) $(SDL_MIXER_LIBS) \
 # 	-lpopt
 
-ube_LDADD=libube-client.a \
+PROJECT_LIBS=libube-client.a \
+	../mvc/libube-mvc.a \
 	../engine/libube-engine.a \
-	../common/libube-common.a \
+	../common/libube-common.a
+
+ube_LDADD=$(PROJECT_LIBS) \
 	$(POPT_LIBS) \
 	$(SDL_image_LIBS) $(SDL_TTF_LIBS) $(SDL_mixer_LIBS) \
 	$(SDL_IMAGE_LIBS) $(SDL_MIXER_LIBS) \
@@ -63,16 +68,16 @@ client_tests_SOURCES=tests/client_tests.cpp \
 	tests/mock_view.hpp \
 	tests/mock_clock.hpp \
 	tests/mock_in_game_renderer.hpp \
+	tests/mock_command_factory.hpp \
 	tests/observable_test.cpp \
 	tests/game_mode_test.cpp \
 	tests/game_loop_test.cpp \
 	tests/in_game_view_test.cpp \
 	tests/option_parser_test.cpp \
-	tests/sdl_in_game_renderer_test.cpp
+	tests/sdl_in_game_renderer_test.cpp \
+	tests/in_game_command_stack_test.cpp
 
-client_tests_LDADD=libube-client.a \
-	../engine/libube-engine.a \
-	../common/libube-common.a \
+client_tests_LDADD=$(PROJECT_LIBS) \
 	-L$(top_srcdir)/lib -lgtest -lgmock \
 	$(POPT_LIBS) \
 	$(SDL_image_LIBS) $(SDL_TTF_LIBS) $(SDL_mixer_LIBS) \
