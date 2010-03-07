@@ -44,3 +44,5 @@ sandbox/*
 semantic.cache
 
 *.bak
+
+doc/muse/*.pdf
