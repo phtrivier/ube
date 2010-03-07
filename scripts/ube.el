@@ -16,6 +16,9 @@
   (interactive)
   (ube-compile "client"))
 
+(defun ube-compile-mvc ()
+  (interactive)
+  (ube-compile "mvc"))
 
 (defun ube-compile-engine ()
   (interactive)
@@ -28,9 +31,14 @@
   (interactive)
   (let ((folder1 (make-folder "common"))
         (folder2 (make-folder "engine"))
-	(folder3 (make-folder "client")))
+	(folder3 (make-folder "mvc"))
+	(folder4 (make-folder "client")))
     (set 'compilation-directory folder1)
-    (set 'compile-command (concat "make -C" folder1 " check && make -C " folder2 " check && make -C " folder3 " check" "&& make -C " (make-folder "../") " install" ))
+    (set 'compile-command (concat "make -C" folder1 
+				  " check && make -C " folder2 
+				  " check && make -C " folder3 
+				  " check && make -C " folder4
+				  " check" "&& make -C " (make-folder "../") " install" ))
     (compile-or-recompile)))
 
 (defun compile-or-recompile ()

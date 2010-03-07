@@ -62,6 +62,7 @@ AC_CONFIG_FILES([
    	src/Makefile
 	src/common/Makefile
    	src/engine/Makefile
+   	src/mvc/Makefile
    	src/client/Makefile
 	po/Makefile.in
 	data/Makefile
