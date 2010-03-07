@@ -27,12 +27,14 @@ namespace {
   TEST_F(SdlInGameRendererTest, ConvertsAMousePointToACellPosition) {
     MockResourceResolver resolver;
     SdlInGameRenderer renderer(resolver);
-    ASSERT_EQ(0, renderer.mouse_x_as_puzzle_column(0));
-    ASSERT_EQ(1, renderer.mouse_x_as_puzzle_column(33));
-    ASSERT_EQ(-1, renderer.mouse_x_as_puzzle_column(-33));
-    ASSERT_EQ(0, renderer.mouse_y_as_puzzle_line(0));
-    ASSERT_EQ(1, renderer.mouse_y_as_puzzle_line(33));
-    ASSERT_EQ(-1, renderer.mouse_y_as_puzzle_line(-33));
+    // FIXME : use class constant here
+    int offset = 40;
+    ASSERT_EQ(0, renderer.mouse_x_as_puzzle_column(offset));
+    ASSERT_EQ(1, renderer.mouse_x_as_puzzle_column(offset+33));
+    ASSERT_EQ(-1, renderer.mouse_x_as_puzzle_column(offset-33));
+    ASSERT_EQ(0, renderer.mouse_y_as_puzzle_line(offset));
+    ASSERT_EQ(1, renderer.mouse_y_as_puzzle_line(offset + 33));
+    ASSERT_EQ(-1, renderer.mouse_y_as_puzzle_line(offset -33));
   }
 
 } // Namespace

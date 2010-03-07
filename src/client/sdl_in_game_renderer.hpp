@@ -32,7 +32,8 @@ public:
     p_screen_(NULL),
     p_selected_cell_image_(NULL),
     p_banned_cell_image_(NULL),
-    p_player_image_(NULL)
+    p_player_image_(NULL),
+    p_bg_(NULL)
   {
 
   }
@@ -82,6 +83,8 @@ private:
   SDL_Surface * p_banned_cell_image_;
   
   SDL_Surface * p_player_image_;
+
+  SDL_Surface * p_bg_;
 
   Uint32 black_;
 
@@ -145,6 +148,16 @@ private:
    * Render an image on a cell.
    */
   void render_cell_image(int i_i, int i_j, SDL_Surface * i_p_surface);
+
+  /**
+   * Safely clear an image
+   */
+  void clear_image(SDL_Surface * i_p_image) {
+    if (i_p_image != NULL) {
+      SDL_FreeSurface(i_p_image);
+    }
+  }
+
 };
 
 #endif // _SDL_IN_GAME_RENDERER_HPP_

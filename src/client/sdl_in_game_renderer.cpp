@@ -18,6 +18,16 @@
 #include "boost/format.hpp"
 using namespace boost;
 
+#define MOVES_X 20
+#define MOVES_Y 450
+#define MOVES_H 128
+#define MOVES_W 64
+
+#define CELLS_X 40
+#define CELLS_Y 40
+#define CELLS_W 32
+#define CELLS_H 32
+
 SdlInGameRenderer::~SdlInGameRenderer() {
   for (int cell_type = 0 ;  
        cell_type < Cell::CELL_TYPES_COUNT ; 
@@ -54,13 +64,15 @@ SdlInGameRenderer::~SdlInGameRenderer() {
     SDL_FreeSurface(p_player_image_);
   }
 
+  clear_image(p_bg_);
+
 }
 
 int
 SdlInGameRenderer::init() {
   int res = -1;
   bool done = false;
-  p_screen_ = SDL_SetVideoMode(640, 480, 8, SDL_SWSURFACE);
+  p_screen_ = SDL_SetVideoMode(800, 600, 8, SDL_SWSURFACE);
   if (p_screen_ != NULL) {
     res = load_cell_images();
     res = load_move_images();
@@ -71,6 +83,7 @@ SdlInGameRenderer::init() {
     res = load_image("selected_cell.png", &p_selected_cell_image_);
     res = load_image("banned_cell.png", &p_banned_cell_image_);
     res = load_image("player.png", &p_player_image_);      
+    res = load_image("bg.png", &p_bg_);
     done = true;
     //}
   }
@@ -81,30 +94,14 @@ SdlInGameRenderer::init() {
 void
 SdlInGameRenderer::clear() {
   assert(p_screen_ != NULL);
-  SDL_FillRect(p_screen_, NULL, black_);
+  SDL_BlitSurface(p_bg_, NULL, p_screen_, NULL);
 }
 
 void 
 SdlInGameRenderer::render_cell(int i_i, int i_j, int i_cell_type) {
-  // TODO : make this a constant instead of recreating
-  SDL_Rect src;
-  src.x = 0;
-  src.y = 0;
-  src.w = 32;
-  src.h = 32;
-
-  // TODO : Optimize the computation, the multiplication is not
-  // needed everytime. Plus, make it a constant !
-  SDL_Rect dst;
-  dst.x = i_j * 32;
-  dst.y = i_i * 32;
-  dst.w = 32;
-  dst.h = 32;
-
   assert(cell_images_.find(i_cell_type) != cell_images_.end());
   assert(cell_images_[i_cell_type] != NULL);
-  SDL_BlitSurface(cell_images_[i_cell_type], &src, p_screen_, &dst);
-
+  render_cell_image(i_i, i_j, cell_images_[i_cell_type]);
 }
 
 void 
@@ -119,7 +116,7 @@ SdlInGameRenderer::mouse_x_as_puzzle_column(int i_x) {
   // TODO(pht) : Handler case where the position is bigger than the screen size
   int res = -1;
   if (i_x >= 0) {
-    res = (i_x / 32);
+    res = ((i_x - CELLS_X) / 32);
   }
   return res;
 }
@@ -129,7 +126,7 @@ SdlInGameRenderer::mouse_y_as_puzzle_line(int i_y) {
   // TODO(pht) : Handler case where the position is bigger than the screen size
   int res = -1;
   if (i_y >= 0) {
-    res = (i_y / 32);
+    res = ((i_y - CELLS_Y) / 32);
   }
   return res;
 }
@@ -140,12 +137,12 @@ SdlInGameRenderer::mouse_position_as_move_index(int i_x, int i_y)
 
   int res = -1;
   
-  int x = i_x - 40;
-  int y = i_y - 300;
-  int w = 64 + 10;
+  int x = i_x - MOVES_X;
+  int y = i_y - MOVES_Y;
+  int w = MOVES_W + 10;
 
-  if (y >0 && y < 128) {
-    if (x % w < 64) {
+  if (y >0 && y < MOVES_H) {
+    if (x % w < MOVES_W) {
       res = x / w;
     }
   }
@@ -156,25 +153,6 @@ SdlInGameRenderer::mouse_position_as_move_index(int i_x, int i_y)
 void
 SdlInGameRenderer::render_selected_cell(int i_i, int i_j) 
 {
-  /*
-  // TODO : make this a constant instead of recreating
-  SDL_Rect src;
-  src.x = 0;
-  src.y = 0;
-  src.w = 32;
-  src.h = 32;
-  // TODO : Optimize the computation, the multiplication is not
-  // needed everytime. Plus, make it a constant !
-  SDL_Rect dst;
-  dst.x = i_j * 32;
-  dst.y = i_i * 32;
-  dst.w = 32;
-  dst.h = 32;
-
-  assert(p_selected_cell_image_ != NULL);
-  // SDL_BlitSurface(p_selected_cell_image_, &src, p_screen_, &dst);
-  SDL_BlitSurface(p_banned_cell_image_, &src, p_screen_, &dst);
-  */
   render_cell_image(i_i, i_j, p_selected_cell_image_);
 }
 
@@ -186,23 +164,6 @@ SdlInGameRenderer::render_banned_cell(int i_i, int i_j)
 
 void
 SdlInGameRenderer::render_player(int i_i, int i_j) {
-  /*
-  // TODO : make this a constant instead of recreating
-  SDL_Rect src;
-  src.x = 0;
-  src.y = 0;
-  src.w = 32;
-  src.h = 32;
-  // TODO : Optimize the computation, the multiplication is not
-  // needed everytime. Plus, make it a constant !
-  SDL_Rect dst;
-  dst.x = i_j * 32;
-  dst.y = i_i * 32;
-  dst.w = 32;
-  dst.h = 32;
-
-  SDL_BlitSurface(p_player_image_, &src, p_screen_, &dst);
-  */
   render_cell_image(i_i, i_j, p_player_image_);
 }
 
@@ -236,14 +197,14 @@ SdlInGameRenderer::render_move(Move & i_move, int i_index)
 {
   SDL_Rect src;
   src.x = src.y = 0;
-  src.w = 64;
-  src.h = 128;
+  src.w = MOVES_W;
+  src.h = MOVES_H;
 
   SDL_Rect dst;
-  dst.x = 40 + i_index*(64 + 10);
-  dst.y = 300;
-  dst.w = 64;
-  dst.h = 128;
+  dst.x = MOVES_X + i_index*(MOVES_W + 10);
+  dst.y = MOVES_Y;
+  dst.w = MOVES_W;
+  dst.h = MOVES_H;
 
   assert(move_images_.find(i_move.type()) != move_images_.end());
   assert(move_images_[i_move.type()] != NULL);
@@ -254,10 +215,10 @@ SdlInGameRenderer::render_move(Move & i_move, int i_index)
 void
 SdlInGameRenderer::render_current_move(int i_move_index) {
 SDL_Rect dst;
-  dst.x = 40 + i_move_index*(64 + 10) - 5;
-  dst.y = 300 - 5;
-  dst.w = 64 + 10;
-  dst.h = 128 + 10;
+  dst.x = MOVES_X + i_move_index*(MOVES_W + 10) - 5;
+  dst.y = MOVES_Y - 5;
+  dst.w = MOVES_W + 10;
+  dst.h = MOVES_H + 10;
   SDL_FillRect(p_screen_, &dst, SDL_MapRGB(p_screen_->format, 255,0,0));
 }
 
@@ -333,15 +294,15 @@ SdlInGameRenderer::render_cell_image(int i_i, int i_j, SDL_Surface * i_p_surface
   SDL_Rect src;
   src.x = 0;
   src.y = 0;
-  src.w = 32;
-  src.h = 32;
+  src.w = CELLS_W;
+  src.h = CELLS_H;
   // TODO : Optimize the computation, the multiplication is not
   // needed everytime. Plus, make it a constant !
   SDL_Rect dst;
-  dst.x = i_j * 32;
-  dst.y = i_i * 32;
-  dst.w = 32;
-  dst.h = 32;
+  dst.x = CELLS_X + (i_j * CELLS_W);
+  dst.y = CELLS_Y + (i_i * CELLS_H);
+  dst.w = CELLS_W;
+  dst.h = CELLS_H;
 
   SDL_BlitSurface(i_p_surface, &src, p_screen_, &dst);
 }
