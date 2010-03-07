@@ -18,7 +18,9 @@ AM_CPPFLAGS=-DSRCDIR=\"${srcdir}\" \
 
 # There is one program that aggreatates all tests cases
 check_PROGRAMS = mvc-tests
-mvc_tests_SOURCES= tests/mvc_tests.cpp
+mvc_tests_SOURCES= tests/mvc_tests.cpp \
+	tests/mock_command.hpp \
+	tests/command_stack_test.cpp
 
 # The program needs to be compiled with 
 mvc_tests_LDADD=libube-mvc.a \
