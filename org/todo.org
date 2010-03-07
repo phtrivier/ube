@@ -1,8 +1,33 @@
 * To do list
-** Coding [4/6]
+** To playtest and beyond [10/14]
    - [X] Know the entrance of the puzzle (if there is any ...)
    - [X] Know the position of the player (initialy at the puzzle's entrance, if there is any ...)
    - [ ] Be able to shout if a puzzle is loaded without an entrance ?
    - [X] Be able to move the player to another position (shouting if the position is empty or walkable)
    - [X] Be able to load the various "moves" inside a puzzle
-   - [ ] Be able to know if a position of the puzzle is reachable from another position (and return a path if it is possible ...)
+   - [X] Be able to know if a position of the puzzle is reachable from another position (and return a path if it is possible ...)
+   - [X] Move the player to a position if selected in the UI and a path is available
+   - [X] Display the various available moves in UI
+   - [X] Change the model code so that moving in the UI consumes one of the moves
+   - [X] Use the 'current' move to look for path
+   - [ ] Use command pattern to allow undo
+   - [X] Display a different sprite for the cells in path and a cell that is not available
+** More moves and levels [0/1]
+   - [ ] Put all the move logic in Lua
+   - [ ] Implement knight
+   - [ ] Implement 'diagonal'
+   - [ ] Implement 'straight line'
+** Eventfull puzzles [/]
+   - [ ] Make stuff happen when a specific cell is reached / traversed (configurable in Lua)
+   - [ ] Example : make levels where new moves are collected along the way
+   - [ ] Example : make levels where cells are moved / added (similar to the 'switch' plugin ?)
+** Playtest, Playtest, Playtest [/]
+   - [ ] Linux distribution (debian package)
+   - [ ] win distribution (NSIS installer ?)
+** Levels and chapter handling) [0/4]
+   - [ ] Add a notion of chapters
+   - [ ] Add a 'chapter start' mode (whith a chapter start screen)
+   - [ ] Transition between levels of a chapter when a level is finished
+   - [ ] Transition between chapters when a chapter is finished
+** Game save (chapter replay -- NTH) [0/1]
+   - [ ] Make it possible to store previously played game
