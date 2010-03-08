@@ -38,7 +38,6 @@ function Agenda:put(item, cost)
 end
 
 function Agenda:front()
-
    res = table.remove(self.elements[self.lower_cost],1)
 
    if (next(self.elements[self.lower_cost]) == nil) then

@@ -25,14 +25,17 @@ AM_CPPFLAGS=-DSRCDIR=\"${srcdir}\" \
 	$(BOOST_CPPFLAGS)
 
 # There is one program that aggreatates all tests cases
-check_PROGRAMS = engine-tests
-engine_tests_SOURCES= tests/engine_tests.cpp \
-	tests/cell_test.cpp \
-	tests/cell_factory_test.cpp \
-	tests/puzzle_test.cpp \
-	tests/puzzle_loader_test.cpp \
-	tests/lua_puzzle_loader_test.cpp \
-	tests/lua_path_finder_test.cpp
+#check_PROGRAMS = engine-tests 
+#engine_tests_SOURCES= tests/engine_tests.cpp \
+# 	tests/cell_test.cpp \
+# 	tests/cell_factory_test.cpp \
+# 	tests/puzzle_test.cpp \
+# 	tests/puzzle_loader_test.cpp \
+# 	tests/lua_puzzle_loader_test.cpp \
+# 	tests/lua_path_finder_test.cpp
+
+check_PROGRAMS = engine-tests 
+engine_tests_SOURCES= tests/lua_path_finder_test.cpp
 
 # The program needs to be compiled with 
 engine_tests_LDADD=libube-engine.a ../common/libube-common.a -L$(top_srcdir)/lib -lgtest -lgmock -llua -ldl

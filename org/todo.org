@@ -10,6 +10,7 @@
    - [X] Display the various available moves in UI
    - [X] Change the model code so that moving in the UI consumes one of the moves
    - [X] Use the 'current' move to look for path
+   - [ ] Run some stats on the path finding (seems to be slower than I though ...)
    - [ ] Use command pattern to allow undo
    - [X] Display a different sprite for the cells in path and a cell that is not available
 ** More moves and levels [0/1]

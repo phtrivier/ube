@@ -34,6 +34,7 @@ namespace {
 
   };
 
+  /*
   TEST_F(LuaPathFinderTest, FindsTrivialPath) {
     
     Puzzle p;
@@ -62,5 +63,41 @@ namespace {
     ASSERT_TRUE(p.get_cell_at(0,1)->is_in_path());
 
   }
+  */
+
+  TEST_F(LuaPathFinderTest, FindsTrivialPath) {
+
+    Puzzle p;
+    int w = 9;
+    int h = 9;
+    p.set_dimensions(w,h);
+
+    for (int i = 0 ; i < h ; i++) {
+      for (int j = 0 ; j < w ; j++) {
+	Cell * c = new Cell(i,j, Cell::WALKABLE);
+	p.add_cell(c);
+      }
+    }
+      
+    MockResourceResolver resolver;
+
+    EXPECT_CALL(resolver, get_engine_lua_path()).
+      WillOnce(Return(str(format("%1%/lua/?.lua") % SRCDIR)));
+
+    EXPECT_CALL(resolver, get_engine_lua_file_name(StrEq("path_finder_lib.lua")))
+      .WillOnce(Return(str(format("%1%/lua/path_finder_lib.lua") % SRCDIR)));
+
+    LuaPathFinder finder(resolver);
+
+    //    ASSERT_EQ(1, finder.find_path(&p, 0, 0, (w-1), (h-1), MoveType::SINGLE));
+    ASSERT_EQ(-1, finder.find_path(&p, 0, 0, w, h, MoveType::SINGLE));
+
+  }
+
 
 } // Namespace
+
+int main(int argc, char **argv) {
+  ::testing::InitGoogleTest(&argc, argv);
+  return RUN_ALL_TESTS();
+}

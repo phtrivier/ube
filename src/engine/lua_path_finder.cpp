@@ -16,6 +16,13 @@ LuaPathFinder::find_path(Puzzle * o_p_puzzle,
 
   int res = -1;
 
+  if (i_i0 < 0 
+      || i_j0 < 0 
+      || i_i1 >= o_p_puzzle->get_h() 
+      || i_j1 >= o_p_puzzle->get_w()) {
+    return -1;
+  }
+
   // find_path should return 0 if no path is found, 1 if 
   // a path is found, and -1 in case of an error.
   // That is, the same as this function, like. 
