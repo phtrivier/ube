@@ -21,7 +21,7 @@ public:
   ~InGameCommandFactory() {
   }
 
-  CommandInterface * createMoveCommand(InGameModel & i_model, int i_index);
+  CommandInterface * createMoveCommand(InGameModel & i_model, int i_index, int i_i, int i_j);
 
 };
 

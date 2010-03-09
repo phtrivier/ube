@@ -3,6 +3,9 @@
 
 #include "view_interface.hpp"
 
+#include "client/in_game_command_factory.hpp"
+#include "client/in_game_command_stack.hpp"
+
 class Puzzle;
 class InGameModel;
 class InGameRendererInterface;
@@ -23,7 +26,8 @@ public:
     ViewInterface(),
     dep_renderer_(dep_renderer),
     dep_model_(dep_model),
-    dep_controller_(dep_controller)
+    dep_controller_(dep_controller),
+    command_stack_(command_factory_)
   {
   }
 
@@ -53,6 +57,10 @@ private:
   InGameRendererInterface & dep_renderer_;
   InGameModel & dep_model_;
   ControllerInterface & dep_controller_;
+
+  InGameCommandFactory command_factory_;
+  InGameCommandStack command_stack_;
+
 };
 
 #endif // _IN_GAME_VIEW_HPP_

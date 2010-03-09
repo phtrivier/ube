@@ -6,7 +6,7 @@
 void
 InGameCommandStack::doMove(InGameModel & i_model, int i_index) 
 {
-  CommandInterface * p_command = dep_command_factory_.createMoveCommand(i_model, i_index);
+  CommandInterface * p_command = dep_command_factory_.createMoveCommand(i_model, i_index, i_i, i_j);
   assert(p_command != NULL);
   doCommand(p_command);
 }

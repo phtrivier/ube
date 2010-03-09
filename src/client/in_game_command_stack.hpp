@@ -28,7 +28,7 @@ public:
    * Execute a command for the i-th move of
    * a model.
    */
-  void doMove(InGameModel & i_model, int i_index);
+  void doMove(InGameModel & i_model, int i_index, int i_i, int i_j);
 
 private:
 
