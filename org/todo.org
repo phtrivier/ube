@@ -1,5 +1,5 @@
 * To do list
-** To playtest and beyond [10/14]
+** To playtest and beyond [11/12]
    - [X] Know the entrance of the puzzle (if there is any ...)
    - [X] Know the position of the player (initialy at the puzzle's entrance, if there is any ...)
    - [ ] Be able to shout if a puzzle is loaded without an entrance ?
@@ -10,8 +10,9 @@
    - [X] Display the various available moves in UI
    - [X] Change the model code so that moving in the UI consumes one of the moves
    - [X] Use the 'current' move to look for path
-   - [ ] Use command pattern to allow undo
+   - [X] Use command pattern to allow undo
    - [X] Display a different sprite for the cells in path and a cell that is not available
+   - [ ] Fix path finding (paths are computed even when not realy required ... wtf ?)
 ** More moves and levels [0/1]
    - [ ] Put all the move logic in Lua
    - [ ] Implement knight
