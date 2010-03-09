@@ -47,10 +47,13 @@ function Node:successors(puzzle, move_type)
    return res
 end
 
--- Uses manhattan distance
+-- Using "square of bird flying" distance
 function Node:heuristic_cost_to_goal(goal)
-   return math.abs(goal.i - self.i) + math.abs(goal.j - self.j)
+   local di = math.abs(goal.i - self.i)
+   local dj = math.abs(goal.j - self.j)
+   return di*di + dj*dj
 end
+
 
 -- Sum of the cost to reach this node, 
 -- and the estimation of the cost to the goal.
