@@ -21,7 +21,15 @@ SdlController::check_events() {
 void
 SdlController::handle_event() {
   if (last_sdl_event_.type == SDL_KEYDOWN) {
-    fire_event(GameEvent::QUIT);
+
+    if (last_sdl_event_.key.keysym.sym == SDLK_z) {
+      fire_event(GameEvent::UNDO);
+    } else if (last_sdl_event_.key.keysym.sym == SDLK_y) {
+      fire_event(GameEvent::REDO);
+    } else if (last_sdl_event_.key.keysym.sym == SDLK_ESCAPE) {
+      fire_event(GameEvent::QUIT);
+    }
+
   } else if (last_sdl_event_.type == SDL_QUIT) {
     fire_event(GameEvent::QUIT);
   } else if (last_sdl_event_.type == SDL_MOUSEMOTION) {
