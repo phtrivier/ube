@@ -20,7 +20,7 @@ public:
    * The ownership of the created command is 
    * transfered to the caller.   
    */
-  virtual CommandInterface * createMoveCommand(InGameModel & i_model, int i_index) = 0;
+  virtual CommandInterface * createMoveCommand(InGameModel & i_model, int i_index, int i_i, int i_j) = 0;
   
 };
 

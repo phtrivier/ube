@@ -4,6 +4,8 @@
 #include "engine/puzzle.hpp"
 #include "engine/path_finder_interface.hpp"
 
+#include "common/logging.hpp"
+
 #include <assert.h>
 
 void
@@ -14,7 +16,7 @@ InGameModel::update_path()
     dep_puzzle_->clear_path();
   } else {
     // If required, look for a path
-    if (has_goal_changed()) {
+    if (should_recompute_path()) {
 
       assert(goal_i_ != -1);
       assert(goal_j_ != -1);
@@ -32,15 +34,36 @@ InGameModel::update_path()
 				 move_type);
 
       last_goal_i_ = goal_i_;
-      last_goal_i_ = goal_j_;
+      last_goal_j_ = goal_j_;
     }
   }
 }
 
 bool
+InGameModel::should_recompute_path()
+{
+  return has_valid_goal() && has_goal_changed();
+}
+
+bool
+InGameModel::has_valid_goal()
+{
+  return goal_i_ > 0 && goal_j_ > 0 &&
+    goal_i_ < dep_puzzle_->get_h() &&
+    goal_j_ < dep_puzzle_->get_w();
+}
+
+bool
 InGameModel::has_goal_changed() 
 {
-  return goal_i_ != last_goal_i_ || goal_j_ != last_goal_j_;
+  LOG_D("in_game_model") << "Last goal i : " << last_goal_i_;
+  LOG_D("in_game_model") << "Goal i : " << goal_i_;
+  LOG_D("in_game_model") << "Last goal j : " << last_goal_j_;
+  LOG_D("in_game_model") << "Goal j : " << goal_j_;
+  
+  bool res =  goal_i_ != last_goal_i_ || goal_j_ != last_goal_j_;
+  LOG_D("in_game_model") << "Has goal changed ? " << res;
+  return res;
 }
 
 void

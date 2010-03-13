@@ -12,10 +12,14 @@ class MoveCommand :
   public CommandInterface
 { 
 public:
-  MoveCommand(InGameModel & dep_model, int i_index):
+  MoveCommand(InGameModel & dep_model, int i_index, int target_i, int target_j):
     CommandInterface(),
     dep_model_(dep_model),
-    move_index_(i_index) 
+    move_index_(i_index),
+    old_i_(-1),
+    old_j_(-1),
+    target_i_(target_i),
+    target_j_(target_j)
   {
   }
 
@@ -30,7 +34,12 @@ private:
   
   InGameModel & dep_model_;
   int move_index_;
+
+  int old_i_;
+  int old_j_;
   
+  int target_i_;
+  int target_j_;
 
 };
 

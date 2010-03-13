@@ -30,31 +30,28 @@ InGameView::handle_event(int iEventCode) {
     int mouse_y = dep_controller_.mouse_y();
     int i = dep_renderer_.mouse_y_as_puzzle_line(mouse_y);
     int j = dep_renderer_.mouse_x_as_puzzle_column(mouse_x);
-
-    // FIXME(pht) : the following really looks like it belongs to the model... 
-
     if (i!=-1 && j!=-1 && 
 	dep_model_.get_puzzle().is_valid_position(i,j)) {
 
       if (dep_model_.get_puzzle().get_cell_at(i,j)->is_in_path()) {
-	// FIXME(pht) : use the Command pattern to make the following undo-able
-	dep_model_.get_puzzle().moves()[dep_model_.current_move_index()].use();
-	dep_model_.get_puzzle().put_player(i,j);
-
-	// Change the current move to be the next available one
-	dep_model_.set_next_available_move_as_current();
+	command_stack_.doMove(dep_model_, dep_model_.current_move_index(), i, j);
       }
     }
-
-    // FIXME(pht) : again, some of this really belongs to the model, but
+    // FIXME(pht) : some of this really belongs to the model, but
     // I am not in the mood for creating methods ;)
     int move_index = dep_renderer_.mouse_position_as_move_index(mouse_x, mouse_y);
     if (move_index != -1 && 
 	move_index < (int) dep_model_.get_puzzle().moves().size()) {
+
       if (dep_model_.get_puzzle().moves()[move_index].available()) {
 	  dep_model_.set_current_move_index(move_index);
       }
+      
     }
+  } else if (iEventCode == GameEvent::UNDO) {
+    command_stack_.undoLast();
+  } else if (iEventCode == GameEvent::REDO) {
+    command_stack_.redoLast();
   }
 }
 

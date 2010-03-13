@@ -3,6 +3,6 @@
 
 class MockCommandFactory : public CommandFactoryInterface {
  public:
-  MOCK_METHOD2(createMoveCommand,
-      CommandInterface*(InGameModel & i_model, int i_index));
+  MOCK_METHOD4(createMoveCommand,
+	       CommandInterface*(InGameModel & i_model, int i_index, int i_i, int i_j));
 };

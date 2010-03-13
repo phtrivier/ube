@@ -4,9 +4,9 @@
 #include "in_game_model.hpp"
 
 void
-InGameCommandStack::doMove(InGameModel & i_model, int i_index) 
+InGameCommandStack::doMove(InGameModel & i_model, int i_index, int i_i, int i_j) 
 {
-  CommandInterface * p_command = dep_command_factory_.createMoveCommand(i_model, i_index);
+  CommandInterface * p_command = dep_command_factory_.createMoveCommand(i_model, i_index, i_i, i_j);
   assert(p_command != NULL);
   doCommand(p_command);
 }
