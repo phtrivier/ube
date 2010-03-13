@@ -4,6 +4,8 @@
 #include "engine/puzzle.hpp"
 #include "engine/path_finder_interface.hpp"
 
+#include "common/logging.hpp"
+
 #include <assert.h>
 
 void
@@ -32,7 +34,7 @@ InGameModel::update_path()
 				 move_type);
 
       last_goal_i_ = goal_i_;
-      last_goal_i_ = goal_j_;
+      last_goal_j_ = goal_j_;
     }
   }
 }
@@ -40,7 +42,14 @@ InGameModel::update_path()
 bool
 InGameModel::has_goal_changed() 
 {
-  return goal_i_ != last_goal_i_ || goal_j_ != last_goal_j_;
+  LOG_D("in_game_model") << "Last goal i : " << last_goal_i_;
+  LOG_D("in_game_model") << "Goal i : " << goal_i_;
+  LOG_D("in_game_model") << "Last goal j : " << last_goal_j_;
+  LOG_D("in_game_model") << "Goal j : " << goal_j_;
+  
+  bool res =  goal_i_ != last_goal_i_ || goal_j_ != last_goal_j_;
+  LOG_D("in_game_model") << "Has goal changed ? " << res;
+  return res;
 }
 
 void
