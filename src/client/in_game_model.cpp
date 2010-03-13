@@ -15,7 +15,7 @@ InGameModel::update_path()
     dep_puzzle_->clear_path();
   } else {
     // If required, look for a path
-    if (has_goal_changed()) {
+    if (has_goal_changed() || has_player_moved()) {
       assert(goal_i_ != -1);
       assert(goal_j_ != -1);
 
@@ -33,8 +33,19 @@ InGameModel::update_path()
 
       last_goal_i_ = goal_i_;
       last_goal_j_ = goal_j_;
+
+      last_player_i_ = dep_puzzle_->get_player_i();
+      last_player_j_ = dep_puzzle_->get_player_j();
+
     }
   }
+}
+
+void
+InGameModel::move_player(int i_i, int i_j) 
+{
+  assert(dep_puzzle_->is_valid_position(i_i, i_j));
+  dep_puzzle_->put_player(i_i, i_j);
 }
 
 bool
@@ -63,6 +74,15 @@ InGameModel::has_goal_changed()
   LOG_D("in_game_model") << "Has goal changed ? " << res;
   return res;
 }
+
+bool
+InGameModel::has_player_moved()
+{
+  bool res = last_player_i_ != dep_puzzle_->get_player_i() ||
+    last_player_j_ != dep_puzzle_->get_player_j();
+  return res;
+}
+
 
 void
 InGameModel::set_next_available_move_as_current()

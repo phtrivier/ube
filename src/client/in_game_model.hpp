@@ -22,6 +22,8 @@ public:
     goal_j_(-1),
     last_goal_i_(-1),
     last_goal_j_(-1),
+    last_player_i_(-1),
+    last_player_j_(-1),
     current_move_index_(0)
   {
   }
@@ -36,7 +38,13 @@ public:
   void set_puzzle(Puzzle & dep_puzzle) {
     this->dep_puzzle_ = &dep_puzzle;
   }
-  
+
+  /**
+   * If either the goal (mouse position) or the position of the player
+   * have changed since last call, clear the pathfinding information
+   * of the puzzle and try to compute a path from the current player's
+   * position to the goal.
+   */
   void update_path();
 
   void set_goal(int i_i, int i_j) {
@@ -58,7 +66,17 @@ public:
     return dep_puzzle_->moves()[current_move_index_];
   }
  
+  /**
+   * Changes the current selected move to 
+   * the first one that is still available.
+   */
   void set_next_available_move_as_current();
+
+  /**
+   * Move the player to a given position.
+   * This clears pathfinding.
+   */
+  void move_player(int i_i, int i_j);
 
 private:
   Puzzle * dep_puzzle_;
@@ -73,14 +91,35 @@ private:
   int last_goal_i_;
   int last_goal_j_;
 
+  // Last position of the player for which a path
+  // was computed
+  int last_player_i_;
+  int last_player_j_;
+
   // Index of the move currently selected in the puzzle.
   int current_move_index_;
 
+  /**
+   * Does the mouse currently point to a valid cell ?
+   */
   bool has_valid_goal();
 
+  /**
+   * Is a valid move currently selected ? 
+   */
+  bool has_valid_move();
+
+  /**
+   * Has the goal changed since last call to update_path ?
+   */
   bool has_goal_changed();
 
-  bool has_valid_move();
+  /**
+   * Has the player's position changed since last call
+   * to update_path ? 
+   */
+  bool has_player_moved();
+
 
 };
 
