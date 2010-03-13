@@ -16,7 +16,7 @@ InGameModel::update_path()
     dep_puzzle_->clear_path();
   } else {
     // If required, look for a path
-    if (has_goal_changed()) {
+    if (should_recompute_path()) {
 
       assert(goal_i_ != -1);
       assert(goal_j_ != -1);
@@ -37,6 +37,20 @@ InGameModel::update_path()
       last_goal_j_ = goal_j_;
     }
   }
+}
+
+bool
+InGameModel::should_recompute_path()
+{
+  return has_valid_goal() && has_goal_changed();
+}
+
+bool
+InGameModel::has_valid_goal()
+{
+  return goal_i_ > 0 && goal_j_ > 0 &&
+    goal_i_ < dep_puzzle_->get_h() &&
+    goal_j_ < dep_puzzle_->get_w();
 }
 
 bool

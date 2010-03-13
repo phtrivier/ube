@@ -76,6 +76,10 @@ private:
   // Index of the move currently selected in the puzzle.
   int current_move_index_;
 
+  bool should_recompute_path();
+
+  bool has_valid_goal();
+
   bool has_goal_changed();
 
 };
