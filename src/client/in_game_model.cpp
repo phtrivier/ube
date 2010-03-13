@@ -11,13 +11,11 @@
 void
 InGameModel::update_path()
 {
-  if (current_move_index_ == -1) {
-    // No node is in the path !
+  if (has_valid_move() || !has_valid_goal()) {
     dep_puzzle_->clear_path();
   } else {
     // If required, look for a path
-    if (should_recompute_path()) {
-
+    if (has_goal_changed()) {
       assert(goal_i_ != -1);
       assert(goal_j_ != -1);
 
@@ -40,9 +38,9 @@ InGameModel::update_path()
 }
 
 bool
-InGameModel::should_recompute_path()
+InGameModel::has_valid_move()
 {
-  return has_valid_goal() && has_goal_changed();
+  return current_move_index_ == -1;
 }
 
 bool

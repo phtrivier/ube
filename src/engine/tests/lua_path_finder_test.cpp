@@ -34,8 +34,7 @@ namespace {
 
   };
 
-  /*
-  TEST_F(LuaPathFinderTest, FindsTrivialPath) {
+  TEST_F(LuaPathFinderTest, FindsTrivialPathInShortPuzzle) {
     
     Puzzle p;
     p.set_dimensions(2,1);
@@ -63,9 +62,8 @@ namespace {
     ASSERT_TRUE(p.get_cell_at(0,1)->is_in_path());
 
   }
-  */
 
-  TEST_F(LuaPathFinderTest, FindsTrivialPath) {
+  TEST_F(LuaPathFinderTest, FindsTrivialPathInBiggerPuzzle) {
 
     Puzzle p;
     int w = 9;
@@ -89,8 +87,8 @@ namespace {
 
     LuaPathFinder finder(resolver);
 
-    //    ASSERT_EQ(1, finder.find_path(&p, 0, 0, (w-1), (h-1), MoveType::SINGLE));
-    ASSERT_EQ(-1, finder.find_path(&p, 0, 0, w, h, MoveType::SINGLE));
+    ASSERT_EQ(0, finder.find_path(&p, 5, 1, (w-1), (h-1), MoveType::DOUBLE));
+    ASSERT_EQ(1, finder.find_path(&p, 5, 1, 5, 7, MoveType::DOUBLE));
 
   }
 

@@ -14,7 +14,8 @@ lua_DATA=lua/puzzle_lib.lua \
 	lua/path_finder_lib.lua \
 	lua/agenda.lua \
 	lua/node.lua \
-	lua/move.lua
+	lua/move.lua \
+	lua/archive.lua
 
 AM_CPPFLAGS=-DSRCDIR=\"${srcdir}\" \
 	-DLUADIR=\"${luadir}\" \
