@@ -6,6 +6,7 @@ libube_engine_a_SOURCES=cell.hpp cell.cpp \
 	puzzle_loader.hpp puzzle_loader.cpp \
 	lua_puzzle_loader.hpp lua_puzzle_loader.cpp \
 	lua_state_holder.hpp lua_state_holder.cpp \
+	path_finder_interface.hpp \
 	lua_path_finder.hpp lua_path_finder.cpp
 
 # TODO : Find a way to make sure this file is available ...
@@ -26,17 +27,15 @@ AM_CPPFLAGS=-DSRCDIR=\"${srcdir}\" \
 	$(BOOST_CPPFLAGS)
 
 # There is one program that aggreatates all tests cases
-#check_PROGRAMS = engine-tests 
-#engine_tests_SOURCES= tests/engine_tests.cpp \
-# 	tests/cell_test.cpp \
-# 	tests/cell_factory_test.cpp \
-# 	tests/puzzle_test.cpp \
-# 	tests/puzzle_loader_test.cpp \
-# 	tests/lua_puzzle_loader_test.cpp \
-# 	tests/lua_path_finder_test.cpp
-
 check_PROGRAMS = engine-tests 
-engine_tests_SOURCES= tests/lua_path_finder_test.cpp
+engine_tests_SOURCES= tests/engine_tests.cpp \
+	tests/cell_test.cpp \
+	tests/cell_factory_test.cpp \
+	tests/puzzle_test.cpp \
+	tests/puzzle_loader_test.cpp \
+	tests/lua_puzzle_loader_test.cpp \
+	tests/lua_path_finder_test.cpp \
+	tests/mock_path_finder.hpp
 
 # The program needs to be compiled with 
 engine_tests_LDADD=libube-engine.a ../common/libube-common.a -L$(top_srcdir)/lib -lgtest -lgmock -llua -ldl

@@ -1,7 +1,7 @@
 noinst_LIBRARIES=libube-common.a
 libube_common_a_SOURCES=gettext.h lua_helper.hpp \
 	silent_ostream.hpp \
-	logging.hpp logging.cpp \
+	log_level.hpp logging.hpp logging.cpp \
 	logger_interface.hpp \
 	cout_logger.hpp \
 	silent_logger.hpp \
@@ -22,6 +22,7 @@ check_PROGRAMS = common-tests
 common_tests_SOURCES= tests/common_tests.cpp \
 	tests/prefix_resource_resolver_test.cpp \
 	tests/mock_file_checker.hpp \
+	tests/mock_resource_resolver.hpp \
 	tests/stat_file_checker_test.cpp
 
 # The program needs to be compiled with 

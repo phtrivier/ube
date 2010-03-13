@@ -1,5 +1,6 @@
 noinst_LIBRARIES=libube-mvc.a
-libube_mvc_a_SOURCES=command_stack.hpp command_stack.cpp
+libube_mvc_a_SOURCES=command_stack.hpp command_stack.cpp \
+	command_interface.hpp
 
 # TODO : Find a way to make sure this file is available ...
 # luadir=${datadir}/@PACKAGE@/lua/mvc
