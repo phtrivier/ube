@@ -20,7 +20,8 @@ libube_client_a_SOURCES=gettext.h \
 	command_factory_interface.hpp \
 	in_game_command_factory.hpp in_game_command_factory.cpp \
 	move_command.hpp move_command.cpp \
-	in_game_command_stack.hpp in_game_command_stack.cpp
+	in_game_command_stack.hpp in_game_command_stack.cpp \
+	ube_game.hpp ube_game.cpp
 
 bin_PROGRAMS = ube
 ube_SOURCES = ube.cpp
