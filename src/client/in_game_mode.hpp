@@ -3,8 +3,9 @@
 
 #include "game_mode.hpp"
 #include "in_game_model.hpp"
-#include "controller_interface.hpp"
-#include "view_interface.hpp"
+
+#include "mvc/controller_interface.hpp"
+#include "mvc/view_interface.hpp"
 
 /**
  * GameMode for the main gameplay.

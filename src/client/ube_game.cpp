@@ -77,7 +77,7 @@ int
 UbeGame::prepare_sdl()
 {
   int res = 0;
-  if((SDL_Init(SDL_INIT_VIDEO|SDL_INIT_AUDIO)==-1)) { 
+  if((SDL_Init(SDL_INIT_VIDEO)==-1)) { 
     preparation_error_message_.append(str(format("Could not initialize SDL: %1%.\n") % SDL_GetError()));
     res = -1;
   } else {

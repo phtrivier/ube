@@ -1,7 +1,7 @@
 #ifndef _SDL_CONTROLLER_HPP_
 #define _SDL_CONTROLLER_HPP_
 
-#include "controller_interface.hpp"
+#include "mvc/controller_interface.hpp"
 
 class InGameModel;
 

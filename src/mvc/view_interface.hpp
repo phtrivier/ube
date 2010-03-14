@@ -1,7 +1,7 @@
 #ifndef _VIEW_INTERFACE_HPP_
 #define _VIEW_INTERFACE_HPP_
 
-#include "observer_interface.hpp"
+#include "mvc/observer_interface.hpp"
 
 /**
  * A generic view.

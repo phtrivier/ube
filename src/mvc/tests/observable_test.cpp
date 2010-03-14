@@ -1,5 +1,6 @@
-#include "observable.hpp"
-#include "mock_observer.hpp"
+#include "mvc/tests/mock_observer.hpp"
+
+#include "mvc/observable.hpp"
 
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>

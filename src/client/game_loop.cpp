@@ -1,8 +1,10 @@
 #include "game_loop.hpp"
 
 #include "common/logging.hpp"
+
+#include "mvc/clock_interface.hpp"
+
 #include "game_mode.hpp"
-#include "clock_interface.hpp"
 #include "game_event.hpp"
 
 #include <cstdio>

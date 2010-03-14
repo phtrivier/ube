@@ -9,7 +9,7 @@
 #include "in_game_model.hpp"
 
 #include "mock_in_game_renderer.hpp"
-#include "mock_controller.hpp"
+#include "mvc/tests/mock_controller.hpp"
 
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>

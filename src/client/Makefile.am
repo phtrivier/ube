@@ -1,10 +1,5 @@
 lib_LIBRARIES=libube-client.a
 libube_client_a_SOURCES=gettext.h \
-	observer_interface.hpp \
-	controller_interface.hpp \
-	view_interface.hpp \
-	clock_interface.hpp \
-	observable.hpp observable.cpp \
 	game_mode_interface.hpp game_mode.hpp game_mode.cpp \
 	game_event.hpp \
 	game_loop.hpp game_loop.cpp \
@@ -66,14 +61,9 @@ ube_LDADD=$(PROJECT_LIBS) \
 
 check_PROGRAMS=client-tests
 client_tests_SOURCES=tests/client_tests.cpp \
-	tests/mock_clock.hpp \
 	tests/mock_command_factory.hpp \
-	tests/mock_controller.hpp \
 	tests/mock_game_mode.hpp \
 	tests/mock_in_game_renderer.hpp \
-	tests/mock_observer.hpp \
-	tests/mock_view.hpp \
-	tests/observable_test.cpp \
 	tests/game_mode_test.cpp \
 	tests/game_loop_test.cpp \
 	tests/in_game_view_test.cpp \

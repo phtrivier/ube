@@ -1,7 +1,7 @@
 #ifndef _GAME_MODE_INTERFACE_HPP_
 #define _GAME_MODE_INTERFACE_HPP_
 
-#include "observable.hpp"
+#include "mvc/observable.hpp"
 
 /**
  * Base class for game modes

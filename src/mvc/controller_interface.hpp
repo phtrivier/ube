@@ -1,7 +1,7 @@
 #ifndef _CONTROLLER_INTERFACE_HPP_
 #define _CONTROLLER_INTERFACE_HPP_
 
-#include "observable.hpp"
+#include "mvc/observable.hpp"
 
 // TODO : Add dependency on models ... 
 

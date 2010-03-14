@@ -2,7 +2,7 @@
 #define _SDL_VIEW_HPP_
 
 #include "view_interface.hpp"
-#include "observer_interface.hpp"
+#include "mvc/observer_interface.hpp"
 #include "SDL.h"
 
 // Music test

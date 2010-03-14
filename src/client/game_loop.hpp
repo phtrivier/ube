@@ -1,7 +1,7 @@
 #ifndef _GAME_LOOP_HPP_
 #define _GAME_LOOP_HPP_
 
-#include "observer_interface.hpp"
+#include "mvc/observer_interface.hpp"
 #include <string>
 #include <map>
 

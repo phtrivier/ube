@@ -1,7 +1,7 @@
 #ifndef _SDL_CLOCK_HPP_
 #define _SDL_CLOCK_HPP_
 
-#include "clock_interface.hpp"
+#include "mvc/clock_interface.hpp"
 #include <SDL.h>
 
 /**

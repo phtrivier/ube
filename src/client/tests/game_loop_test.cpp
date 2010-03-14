@@ -4,10 +4,11 @@
 #include <stdexcept>
 using namespace std;
 
-#include "mock_controller.hpp"
-#include "mock_view.hpp"
+#include "mvc/tests/mock_controller.hpp"
+#include "mvc/tests/mock_view.hpp"
+#include "mvc/tests/mock_clock.hpp"
+
 #include "mock_game_mode.hpp"
-#include "mock_clock.hpp"
 
 namespace {
   class GameLoopTest : public ::testing::Test {

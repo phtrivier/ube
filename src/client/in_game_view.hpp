@@ -1,7 +1,7 @@
 #ifndef _IN_GAME_VIEW_HPP_
 #define _IN_GAME_VIEW_HPP_
 
-#include "view_interface.hpp"
+#include "mvc/view_interface.hpp"
 
 #include "client/in_game_command_factory.hpp"
 #include "client/in_game_command_stack.hpp"

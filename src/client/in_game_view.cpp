@@ -4,10 +4,11 @@
 #include "engine/cell.hpp"
 #include "engine/puzzle.hpp"
 
+#include "mvc/controller_interface.hpp"
+
 #include "game_event.hpp"
 #include "in_game_model.hpp"
 #include "in_game_renderer_interface.hpp"
-#include "controller_interface.hpp"
 
 #include <assert.h>
 

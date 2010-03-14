@@ -1,7 +1,8 @@
 #include "game_mode.hpp"
-#include "mock_controller.hpp"
-#include "mock_observer.hpp"
-#include "mock_view.hpp"
+
+#include "mvc/tests/mock_controller.hpp"
+#include "mvc/tests/mock_observer.hpp"
+#include "mvc/tests/mock_view.hpp"
 
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>

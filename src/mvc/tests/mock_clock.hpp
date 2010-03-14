@@ -1,5 +1,5 @@
 #include <gmock/gmock.h>
-#include "clock_interface.hpp"
+#include "mvc/clock_interface.hpp"
 
 class MockClock : public ClockInterface {
  public:

@@ -1,5 +1,5 @@
 #include <gmock/gmock.h>
-#include "view_interface.hpp"
+#include "mvc/view_interface.hpp"
 
 class ObserverInterface;
 

@@ -1,7 +1,7 @@
 #include "game_mode.hpp"
 
-#include "controller_interface.hpp"
-#include "view_interface.hpp"
+#include "mvc/controller_interface.hpp"
+#include "mvc/view_interface.hpp"
 
 #include <cassert>
 
