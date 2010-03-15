@@ -9,6 +9,8 @@ class ResourceResolverInterface;
 class OptionParser;
 class SdlInGameRenderer;
 class InGameModeFactory;
+class SdlPuzzleSelectionRenderer;
+class PuzzleSelectionModeFactory;
 
 /**
  * Class for the meat of the game
@@ -23,8 +25,9 @@ public:
     dep_option_parser_(dep_option_parser),
     preparation_error_message_(""),
     p_in_game_renderer_(NULL),
-    p_in_game_mode_factory_(NULL)
-  
+    p_in_game_mode_factory_(NULL),
+    p_puzzle_selection_renderer_(NULL),
+    p_puzzle_selection_mode_factory_(NULL)
   {
   }
 
@@ -63,6 +66,9 @@ private:
   // be needed.
   SdlInGameRenderer * p_in_game_renderer_;
   InGameModeFactory * p_in_game_mode_factory_;
+
+  SdlPuzzleSelectionRenderer * p_puzzle_selection_renderer_;
+  PuzzleSelectionModeFactory * p_puzzle_selection_mode_factory_;
 
   int prepare_sdl();
   int prepare_game_modes();

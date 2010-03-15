@@ -8,6 +8,8 @@
 #include "in_game_model.hpp"
 #include "sdl_in_game_renderer.hpp"
 #include "in_game_mode_factory.hpp"
+#include "sdl_puzzle_selection_renderer.hpp"
+#include "puzzle_selection_mode_factory.hpp"
 
 #include "common/logging.hpp"
 
@@ -88,6 +90,23 @@ int
 UbeGame::prepare_puzzle_selection_mode()
 {
   return 0;
+
+  assert(p_screen_ != NULL);
+
+  p_puzzle_selection_renderer_ = new SdlPuzzleSelectionRenderer(dep_resolver_, p_screen_);
+  int res = p_puzzle_selection_renderer_->init();
+  if (res != 0) {
+    sdl_preparation_error_message("Error while initializing sdl_renderer : %1%\n");
+  } else {
+    p_puzzle_selection_mode_factory_ = new PuzzleSelectionModeFactory(*p_puzzle_selection_renderer_);
+    res = p_puzzle_selection_mode_factory_->create_mode();
+    if (res != 0) {
+      sdl_preparation_error_message("Error creating puzzle_selection_mode : %1%\n");
+    }
+  }
+  return res;
+
+
 }
 
 int
@@ -119,15 +138,21 @@ UbeGame::sdl_preparation_error_message(std::string i_msg)
 void
 UbeGame::play()
 {
-  boost::shared_ptr<GameMode> mode = p_in_game_mode_factory_->get_mode();
-  assert(mode.get() != NULL);
+  boost::shared_ptr<GameMode> puzzle_selection_mode = p_puzzle_selection_mode_factory_->get_mode();
+  boost::shared_ptr<GameMode> in_game_mode = p_in_game_mode_factory_->get_mode();
 
+  assert(puzzle_selection_mode != NULL);
+  assert(in_game_mode.get() != NULL);
+  
   SdlClock clock;
 
   GameLoop loop(&clock);
 
-  loop.register_game_mode("in-game", mode.get()); // FIXME : it would be better to use a reference here, wouldn't it ?
-  loop.set_current_game_mode("in-game");
+  loop.register_game_mode("puzzle_selection", puzzle_selection_mode.get());
+  loop.register_game_mode("in-game", in_game_mode.get()); // FIXME : it would be better to use a reference here, wouldn't it ?
+
+  // TODO(pht) : here, depending on the options, starts with in-game mode or puzzle selection mode... 
+  loop.set_current_game_mode("puzzle-selection");
 
   loop.loop();
 

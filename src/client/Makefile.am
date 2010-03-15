@@ -24,7 +24,8 @@ libube_client_a_SOURCES=gettext.h \
 	puzzle_selection_renderer_interface.hpp \
 	puzzle_selection_view.hpp puzzle_selection_view.cpp \
 	puzzle_selection_mode.hpp puzzle_selection_mode.cpp \
-	puzzle_selection_mode_factory.hpp puzzle_selection_mode_factory.cpp
+	puzzle_selection_mode_factory.hpp puzzle_selection_mode_factory.cpp \
+	sdl_puzzle_selection_renderer.hpp  sdl_puzzle_selection_renderer.cpp
 
 bin_PROGRAMS = ube
 ube_SOURCES = ube.cpp

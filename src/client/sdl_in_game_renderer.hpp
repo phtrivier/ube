@@ -31,7 +31,7 @@ class SdlInGameRenderer :
 { 
 
 public:
-  explicit SdlInGameRenderer(ResourceResolverInterface & dep_resolver, SDL_Surface * dep_p_screen) : 
+  SdlInGameRenderer(ResourceResolverInterface & dep_resolver, SDL_Surface * dep_p_screen) : 
     InGameRendererInterface(),
     InGameRendererGeometry(),
     SdlRenderer(dep_resolver, dep_p_screen),
