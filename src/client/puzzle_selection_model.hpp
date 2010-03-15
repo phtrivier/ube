@@ -37,6 +37,10 @@ public:
     return puzzle_names_;
   }
 
+  int get_puzzle_count() {
+    return (int) puzzle_names_.size();
+  }
+
 private:
 
   int puzzle_index_;

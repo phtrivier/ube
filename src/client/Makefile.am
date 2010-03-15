@@ -20,7 +20,9 @@ libube_client_a_SOURCES=gettext.h \
 	move_command.hpp move_command.cpp \
 	in_game_command_stack.hpp in_game_command_stack.cpp \
 	ube_game.hpp ube_game.cpp \
-	puzzle_selection_model.hpp puzzle_selection_model.cpp 
+	puzzle_selection_model.hpp puzzle_selection_model.cpp \
+	puzzle_selection_renderer_interface.hpp \
+	puzzle_selection_view.hpp puzzle_selection_view.cpp
 
 bin_PROGRAMS = ube
 ube_SOURCES = ube.cpp
@@ -74,7 +76,8 @@ client_tests_SOURCES=tests/client_tests.cpp \
 	tests/option_parser_test.cpp \
 	tests/in_game_renderer_geometry_test.cpp \
 	tests/in_game_command_stack_test.cpp \
-	tests/puzzle_selection_model_test.cpp
+	tests/puzzle_selection_model_test.cpp \
+	tests/puzzle_selection_view_test.cpp
 
 client_tests_LDADD=$(PROJECT_LIBS) \
 	-L$(top_srcdir)/lib -lgtest -lgmock \

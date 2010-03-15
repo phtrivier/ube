@@ -21,8 +21,6 @@ public:
   virtual ~InGameRendererInterface() {
   }
 
-  // Is it needed to repeat the clear / flush here ? 
-  
   /**
    * Renders a cell at a given position.
    */
