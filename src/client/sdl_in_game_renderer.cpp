@@ -18,16 +18,6 @@
 #include "boost/format.hpp"
 using namespace boost;
 
-#define MOVES_X 20
-#define MOVES_Y 450
-#define MOVES_H 64
-#define MOVES_W 128
-
-#define CELLS_X 40
-#define CELLS_Y 40
-#define CELLS_W 32
-#define CELLS_H 32
-
 SdlInGameRenderer::~SdlInGameRenderer() {
   for (int cell_type = 0 ;  
        cell_type < Cell::CELL_TYPES_COUNT ; 
@@ -71,30 +61,29 @@ SdlInGameRenderer::~SdlInGameRenderer() {
 int
 SdlInGameRenderer::init() {
   int res = -1;
-  bool done = false;
-  p_screen_ = SDL_SetVideoMode(800, 600, 8, SDL_SWSURFACE);
-  if (p_screen_ != NULL) {
-    res = load_cell_images();
-    res = load_move_images();
-    black_ = SDL_MapRGB(p_screen_->format, 0x00, 0x00, 0x00);
-    //    while (!done && res != -1) {
-    // FIXME(pht) : use a clever loop to try and load images and 
-    // report the first error ...
-    res = load_image("selected_cell.png", &p_selected_cell_image_);
-    res = load_image("banned_cell.png", &p_banned_cell_image_);
-    res = load_image("player.png", &p_player_image_);      
-    res = load_image("bg.png", &p_bg_);
-    done = true;
-    //}
-  }
-
+  res = load_cell_images();
+  res = load_move_images();
+  //    while (!done && res != -1) {
+  // FIXME(pht) : use a clever loop to try and load images and 
+  // report the first error ...
+  res = load_image("selected_cell.png", &p_selected_cell_image_);
+  res = load_image("banned_cell.png", &p_banned_cell_image_);
+  res = load_image("player.png", &p_player_image_);      
+  res = load_image("bg.png", &p_bg_);
+  
   return res;
 }
 
 void
 SdlInGameRenderer::clear() {
-  assert(p_screen_ != NULL);
-  SDL_BlitSurface(p_bg_, NULL, p_screen_, NULL);
+  assert(get_screen() != NULL);
+  SDL_BlitSurface(p_bg_, NULL, get_screen(), NULL);
+}
+
+void
+SdlInGameRenderer::flush() 
+{
+  SdlRenderer::flush();
 }
 
 void 
@@ -102,52 +91,6 @@ SdlInGameRenderer::render_cell(int i_i, int i_j, int i_cell_type) {
   assert(cell_images_.find(i_cell_type) != cell_images_.end());
   assert(cell_images_[i_cell_type] != NULL);
   render_cell_image(i_i, i_j, cell_images_[i_cell_type]);
-}
-
-void 
-SdlInGameRenderer::flush() {
-  assert(p_screen_ != NULL);
-  SDL_Flip(p_screen_);
-}
-
-
-int
-SdlInGameRenderer::mouse_x_as_puzzle_column(int i_x) {
-  // TODO(pht) : Handler case where the position is bigger than the screen size
-  int res = -1;
-  if (i_x >= 0) {
-    res = ((i_x - CELLS_X) / 32);
-  }
-  return res;
-}
-
-int
-SdlInGameRenderer::mouse_y_as_puzzle_line(int i_y) {
-  // TODO(pht) : Handler case where the position is bigger than the screen size
-  int res = -1;
-  if (i_y >= 0) {
-    res = ((i_y - CELLS_Y) / 32);
-  }
-  return res;
-}
-
-int
-SdlInGameRenderer::mouse_position_as_move_index(int i_x, int i_y) 
-{
-
-  int res = -1;
-  
-  int x = i_x - MOVES_X;
-  int y = i_y - MOVES_Y;
-  int w = MOVES_W + 10;
-
-  if (y >0 && y < MOVES_H) {
-    if (x % w < MOVES_W) {
-      res = x / w;
-    }
-  }
-
-  return res;
 }
 
 void
@@ -208,7 +151,7 @@ SdlInGameRenderer::render_move(Move & i_move, int i_index)
 
   assert(move_images_.find(i_move.type()) != move_images_.end());
   assert(move_images_[i_move.type()] != NULL);
-  SDL_BlitSurface(move_images_[i_move.type()], &src, p_screen_, &dst);
+  SDL_BlitSurface(move_images_[i_move.type()], &src, get_screen(), &dst);
 }
 
 // TODO(pht) : fix this
@@ -219,7 +162,7 @@ SDL_Rect dst;
   dst.y = MOVES_Y - 5;
   dst.w = MOVES_W + 10;
   dst.h = MOVES_H + 10;
-  SDL_FillRect(p_screen_, &dst, SDL_MapRGB(p_screen_->format, 255,0,0));
+  SDL_FillRect(get_screen(), &dst, SDL_MapRGB(get_screen()->format, 255,0,0));
 }
 
 
@@ -276,17 +219,6 @@ SdlInGameRenderer::load_move_image(int i_move_type, SDL_Surface ** o_pp_surface)
   return res;
 }
 
-int
-SdlInGameRenderer::load_image(std::string i_image_name, SDL_Surface ** o_pp_surface) {
-  int res = -1;
-  SDL_Surface * p_tmp = IMG_Load(dep_resolver_.get_image_file_name(i_image_name.c_str()).c_str());
-  if (p_tmp != NULL) {
-    *o_pp_surface = SDL_DisplayFormatAlpha(p_tmp);
-    SDL_FreeSurface(p_tmp);
-    res = 0;
-  }
-  return res;
-}
 
 void
 SdlInGameRenderer::render_cell_image(int i_i, int i_j, SDL_Surface * i_p_surface) {
@@ -304,5 +236,21 @@ SdlInGameRenderer::render_cell_image(int i_i, int i_j, SDL_Surface * i_p_surface
   dst.w = CELLS_W;
   dst.h = CELLS_H;
 
-  SDL_BlitSurface(i_p_surface, &src, p_screen_, &dst);
+  SDL_BlitSurface(i_p_surface, &src, get_screen(), &dst);
 }
+
+int 
+SdlInGameRenderer::mouse_x_as_puzzle_column(int i_x) {
+  return InGameRendererGeometry::mouse_x_as_puzzle_column(i_x);
+}
+
+int 
+SdlInGameRenderer::mouse_y_as_puzzle_line(int i_y) {
+  return InGameRendererGeometry::mouse_y_as_puzzle_line(i_y);
+}
+
+int 
+SdlInGameRenderer::mouse_position_as_move_index(int i_x, int i_y) {
+  return InGameRendererGeometry::mouse_position_as_move_index(i_x,i_y);
+}
+

@@ -3,6 +3,8 @@
 
 #include <string>
 
+#include "SDL.h"
+
 class ResourceResolverInterface;
 class OptionParser;
 class SdlInGameRenderer;
@@ -54,12 +56,28 @@ private:
 
   std::string preparation_error_message_;
 
+  // Screen is owned by the game.
+  SDL_Surface * p_screen_;
+
+  // TODO(pht) : only the game_mode_factory should
+  // be needed.
   SdlInGameRenderer * p_in_game_renderer_;
   InGameModeFactory * p_in_game_mode_factory_;
 
   int prepare_sdl();
   int prepare_game_modes();
+
+  int prepare_puzzle_selection_mode();
   int prepare_in_game_mode();
+
+  /**
+   * Appends the current SDL_GetError to
+   * the "preparation_error_message"
+   *
+   * @param i_mgs, message, to be formatted by boost::format (in
+   * should contain at least %1% to contain the actual SDL error.)
+   */
+  void sdl_preparation_error_message(std::string i_msg);
 
 };
 

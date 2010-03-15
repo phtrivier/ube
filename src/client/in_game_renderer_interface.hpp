@@ -68,7 +68,6 @@ public:
    * Displays the list of available moves
    */
   virtual void render_moves(InGameModel & i_model) = 0;
-
  
 
 };

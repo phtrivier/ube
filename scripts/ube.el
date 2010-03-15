@@ -64,7 +64,7 @@
 					    "/src/common"
 					    "/src/client"
 					    "/src/engine")
-			    :system-include-path '("/usr/include/c++/4.4.1")))
+			    :system-include-path '("/usr/include/c++/4.4.1" "/usr/include/SDL")))
 
                             ;; :local-variables (list
                             ;;                   (cons 'compile-command

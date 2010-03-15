@@ -6,9 +6,11 @@ libube_client_a_SOURCES=gettext.h \
 	sdl_clock.hpp sdl_clock.cpp \
 	sdl_controller.hpp sdl_controller.cpp \
 	in_game_renderer_interface.hpp \
+	in_game_renderer_geometry.hpp in_game_renderer_geometry.cpp \
 	in_game_model.hpp in_game_model.cpp \
 	in_game_view.hpp in_game_view.cpp \
 	in_game_mode.hpp in_game_mode.cpp \
+	sdl_renderer.hpp sdl_renderer.cpp \
 	sdl_in_game_renderer.hpp sdl_in_game_renderer.cpp \
 	in_game_mode_factory.hpp in_game_mode_factory.cpp \
 	option_parser.hpp option_parser.cpp \
@@ -68,7 +70,7 @@ client_tests_SOURCES=tests/client_tests.cpp \
 	tests/game_loop_test.cpp \
 	tests/in_game_view_test.cpp \
 	tests/option_parser_test.cpp \
-	tests/sdl_in_game_renderer_test.cpp \
+	tests/in_game_renderer_geometry_test.cpp \
 	tests/in_game_command_stack_test.cpp
 
 client_tests_LDADD=$(PROJECT_LIBS) \

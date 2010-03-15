@@ -11,6 +11,8 @@
 
 #include "common/logging.hpp"
 
+#include <assert.h>
+
 #include "SDL.h"  
 #include "SDL_image.h"
 #include "SDL_ttf.h"
@@ -33,10 +35,16 @@ UbeGame::prepare_game()
 int
 UbeGame::prepare_in_game_mode()
 {
-  p_in_game_renderer_ = new SdlInGameRenderer(dep_resolver_);
+  // Assume the screen has been prepared in prepare_sdl
+  assert(p_screen_ != NULL);
+
+  // Note(pht) : that could "look" simplier to let the factory create
+  // SdlInGameRenderer, but then I would need to pass the screen explicitely, 
+  // and that kinda breaks the "No SDL in Factory interface, like..."
+  p_in_game_renderer_ = new SdlInGameRenderer(dep_resolver_, p_screen_);
   int res = p_in_game_renderer_->init();
   if (res != 0) {
-    preparation_error_message_.append(str(format("Error while initializing sdl_renderer : %1%\n") % SDL_GetError()));
+    sdl_preparation_error_message("Error while initializing sdl_renderer : %1%\n");
   } else {
 
     // FIXME(pht) : the code about the puzzle should
@@ -57,11 +65,10 @@ UbeGame::prepare_in_game_mode()
     p_in_game_mode_factory_ = new InGameModeFactory(dep_resolver_,
 						    *p_in_game_renderer_,
 						    puzzle_file_name);
-						
-    
+
     res = p_in_game_mode_factory_->create_mode();
     if (res != 0) {
-      preparation_error_message_.append(str(format("Error creating in_game_mode : %1%\n") % SDL_GetError())); 
+      sdl_preparation_error_message("Error creating in_game_mode : %1%\n");
     }
   }
   return res;
@@ -70,7 +77,17 @@ UbeGame::prepare_in_game_mode()
 int
 UbeGame::prepare_game_modes()
 {
-  return prepare_in_game_mode();
+  int res = prepare_puzzle_selection_mode();
+  if (res == 0) {
+    res = prepare_in_game_mode();
+  }
+  return res;
+}
+
+int
+UbeGame::prepare_puzzle_selection_mode()
+{
+  return 0;
 }
 
 int
@@ -78,13 +95,26 @@ UbeGame::prepare_sdl()
 {
   int res = 0;
   if((SDL_Init(SDL_INIT_VIDEO)==-1)) { 
-    preparation_error_message_.append(str(format("Could not initialize SDL: %1%.\n") % SDL_GetError()));
     res = -1;
   } else {
-    atexit(SDL_Quit);
+    p_screen_ = SDL_SetVideoMode(800, 600, 8, SDL_SWSURFACE);
+    if (p_screen_ == NULL) {
+      res = -1;
+    } else {
+      atexit(SDL_Quit);
+    }
+  }
+  if (res != 0) {
+    sdl_preparation_error_message("Could not initialize SDL : %1%.\n");
   }
   return res;
 }
+
+void
+UbeGame::sdl_preparation_error_message(std::string i_msg)
+{
+   preparation_error_message_.append(str(format(i_msg) % SDL_GetError()));
+ }
 
 void
 UbeGame::play()
