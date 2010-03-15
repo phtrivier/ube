@@ -2,7 +2,7 @@
 
 header() {
     echo "---------------------------------------"
-    echo "Ube linux helper compiling script."
+    echo "Ube Ubuntu helper compiling script."
     echo "Copyright (c) 2009 Pierre-Henri Trivier"
     echo "---------------------------------------"
 }
