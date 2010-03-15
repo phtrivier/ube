@@ -15,18 +15,10 @@
 
 InGameModeFactory::~InGameModeFactory() {
   mode_.reset();
-  if (p_view_ != NULL) {
-    delete p_view_;
-  }
-  if (p_model_ != NULL) {
-    delete p_model_;
-  }
-  if (p_puzzle_ != NULL) {
-    delete p_puzzle_;
-  }
-  if (p_controller_ != NULL) {
-    delete p_controller_;
-  }
+  delete p_view_;
+  delete p_model_;
+  delete p_puzzle_;
+  delete p_controller_;
 }
 
 int
