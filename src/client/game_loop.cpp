@@ -78,4 +78,9 @@ GameLoop::handle_event(int iEventCode)
   if (iEventCode == GameEvent::QUIT) {
     running_ = false;
   }
+  // Here, if the event is PUZZLE_SELECTED, then
+  // current mode is a PuzzleSelectionMode, and has a current_puzzle_name
+  // Which means I can ask it, and start an in_game_mode
+  // with the selected puzzle. Yihaa.
+
 }
