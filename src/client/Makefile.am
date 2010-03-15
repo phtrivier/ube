@@ -5,6 +5,7 @@ libube_client_a_SOURCES=gettext.h \
 	game_loop.hpp game_loop.cpp \
 	sdl_clock.hpp sdl_clock.cpp \
 	sdl_controller.hpp sdl_controller.cpp \
+	renderer_interface.hpp \
 	in_game_renderer_interface.hpp \
 	in_game_renderer_geometry.hpp in_game_renderer_geometry.cpp \
 	in_game_model.hpp in_game_model.cpp \
