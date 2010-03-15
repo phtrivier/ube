@@ -44,7 +44,7 @@ If you run into lua issues, the trick might be to set :
   --with-lua-prefix to the folder that contains lua.h
   --with-lua-suffix to the suffix of the liblua*.a file in your /usr/lib
 
-* Windows
+* Microsoft Windows (tm)
 
 There should be a Setup.exe installer for windows, so why would you
 want to build it from sources. Are you a masochich or somethings ;) ?
@@ -57,7 +57,7 @@ don't want to do it now, really.
 Also, it *might* be possible to build it with another compiler, cygwin
 or whatever. I just don't know.
 
-* Mac OS
+* Mac OS (tm ?)
 
 I have no clue how building works on those Apple thingy, but I promise
 I'll try someday :)
