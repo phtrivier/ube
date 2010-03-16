@@ -7,6 +7,8 @@
 
 #include <string>
 
+#include "SDL_ttf.h"
+
 /**
  * puzzle selection renderer based on SDL
  */
@@ -38,6 +40,10 @@ public:
 private:
 
   SDL_Surface * p_bg_;
+  
+  TTF_Font * p_font_;
+  
+  int load_font(const char * i_name, int i_ptsize, TTF_Font ** o_pp_font);
 
 };
 

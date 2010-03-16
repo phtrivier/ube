@@ -85,6 +85,8 @@ private:
    */
   void sdl_preparation_error_message(std::string i_msg);
 
+  void ttf_preparation_error_message(std::string i_msg);
+
 };
 
 #endif // _UBE_GAME_HPP_

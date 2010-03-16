@@ -89,8 +89,6 @@ UbeGame::prepare_game_modes()
 int
 UbeGame::prepare_puzzle_selection_mode()
 {
-  return 0;
-
   assert(p_screen_ != NULL);
 
   p_puzzle_selection_renderer_ = new SdlPuzzleSelectionRenderer(dep_resolver_, p_screen_);
@@ -105,8 +103,6 @@ UbeGame::prepare_puzzle_selection_mode()
     }
   }
   return res;
-
-
 }
 
 int
@@ -120,7 +116,12 @@ UbeGame::prepare_sdl()
     if (p_screen_ == NULL) {
       res = -1;
     } else {
-      atexit(SDL_Quit);
+      if (TTF_Init() == -1) {
+	ttf_preparation_error_message("Could not initialize TTF %1%");
+	res = -1;
+      } else {
+	atexit(SDL_Quit);
+      }
     }
   }
   if (res != 0) {
@@ -136,6 +137,12 @@ UbeGame::sdl_preparation_error_message(std::string i_msg)
  }
 
 void
+UbeGame::ttf_preparation_error_message(std::string i_msg)
+{
+   preparation_error_message_.append(str(format(i_msg) % TTF_GetError()));
+}
+
+void
 UbeGame::play()
 {
   boost::shared_ptr<GameMode> puzzle_selection_mode = p_puzzle_selection_mode_factory_->get_mode();
@@ -148,7 +155,7 @@ UbeGame::play()
 
   GameLoop loop(&clock);
 
-  loop.register_game_mode("puzzle_selection", puzzle_selection_mode.get());
+  loop.register_game_mode("puzzle-selection", puzzle_selection_mode.get());
   loop.register_game_mode("in-game", in_game_mode.get()); // FIXME : it would be better to use a reference here, wouldn't it ?
 
   // TODO(pht) : here, depending on the options, starts with in-game mode or puzzle selection mode... 

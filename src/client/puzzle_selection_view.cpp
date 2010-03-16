@@ -9,10 +9,12 @@
 void
 PuzzleSelectionView::render_game()
 {
+  dep_renderer_.clear();
   std::vector<std::string> puzzle_names = dep_model_.get_puzzle_names();
   for (int i = 0 ; i < dep_model_.get_puzzle_count() ; i++) {
     dep_renderer_.render_puzzle_name(puzzle_names[i], i);
   }
+  dep_renderer_.flush();
 }
 
 void
