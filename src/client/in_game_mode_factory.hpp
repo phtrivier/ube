@@ -4,6 +4,7 @@
 #include <string>
 
 #include <boost/shared_ptr.hpp>
+
 class GameMode;
 class ResourceResolverInterface;
 class InGameRendererInterface;

@@ -14,18 +14,6 @@ class ClockInterface;
  */
 class GameLoop : public ObserverInterface { 
 
-  // Current game mode.
-  GameModeInterface * pCurrentGameMode_;
-
-  // Map of game modes, by names
-  std::map<std::string, GameModeInterface *> gameModes_;
-
-  // Clcok
-  ClockInterface * pClock_;
-
-  // Is the game running ? 
-  bool running_;
-  
 public:
 
   GameLoop(ClockInterface * ipClock) : pClock_(ipClock) {
@@ -66,7 +54,22 @@ public:
   /**
    * Handles events from any 
    */
-  void handle_event(int iEventCode);
+  virtual void handle_event(int iEventCode);
+
+private:
+
+  // Current game mode.
+  GameModeInterface * pCurrentGameMode_;
+
+  // Map of game modes, by names
+  std::map<std::string, GameModeInterface *> gameModes_;
+
+  // Clcok
+  ClockInterface * pClock_;
+
+  // Is the game running ? 
+  bool running_;
+
 };
 
 #endif // _GAME_LOOP_HPP_

@@ -10,7 +10,9 @@ class ObserverInterface;
 /**
  * Compose Controler and View to handle a part of the game.
  */
-class GameMode : public GameModeInterface { 
+class GameMode : 
+  public GameModeInterface 
+{ 
 
 public:
 

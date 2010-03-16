@@ -1,32 +1,30 @@
 #ifndef _IN_GAME_RENDERER_INTERFACE_HPP_
 #define _IN_GAME_RENDERER_INTERFACE_HPP_
 
+#include "renderer_interface.hpp"
+
 class InGameModel;
 
 /**
  * renderer for in game view.
  */
-class InGameRendererInterface { 
+class InGameRendererInterface : 
+  public RendererInterface
+{ 
 
 public:
+
+  InGameRendererInterface() :
+    RendererInterface() {
+  }
 
   virtual ~InGameRendererInterface() {
   }
 
   /**
-   * Clears the screen
-   */
-  virtual void clear() = 0;
-  
-  /**
    * Renders a cell at a given position.
    */
   virtual void render_cell(int i_i, int i_j, int i_cell_type) = 0;
-
-  /**
-   * Finalize renderering
-   */
-  virtual void flush() = 0;
 
   /**
    * Convert a pointer x position to a column of the puzzle.

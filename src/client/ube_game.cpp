@@ -4,10 +4,14 @@
 #include "sdl_controller.hpp"
 #include "sdl_clock.hpp"
 #include "game_mode.hpp"
-#include "game_loop.hpp"
 #include "in_game_model.hpp"
 #include "sdl_in_game_renderer.hpp"
 #include "in_game_mode_factory.hpp"
+#include "in_game_mode.hpp"
+#include "sdl_puzzle_selection_renderer.hpp"
+#include "puzzle_selection_mode_factory.hpp"
+#include "puzzle_selection_mode.hpp"
+#include "game_event.hpp"
 
 #include "common/logging.hpp"
 
@@ -33,7 +37,7 @@ UbeGame::prepare_game()
 }
 
 int
-UbeGame::prepare_in_game_mode()
+UbeGame::prepare_in_game_mode(std::string & i_puzzle_file_name)
 {
   // Assume the screen has been prepared in prepare_sdl
   assert(p_screen_ != NULL);
@@ -47,24 +51,9 @@ UbeGame::prepare_in_game_mode()
     sdl_preparation_error_message("Error while initializing sdl_renderer : %1%\n");
   } else {
 
-    // FIXME(pht) : the code about the puzzle should
-    // probably be somewhere else ? 
-    // Note : I'll need to charge a given puzzle
-    std::string puzzle_file_name = "puzzle1.lua";
-
-    LOG_D("main") << "Do we have a puzzle name ? " << dep_option_parser_.has_puzzle_file_name() << std::endl;
-
-    if (dep_option_parser_.has_puzzle_file_name()) {
-      LOG_D("main") << "Getting puzzle file name" << std::endl;
-      puzzle_file_name = dep_option_parser_.get_puzzle_file_name();
-    }
-    
-    LOG_D("main") << "Puzzle file name : " << puzzle_file_name << std::endl;
-    LOG_D("main") << "Puzzle file name's c_str() : " << puzzle_file_name.c_str() << std::endl;
-    
     p_in_game_mode_factory_ = new InGameModeFactory(dep_resolver_,
 						    *p_in_game_renderer_,
-						    puzzle_file_name);
+						    i_puzzle_file_name);
 
     res = p_in_game_mode_factory_->create_mode();
     if (res != 0) {
@@ -77,9 +66,23 @@ UbeGame::prepare_in_game_mode()
 int
 UbeGame::prepare_game_modes()
 {
+
   int res = prepare_puzzle_selection_mode();
   if (res == 0) {
-    res = prepare_in_game_mode();
+    
+    // FIXME(pht) : the code about the puzzle should
+    // probably be somewhere else ? 
+    // Note : I'll need to charge a given puzzle
+    
+    LOG_D("main") << "Do we have a puzzle name ? " << dep_option_parser_.has_puzzle_file_name() << std::endl;
+  
+    if (dep_option_parser_.has_puzzle_file_name()) {
+      LOG_D("main") << "Getting puzzle file name" << std::endl;
+      std::string puzzle_file_name = dep_option_parser_.get_puzzle_file_name();
+      LOG_D("main") << "Puzzle file name : " << puzzle_file_name << std::endl;
+      LOG_D("main") << "Puzzle file name's c_str() : " << puzzle_file_name.c_str() << std::endl;
+      res = prepare_in_game_mode(puzzle_file_name);
+    }
   }
   return res;
 }
@@ -87,7 +90,20 @@ UbeGame::prepare_game_modes()
 int
 UbeGame::prepare_puzzle_selection_mode()
 {
-  return 0;
+  assert(p_screen_ != NULL);
+
+  p_puzzle_selection_renderer_ = new SdlPuzzleSelectionRenderer(dep_resolver_, p_screen_);
+  int res = p_puzzle_selection_renderer_->init();
+  if (res != 0) {
+    sdl_preparation_error_message("Error while initializing sdl_renderer : %1%\n");
+  } else {
+    p_puzzle_selection_mode_factory_ = new PuzzleSelectionModeFactory(*p_puzzle_selection_renderer_);
+    res = p_puzzle_selection_mode_factory_->create_mode();
+    if (res != 0) {
+      sdl_preparation_error_message("Error creating puzzle_selection_mode : %1%\n");
+    }
+  }
+  return res;
 }
 
 int
@@ -101,7 +117,12 @@ UbeGame::prepare_sdl()
     if (p_screen_ == NULL) {
       res = -1;
     } else {
-      atexit(SDL_Quit);
+      if (TTF_Init() == -1) {
+	ttf_preparation_error_message("Could not initialize TTF %1%");
+	res = -1;
+      } else {
+	atexit(SDL_Quit);
+      }
     }
   }
   if (res != 0) {
@@ -117,21 +138,45 @@ UbeGame::sdl_preparation_error_message(std::string i_msg)
  }
 
 void
+UbeGame::ttf_preparation_error_message(std::string i_msg)
+{
+   preparation_error_message_.append(str(format(i_msg) % TTF_GetError()));
+}
+
+void
 UbeGame::play()
 {
-  boost::shared_ptr<GameMode> mode = p_in_game_mode_factory_->get_mode();
-  assert(mode.get() != NULL);
 
-  SdlClock clock;
+  p_puzzle_selection_mode_ = static_cast<PuzzleSelectionMode*>(p_puzzle_selection_mode_factory_->get_mode().get());
+  register_game_mode("puzzle-selection", p_puzzle_selection_mode_);
 
-  GameLoop loop(&clock);
+  if (dep_option_parser_.has_puzzle_file_name()) {
+    p_in_game_mode_ = static_cast<InGameMode *>(p_in_game_mode_factory_->get_mode().get());
+    register_game_mode("in-game", p_in_game_mode_);
+    set_current_game_mode("in-game");
+  } else {
+    set_current_game_mode("puzzle-selection");
+  }
 
-  loop.register_game_mode("in-game", mode.get()); // FIXME : it would be better to use a reference here, wouldn't it ?
-  loop.set_current_game_mode("in-game");
-
-  loop.loop();
+  loop();
 
   std::cout << std::endl;
   std::cout << "Thanks for playing !" << std::endl;
+}
 
+void
+UbeGame::handle_event(int i_event_code)
+{
+  GameLoop::handle_event(i_event_code);
+
+  switch (i_event_code) {
+    case GameEvent::PUZZLE_SELECTED : {
+      // FIXME(pht) : move some of this to prepare
+      std::string puzzle_file_name = p_puzzle_selection_mode_->get_model().get_selected_puzzle_file_name();
+      prepare_in_game_mode(puzzle_file_name);
+      p_in_game_mode_ = static_cast<InGameMode *>(p_in_game_mode_factory_->get_mode().get());
+      register_game_mode("in-game", p_in_game_mode_);
+      set_current_game_mode("in-game");
+    }
+  }
 }

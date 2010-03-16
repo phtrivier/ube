@@ -4,6 +4,8 @@
 #include "common/silent_logger.hpp"
 #include "common/stat_file_checker.hpp"
 
+#include "sdl_clock.hpp"
+
 #include "option_parser.hpp"
 
 #include "ube_game.hpp"
@@ -34,6 +36,7 @@ int main(int argc, char ** argv) {
   Logging::add_logging_category("sdl_in_game_renderer");
   Logging::add_logging_category("main");
   Logging::add_logging_category("parser");
+  //  Logging::add_logging_category("puzzle_selection");
   //  Logging::add_logging_category("view");
 
   // Prepare a resource resolver
@@ -54,8 +57,10 @@ int main(int argc, char ** argv) {
     return -1;
   }
 
+  SdlClock clock;
+
   // Actually prepare and run the game
-  UbeGame ube(resolver, parser);
+  UbeGame ube(&clock, resolver, parser);
   if (ube.prepare_game() != 0) {
     std::cout << "Error while preparing game" << std::endl;
     std::cout << "Error message : " << ube.get_preparation_error_message() << std::endl;
