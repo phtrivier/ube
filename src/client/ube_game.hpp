@@ -1,6 +1,8 @@
 #ifndef _UBE_GAME_HPP_
 #define _UBE_GAME_HPP_
 
+#include "game_loop.hpp"
+
 #include <string>
 
 #include "SDL.h"
@@ -9,25 +11,33 @@ class ResourceResolverInterface;
 class OptionParser;
 class SdlInGameRenderer;
 class InGameModeFactory;
+class InGameMode;
 class SdlPuzzleSelectionRenderer;
 class PuzzleSelectionModeFactory;
+class PuzzleSelectionMode;
 
 /**
  * Class for the meat of the game
  */
-class UbeGame { 
+class UbeGame : 
+  public GameLoop
+{ 
 
 public:
 
-  UbeGame(ResourceResolverInterface & dep_resolver,
+  UbeGame(ClockInterface * i_p_clock,
+	  ResourceResolverInterface & dep_resolver,
 	  OptionParser & dep_option_parser) :
+    GameLoop(i_p_clock),
     dep_resolver_(dep_resolver),
     dep_option_parser_(dep_option_parser),
     preparation_error_message_(""),
     p_in_game_renderer_(NULL),
     p_in_game_mode_factory_(NULL),
+    p_in_game_mode_(NULL),
     p_puzzle_selection_renderer_(NULL),
-    p_puzzle_selection_mode_factory_(NULL)
+    p_puzzle_selection_mode_factory_(NULL),
+    p_puzzle_selection_mode_(NULL)
   {
   }
 
@@ -53,6 +63,8 @@ public:
    */
   void play();
   
+  void handle_event(int i_event_code);
+
 private:
   ResourceResolverInterface & dep_resolver_;
   OptionParser & dep_option_parser_;
@@ -66,15 +78,17 @@ private:
   // be needed.
   SdlInGameRenderer * p_in_game_renderer_;
   InGameModeFactory * p_in_game_mode_factory_;
+  InGameMode * p_in_game_mode_;
 
   SdlPuzzleSelectionRenderer * p_puzzle_selection_renderer_;
   PuzzleSelectionModeFactory * p_puzzle_selection_mode_factory_;
+  PuzzleSelectionMode * p_puzzle_selection_mode_;
 
   int prepare_sdl();
   int prepare_game_modes();
 
   int prepare_puzzle_selection_mode();
-  int prepare_in_game_mode();
+  int prepare_in_game_mode(std::string & i_puzzle_file_name);
 
   /**
    * Appends the current SDL_GetError to

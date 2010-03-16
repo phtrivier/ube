@@ -22,6 +22,8 @@ public:
   }
 
   virtual void render_puzzle_name(std::string & i_name, int i_index) = 0;
+
+  virtual int get_mouse_position_as_puzzle_index(int i_x, int i_y) = 0;
   
 };
 

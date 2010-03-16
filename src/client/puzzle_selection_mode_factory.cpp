@@ -2,6 +2,7 @@
 
 #include "sdl_controller.hpp"
 #include "puzzle_selection_mode.hpp"
+#include "puzzle_selection_geometry.hpp"
 #include "puzzle_selection_view.hpp"
 #include "puzzle_selection_mode.hpp"
 
@@ -22,7 +23,7 @@ PuzzleSelectionModeFactory::create_mode() {
   p_model_ = new PuzzleSelectionModel();
   p_view_ = new PuzzleSelectionView(dep_renderer_, *p_model_, *p_controller_);
 
-  mode_ = boost::shared_ptr<PuzzleSelectionMode>(new PuzzleSelectionMode(*p_controller_, *p_view_, *p_model_));
+  mode_ = boost::shared_ptr<GameModeInterface>(new PuzzleSelectionMode(*p_controller_, *p_view_, *p_model_));
 
   // FIXME(pht) : this is duplicated in factories
   if (p_controller_ != NULL && p_view_ != NULL) {

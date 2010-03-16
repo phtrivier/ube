@@ -22,6 +22,7 @@ libube_client_a_SOURCES=gettext.h \
 	ube_game.hpp ube_game.cpp \
 	puzzle_selection_model.hpp puzzle_selection_model.cpp \
 	puzzle_selection_renderer_interface.hpp \
+	puzzle_selection_geometry.hpp puzzle_selection_geometry.cpp \
 	puzzle_selection_view.hpp puzzle_selection_view.cpp \
 	puzzle_selection_mode.hpp puzzle_selection_mode.cpp \
 	puzzle_selection_mode_factory.hpp puzzle_selection_mode_factory.cpp \

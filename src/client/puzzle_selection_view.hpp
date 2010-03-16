@@ -38,7 +38,6 @@ private:
   PuzzleSelectionRendererInterface & dep_renderer_;
   PuzzleSelectionModel & dep_model_;
   ControllerInterface & dep_controller_;
-
 };
 
 #endif // _PUZZLE_SELECTION_VIEW_HPP_

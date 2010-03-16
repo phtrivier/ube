@@ -10,7 +10,7 @@ class PuzzleSelectionRendererInterface;
 class PuzzleSelectionView;
 class PuzzleSelectionModel;
 class SdlController;
-
+class GameModeInterface;
 
 /**
  * Factory to create and initialize a puzzle selection mode
@@ -28,7 +28,7 @@ public:
 
   int create_mode();
 
-  boost::shared_ptr<GameMode> & get_mode() {
+  boost::shared_ptr<GameModeInterface> & get_mode() {
     return mode_;
   }
 
@@ -40,7 +40,7 @@ private:
   PuzzleSelectionModel * p_model_;
   PuzzleSelectionView * p_view_;
 
-  boost::shared_ptr<GameMode> mode_;
+  boost::shared_ptr<GameModeInterface> mode_;
 
 };
 

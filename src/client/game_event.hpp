@@ -14,7 +14,7 @@ public:
   static const int MOUSE_CLICKED = 1;
   static const int UNDO = 2;
   static const int REDO = 3;
-    
+  static const int PUZZLE_SELECTED = 4;
 };
 
 #endif // _GAME_EVENT_HPP_

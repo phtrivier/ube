@@ -17,16 +17,20 @@ class PuzzleSelectionMode :
 { 
 
 public:
-
-    PuzzleSelectionMode(ControllerInterface & dep_controller, 
-	       ViewInterface & dep_view, 
-	       PuzzleSelectionModel & dep_model):
+  
+  PuzzleSelectionMode(ControllerInterface & dep_controller, 
+		      ViewInterface & dep_view, 
+		      PuzzleSelectionModel & dep_model):
     GameMode(&dep_controller, &dep_view),
     dep_model_(dep_model)
   {
   }
-
+  
   void update_game(int iDelta);
+
+  PuzzleSelectionModel & get_model() {
+    return dep_model_;
+  }
 
 private:
 

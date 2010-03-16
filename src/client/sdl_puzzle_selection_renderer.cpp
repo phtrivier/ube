@@ -70,11 +70,17 @@ SdlPuzzleSelectionRenderer::render_puzzle_name(std::string & i_name,
 
   } else {
     SDL_Rect dst;
-    dst.x = 50;
-    dst.y = 50 + (40*i_index + 10);
+    dst.x = get_puzzle_name_x(i_index); // 50;
+    dst.y = get_puzzle_name_y(i_index); // 50 + (40*i_index + 10);
     LOG_D("puzzle_selection") << "Blitting text surface on screen" << dst.x << "," << dst.y << "," << dst.w << "," << dst.h << std::endl;
 
     SDL_BlitSurface(text_surface, NULL, get_screen(), &dst);
     SDL_FreeSurface(text_surface);
   }
+}
+
+int
+SdlPuzzleSelectionRenderer::get_mouse_position_as_puzzle_index(int i_x, int i_y)
+{
+  return PuzzleSelectionGeometry::get_mouse_position_as_puzzle_index(i_x,i_y);
 }
