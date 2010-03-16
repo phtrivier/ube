@@ -74,6 +74,7 @@ client_tests_SOURCES=tests/client_tests.cpp \
 	tests/mock_command_factory.hpp \
 	tests/mock_game_mode.hpp \
 	tests/mock_in_game_renderer.hpp \
+	tests/mock_puzzle_selection_renderer.hpp \
 	tests/game_mode_test.cpp \
 	tests/game_loop_test.cpp \
 	tests/in_game_view_test.cpp \

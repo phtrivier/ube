@@ -1,11 +1,10 @@
 #include "puzzle_selection_view.hpp"
 
 #include "puzzle_selection_geometry.hpp"
-
 #include "mvc/tests/mock_controller.hpp"
+#include "client/puzzle_selection_model.hpp"
 
 #include "client/tests/mock_puzzle_selection_renderer.hpp"
-#include "client/puzzle_selection_model.hpp"
 
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
