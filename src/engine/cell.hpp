@@ -24,6 +24,8 @@ public:
   Cell(int iI, int iJ, int iType) : i_(iI), j_(iJ), type_(iType) , in_path_(false) {
   }
 
+  ~Cell();
+
   int get_i() {
     return i_;
   }

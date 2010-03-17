@@ -27,7 +27,12 @@ public:
 		    std::string puzzle_file_name) :
     dep_resolver_(dep_resolver),
     dep_renderer_(dep_renderer),
-    puzzle_file_name_(puzzle_file_name)
+    puzzle_file_name_(puzzle_file_name),
+    p_view_(NULL),
+    p_model_(NULL),
+    p_puzzle_(NULL),
+    p_controller_(NULL),
+    p_path_finder_(NULL)
   {
   }
 
@@ -37,6 +42,12 @@ public:
 
   boost::shared_ptr<GameMode> & get_mode();
 
+  /**
+   * Load a puzzle file by its file name.
+   * @param i_file_name : puzzle name, with extension (eg "puzzle1.lua")
+   */
+  int load_puzzle(std::string & i_file_name);
+
 private:
 
   ResourceResolverInterface & dep_resolver_;
@@ -44,10 +55,10 @@ private:
 
   std::string puzzle_file_name_;
 
-  SdlController * p_controller_;
   InGameView * p_view_;
   InGameModel * p_model_;
   Puzzle * p_puzzle_;
+  SdlController * p_controller_;
   LuaPathFinder * p_path_finder_;
 
   boost::shared_ptr<GameMode> mode_;

@@ -36,6 +36,7 @@ int main(int argc, char ** argv) {
   Logging::add_logging_category("sdl_in_game_renderer");
   Logging::add_logging_category("main");
   Logging::add_logging_category("parser");
+  Logging::add_logging_category("cell");
   //  Logging::add_logging_category("puzzle_selection");
   //  Logging::add_logging_category("view");
 

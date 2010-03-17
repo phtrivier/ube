@@ -139,11 +139,9 @@ UbeGame::prepare_in_game_mode(std::string & i_puzzle_file_name)
 	register_game_mode("in-game", p_in_game_mode_);
       }
     }
-  } /*
-  else {
+  } else {
     p_in_game_mode_factory_->load_puzzle(i_puzzle_file_name);
   }
-    */
 
   return res;
 }

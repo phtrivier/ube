@@ -117,3 +117,16 @@ Puzzle::clear_path()
     }
   }
 }
+
+void
+Puzzle::clear_cells()
+{
+  for (int i = 0 ; i < h_ ; i++) {
+    if (cells_[i] != NULL) {
+      delete[] cells_[i];
+    }
+  }
+  if (cells_ != NULL) {
+    delete[] cells_;
+  }
+}

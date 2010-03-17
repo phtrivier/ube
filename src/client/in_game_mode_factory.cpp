@@ -22,21 +22,37 @@ InGameModeFactory::~InGameModeFactory() {
 }
 
 int
-InGameModeFactory::create_mode() {
-  int res = 0;
+InGameModeFactory::load_puzzle(std::string & i_file_name)
+{
+  if (p_puzzle_ == NULL) {
+    p_puzzle_ = new Puzzle();
+  } else {
+    p_puzzle_->clear();
+  }
 
-  // TODO : initialize the model better than this ? Or what ? 
+  // FIXME(pht) : reuse a loader instead of recreating one ?
   CellFactory factory;
 
   LuaPuzzleLoader loader(&factory, dep_resolver_);
-  //  PuzzleLoader loader(&factory);
 
-  p_puzzle_ = new Puzzle();
-
-  res = loader.load_puzzle_file(puzzle_file_name_.c_str(), p_puzzle_);
-
+  int res = loader.load_puzzle_file(i_file_name.c_str(), p_puzzle_);
   if (res == 0) {
     p_puzzle_->enters_player();
+  }
+  // TODO : Otherwise, display any lua error message from
+  // preparation ? (ideally, loader should have the error...)
+
+  return res;
+
+}
+
+int
+InGameModeFactory::create_mode() {
+  int res = 0;
+
+  res = load_puzzle(puzzle_file_name_);
+
+  if (res == 0) {
     // Bring things together
     p_path_finder_ = new LuaPathFinder(dep_resolver_);
     p_model_ = new InGameModel(*p_path_finder_);

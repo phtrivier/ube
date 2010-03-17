@@ -13,12 +13,27 @@ class Puzzle {
 
 public:
 
-  Puzzle() {
-    w_ = h_ = -1;
-    player_i_ = player_j_ = -1;
+  Puzzle() : 
+    cells_(NULL),
+    w_(-1), 
+    h_(-1), 
+    player_i_(-1),
+    player_j_(-1)
+  {
   }
 
   ~Puzzle() {
+    clear_cells();
+  }
+
+  /**
+   * Clears all cells in the puzzle,
+   * and reset dimensions
+   */
+  void clear() {
+    clear_cells();
+    w_ = h_ = -1;
+    player_i_ = player_j_ = -1;
   }
 
   /**
@@ -114,11 +129,11 @@ public:
   
 private:
 
-  // Dimensions
-  int w_,h_;
-
   // Cells
   Cell*** cells_;
+
+  // Dimensions
+  int w_,h_;
 
   // Position of the player
   int player_i_;
@@ -126,6 +141,9 @@ private:
 
   // Moves
   std::vector<Move> moves_;
+
+  // Clear all the cells
+  void clear_cells();
 
 };
 
