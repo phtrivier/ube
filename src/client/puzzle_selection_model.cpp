@@ -3,9 +3,9 @@
 void 
 PuzzleSelectionModel::fill_puzzle_list()
 {
-  add_puzzle("First puzzle", "puzzle1.lua");
-  add_puzzle("Second puzzle", "puzzle2.lua");
-  add_puzzle("Big puzzle", "puzzle3.lua");
+  add_puzzle("Tutorial", "tutorial0.lua");
+  add_puzzle("Second puzzle", "tutorial1.lua");
+  add_puzzle("Big puzzle", "tutorial2.lua");
 }
 
 void
