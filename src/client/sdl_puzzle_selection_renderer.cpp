@@ -4,6 +4,10 @@
 #include "common/resource_resolver_interface.hpp"
 
 #include <assert.h>
+#include <config.h>
+
+#include <boost/format.hpp>
+using boost::format;
 
 int
 SdlPuzzleSelectionRenderer::init() 
@@ -46,6 +50,7 @@ SdlPuzzleSelectionRenderer::clear()
   // FIXME(pht) : i18n this
   render_text("Please choose a level", 300, 450);
   render_text("(Oh, and please, don't shoot the coder, he's doing its best.)", 170, 500);
+  render_text(str(format("ube v%1%") % VERSION), 10, 570);
 }
 
 void
