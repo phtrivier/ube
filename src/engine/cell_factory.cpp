@@ -20,7 +20,7 @@ CellFactory::is_valid_cell_letter(char iLetter) const {
 }
 
 Cell * 
-CellFactory::make_cell(int iI, int iJ, char iLetter) const {
+CellFactory::make_cell(int iI, int iJ, char iLetter) {
 
   assert(is_valid_cell_letter(iLetter));
 
@@ -40,6 +40,19 @@ CellFactory::make_cell(int iI, int iJ, char iLetter) const {
     type = Cell::WALKABLE;
     break;
   }
+
+  Cell * res = new Cell(iI, iJ, type);
+  created_cells_.push_back(res);
   
-  return new Cell(iI, iJ, type);
+  return res;
+}
+
+void
+CellFactory::delete_created_cells()
+{
+  for (int i = 0 ; i < (int) created_cells_.size() ; ++i) {
+    assert(created_cells_[i] != NULL);
+    delete created_cells_[i];
+  }
+  created_cells_.clear();
 }

@@ -96,5 +96,30 @@ namespace {
     
   }
 
+  TEST_F(LuaPuzzleLoaderTest, ClearsMoveListWhenReloadingAPuzzle) {
+    Puzzle p;
+    load_puzzle_from_file("puzzle_loader_test/puzzle2.lua", &p);
+    ASSERT_EQ(1, (int) p.moves().size());
+    p.moves()[0].use();
+    ASSERT_FALSE(p.moves()[0].available());
+    load_puzzle_from_file("puzzle_loader_test/puzzle1.lua", &p);
+    ASSERT_EQ(2, (int) p.moves().size());
+    ASSERT_TRUE(p.moves()[0].available());
+  }
+
+  TEST_F(LuaPuzzleLoaderTest, LoadedPuzzlesCanBeCleared) {
+    Puzzle p;
+    load_puzzle_from_file("puzzle_loader_test/puzzle2.lua", &p);
+    ASSERT_EQ(1, (int) p.moves().size());
+    load_puzzle_from_file("puzzle_loader_test/puzzle1.lua", &p);
+    ASSERT_EQ(2, (int) p.moves().size());
+    p.clear();
+    p.clear();
+    load_puzzle_from_file("puzzle_loader_test/puzzle2.lua", &p);
+    ASSERT_EQ(1, (int) p.moves().size());
+  }
+
+
+
 
 } // Namespace

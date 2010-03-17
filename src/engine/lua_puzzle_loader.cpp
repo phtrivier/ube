@@ -45,8 +45,6 @@ void
 LuaPuzzleLoader::register_lua_functions() 
 {
 
-  std::cout << "Registering in child version ... " << std::endl;
-
   LOG_D("lua") << "Registering functions for puzzle loader" << std::endl;
 
   // This puzzle loader will be accessible 
@@ -77,6 +75,9 @@ LuaPuzzleLoader::load_lua_puzzle_file(const char * iFileName)
 int
 LuaPuzzleLoader::load_puzzle_file(const char * iFileName, 
 				  Puzzle * oPuzzle) {
+
+  assert(oPuzzle != NULL);
+  oPuzzle->clear();
 
   // The puzzle will be accessible to the script as 
   // a global "cpp_puzzle" variable.

@@ -28,13 +28,9 @@ public:
 
   /**
    * Clears all cells in the puzzle,
-   * and reset dimensions
+   * reset dimensions and list of moves.
    */
-  void clear() {
-    clear_cells();
-    w_ = h_ = -1;
-    player_i_ = player_j_ = -1;
-  }
+  void clear();
 
   /**
    * Set the dimensions of the puzzle, 

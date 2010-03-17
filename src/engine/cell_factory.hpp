@@ -1,6 +1,8 @@
 #ifndef _CELL_FACTORY_HPP_
 #define _CELL_FACTORY_HPP_
 
+#include <vector>
+
 class Cell;
 
 /**
@@ -31,7 +33,18 @@ public:
    * @param iJ : a column index (should be positive)
    * @param iLetter : a letter representing a cell (should be valid, as defined by is_valid_cell_letter)
    */
-  Cell * make_cell(int iI, int iJ, char iLetter) const;
+  Cell * make_cell(int iI, int iJ, char iLetter);
+
+  /**
+   * Delete all the cells previously created by this 
+   * factory.
+   */
+  void delete_created_cells();
+
+private:
+
+  std::vector<Cell *> created_cells_;
+
 };
 
 #endif // _CELL_FACTORY_HPP_

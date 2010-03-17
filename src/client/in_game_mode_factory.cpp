@@ -19,6 +19,7 @@ InGameModeFactory::~InGameModeFactory() {
   delete p_model_;
   delete p_puzzle_;
   delete p_controller_;
+
 }
 
 int
@@ -27,17 +28,25 @@ InGameModeFactory::load_puzzle(std::string & i_file_name)
   if (p_puzzle_ == NULL) {
     p_puzzle_ = new Puzzle();
   } else {
+    // At least one puzzle was already 
+    // created. To avoid memory leak, 
+    // we ask the factory to get rid 
+    // of all created cells.
     p_puzzle_->clear();
+    cell_factory_.delete_created_cells();
   }
 
-  // FIXME(pht) : reuse a loader instead of recreating one ?
-  CellFactory factory;
-
-  LuaPuzzleLoader loader(&factory, dep_resolver_);
+  LuaPuzzleLoader loader(&cell_factory_, dep_resolver_);
 
   int res = loader.load_puzzle_file(i_file_name.c_str(), p_puzzle_);
   if (res == 0) {
+    // TODO(pht) : this looks kinda strange ... maybe the model should be the sole responsible for clearing everything ? 
+    // Also, what if the model was responsible for creating the puzzle (I very rarely create a model without 
+    // a puzzle ... and it would simplify a few things ... 
     p_puzzle_->enters_player();
+    if (p_model_ != NULL) {
+      p_model_->set_next_available_move_as_current();
+    }
   }
   // TODO : Otherwise, display any lua error message from
   // preparation ? (ideally, loader should have the error...)

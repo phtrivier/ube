@@ -91,9 +91,10 @@ InGameModel::set_next_available_move_as_current()
   int size = moves.size();
   bool found = false;
   current_move_index_ = -1;
-  for (int i = 0 ; !found && i < size ; i++) {
+  for (int i = 0 ; !found && i < size ; ++i) {
     if (moves[i].available()) {
       current_move_index_ = i;
+      found = true;
     }
   }
 }

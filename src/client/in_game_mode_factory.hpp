@@ -1,6 +1,8 @@
 #ifndef _IN_GAME_MODE_FACTORY_HPP_
 #define _IN_GAME_MODE_FACTORY_HPP_
 
+#include "engine/cell_factory.hpp"
+
 #include <string>
 
 #include <boost/shared_ptr.hpp>
@@ -60,6 +62,7 @@ private:
   Puzzle * p_puzzle_;
   SdlController * p_controller_;
   LuaPathFinder * p_path_finder_;
+  CellFactory cell_factory_;
 
   boost::shared_ptr<GameMode> mode_;
 

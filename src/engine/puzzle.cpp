@@ -119,8 +119,34 @@ Puzzle::clear_path()
 }
 
 void
+Puzzle::clear()
+{
+  clear_cells();
+  moves_.clear();
+  w_ = h_ = -1;
+  player_i_ = player_j_ = -1;
+}
+
+void
 Puzzle::clear_cells()
 {
+  if (cells_ != NULL) {
+    for (int i = 0 ; i < h_ ; i++) {
+      if (cells_[i] != NULL) {
+	for (int j = 0 ; j < w_ ; j++) {
+	  if (cells_[i][j] != NULL) {
+	    cells_[i][j] = NULL;
+	  }
+	}
+	delete[] cells_[i];
+      }
+    }
+    
+    delete[] cells_;
+    cells_ = NULL;
+  }
+
+  /*
   for (int i = 0 ; i < h_ ; i++) {
     if (cells_[i] != NULL) {
       delete[] cells_[i];
@@ -129,6 +155,12 @@ Puzzle::clear_cells()
   if (cells_ != NULL) {
     delete[] cells_;
   }
+  */
+  /*
+  if (cells_ != NULL) {
+    delete cells_;
+  }
+  */
 }
 
 bool
@@ -137,3 +169,4 @@ Puzzle::is_finished()
   return is_valid_position(player_i_, player_j_) &&
     get_cell_at(player_i_, player_j_)->is_out();
 }
+
