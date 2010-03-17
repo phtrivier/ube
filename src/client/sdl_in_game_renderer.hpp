@@ -37,7 +37,8 @@ public:
     SdlRenderer(dep_resolver, dep_p_screen),
     p_selected_cell_image_(NULL), p_banned_cell_image_(NULL),
     p_player_image_(NULL),
-    p_bg_(NULL), p_undo_image_(NULL), p_redo_image_(NULL)
+    p_bg_(NULL), p_undo_image_(NULL), p_redo_image_(NULL),
+    p_disabled_undo_image_(NULL), p_disabled_redo_image_(NULL)
   {
 
   }
@@ -72,7 +73,7 @@ public:
 
   void render_moves(InGameModel & i_model);
 
-  void render_ui();
+  void render_ui(bool i_can_undo, bool i_can_redo);
 
   bool is_on_undo_button(int i_x, int i_y);
   
@@ -94,6 +95,9 @@ private:
 
   SDL_Surface * p_undo_image_;
   SDL_Surface * p_redo_image_;
+  SDL_Surface * p_disabled_undo_image_;
+  SDL_Surface * p_disabled_redo_image_;
+
 
   /**
    * Load all the images necessary to display

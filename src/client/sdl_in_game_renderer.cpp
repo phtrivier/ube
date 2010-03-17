@@ -57,7 +57,9 @@ SdlInGameRenderer::~SdlInGameRenderer() {
   clear_image(p_bg_);
   clear_image(p_undo_image_);
   clear_image(p_redo_image_);
-    
+  clear_image(p_disabled_undo_image_);
+  clear_image(p_disabled_redo_image_);
+
 }
 
 int
@@ -75,6 +77,8 @@ SdlInGameRenderer::init() {
   
   res = load_image("undo.png", &p_undo_image_);
   res = load_image("redo.png", &p_redo_image_);
+  res = load_image("disabled_undo.png", &p_disabled_undo_image_);
+  res = load_image("disabled_redo.png", &p_disabled_redo_image_);
 
   return res;
 }
@@ -260,16 +264,25 @@ SdlInGameRenderer::mouse_position_as_move_index(int i_x, int i_y) {
 }
 
 void
-SdlInGameRenderer::render_ui() {
+SdlInGameRenderer::render_ui(bool i_can_undo, bool i_can_redo) {
 
   SDL_Rect dst;
   dst.x = UNDO_X;
   dst.y = UNDO_Y;
-  SDL_BlitSurface(p_undo_image_, NULL, get_screen(), &dst);
+  if (i_can_undo) {
+    SDL_BlitSurface(p_undo_image_, NULL, get_screen(), &dst);
+  } else {
+    SDL_BlitSurface(p_disabled_undo_image_, NULL, get_screen(), &dst);
+  }
 
   dst.x = REDO_X;
   dst.y = REDO_Y;
-  SDL_BlitSurface(p_redo_image_, NULL, get_screen(), &dst);
+  if (i_can_redo) {
+    SDL_BlitSurface(p_redo_image_, NULL, get_screen(), &dst);
+  } else {
+    SDL_BlitSurface(p_disabled_redo_image_, NULL, get_screen(), &dst);
+  }
+
 
 }
 

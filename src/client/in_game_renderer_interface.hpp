@@ -67,7 +67,7 @@ public:
    */
   virtual void render_moves(InGameModel & i_model) = 0;
 
-  virtual void render_ui() = 0;
+  virtual void render_ui(bool can_undo, bool can_redo) = 0;
 
   virtual bool is_on_undo_button(int i_x, int i_y) = 0;
 

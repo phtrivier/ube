@@ -15,7 +15,7 @@
 void
 InGameView::render_game() {
   dep_renderer_.clear();
-  dep_renderer_.render_ui();
+  dep_renderer_.render_ui(command_stack_.canUndo(), command_stack_.canRedo());
   render_puzzle(dep_model_.get_puzzle());
   render_selected_cell(dep_model_.get_puzzle());
   render_path(dep_model_);

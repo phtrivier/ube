@@ -33,7 +33,7 @@ class MockInGameRenderer : public InGameRendererInterface {
   MOCK_METHOD1(render_moves,
 	       void (InGameModel & i_model));
 
-  MOCK_METHOD0(render_ui, void());
+  MOCK_METHOD2(render_ui, void(bool i_can_undo, bool i_can_redo));
 
   MOCK_METHOD2(is_on_undo_button,
 	       bool (int i_x, int i_y));

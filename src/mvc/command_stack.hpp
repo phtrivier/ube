@@ -42,20 +42,6 @@ public:
    */
   void redoLast();
 
-private:
-
-  std::vector<CommandInterface *> commands_;
-
-  /**
-   * Index of the next command that can be undone.
-   */
-  int undo_index_;
-
-  /**
-   * Index of the next command that can be redone.
-   */
-  int redo_index_;
-
   /**
    * Is there anything to undo ?
    */
@@ -70,6 +56,19 @@ private:
     return redo_index_ != -1;
   }
 
+private:
+
+  std::vector<CommandInterface *> commands_;
+
+  /**
+   * Index of the next command that can be undone.
+   */
+  int undo_index_;
+
+  /**
+   * Index of the next command that can be redone.
+   */
+  int redo_index_;
 
 };
 
