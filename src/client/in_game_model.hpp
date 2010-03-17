@@ -88,6 +88,11 @@ public:
    */
   bool has_valid_move();
 
+  /**
+   * Has the player reached the out cell of the puzzle ?
+   */
+  bool is_puzzle_finished();
+
 private:
   Puzzle * dep_puzzle_;
   PathFinderInterface & dep_path_finder_;

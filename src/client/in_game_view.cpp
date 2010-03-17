@@ -36,6 +36,11 @@ InGameView::handle_event(int iEventCode) {
 
       if (dep_model_.get_puzzle().get_cell_at(i,j)->is_in_path()) {
 	command_stack_.doMove(dep_model_, dep_model_.current_move_index(), i, j);
+
+	if (dep_model_.is_puzzle_finished()) {
+	  dep_controller_.fire_event(GameEvent::PUZZLE_FINISHED);
+	}
+
       }
     }
     // FIXME(pht) : some of this really belongs to the model, but

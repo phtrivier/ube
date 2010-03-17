@@ -126,6 +126,11 @@ public:
    * in the last computed path.
    */
   void clear_path();
+
+  /**
+   * Has the player reached the exit ? 
+   */
+  bool is_finished();
   
 private:
 

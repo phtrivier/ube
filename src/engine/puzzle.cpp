@@ -130,3 +130,10 @@ Puzzle::clear_cells()
     delete[] cells_;
   }
 }
+
+bool
+Puzzle::is_finished()
+{
+  return is_valid_position(player_i_, player_j_) &&
+    get_cell_at(player_i_, player_j_)->is_out();
+}

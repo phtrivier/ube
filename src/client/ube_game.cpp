@@ -183,9 +183,12 @@ UbeGame::handle_event(int i_event_code)
     // FIXME(pht) : move some of this to prepare
     std::string puzzle_file_name = p_puzzle_selection_mode_->get_model().get_selected_puzzle_file_name();
     prepare_in_game_mode(puzzle_file_name);
-    p_in_game_mode_ = static_cast<InGameMode *>(p_in_game_mode_factory_->get_mode().get());
-    register_game_mode("in-game", p_in_game_mode_);
     set_current_game_mode("in-game");
+    break;
+  }
+  case (GameEvent::PUZZLE_FINISHED) : {
+    set_current_game_mode("puzzle-selection");
+    break;
   }
   }
 }

@@ -97,3 +97,9 @@ InGameModel::set_next_available_move_as_current()
     }
   }
 }
+
+bool
+InGameModel::is_puzzle_finished()
+{
+  return dep_puzzle_->is_finished();
+}
