@@ -15,6 +15,7 @@
 void
 InGameView::render_game() {
   dep_renderer_.clear();
+  dep_renderer_.render_ui();
   render_puzzle(dep_model_.get_puzzle());
   render_selected_cell(dep_model_.get_puzzle());
   render_path(dep_model_);
@@ -54,6 +55,15 @@ InGameView::handle_event(int iEventCode) {
       }
       
     }
+
+    if (dep_renderer_.is_on_undo_button(mouse_x, mouse_y)) {
+      command_stack_.undoLast();
+    }
+
+    if (dep_renderer_.is_on_redo_button(mouse_x, mouse_y)) {
+      command_stack_.redoLast();
+    }
+
   } else if (iEventCode == GameEvent::UNDO) {
     command_stack_.undoLast();
   } else if (iEventCode == GameEvent::REDO) {

@@ -13,6 +13,16 @@
 #define CELLS_W 32
 #define CELLS_H 32
 
+#define UNDO_X 20
+#define UNDO_Y 520
+#define UNDO_H 64
+#define UNDO_W 64
+
+#define REDO_X 20 + 64 + 10
+#define REDO_Y 520
+#define REDO_H 64
+#define REDO_W 64
+
 /**
  * Geometry of the screen.
  */
@@ -32,6 +42,10 @@ public:
   int mouse_y_as_puzzle_line(int i_y);
   
   int mouse_position_as_move_index(int i_x, int i_y);
+
+  bool is_on_undo_button(int i_x, int i_y);
+
+  bool is_on_redo_button(int i_x, int i_y);
 
 };
 

@@ -35,10 +35,9 @@ public:
     InGameRendererInterface(),
     InGameRendererGeometry(),
     SdlRenderer(dep_resolver, dep_p_screen),
-    p_selected_cell_image_(NULL),
-    p_banned_cell_image_(NULL),
+    p_selected_cell_image_(NULL), p_banned_cell_image_(NULL),
     p_player_image_(NULL),
-    p_bg_(NULL)
+    p_bg_(NULL), p_undo_image_(NULL), p_redo_image_(NULL)
   {
 
   }
@@ -73,6 +72,12 @@ public:
 
   void render_moves(InGameModel & i_model);
 
+  void render_ui();
+
+  bool is_on_undo_button(int i_x, int i_y);
+  
+  bool is_on_redo_button(int i_x, int i_y);
+    
 private:
 
   std::map<int, SDL_Surface *> cell_images_;
@@ -86,6 +91,9 @@ private:
   SDL_Surface * p_player_image_;
 
   SDL_Surface * p_bg_;
+
+  SDL_Surface * p_undo_image_;
+  SDL_Surface * p_redo_image_;
 
   /**
    * Load all the images necessary to display

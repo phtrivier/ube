@@ -37,3 +37,17 @@ InGameRendererGeometry::mouse_position_as_move_index(int i_x, int i_y)
 
   return res;
 }
+
+bool 
+InGameRendererGeometry::is_on_undo_button(int i_x, int i_y)
+{
+  return (i_x > UNDO_X && i_x < UNDO_X + UNDO_W) &&
+    (i_y > UNDO_Y && i_y < UNDO_Y + UNDO_H);
+}
+
+bool 
+InGameRendererGeometry::is_on_redo_button(int i_x, int i_y)
+{
+  return (i_x > REDO_X && i_x < REDO_X + REDO_W) &&
+    (i_y > REDO_Y && i_y < REDO_Y + REDO_H);
+}

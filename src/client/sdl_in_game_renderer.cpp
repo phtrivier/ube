@@ -55,7 +55,9 @@ SdlInGameRenderer::~SdlInGameRenderer() {
   }
 
   clear_image(p_bg_);
-
+  clear_image(p_undo_image_);
+  clear_image(p_redo_image_);
+    
 }
 
 int
@@ -71,6 +73,9 @@ SdlInGameRenderer::init() {
   res = load_image("player.png", &p_player_image_);      
   res = load_image("bg.png", &p_bg_);
   
+  res = load_image("undo.png", &p_undo_image_);
+  res = load_image("redo.png", &p_redo_image_);
+
   return res;
 }
 
@@ -252,5 +257,29 @@ SdlInGameRenderer::mouse_y_as_puzzle_line(int i_y) {
 int 
 SdlInGameRenderer::mouse_position_as_move_index(int i_x, int i_y) {
   return InGameRendererGeometry::mouse_position_as_move_index(i_x,i_y);
+}
+
+void
+SdlInGameRenderer::render_ui() {
+
+  SDL_Rect dst;
+  dst.x = UNDO_X;
+  dst.y = UNDO_Y;
+  SDL_BlitSurface(p_undo_image_, NULL, get_screen(), &dst);
+
+  dst.x = REDO_X;
+  dst.y = REDO_Y;
+  SDL_BlitSurface(p_redo_image_, NULL, get_screen(), &dst);
+
+}
+
+bool
+SdlInGameRenderer::is_on_undo_button(int i_x, int i_y) {
+  return InGameRendererGeometry::is_on_undo_button(i_x,i_y);
+}
+
+bool
+SdlInGameRenderer::is_on_redo_button(int i_x, int i_y) {
+  return InGameRendererGeometry::is_on_redo_button(i_x,i_y);
 }
 
