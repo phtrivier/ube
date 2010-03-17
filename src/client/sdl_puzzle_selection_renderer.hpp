@@ -54,6 +54,8 @@ private:
   
   int load_font(const char * i_name, int i_ptsize, TTF_Font ** o_pp_font);
 
+  void render_text(std::string i_text, int i_x, int i_y);
+
 };
 
 #endif // _SDL_PUZZLE_SELECTION_RENDERER_HPP_

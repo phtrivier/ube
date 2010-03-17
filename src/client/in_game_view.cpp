@@ -39,6 +39,7 @@ InGameView::handle_event(int iEventCode) {
 	command_stack_.doMove(dep_model_, dep_model_.current_move_index(), i, j);
 
 	if (dep_model_.is_puzzle_finished()) {
+	  command_stack_.clear();
 	  dep_controller_.fire_event(GameEvent::PUZZLE_FINISHED);
 	}
 

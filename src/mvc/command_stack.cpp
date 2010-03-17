@@ -6,6 +6,12 @@
 
 CommandStack::~CommandStack()
 {
+  clear();
+}
+
+void
+CommandStack::clear()
+{
   // Deletes all the pointers in the command stack.
   int size = (int) commands_.size();
   for (int i = 0 ; i < size ; i++) {
@@ -14,6 +20,10 @@ CommandStack::~CommandStack()
     commands_.pop_back();
     delete(p_command);
   }
+  
+  undo_index_ = -1;
+  redo_index_ = -1;
+
 }
 
 void

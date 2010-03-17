@@ -3,9 +3,11 @@
 void 
 PuzzleSelectionModel::fill_puzzle_list()
 {
-  add_puzzle("Tutorial", "tutorial0.lua");
-  add_puzzle("Second puzzle", "tutorial1.lua");
-  add_puzzle("Big puzzle", "tutorial2.lua");
+  add_puzzle("From here to there (you can move, like.)", "tutorial0.lua");
+  add_puzzle("Twice as fast (you can move even faster, like.)", "tutorial0a.lua");
+  add_puzzle("Ouch, a wall. You can cross it. Trust me.", "tutorial1.lua");
+  add_puzzle("Okay, let's get funnier...", "tutorial2.lua");
+
 }
 
 void

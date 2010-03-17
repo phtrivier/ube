@@ -42,12 +42,37 @@ SdlPuzzleSelectionRenderer::clear()
 {
   assert(get_screen() != NULL);
   SDL_BlitSurface(p_bg_, NULL, get_screen(), NULL);
+
+  // FIXME(pht) : i18n this
+  render_text("Please choose a level", 300, 450);
+  render_text("(Oh, and please, don't shoot the coder, he's doing its best.)", 170, 500);
 }
 
 void
 SdlPuzzleSelectionRenderer::flush() 
 {
   SdlRenderer::flush();
+}
+
+void
+SdlPuzzleSelectionRenderer::render_text(std::string i_text, int i_x, int i_y)
+{
+  // FIXME(pht) : ideally, the text surface only has to be
+  // computed once and can be reused, can't it ? 
+  SDL_Surface * text_surface;
+  SDL_Color white = {255,255,255};
+  if (!(text_surface = TTF_RenderText_Blended(p_font_, i_text.c_str(), white))) {
+    printf("Error while printing text %s\n", TTF_GetError());
+    LOG_D("puzzle_selection") << "Could not create renderering surface ; " << TTF_GetError() << std::endl;
+  } else {
+    SDL_Rect dst;
+    dst.x = i_x;
+    dst.y = i_y; // 50 + (40*i_index + 10);
+    LOG_D("puzzle_selection") << "Blitting text surface on screen" << dst.x << "," << dst.y << "," << dst.w << "," << dst.h << std::endl;
+
+    SDL_BlitSurface(text_surface, NULL, get_screen(), &dst);
+    SDL_FreeSurface(text_surface);
+  }
 }
 
 void
@@ -59,24 +84,8 @@ SdlPuzzleSelectionRenderer::render_puzzle_name(std::string & i_name,
 
   LOG_D("puzzle_selection") << "Rendering name " << i_name << " at index " << i_index << std::endl;
 
-  // FIXME(pht) : ideally, the text surface only has to be
-  // computed once and can be reused, can't it ? 
-  SDL_Surface * text_surface;
-  SDL_Color white = {255,255,255};
-  if (!(text_surface = TTF_RenderText_Blended(p_font_, i_name.c_str(), white))) {
-    printf("Error while printing text %s\n", TTF_GetError());
-
-    LOG_D("puzzle_selection") << "Could not create renderering surface ; " << TTF_GetError() << std::endl;
-
-  } else {
-    SDL_Rect dst;
-    dst.x = get_puzzle_name_x(i_index); // 50;
-    dst.y = get_puzzle_name_y(i_index); // 50 + (40*i_index + 10);
-    LOG_D("puzzle_selection") << "Blitting text surface on screen" << dst.x << "," << dst.y << "," << dst.w << "," << dst.h << std::endl;
-
-    SDL_BlitSurface(text_surface, NULL, get_screen(), &dst);
-    SDL_FreeSurface(text_surface);
-  }
+  render_text(i_name, get_puzzle_name_x(i_index), get_puzzle_name_y(i_index));
+ 
 }
 
 int

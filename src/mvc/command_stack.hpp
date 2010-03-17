@@ -56,6 +56,8 @@ public:
     return redo_index_ != -1;
   }
 
+  void clear();
+
 private:
 
   std::vector<CommandInterface *> commands_;
