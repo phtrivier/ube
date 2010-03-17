@@ -44,7 +44,8 @@ engine_tests_LDADD=libube-engine.a ../common/libube-common.a -L$(top_srcdir)/lib
 # Otherwise it won't be included in the distribution, 
 # and make distcheck will fail.
 EXTRA_DIST=${lua_DATA} \
-	tests/lua/puzzle_loader_test/puzzle1.lua
+	tests/lua/puzzle_loader_test/puzzle1.lua \
+	tests/lua/puzzle_loader_test/puzzle2.lua
 
 # This means engine-tests is run when using 'make check'.
 TESTS = engine-tests

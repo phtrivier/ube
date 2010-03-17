@@ -1,0 +1,3 @@
+* DONE ube-01
+
+Seems like cells on the border of a puzzle cannot be reached ... 

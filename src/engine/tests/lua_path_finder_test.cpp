@@ -92,5 +92,38 @@ namespace {
 
   }
 
+  TEST_F(LuaPathFinderTest, CanReachBordersOfPuzzle) {
+
+    Puzzle p;
+    p.set_dimensions(3,2);
+    Cell c1(0,0,Cell::WALKABLE);
+    Cell c2(0,1,Cell::WALKABLE);
+    Cell c3(0,2,Cell::IN);
+    Cell c4(1,0,Cell::OUT);
+    Cell c5(1,1,Cell::WALKABLE);
+    Cell c6(1,2,Cell::WALKABLE);
+
+    p.add_cell(&c1);
+    p.add_cell(&c2);
+    p.add_cell(&c3);
+    p.add_cell(&c4);
+    p.add_cell(&c5);
+    p.add_cell(&c6);
+
+    MockResourceResolver resolver;
+
+    EXPECT_CALL(resolver, get_engine_lua_path()).
+      WillOnce(Return(str(format("%1%/lua/?.lua") % SRCDIR)));
+
+    EXPECT_CALL(resolver, get_engine_lua_file_name(StrEq("path_finder_lib.lua")))
+      .WillOnce(Return(str(format("%1%/lua/path_finder_lib.lua") % SRCDIR)));
+
+    LuaPathFinder finder(resolver);
+
+    ASSERT_EQ(1, finder.find_path(&p, 0, 2, 1, 0, MoveType::SINGLE));
+    
+  }
+
+  
 
 } // Namespace

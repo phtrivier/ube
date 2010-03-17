@@ -57,7 +57,7 @@ InGameModel::has_valid_move()
 bool
 InGameModel::has_valid_goal()
 {
-  return goal_i_ > 0 && goal_j_ > 0 &&
+  return goal_i_ >= 0 && goal_j_ >= 0 &&
     goal_i_ < dep_puzzle_->get_h() &&
     goal_j_ < dep_puzzle_->get_w();
 }

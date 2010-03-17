@@ -78,6 +78,16 @@ public:
    */
   void move_player(int i_i, int i_j);
 
+  /**
+   * Does the mouse currently point to a valid cell ?
+   */
+  bool has_valid_goal();
+
+  /**
+   * Is a valid move currently selected ? 
+   */
+  bool has_valid_move();
+
 private:
   Puzzle * dep_puzzle_;
   PathFinderInterface & dep_path_finder_;
@@ -98,16 +108,6 @@ private:
 
   // Index of the move currently selected in the puzzle.
   int current_move_index_;
-
-  /**
-   * Does the mouse currently point to a valid cell ?
-   */
-  bool has_valid_goal();
-
-  /**
-   * Is a valid move currently selected ? 
-   */
-  bool has_valid_move();
 
   /**
    * Has the goal changed since last call to update_path ?

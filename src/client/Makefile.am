@@ -82,7 +82,8 @@ client_tests_SOURCES=tests/client_tests.cpp \
 	tests/in_game_renderer_geometry_test.cpp \
 	tests/in_game_command_stack_test.cpp \
 	tests/puzzle_selection_model_test.cpp \
-	tests/puzzle_selection_view_test.cpp
+	tests/puzzle_selection_view_test.cpp \
+	tests/in_game_model_test.cpp 
 
 client_tests_LDADD=$(PROJECT_LIBS) \
 	-L$(top_srcdir)/lib -lgtest -lgmock \

@@ -97,8 +97,10 @@ InGameView::update_goal(InGameModel & i_model) {
   int mouse_x = dep_controller_.mouse_x();
   int mouse_y = dep_controller_.mouse_y();
   int j = dep_renderer_.mouse_x_as_puzzle_column(mouse_x);
+  LOG_D("in_game_view") << "Mouse x as puzzle column : " << j << std::endl;
   if (j != -1) {
     int i = dep_renderer_.mouse_y_as_puzzle_line(mouse_y);
+    LOG_D("in_game_view") << "Mouse y as puzzle line : " << i << std::endl;
     if (i != -1) {
       i_model.set_goal(i,j);
     }
