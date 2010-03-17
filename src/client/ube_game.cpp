@@ -15,6 +15,7 @@
 
 #include "common/logging.hpp"
 
+#include <config.h>
 #include <assert.h>
 
 #include "SDL.h"  
@@ -51,6 +52,10 @@ UbeGame::prepare_sdl()
 	ttf_preparation_error_message("Could not initialize TTF %1%");
 	res = -1;
       } else {
+	
+	std::string title = str(format("ube v%1%") % VERSION);
+	SDL_WM_SetCaption(title.c_str(), title.c_str());
+
 	atexit(SDL_Quit);
       }
     }

@@ -5,7 +5,7 @@
 
 # Change this path as appropriate
 #export MW32=$HOME/sandbox/src/mingw-cross-env
-export MW32=$HOME/sandbox/mingw-cross-env-trunk
+export MW32=$HOME/src/mingw-cross-env-trunk
 
 # Tools from mingw-cross-env should be available
 export PATH=$MW32/usr/bin:$MW32/usr/i686-pc-mingw32/bin:$PATH
