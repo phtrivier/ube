@@ -37,28 +37,26 @@ UbeGame::prepare_game()
 }
 
 int
-UbeGame::prepare_in_game_mode(std::string & i_puzzle_file_name)
+UbeGame::prepare_sdl()
 {
-  // Assume the screen has been prepared in prepare_sdl
-  assert(p_screen_ != NULL);
-
-  // Note(pht) : that could "look" simplier to let the factory create
-  // SdlInGameRenderer, but then I would need to pass the screen explicitely, 
-  // and that kinda breaks the "No SDL in Factory interface, like..."
-  p_in_game_renderer_ = new SdlInGameRenderer(dep_resolver_, p_screen_);
-  int res = p_in_game_renderer_->init();
-  if (res != 0) {
-    sdl_preparation_error_message("Error while initializing sdl_renderer : %1%\n");
+  int res = 0;
+  if((SDL_Init(SDL_INIT_VIDEO)==-1)) { 
+    res = -1;
   } else {
-
-    p_in_game_mode_factory_ = new InGameModeFactory(dep_resolver_,
-						    *p_in_game_renderer_,
-						    i_puzzle_file_name);
-
-    res = p_in_game_mode_factory_->create_mode();
-    if (res != 0) {
-      sdl_preparation_error_message("Error creating in_game_mode : %1%\n");
+    p_screen_ = SDL_SetVideoMode(800, 600, 8, SDL_SWSURFACE);
+    if (p_screen_ == NULL) {
+      res = -1;
+    } else {
+      if (TTF_Init() == -1) {
+	ttf_preparation_error_message("Could not initialize TTF %1%");
+	res = -1;
+      } else {
+	atexit(SDL_Quit);
+      }
     }
+  }
+  if (res != 0) {
+    sdl_preparation_error_message("Could not initialize SDL : %1%.\n");
   }
   return res;
 }
@@ -87,6 +85,7 @@ UbeGame::prepare_game_modes()
   return res;
 }
 
+
 int
 UbeGame::prepare_puzzle_selection_mode()
 {
@@ -101,33 +100,51 @@ UbeGame::prepare_puzzle_selection_mode()
     res = p_puzzle_selection_mode_factory_->create_mode();
     if (res != 0) {
       sdl_preparation_error_message("Error creating puzzle_selection_mode : %1%\n");
+    } else {
+      p_puzzle_selection_mode_ = static_cast<PuzzleSelectionMode*>(p_puzzle_selection_mode_factory_->get_mode().get());
+      register_game_mode("puzzle-selection", p_puzzle_selection_mode_);
     }
   }
   return res;
 }
 
+
 int
-UbeGame::prepare_sdl()
+UbeGame::prepare_in_game_mode(std::string & i_puzzle_file_name)
 {
-  int res = 0;
-  if((SDL_Init(SDL_INIT_VIDEO)==-1)) { 
-    res = -1;
-  } else {
-    p_screen_ = SDL_SetVideoMode(800, 600, 8, SDL_SWSURFACE);
-    if (p_screen_ == NULL) {
-      res = -1;
+  // Assume the screen has been prepared in prepare_sdl
+  assert(p_screen_ != NULL);
+
+  int res = -1;
+
+  if (p_in_game_mode_factory_ == NULL) {
+    // Note(pht) : that could "look" simplier to let the factory create
+    // SdlInGameRenderer, but then I would need to pass the screen explicitely, 
+    // and that kinda breaks the "No SDL in Factory interface, like..."
+    p_in_game_renderer_ = new SdlInGameRenderer(dep_resolver_, p_screen_);
+    res = p_in_game_renderer_->init();
+    if (res != 0) {
+      sdl_preparation_error_message("Error while initializing sdl_renderer : %1%\n");
     } else {
-      if (TTF_Init() == -1) {
-	ttf_preparation_error_message("Could not initialize TTF %1%");
-	res = -1;
+
+      p_in_game_mode_factory_ = new InGameModeFactory(dep_resolver_,
+						      *p_in_game_renderer_,
+						      i_puzzle_file_name);
+
+      res = p_in_game_mode_factory_->create_mode();
+      if (res != 0) {
+	sdl_preparation_error_message("Error creating in_game_mode : %1%\n");
       } else {
-	atexit(SDL_Quit);
+	p_in_game_mode_ = static_cast<InGameMode *>(p_in_game_mode_factory_->get_mode().get());
+	register_game_mode("in-game", p_in_game_mode_);
       }
     }
+  } /*
+  else {
+    p_in_game_mode_factory_->load_puzzle(i_puzzle_file_name);
   }
-  if (res != 0) {
-    sdl_preparation_error_message("Could not initialize SDL : %1%.\n");
-  }
+    */
+
   return res;
 }
 
@@ -146,13 +163,7 @@ UbeGame::ttf_preparation_error_message(std::string i_msg)
 void
 UbeGame::play()
 {
-
-  p_puzzle_selection_mode_ = static_cast<PuzzleSelectionMode*>(p_puzzle_selection_mode_factory_->get_mode().get());
-  register_game_mode("puzzle-selection", p_puzzle_selection_mode_);
-
   if (dep_option_parser_.has_puzzle_file_name()) {
-    p_in_game_mode_ = static_cast<InGameMode *>(p_in_game_mode_factory_->get_mode().get());
-    register_game_mode("in-game", p_in_game_mode_);
     set_current_game_mode("in-game");
   } else {
     set_current_game_mode("puzzle-selection");
@@ -170,13 +181,13 @@ UbeGame::handle_event(int i_event_code)
   GameLoop::handle_event(i_event_code);
 
   switch (i_event_code) {
-    case GameEvent::PUZZLE_SELECTED : {
-      // FIXME(pht) : move some of this to prepare
-      std::string puzzle_file_name = p_puzzle_selection_mode_->get_model().get_selected_puzzle_file_name();
-      prepare_in_game_mode(puzzle_file_name);
-      p_in_game_mode_ = static_cast<InGameMode *>(p_in_game_mode_factory_->get_mode().get());
-      register_game_mode("in-game", p_in_game_mode_);
-      set_current_game_mode("in-game");
-    }
+  case GameEvent::PUZZLE_SELECTED : {
+    // FIXME(pht) : move some of this to prepare
+    std::string puzzle_file_name = p_puzzle_selection_mode_->get_model().get_selected_puzzle_file_name();
+    prepare_in_game_mode(puzzle_file_name);
+    p_in_game_mode_ = static_cast<InGameMode *>(p_in_game_mode_factory_->get_mode().get());
+    register_game_mode("in-game", p_in_game_mode_);
+    set_current_game_mode("in-game");
+  }
   }
 }
