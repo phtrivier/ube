@@ -2,6 +2,7 @@
 #include "cell.hpp"
 #include "puzzle.hpp"
 #include "cell_factory.hpp"
+#include "lua_command.hpp"
 
 #include "common/tests/mock_resource_resolver.hpp"
 #include "common/stat_file_checker.hpp"
@@ -119,7 +120,21 @@ namespace {
     ASSERT_EQ(1, (int) p.moves().size());
   }
 
-
-
+  TEST_F(LuaPuzzleLoaderTest, LoadsScriptInPuzzle) {
+    Puzzle p;
+    load_puzzle_from_file("puzzle_loader_test/puzzle_with_scripts.lua", &p);
+    ASSERT_TRUE(p.has_script(0,2));
+    LuaCommand * p_script1 = static_cast<LuaCommand*>(p.get_script_at(0,2));
+    ASSERT_TRUE(p_script1 != NULL);
+    ASSERT_EQ(1, p_script1->get_index());
+    
+    // Script at 0,1 should be the kind that adds a "SINGLE" move
+    /*
+    ASSERT_EQ(1, (int) p.moves().size());
+    p.do_script_at(0,2);
+    ASSERT_EQ(2, (int) p.moves().size());
+    ASSERT_EQ(MoveType::SINGLE, p.moves().at(1).type());
+    */
+  }
 
 } // Namespace

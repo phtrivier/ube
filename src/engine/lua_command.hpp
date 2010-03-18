@@ -29,6 +29,10 @@ public:
 
   void undo();
 
+  int get_index() {
+    return index_;
+  }
+  
 private:
 
   int index_;

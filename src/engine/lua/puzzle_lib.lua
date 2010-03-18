@@ -23,3 +23,7 @@ function set_puzzle_moves(moves)
       cpp_puzzle_add_move(cpp_puzzle, move)
    end
 end
+
+function add_puzzle_script(i,j,index)
+   cpp_puzzle_add_script(cpp_puzzle, cpp_puzzle_loader, i,j,index)
+end
