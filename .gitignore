@@ -27,6 +27,7 @@ src/*.a
 src/*/*.a
 stamp-h1
 po/remove-potcdate.sed
+scripts/gmock/generator/cpp/*.pyc
 
 # Binairies
 src/client/ube
@@ -38,11 +39,7 @@ Setup.exe
 
 # Dists
 ube-*.*
-
 sandbox/*
-
 semantic.cache
-
 *.bak
-
 doc/muse/*.pdf
