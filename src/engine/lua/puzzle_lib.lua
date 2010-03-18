@@ -2,6 +2,8 @@
 package.path = ube_engine_lua_path or package.path
 
 require 'move'
+require 'script'
+require 'pick_move'
 
 -- Set the dimension of globaly available puzzle.
 function set_puzzle_dimensions(w,h)
@@ -26,25 +28,4 @@ end
 
 function add_puzzle_script(i,j,index)
    cpp_puzzle_add_script(cpp_puzzle, cpp_puzzle_loader, i,j,index)
-end
-
-g_scripts = {};
-
-function register_script(index, script)
-   print("Registering script at index " .. index)
-   g_scripts[index] = script;
-end
-
-function do_script(index, puzzle)
-   print("Doing script at " .. index)
-   if (g_scripts[index] ~= nil) then
-      g_scripts[index]:execute(puzzle)
-   end
-end
-
-function undo_script(index, puzzle)
-   print("Undoing script at " .. index)
-   if (g_scripts[index] ~= nil) then
-      g_scripts[index]:undo(puzzle)
-   end
 end
