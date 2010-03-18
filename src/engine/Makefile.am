@@ -7,7 +7,9 @@ libube_engine_a_SOURCES=cell.hpp cell.cpp \
 	lua_puzzle_loader.hpp lua_puzzle_loader.cpp \
 	lua_state_holder.hpp lua_state_holder.cpp \
 	path_finder_interface.hpp \
-	lua_path_finder.hpp lua_path_finder.cpp
+	lua_path_finder.hpp lua_path_finder.cpp \
+	script_runner_interface.hpp \
+	lua_command.hpp lua_command.cpp
 
 # TODO : Find a way to make sure this file is available ...
 luadir=${datadir}/@PACKAGE@/lua/engine
@@ -35,7 +37,9 @@ engine_tests_SOURCES= tests/engine_tests.cpp \
 	tests/puzzle_loader_test.cpp \
 	tests/lua_puzzle_loader_test.cpp \
 	tests/lua_path_finder_test.cpp \
-	tests/mock_path_finder.hpp
+	tests/mock_path_finder.hpp \
+	tests/mock_script_runner.hpp \
+	tests/lua_command_test.cpp
 
 # The program needs to be compiled with 
 engine_tests_LDADD=libube-engine.a \
