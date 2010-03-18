@@ -136,7 +136,9 @@ public:
 
   void add_script(int i_i, int i_j, CommandInterface * i_p_script);
 
-  void run_script_at(int i_i, int i_j);
+  void do_script_at(int i_i, int i_j);
+
+  void undo_script_at(int i_i, int i_j);
 
 private:
 

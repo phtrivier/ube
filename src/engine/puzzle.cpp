@@ -190,8 +190,15 @@ Puzzle::add_script(int i_i, int i_j, CommandInterface * i_p_script)
 }
 
 void
-Puzzle::run_script_at(int i_i, int i_j)
+Puzzle::do_script_at(int i_i, int i_j)
 {
   assert(has_script(i_i, i_j));
   scripts_[i_i][i_j] -> execute();
+}
+
+void
+Puzzle::undo_script_at(int i_i, int i_j)
+{
+  assert(has_script(i_i, i_j));
+  scripts_[i_i][i_j] -> undo();
 }

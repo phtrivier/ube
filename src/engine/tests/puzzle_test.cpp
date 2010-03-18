@@ -129,8 +129,10 @@ namespace {
     ASSERT_EQ(&script, p.get_script_at(0,1));
 
     EXPECT_CALL(script, execute()).Times(1);
+    EXPECT_CALL(script, undo()).Times(1);
 
-    p.run_script_at(0,1);
+    p.do_script_at(0,1);
+    p.undo_script_at(0,1);
 
   }
 
