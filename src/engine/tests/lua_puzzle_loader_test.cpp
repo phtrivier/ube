@@ -137,6 +137,10 @@ namespace {
     p.undo_script_at(0,2);
     ASSERT_EQ(1, (int) p.moves().size());
     
+    p.do_script_at(1,1);
+    ASSERT_EQ(2, (int) p.moves().size());
+    ASSERT_EQ(MoveType::SINGLE, p.moves().at(1).type());
+
   }
 
 } // Namespace

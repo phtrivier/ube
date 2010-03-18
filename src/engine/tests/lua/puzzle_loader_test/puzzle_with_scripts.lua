@@ -10,5 +10,7 @@ set_puzzle_moves({Move.SINGLE})
 
 
 -- FIXME(pht) : of course, re-arrange this
-register_script(1, PickMoveScript:new(Move.DOUBLE))
-add_puzzle_script(0,2,1);
+-- register_script(1, PickMoveScript:new(Move.DOUBLE))
+-- add_puzzle_script(0,2,1);
+add_move(0,2,Move.DOUBLE)
+add_move(1,1,Move.SINGLE)
