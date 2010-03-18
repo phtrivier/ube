@@ -142,11 +142,17 @@ LuaPuzzleLoader::create_script(int i_index, Puzzle * i_p_puzzle)
 void 
 LuaPuzzleLoader::do_script(int i_index, Puzzle * o_p_puzzle)
 {
-
+  lua_getfield(get_lua_state(), LUA_GLOBALSINDEX, "do_script");
+  lua_pushinteger(get_lua_state(), i_index);
+  lua_pushlightuserdata(get_lua_state(), o_p_puzzle);
+  lua_call(get_lua_state(), 2, 0);
 }
 
 void 
 LuaPuzzleLoader::undo_script(int i_index, Puzzle * o_p_puzzle)
 {
-
+  lua_getfield(get_lua_state(), LUA_GLOBALSINDEX, "undo_script");
+  lua_pushinteger(get_lua_state(), i_index);
+  lua_pushlightuserdata(get_lua_state(), o_p_puzzle);
+  lua_call(get_lua_state(), 2, 0);
 }

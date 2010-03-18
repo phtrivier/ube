@@ -21,11 +21,13 @@ function PickMoveScript:new(type)
 end
 
 function PickMoveScript:execute(puzzle)
-   self.move_index = cpp_puzzle_add_move(puzzle, move_type)
+   print("executing pickmove cmd")
+   self.move_index = cpp_puzzle_add_move(puzzle, self.move_type)
 end
 
 function PickMoveScript:undo(puzzle)
-   cpp_puzzle_remove_move(puzzle, move_index)
+   print("undoing pickmove cmd")
+   cpp_puzzle_remove_move(puzzle, self.move_index)
 end
 
 -- FIXME(pht) : of course, re-arrange this
