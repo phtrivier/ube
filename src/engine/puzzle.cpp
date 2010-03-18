@@ -202,3 +202,4 @@ Puzzle::undo_script_at(int i_i, int i_j)
   assert(has_script(i_i, i_j));
   scripts_[i_i][i_j] -> undo();
 }
+

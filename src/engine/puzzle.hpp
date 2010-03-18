@@ -152,7 +152,6 @@ private:
   // TODO(pht) : use something more efficient than a sparse matrix ?
   CommandInterface *** scripts_;
 
-
   // Dimensions
   int w_,h_;
 
