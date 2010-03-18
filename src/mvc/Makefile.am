@@ -34,7 +34,6 @@ mvc_tests_SOURCES= tests/mvc_tests.cpp \
 
 # The program needs to be compiled with 
 mvc_tests_LDADD=libube-mvc.a \
-	../engine/libube-engine.a \
 	../common/libube-common.a \
 	-L$(top_srcdir)/lib -lgtest -lgmock -llua -ldl
 

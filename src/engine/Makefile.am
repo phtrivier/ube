@@ -38,7 +38,10 @@ engine_tests_SOURCES= tests/engine_tests.cpp \
 	tests/mock_path_finder.hpp
 
 # The program needs to be compiled with 
-engine_tests_LDADD=libube-engine.a ../common/libube-common.a -L$(top_srcdir)/lib -lgtest -lgmock -llua -ldl
+engine_tests_LDADD=libube-engine.a \
+	../mvc/libube-mvc.a \
+	../common/libube-common.a \
+	-L$(top_srcdir)/lib -lgtest -lgmock -llua -ldl
 
 # You should include here any local file that a test program.
 # Otherwise it won't be included in the distribution, 
