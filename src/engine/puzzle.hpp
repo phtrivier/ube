@@ -5,6 +5,7 @@
 #include <vector>
 
 class Cell;
+class CommandInterface;
 
 /**
  * The board of the game.
@@ -15,6 +16,7 @@ public:
 
   Puzzle() : 
     cells_(NULL),
+    scripts_(NULL),
     w_(-1), 
     h_(-1), 
     player_i_(-1),
@@ -127,11 +129,27 @@ public:
    * Has the player reached the exit ? 
    */
   bool is_finished();
-  
+
+  bool has_script(int i_i, int i_j);
+
+  CommandInterface * get_script_at(int i_i, int i_j);
+
+  void add_script(int i_i, int i_j, CommandInterface * i_p_script);
+
+  void run_script_at(int i_i, int i_j);
+
 private:
 
   // Cells
+  // Cells are not owned by the puzzle (the puzzle should
+  // not try and dealocate them)
   Cell*** cells_;
+
+  // Scripts
+  // Scripts are not owned by the puzzle, neither.
+  // TODO(pht) : use something more efficient than a sparse matrix ?
+  CommandInterface *** scripts_;
+
 
   // Dimensions
   int w_,h_;

@@ -2,6 +2,8 @@
 #include "cell.hpp"
 #include "move.hpp"
 
+#include "mvc/command_interface.hpp"
+
 #include <assert.h>
 #include <cstddef>
 #include <sstream>
@@ -17,12 +19,17 @@ void Puzzle::set_dimensions(int iW, int iH) {
   w_ = iW;
   h_ = iH;
   cells_ = new Cell**[h_];
+  scripts_ = new CommandInterface **[h_];
   for (int i = 0 ; i < iH ; i++) {
     cells_[i] = new Cell*[w_];
+    scripts_[i] = new CommandInterface * [w_];
     for (int j = 0 ; j < w_ ; j++) {
       cells_[i][j] = NULL;
+      scripts_[i][j] = NULL;
     }
   }
+
+
 }
 
 void Puzzle::add_cell(Cell * ipCell) {
@@ -130,37 +137,28 @@ Puzzle::clear()
 void
 Puzzle::clear_cells()
 {
+  // Neither cells nor scripts are owned by the 
+  // puzzle. So we don't delete them (instead we NULL
+  // our pointer), but we deallocate the arrays.
   if (cells_ != NULL) {
     for (int i = 0 ; i < h_ ; i++) {
       if (cells_[i] != NULL) {
 	for (int j = 0 ; j < w_ ; j++) {
 	  if (cells_[i][j] != NULL) {
 	    cells_[i][j] = NULL;
+	    scripts_[i][j] = NULL;
 	  }
 	}
 	delete[] cells_[i];
+	delete[] scripts_[i];
       }
     }
     
     delete[] cells_;
+    delete[] scripts_;
     cells_ = NULL;
+    scripts_ = NULL;
   }
-
-  /*
-  for (int i = 0 ; i < h_ ; i++) {
-    if (cells_[i] != NULL) {
-      delete[] cells_[i];
-    }
-  }
-  if (cells_ != NULL) {
-    delete[] cells_;
-  }
-  */
-  /*
-  if (cells_ != NULL) {
-    delete cells_;
-  }
-  */
 }
 
 bool
@@ -170,3 +168,30 @@ Puzzle::is_finished()
     get_cell_at(player_i_, player_j_)->is_out();
 }
 
+bool
+Puzzle::has_script(int i_i, int i_j)
+{
+  return is_valid_position(i_i, i_j) &&
+    scripts_[i_i][i_j] != NULL;
+}
+
+CommandInterface * 
+Puzzle::get_script_at(int i_i, int i_j)
+{
+  assert(is_valid_position(i_i, i_j));
+  return scripts_[i_i][i_j];
+}
+
+void
+Puzzle::add_script(int i_i, int i_j, CommandInterface * i_p_script)
+{
+  assert(is_valid_position(i_i, i_j));
+  scripts_[i_i][i_j] = i_p_script;
+}
+
+void
+Puzzle::run_script_at(int i_i, int i_j)
+{
+  assert(has_script(i_i, i_j));
+  scripts_[i_i][i_j] -> execute();
+}
