@@ -27,3 +27,21 @@ end
 function add_puzzle_script(i,j,index)
    cpp_puzzle_add_script(cpp_puzzle, cpp_puzzle_loader, i,j,index)
 end
+
+g_scripts = {};
+
+function register_script(index, script)
+   g_scripts[index] = script;
+end
+
+function do_script(index, puzzle)
+   if (g_scripts[index] ~= nil) then
+      g_scripts[index]:execute(puzzle)
+   end
+end
+
+function undo_script(index, puzzle)
+   if (g_scripts[index] ~= nil) then
+      g_scripts[index]:undo(puzzle)
+   end
+end

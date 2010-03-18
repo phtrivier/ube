@@ -8,4 +8,26 @@ set_puzzle_rows({"###",
 
 set_puzzle_moves({Move.SINGLE})
 
+PickMoveScript = {}
+
+function PickMoveScript:new(type) 
+   o = {
+      move_type = type,
+      move_index = nil
+   }
+   setmetatable(o, self)
+   self.__index = self
+   return o
+end
+
+function PickMoveScript:execute(puzzle)
+   self.move_index = cpp_puzzle_add_move(puzzle, move_type)
+end
+
+function PickMoveScript:undo(puzzle)
+   cpp_puzzle_remove_move(puzzle, move_index)
+end
+
+-- FIXME(pht) : of course, re-arrange this
+register_script(1, PickMoveScript:new(Move.DOUBLE))
 add_puzzle_script(0,2,1);
