@@ -20,12 +20,15 @@ void Puzzle::set_dimensions(int iW, int iH) {
   h_ = iH;
   cells_ = new Cell**[h_];
   scripts_ = new CommandInterface **[h_];
+  overlays_ = new int * [h_];
   for (int i = 0 ; i < iH ; i++) {
     cells_[i] = new Cell*[w_];
     scripts_[i] = new CommandInterface * [w_];
+    overlays_[i] = new int[w_];
     for (int j = 0 ; j < w_ ; j++) {
       cells_[i][j] = NULL;
       scripts_[i][j] = NULL;
+      overlays_[i][j] = -1;
     }
   }
 
@@ -151,13 +154,17 @@ Puzzle::clear_cells()
 	}
 	delete[] cells_[i];
 	delete[] scripts_[i];
+	delete[] overlays_[i];
       }
     }
     
     delete[] cells_;
     delete[] scripts_;
+    delete[] overlays_;
+
     cells_ = NULL;
     scripts_ = NULL;
+    overlays_ = NULL;
   }
 }
 
@@ -203,3 +210,15 @@ Puzzle::undo_script_at(int i_i, int i_j)
   scripts_[i_i][i_j] -> undo();
 }
 
+bool
+Puzzle::has_overlay(int i_i, int i_j) const
+{
+  assert(is_valid_position(i_i, i_j));
+  return overlays_[i_i][i_j] != -1;
+}
+
+int
+Puzzle::get_overlay(int i_i, int i_j) const
+{
+  return -1;
+}

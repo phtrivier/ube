@@ -17,6 +17,7 @@ public:
   Puzzle() : 
     cells_(NULL),
     scripts_(NULL),
+    overlays_(NULL),
     w_(-1), 
     h_(-1), 
     player_i_(-1),
@@ -140,6 +141,10 @@ public:
 
   void undo_script_at(int i_i, int i_j);
 
+  bool has_overlay(int i_i, int i_j) const;
+
+  int get_overlay(int i_i, int i_j) const;
+  
 private:
 
   // Cells
@@ -152,6 +157,9 @@ private:
   // TODO(pht) : use something more efficient than a sparse matrix ?
   CommandInterface *** scripts_;
 
+  // Overlay types
+  int ** overlays_;
+  
   // Dimensions
   int w_,h_;
 

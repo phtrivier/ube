@@ -41,5 +41,7 @@ class MockInGameRenderer : public InGameRendererInterface {
   MOCK_METHOD2(is_on_redo_button,
 	       bool (int i_x, int i_y));
 
+  MOCK_METHOD3(render_overlay,
+	       void (int i_i, int i_j, int i_overlay_type));
 
 };

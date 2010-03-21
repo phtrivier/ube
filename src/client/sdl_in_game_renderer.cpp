@@ -42,18 +42,9 @@ SdlInGameRenderer::~SdlInGameRenderer() {
     }
   }
 
-  if (p_selected_cell_image_ != NULL) {
-    SDL_FreeSurface(p_selected_cell_image_);
-  }
-
-  if (p_banned_cell_image_ != NULL) {
-    SDL_FreeSurface(p_banned_cell_image_);
-  }
-
-  if (p_player_image_ != NULL) {
-    SDL_FreeSurface(p_player_image_);
-  }
-
+  clear_image(p_selected_cell_image_);
+  clear_image(p_banned_cell_image_);
+  clear_image(p_player_image_);
   clear_image(p_bg_);
   clear_image(p_undo_image_);
   clear_image(p_redo_image_);
@@ -296,3 +287,7 @@ SdlInGameRenderer::is_on_redo_button(int i_x, int i_y) {
   return InGameRendererGeometry::is_on_redo_button(i_x,i_y);
 }
 
+void
+SdlInGameRenderer::render_overlay(int i_i, int i_j, int i_overlay_type) {
+  // TODO
+}

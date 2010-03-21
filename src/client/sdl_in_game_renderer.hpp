@@ -151,6 +151,8 @@ private:
    */
   void render_cell_image(int i_i, int i_j, SDL_Surface * i_p_surface);
 
+  void render_overlay(int i_i, int i_j, int i_overlay_type); 
+  
 };
 
 #endif // _SDL_IN_GAME_RENDERER_HPP_

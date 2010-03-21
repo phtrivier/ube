@@ -79,6 +79,9 @@ InGameView::render_puzzle(const Puzzle & i_puzzle) {
   for (int i = 0 ; i < i_puzzle.get_h() ; i++) {
     for (int j= 0 ; j < i_puzzle.get_w() ; j++) {
       dep_renderer_.render_cell(i,j,i_puzzle.get_cell_at(i,j)->get_type());
+      if (i_puzzle.has_overlay(i,j)) {
+	dep_renderer_.render_overlay(i,j,i_puzzle.get_overlay(i,j));
+      }
     }
   }
 }

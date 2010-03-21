@@ -73,6 +73,8 @@ public:
 
   virtual bool is_on_redo_button(int i_x, int i_y) = 0;
 
+  virtual void render_overlay(int i_i, int i_j, int i_overlay_type) = 0;
+  
 };
 
 #endif // _IN_GAME_RENDERER_INTERFACE_HPP_
