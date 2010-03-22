@@ -220,5 +220,13 @@ Puzzle::has_overlay(int i_i, int i_j) const
 int
 Puzzle::get_overlay(int i_i, int i_j) const
 {
-  return -1;
+  assert(is_valid_position(i_i, i_j));
+  return overlays_[i_i][i_j];
+}
+
+void
+Puzzle::set_overlay(int i_i, int i_j, int i_type)
+{
+  assert(is_valid_position(i_i, i_j));
+  overlays_[i_i][i_j] = i_type;
 }

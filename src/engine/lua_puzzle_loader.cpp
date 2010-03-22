@@ -75,6 +75,16 @@ int lua_puzzle_remove_move(lua_State * i_p_lua_state) {
   return 0;
 }
   
+int lua_puzzle_set_overlay(lua_State * i_p_lua_state) {
+  Puzzle * p_puzzle = (Puzzle *) lua_touserdata(i_p_lua_state, 1);
+  assert(p_puzzle != NULL);
+  int i = lua_tointeger(i_p_lua_state,2);
+  int j = lua_tointeger(i_p_lua_state,3);
+  int type = lua_tointeger(i_p_lua_state,4);
+  // FIXME(pht) : this is from outside, it should be checked
+  p_puzzle->set_overlay(i,j,type);
+  return 0;
+}
 
 void
 LuaPuzzleLoader::register_lua_functions() 
@@ -102,6 +112,9 @@ LuaPuzzleLoader::register_lua_functions()
 
   lua_pushcfunction(get_lua_state(), lua_puzzle_add_script);
   lua_setglobal(get_lua_state(), "cpp_puzzle_add_script");
+
+  lua_pushcfunction(get_lua_state(), lua_puzzle_set_overlay);
+  lua_setglobal(get_lua_state(), "cpp_puzzle_set_overlay");
 
   load_lua_engine_file("puzzle_lib.lua");
 

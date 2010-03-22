@@ -145,6 +145,8 @@ public:
 
   int get_overlay(int i_i, int i_j) const;
   
+  void set_overlay(int i_i, int i_j, int i_type);
+
 private:
 
   // Cells

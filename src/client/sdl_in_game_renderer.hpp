@@ -78,12 +78,16 @@ public:
   bool is_on_undo_button(int i_x, int i_y);
   
   bool is_on_redo_button(int i_x, int i_y);
+
+  void render_overlay(int i_i, int i_j, int i_overlay_type); 
     
 private:
 
   std::map<int, SDL_Surface *> cell_images_;
 
   std::map<int, SDL_Surface *> move_images_;
+
+  std::map<int, SDL_Surface *> overlay_images_;
 
   SDL_Surface * p_selected_cell_image_;
 
@@ -116,6 +120,14 @@ private:
   int load_move_images();
 
   /**
+   * Load all the images necessary to display
+   * overlays.
+   *
+   * @returns 0 if image was loaded, -1 otherwise
+   */
+  int load_overlay_images();
+
+  /**
    * Load the image necessary to display a cell.
    * 
    * @param i_cell_type 
@@ -132,6 +144,15 @@ private:
    * @returns 0 if cell was loaded, -1 otherwise.
    */
   int load_move_image(int i_move_type, SDL_Surface ** o_pp_surface);
+
+  /**
+   * Load the image necessary to display an overlay
+   * 
+   * @param i_move_type 
+   * @param o_pp_surface output address of the image after loading
+   * @returns 0 if cell was loaded, -1 otherwise.
+   */
+  int load_overlay_image(int i_type, SDL_Surface ** o_pp_surface);
 
   /**
    * Display the icon of a given move.
@@ -151,7 +172,11 @@ private:
    */
   void render_cell_image(int i_i, int i_j, SDL_Surface * i_p_surface);
 
-  void render_overlay(int i_i, int i_j, int i_overlay_type); 
+  /**
+   * Clears a map, attempting to free surfaces
+   * for all integer values.
+   */
+  void clear_image_map(std::map<int, SDL_Surface * > & i_map, int i_limit);
   
 };
 

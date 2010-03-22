@@ -136,4 +136,13 @@ namespace {
 
   }
 
+  TEST_F(PuzzleTest, SetOverlays) {
+    Puzzle p;
+    p.set_dimensions(2,2);
+    p.set_overlay(0,0,1);
+    ASSERT_TRUE(p.has_overlay(0,0));
+    ASSERT_EQ(1, p.get_overlay(0,0));
+  }
+
+
 } // Namespace

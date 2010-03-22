@@ -29,3 +29,7 @@ end
 function add_puzzle_script(i,j,index)
    cpp_puzzle_add_script(cpp_puzzle, cpp_puzzle_loader, i,j,index)
 end
+
+function add_overlay(i,j,type)
+   cpp_puzzle_set_overlay(cpp_puzzle, i, j , type);
+end

@@ -129,7 +129,7 @@ namespace {
     ASSERT_TRUE(p_script1 != NULL);
     ASSERT_EQ(1, p_script1->get_index());
     
-    // Script at 0,1 should be the kind that adds a "SINGLE" move
+    // Script at 0,1 should be the kind that adds a "DOUBLE" move
     ASSERT_EQ(1, (int) p.moves().size());
     p.do_script_at(0,2);
     ASSERT_EQ(2, (int) p.moves().size());
@@ -140,7 +140,16 @@ namespace {
     p.do_script_at(1,1);
     ASSERT_EQ(2, (int) p.moves().size());
     ASSERT_EQ(MoveType::SINGLE, p.moves().at(1).type());
-
   }
+
+  TEST_F(LuaPuzzleLoaderTest, LoadsOverlaysInPuzzle) {
+    Puzzle p;
+    load_puzzle_from_file("puzzle_loader_test/puzzle_with_scripts.lua", &p);
+    ASSERT_TRUE(p.has_overlay(0,2));
+    ASSERT_EQ(MoveType::DOUBLE, p.get_overlay(0,2));
+    p.do_script_at(0,2);
+    ASSERT_FALSE(p.has_overlay(0,2));
+  }
+
 
 } // Namespace
