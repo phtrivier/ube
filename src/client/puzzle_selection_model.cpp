@@ -7,7 +7,7 @@ PuzzleSelectionModel::fill_puzzle_list()
   add_puzzle("Twice as fast (you can move even faster, like.)", "tutorial0a.lua");
   add_puzzle("Ouch, a wall. You can cross it. Trust me.", "tutorial1.lua");
   add_puzzle("Okay, let's get funnier...", "tutorial2.lua");
-
+  add_puzzle("Relax. You'll pick up along the way.", "tutorial3.lua");
 }
 
 void
