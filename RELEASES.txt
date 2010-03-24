@@ -1,3 +1,9 @@
+* 24/03/2010 0.2.0 'World Tuberculosis day' (http://en.wikipedia.org/wiki/World_Tuberculosis_Day)
+
+ - Added a scripting system
+ - Added the possibility to pick moves in a puzzle
+ - Changed UI to display path in different colors
+
 * 17/03/2010 0.1.0 'St Patrick'
 
  - Initial version for Julie
