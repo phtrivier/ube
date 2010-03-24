@@ -2,6 +2,8 @@
 #include "cell.hpp"
 #include "move.hpp"
 
+#include "mvc/command_interface.hpp"
+
 #include <assert.h>
 #include <cstddef>
 #include <sstream>
@@ -17,12 +19,20 @@ void Puzzle::set_dimensions(int iW, int iH) {
   w_ = iW;
   h_ = iH;
   cells_ = new Cell**[h_];
+  scripts_ = new CommandInterface **[h_];
+  overlays_ = new int * [h_];
   for (int i = 0 ; i < iH ; i++) {
     cells_[i] = new Cell*[w_];
+    scripts_[i] = new CommandInterface * [w_];
+    overlays_[i] = new int[w_];
     for (int j = 0 ; j < w_ ; j++) {
       cells_[i][j] = NULL;
+      scripts_[i][j] = NULL;
+      overlays_[i][j] = -1;
     }
   }
+
+
 }
 
 void Puzzle::add_cell(Cell * ipCell) {
@@ -130,37 +140,32 @@ Puzzle::clear()
 void
 Puzzle::clear_cells()
 {
+  // Neither cells nor scripts are owned by the 
+  // puzzle. So we don't delete them (instead we NULL
+  // our pointer), but we deallocate the arrays.
   if (cells_ != NULL) {
     for (int i = 0 ; i < h_ ; i++) {
       if (cells_[i] != NULL) {
 	for (int j = 0 ; j < w_ ; j++) {
 	  if (cells_[i][j] != NULL) {
 	    cells_[i][j] = NULL;
+	    scripts_[i][j] = NULL;
 	  }
 	}
 	delete[] cells_[i];
+	delete[] scripts_[i];
+	delete[] overlays_[i];
       }
     }
     
     delete[] cells_;
-    cells_ = NULL;
-  }
+    delete[] scripts_;
+    delete[] overlays_;
 
-  /*
-  for (int i = 0 ; i < h_ ; i++) {
-    if (cells_[i] != NULL) {
-      delete[] cells_[i];
-    }
+    cells_ = NULL;
+    scripts_ = NULL;
+    overlays_ = NULL;
   }
-  if (cells_ != NULL) {
-    delete[] cells_;
-  }
-  */
-  /*
-  if (cells_ != NULL) {
-    delete cells_;
-  }
-  */
 }
 
 bool
@@ -170,3 +175,58 @@ Puzzle::is_finished()
     get_cell_at(player_i_, player_j_)->is_out();
 }
 
+bool
+Puzzle::has_script(int i_i, int i_j)
+{
+  return is_valid_position(i_i, i_j) &&
+    scripts_[i_i][i_j] != NULL;
+}
+
+CommandInterface * 
+Puzzle::get_script_at(int i_i, int i_j)
+{
+  assert(is_valid_position(i_i, i_j));
+  return scripts_[i_i][i_j];
+}
+
+void
+Puzzle::add_script(int i_i, int i_j, CommandInterface * i_p_script)
+{
+  assert(is_valid_position(i_i, i_j));
+  scripts_[i_i][i_j] = i_p_script;
+}
+
+void
+Puzzle::do_script_at(int i_i, int i_j)
+{
+  assert(has_script(i_i, i_j));
+  scripts_[i_i][i_j] -> execute();
+}
+
+void
+Puzzle::undo_script_at(int i_i, int i_j)
+{
+  assert(has_script(i_i, i_j));
+  scripts_[i_i][i_j] -> undo();
+}
+
+bool
+Puzzle::has_overlay(int i_i, int i_j) const
+{
+  assert(is_valid_position(i_i, i_j));
+  return overlays_[i_i][i_j] != -1;
+}
+
+int
+Puzzle::get_overlay(int i_i, int i_j) const
+{
+  assert(is_valid_position(i_i, i_j));
+  return overlays_[i_i][i_j];
+}
+
+void
+Puzzle::set_overlay(int i_i, int i_j, int i_type)
+{
+  assert(is_valid_position(i_i, i_j));
+  overlays_[i_i][i_j] = i_type;
+}

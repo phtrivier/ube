@@ -19,7 +19,7 @@ InGameModeFactory::~InGameModeFactory() {
   delete p_model_;
   delete p_puzzle_;
   delete p_controller_;
-
+  delete p_puzzle_loader_;
 }
 
 int
@@ -36,9 +36,11 @@ InGameModeFactory::load_puzzle(std::string & i_file_name)
     cell_factory_.delete_created_cells();
   }
 
-  LuaPuzzleLoader loader(&cell_factory_, dep_resolver_);
+  if (p_puzzle_loader_ == NULL) {
+    p_puzzle_loader_ = new LuaPuzzleLoader(&cell_factory_, dep_resolver_);
+  }
 
-  int res = loader.load_puzzle_file(i_file_name.c_str(), p_puzzle_);
+  int res = p_puzzle_loader_->load_puzzle_file(i_file_name.c_str(), p_puzzle_);
   if (res == 0) {
     // TODO(pht) : this looks kinda strange ... maybe the model should be the sole responsible for clearing everything ? 
     // Also, what if the model was responsible for creating the puzzle (I very rarely create a model without 

@@ -2,6 +2,8 @@
 #include "cell.hpp"
 #include "move.hpp"
 
+#include "mvc/tests/mock_command.hpp"
+
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 #include <stdexcept>
@@ -107,6 +109,40 @@ namespace {
     ASSERT_TRUE(p.moves().at(0).available());
   }
 
+  TEST_F(PuzzleTest, CanHaveScriptsOnSomeCells) {
+    Puzzle p;
+    p.set_dimensions(2,1);
+    Cell c1(0,0,Cell::WALKABLE);
+    Cell c2(0,1,Cell::OUT);
+    p.add_cell(&c1);
+    p.add_cell(&c2);
+
+    ASSERT_FALSE(p.has_script(0,0));
+    ASSERT_FALSE(p.has_script(0,1));
+
+    MockCommand script;
+    p.add_script(0,1,&script);
+
+    ASSERT_FALSE(p.has_script(0,0));
+    ASSERT_TRUE(p.has_script(0,1));
+    
+    ASSERT_EQ(&script, p.get_script_at(0,1));
+
+    EXPECT_CALL(script, execute()).Times(1);
+    EXPECT_CALL(script, undo()).Times(1);
+
+    p.do_script_at(0,1);
+    p.undo_script_at(0,1);
+
+  }
+
+  TEST_F(PuzzleTest, SetOverlays) {
+    Puzzle p;
+    p.set_dimensions(2,2);
+    p.set_overlay(0,0,1);
+    ASSERT_TRUE(p.has_overlay(0,0));
+    ASSERT_EQ(1, p.get_overlay(0,0));
+  }
 
 
 } // Namespace

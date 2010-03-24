@@ -18,42 +18,30 @@
 #include "boost/format.hpp"
 using namespace boost;
 
-SdlInGameRenderer::~SdlInGameRenderer() {
-  for (int cell_type = 0 ;  
-       cell_type < Cell::CELL_TYPES_COUNT ; 
-       cell_type++) {
-
-    if (cell_images_.find(cell_type) != cell_images_.end()) {
-      SDL_Surface * p_cell_image = cell_images_[cell_type];
+void
+SdlInGameRenderer::clear_image_map(std::map<int, SDL_Surface * > & i_map, int i_limit)
+{
+  for (int index = 0 ; index < i_limit ; index++) {
+    if (i_map.find(index) != i_map.end()) {
+      SDL_Surface * p_cell_image = i_map[index];
       if (p_cell_image != NULL) {
 	SDL_FreeSurface(p_cell_image);
       }
     }
-
   }
+}
 
-  // FIXME(pht) : use a nicer list of move types, make it more dynamic, etc..
-  for (int move_type = 0 ; move_type <= MoveType::KNIGHT ; move_type++) {
-    if (move_images_.find(move_type) != move_images_.end()) {
-      SDL_Surface * p_move_image = move_images_[move_type];
-      if (p_move_image != NULL) {
-	SDL_FreeSurface(p_move_image);
-      }
-    }
-  }
+SdlInGameRenderer::~SdlInGameRenderer() 
+{
 
-  if (p_selected_cell_image_ != NULL) {
-    SDL_FreeSurface(p_selected_cell_image_);
-  }
+  clear_image_map(cell_images_, Cell::CELL_TYPES_COUNT);
+  clear_image_map(move_images_, MoveType::KNIGHT+1);
+  clear_image_map(overlay_images_, MoveType::KNIGHT+1);
+  clear_image_map(path_images_, MoveType::KNIGHT+1);
 
-  if (p_banned_cell_image_ != NULL) {
-    SDL_FreeSurface(p_banned_cell_image_);
-  }
-
-  if (p_player_image_ != NULL) {
-    SDL_FreeSurface(p_player_image_);
-  }
-
+  clear_image(p_selected_cell_image_);
+  clear_image(p_banned_cell_image_);
+  clear_image(p_player_image_);
   clear_image(p_bg_);
   clear_image(p_undo_image_);
   clear_image(p_redo_image_);
@@ -67,14 +55,17 @@ SdlInGameRenderer::init() {
   int res = -1;
   res = load_cell_images();
   res = load_move_images();
+  res = load_overlay_images();
+  res = load_path_images();
   //    while (!done && res != -1) {
   // FIXME(pht) : use a clever loop to try and load images and 
   // report the first error ...
   res = load_image("selected_cell.png", &p_selected_cell_image_);
   res = load_image("banned_cell.png", &p_banned_cell_image_);
   res = load_image("player.png", &p_player_image_);      
+
   res = load_image("bg.png", &p_bg_);
-  
+
   res = load_image("undo.png", &p_undo_image_);
   res = load_image("redo.png", &p_redo_image_);
   res = load_image("disabled_undo.png", &p_disabled_undo_image_);
@@ -103,9 +94,11 @@ SdlInGameRenderer::render_cell(int i_i, int i_j, int i_cell_type) {
 }
 
 void
-SdlInGameRenderer::render_selected_cell(int i_i, int i_j) 
+SdlInGameRenderer::render_cell_in_path(int i_i, int i_j, int i_move_type) 
 {
-  render_cell_image(i_i, i_j, p_selected_cell_image_);
+  assert(path_images_.find(i_move_type) != path_images_.end());
+  assert(path_images_[i_move_type] != NULL);
+  render_cell_image(i_i, i_j, path_images_[i_move_type]);
 }
 
 void
@@ -195,39 +188,52 @@ SdlInGameRenderer::load_cell_images() {
 }
 
 int
-SdlInGameRenderer::load_move_images() {
+SdlInGameRenderer::load_images_for_move_types(std::map<int, SDL_Surface *> & i_map, std::string i_format)
+{
   int res = 0;
-  // FIXME(pht) : use nicer list of move types
   for (int move_type = 0 ; move_type <= MoveType::KNIGHT ; move_type ++) {
     SDL_Surface * p_new_surface = NULL;
-    LOG_D("sdl_in_game_renderer") << "Loading image for move_type : " << move_type;
-    res = load_move_image(move_type, &p_new_surface);
+    res = load_image_for_move_type(move_type, i_format, &p_new_surface);
     if (res == 0) {
       assert(p_new_surface != NULL);
-      move_images_[move_type] = p_new_surface;
+      i_map[move_type] = p_new_surface;
     } 
   }
   return res;
 }
 
+int 
+SdlInGameRenderer::load_image_for_move_type(int i_move_type, std::string & i_format, SDL_Surface ** o_pp_surface) 
+{
+  int res = -1;
+  std::string image_name = str(format(i_format) % i_move_type);
+  res = load_image(image_name, o_pp_surface);
+  return res;
+}
 
 int
-SdlInGameRenderer::load_cell_image(int i_cell_type, SDL_Surface ** o_pp_surface) {
+SdlInGameRenderer::load_move_images() {
+  return load_images_for_move_types(move_images_, "move_%1%.png");
+}
+
+int
+SdlInGameRenderer::load_overlay_images() {
+  return load_images_for_move_types(overlay_images_, "overlay_move_%1%.png");
+}
+
+int
+SdlInGameRenderer::load_path_images() {
+  return load_images_for_move_types(path_images_, "path_%1%.png");
+}
+
+int
+SdlInGameRenderer::load_cell_image(int i_cell_type, SDL_Surface ** o_pp_surface) 
+{
   int res = -1;
   std::string image_name = str(format("cell_%1%.png") % i_cell_type);
   res = load_image(image_name, o_pp_surface);
   return res;
 }
-
-// TODO(pht) : refactor both codes
-int
-SdlInGameRenderer::load_move_image(int i_move_type, SDL_Surface ** o_pp_surface) {
-  int res = -1;
-  std::string image_name = str(format("move_%1%.png") % i_move_type);
-  res = load_image(image_name, o_pp_surface);
-  return res;
-}
-
 
 void
 SdlInGameRenderer::render_cell_image(int i_i, int i_j, SDL_Surface * i_p_surface) {
@@ -245,7 +251,7 @@ SdlInGameRenderer::render_cell_image(int i_i, int i_j, SDL_Surface * i_p_surface
   dst.w = CELLS_W;
   dst.h = CELLS_H;
 
-  SDL_BlitSurface(i_p_surface, &src, get_screen(), &dst);
+  SDL_BlitSurface(i_p_surface, NULL, get_screen(), &dst);
 }
 
 int 
@@ -296,3 +302,9 @@ SdlInGameRenderer::is_on_redo_button(int i_x, int i_y) {
   return InGameRendererGeometry::is_on_redo_button(i_x,i_y);
 }
 
+void
+SdlInGameRenderer::render_overlay(int i_i, int i_j, int i_overlay_type) {
+  assert(overlay_images_.find(i_overlay_type) != overlay_images_.end());
+  assert(overlay_images_[i_overlay_type] != NULL);
+  render_cell_image(i_i, i_j, overlay_images_[i_overlay_type]);
+}

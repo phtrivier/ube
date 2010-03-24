@@ -4,11 +4,14 @@
 #include "lua_state_holder.hpp"
 #include "puzzle_loader.hpp"
 
+#include "script_runner_interface.hpp"
+
 #include <iostream>
 using namespace std;
 
 class ResourceResolverInterface;
-//K struct lua_State;
+class LuaCommand;
+class Puzzle;
 
 /**
  * Puzzle loader from Lua file.
@@ -16,14 +19,15 @@ class ResourceResolverInterface;
  * It should be used in conjunction with a ResourceResolver
  * to find lua files.
  */
-class LuaPuzzleLoader : 
+class LuaPuzzleLoader :
+  public ScriptRunnerInterface,
   public LuaStateHolder, 
   public PuzzleLoader
 { 
 public:
   LuaPuzzleLoader(CellFactory * ipFactory, 
 		  ResourceResolverInterface & dep_resolver) : 
-
+    ScriptRunnerInterface(),
     LuaStateHolder(dep_resolver), 
     PuzzleLoader(ipFactory)
   {
@@ -44,6 +48,16 @@ public:
   int load_puzzle_file(const char * iFileName, Puzzle * oPuzzle);
 
   void register_lua_functions();
+
+  /**
+   * Creates a script command to be used on a puzzle.
+   * The loader should retain ownership of the command.
+   */
+  LuaCommand * create_script(int index, Puzzle * i_p_puzzle);
+
+  void do_script(int i_index, Puzzle * o_p_puzzle);
+
+  void undo_script(int i_index, Puzzle * o_p_puzzle);
 
 private:
  

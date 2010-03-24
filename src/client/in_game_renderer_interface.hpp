@@ -51,9 +51,9 @@ public:
   virtual int mouse_position_as_move_index(int i_x, int i_y) = 0;
 
   /**
-   * Marks the cell at a given position as the selected one.
+   * Display a cell as in path.
    */
-  virtual void render_selected_cell(int i_i, int i_j) = 0;
+  virtual void render_cell_in_path(int i_i, int i_j, int move_type) = 0;
 
   virtual void render_banned_cell(int i_i, int i_j) = 0;
 
@@ -73,6 +73,8 @@ public:
 
   virtual bool is_on_redo_button(int i_x, int i_y) = 0;
 
+  virtual void render_overlay(int i_i, int i_j, int i_overlay_type) = 0;
+  
 };
 
 #endif // _IN_GAME_RENDERER_INTERFACE_HPP_

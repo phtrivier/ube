@@ -2,6 +2,8 @@
 package.path = ube_engine_lua_path or package.path
 
 require 'move'
+require 'script'
+require 'pick_move'
 
 -- Set the dimension of globaly available puzzle.
 function set_puzzle_dimensions(w,h)
@@ -22,4 +24,12 @@ function set_puzzle_moves(moves)
    for i,move in ipairs(moves) do 
       cpp_puzzle_add_move(cpp_puzzle, move)
    end
+end
+
+function add_puzzle_script(i,j,index)
+   cpp_puzzle_add_script(cpp_puzzle, cpp_puzzle_loader, i,j,index)
+end
+
+function add_overlay(i,j,type)
+   cpp_puzzle_set_overlay(cpp_puzzle, i, j , type);
 end

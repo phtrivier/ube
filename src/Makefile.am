@@ -1,1 +1,1 @@
-SUBDIRS = common engine mvc client 
+SUBDIRS = common mvc engine client 

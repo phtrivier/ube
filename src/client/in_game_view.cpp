@@ -20,6 +20,8 @@ InGameView::render_game() {
   render_selected_cell(dep_model_.get_puzzle());
   render_path(dep_model_);
   render_player(dep_model_.get_puzzle());
+  render_overlays(dep_model_.get_puzzle());
+
   dep_renderer_.render_moves(dep_model_);
   update_goal(dep_model_);
   dep_renderer_.flush();
@@ -84,6 +86,19 @@ InGameView::render_puzzle(const Puzzle & i_puzzle) {
 }
 
 void
+InGameView::render_overlays(const Puzzle & i_puzzle) {
+  assert(i_puzzle.get_w() > 0);
+  assert(i_puzzle.get_h() > 0);
+  for (int i = 0 ; i < i_puzzle.get_h() ; i++) {
+    for (int j= 0 ; j < i_puzzle.get_w() ; j++) {
+      if (i_puzzle.has_overlay(i,j)) {
+	dep_renderer_.render_overlay(i,j,i_puzzle.get_overlay(i,j));
+      }
+    }
+  }
+}
+
+void
 InGameView::render_selected_cell(const Puzzle & i_puzzle) {
   int mouse_x = dep_controller_.mouse_x();
   int mouse_y = dep_controller_.mouse_y();
@@ -97,9 +112,6 @@ InGameView::render_selected_cell(const Puzzle & i_puzzle) {
       if (i_puzzle.is_valid_position(i,j)) {
 	assert(i_puzzle.get_cell_at(i,j) != NULL);
 	if (!i_puzzle.get_cell_at(i,j)->is_empty()) {
-	  /*
-	  dep_renderer_.render_selected_cell(i,j);
-	  */
 	  dep_renderer_.render_banned_cell(i,j);
 	}
       }
@@ -133,8 +145,8 @@ InGameView::render_path(InGameModel & i_model) {
   for (int i = 0 ; i < puzzle.get_h() ; i++) {
     for (int j = 0 ; j < puzzle.get_w() ; j++) {
       if (puzzle.get_cell_at(i,j)->is_in_path()) {
-	// TODO : render other kind of cell
-	dep_renderer_.render_selected_cell(i,j);
+	int move_type = puzzle.moves()[i_model.current_move_index()].type();
+	dep_renderer_.render_cell_in_path(i,j, move_type);
       }
     }
   }

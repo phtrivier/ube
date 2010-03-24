@@ -15,6 +15,7 @@ class InGameView;
 class InGameModel;
 class Puzzle;
 class LuaPathFinder;
+class LuaPuzzleLoader;
 
 /**
  * Factory to create and initialize an InGameMode.
@@ -34,7 +35,8 @@ public:
     p_model_(NULL),
     p_puzzle_(NULL),
     p_controller_(NULL),
-    p_path_finder_(NULL)
+    p_path_finder_(NULL),
+    p_puzzle_loader_(NULL)
   {
   }
 
@@ -63,7 +65,8 @@ private:
   SdlController * p_controller_;
   LuaPathFinder * p_path_finder_;
   CellFactory cell_factory_;
-
+  LuaPuzzleLoader * p_puzzle_loader_;
+  
   boost::shared_ptr<GameMode> mode_;
 
 };
