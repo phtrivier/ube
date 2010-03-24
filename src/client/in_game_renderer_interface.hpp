@@ -51,9 +51,9 @@ public:
   virtual int mouse_position_as_move_index(int i_x, int i_y) = 0;
 
   /**
-   * Marks the cell at a given position as the selected one.
+   * Display a cell as in path.
    */
-  virtual void render_selected_cell(int i_i, int i_j) = 0;
+  virtual void render_cell_in_path(int i_i, int i_j, int move_type) = 0;
 
   virtual void render_banned_cell(int i_i, int i_j) = 0;
 

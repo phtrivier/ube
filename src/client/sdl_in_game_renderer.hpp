@@ -65,7 +65,7 @@ public:
 
   int mouse_position_as_move_index(int i_x, int i_y);
   
-  void render_selected_cell(int i_i, int i_j);
+  void render_cell_in_path(int i_i, int i_j, int i_move_type);
 
   void render_banned_cell(int i_i, int i_j);
 
@@ -84,10 +84,9 @@ public:
 private:
 
   std::map<int, SDL_Surface *> cell_images_;
-
   std::map<int, SDL_Surface *> move_images_;
-
   std::map<int, SDL_Surface *> overlay_images_;
+  std::map<int, SDL_Surface *> path_images_;
 
   SDL_Surface * p_selected_cell_image_;
 
@@ -128,6 +127,33 @@ private:
   int load_overlay_images();
 
   /**
+   * Load all the images necessary to display
+   * paths.
+   *
+   * @returns 0 if image was loaded, -1 otherwise
+   */
+  int load_path_images();
+
+  /**
+   * Load images by move types, based on a format
+   *
+   * @param i_map map to contain the images
+   * @param i_format boost:format string format to get the image (eg : 'move_%1%.png'.) 
+   *   %1% is replaced by the move_type.
+   */
+  int load_images_for_move_types(std::map<int, SDL_Surface *> & i_map, std::string i_format);
+
+  /**
+   * Load one image by move types, based on a format
+   *
+   * @param i_move_type
+   * @param i_format boost:format string format to get the image (eg : 'move_%1%.png'.) 
+   *   %1% is replaced by the move_type.
+   * @param o_pp_surface address of the surface to hold the image
+   */
+  int load_image_for_move_type(int i_move_type, std::string & i_format, SDL_Surface ** o_pp_surface);
+
+  /**
    * Load the image necessary to display a cell.
    * 
    * @param i_cell_type 
@@ -143,7 +169,7 @@ private:
    * @param o_pp_surface output address of the image after loading
    * @returns 0 if cell was loaded, -1 otherwise.
    */
-  int load_move_image(int i_move_type, SDL_Surface ** o_pp_surface);
+  //K int load_move_image(int i_move_type, SDL_Surface ** o_pp_surface);
 
   /**
    * Load the image necessary to display an overlay
@@ -152,7 +178,7 @@ private:
    * @param o_pp_surface output address of the image after loading
    * @returns 0 if cell was loaded, -1 otherwise.
    */
-  int load_overlay_image(int i_type, SDL_Surface ** o_pp_surface);
+  //K int load_overlay_image(int i_type, SDL_Surface ** o_pp_surface);
 
   /**
    * Display the icon of a given move.

@@ -51,6 +51,8 @@ public:
 
   void render_player(const Puzzle & i_puzzle);
 
+  void render_overlays(const Puzzle & i_puzzle);
+
 private:
 
   // Dependencies
@@ -60,7 +62,7 @@ private:
 
   InGameCommandFactory command_factory_;
   InGameCommandStack command_stack_;
-
+  
 };
 
 #endif // _IN_GAME_VIEW_HPP_

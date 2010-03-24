@@ -115,7 +115,7 @@ namespace {
     EXPECT_CALL(controller, mouse_y()).WillRepeatedly(Return(11));
     EXPECT_CALL(renderer, mouse_x_as_puzzle_column(10)).WillRepeatedly(Return(0));
     EXPECT_CALL(renderer, mouse_y_as_puzzle_line(11)).WillRepeatedly(Return(0));
-    EXPECT_CALL(renderer, render_selected_cell(_,_)).Times(0);
+    EXPECT_CALL(renderer, render_cell_in_path(_,_,_)).Times(0);
     EXPECT_CALL(renderer, render_cell(0,0,Cell::EMPTY));
     EXPECT_CALL(renderer, flush());
 
