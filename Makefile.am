@@ -1,3 +1,3 @@
 SUBDIRS = po src data
 ACLOCAL_AMFLAGS = -I m4
-EXTRA_DIST=include lib
+EXTRA_DIST=include lib COPYING

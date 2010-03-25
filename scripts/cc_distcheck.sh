@@ -53,7 +53,7 @@ prepare_folders() {
 
 
 configure() {
-    autoreconf
+    autoreconf --install
     cd $BUILD_FOLDER
     ../../../configure --prefix $INSTALL_FOLDER $UBUNTU_CONFIG_OPTIONS
 }

@@ -59,10 +59,10 @@ Section "Ube" SecUbe
   #Create uninstaller
   WriteUninstaller "$INSTDIR\Uninstall.exe"
 
-  SetOutPath "$INSTDIR\bin" ;
+  SetOutPath "$INSTDIR\games" ;
 
   CreateDirectory "$SMPROGRAMS\ube"
-  createShortCut "$SMPROGRAMS\ube\ube.lnk" "$INSTDIR\bin\ube"
+  createShortCut "$SMPROGRAMS\ube\ube.lnk" "$INSTDIR\games\ube"
 
   createShortCut "$SMPROGRAMS\ube\uninstall.lnk" "$INSTDIR\uninstall.exe"
 
