@@ -1,1 +1,1 @@
-SUBDIRS = common mvc engine client 
+SUBDIRS = lua common mvc engine client 

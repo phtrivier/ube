@@ -42,7 +42,8 @@ AM_CPPFLAGS= -g -DLOCALEDIR=\"${datadir}/locale\" \
 	-I$(srcdir)/../../include \
 	-I$(srcdir)/../ \
 	$(SDL_CFLAGS) \
-	$(LUA_INCLUDE)
+	-I$(srcdir)/../lua
+#	$(LUA_INCLUDE)
 
 SDL_TTF_LIBS = -lSDL_ttf -lfreetype
 SDL_IMAGE_LIBS = -lSDL_image -lpng -ltiff -ljpeg -lz
@@ -60,13 +61,15 @@ POPT_LIBS=-lpopt
 PROJECT_LIBS=libube-client.a \
 	../mvc/libube-mvc.a \
 	../engine/libube-engine.a \
-	../common/libube-common.a
+	../common/libube-common.a \
+	../lua/liblua.a
 
 ube_LDADD=$(PROJECT_LIBS) \
 	$(POPT_LIBS) \
 	$(SDL_image_LIBS) $(SDL_TTF_LIBS) $(SDL_mixer_LIBS) \
 	$(SDL_IMAGE_LIBS) $(SDL_MIXER_LIBS) \
-	$(LUA_LIB) $(LIBINTL) 
+	$(LIBINTL) 
+#	$(LUA_LIB) $(LIBINTL) 
 
 
 check_PROGRAMS=client-tests
@@ -90,7 +93,8 @@ client_tests_LDADD=$(PROJECT_LIBS) \
 	$(POPT_LIBS) \
 	$(SDL_image_LIBS) $(SDL_TTF_LIBS) $(SDL_mixer_LIBS) \
 	$(SDL_IMAGE_LIBS) $(SDL_MIXER_LIBS) \
-	$(LUA_LIB) $(LIBINTL) 
+	$(LIBINTL)
+#	$(LUA_LIB) $(LIBINTL) 
 
 
 TESTS = client-tests

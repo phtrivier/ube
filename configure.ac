@@ -51,8 +51,8 @@ dnl              AC_MSG_WARN([*** Unable to find SDL_mixer library.
 dnl                               Are you cross compiling ? ]))			
 			    
 # You might need to define --with-lua-prefix and --with-lua-suffix to use this
-AX_LUA_HEADERS
-AX_LUA_LIBS
+#AX_LUA_HEADERS
+#AX_LUA_LIBS
 
 AX_BOOST_BASE([1.34])
 
@@ -60,6 +60,7 @@ AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_FILES([ 
 	Makefile
    	src/Makefile
+	src/lua/Makefile
 	src/common/Makefile
    	src/engine/Makefile
    	src/mvc/Makefile
