@@ -1,4 +1,4 @@
-AC_INIT([ube],[0.2.1],[phtrivier@yahoo.fr])
+AC_INIT([ube],[0.3.0],[phtrivier@yahoo.fr])
 AM_INIT_AUTOMAKE([foreign -Wall -Werror])
 AM_GNU_GETTEXT([external])
 AM_GNU_GETTEXT_VERSION([0.17])
