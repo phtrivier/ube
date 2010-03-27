@@ -11,7 +11,6 @@ libube_engine_a_SOURCES=cell.hpp cell.cpp \
 	script_runner_interface.hpp \
 	lua_command.hpp lua_command.cpp
 
-# TODO : Find a way to make sure this file is available ...
 luadir=${datadir}/@PACKAGE@/lua/engine
 lua_DATA=lua/puzzle_lib.lua \
 	lua/path_finder_lib.lua \
@@ -50,7 +49,6 @@ engine_tests_LDADD=libube-engine.a \
 	../common/libube-common.a \
 	../lua/liblua.a \
 	-L$(top_srcdir)/lib -lgtest -lgmock -ldl
-#	-L$(top_srcdir)/lib -lgtest -lgmock -llua -ldl
 
 # You should include here any local file that a test program.
 # Otherwise it won't be included in the distribution, 
@@ -59,7 +57,6 @@ EXTRA_DIST=${lua_DATA} \
 	tests/lua/puzzle_loader_test/puzzle1.lua \
 	tests/lua/puzzle_loader_test/puzzle2.lua \
 	tests/lua/puzzle_loader_test/puzzle_with_scripts.lua
-
 
 # This means engine-tests is run when using 'make check'.
 TESTS = engine-tests

@@ -16,18 +16,18 @@ You should have a number of libs installed. At least the following :
  - SDL_ttf (2.0.9 works for me)
  - popt (1.14.4 works for me)
  - boost (1.34.1 works for me)
- - lua (5.1.4 works for me)
 
 If you need anything else, please tell me !
 
 * Ubuntu 9.10
 
-Lua is distributed in a 'strange' (or at least non standard ?) way in
-Ubuntu. So the lua libs cannot easily be found by configure, and you
-have to baby-sit it somehow. Anyway, if you want to build, you will
-need at last :
+Install the dependencies ; something like this should do : 
 
- configure --with-lua-prefix=/usr/include/lua5.1 --with-lua-suffix=5.1
+ sudo apt-get install libsdl-ttf2.0-0 libsdl-ttf2.0-dev gettext libboost1.38-dev libpopt0 libpopt-dev pkg-config libsdl1.2-dev libsdl-image1.2-dev libsdl-mixer1.2-dev
+
+Then you can build things the "usual" way : 
+
+ ./configure
  make
  make install
 
@@ -38,11 +38,6 @@ in another place than the standard distribution
 
 Honestly, I don't know !! I haven't tested it anywhere else, if you do
 and you have troubles / it works, please drop a note !
-
-If you run into lua issues, the trick might be to set :
-
-  --with-lua-prefix to the folder that contains lua.h
-  --with-lua-suffix to the suffix of the liblua*.a file in your /usr/lib
 
 * Microsoft Windows (tm)
 

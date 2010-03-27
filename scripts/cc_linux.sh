@@ -70,7 +70,7 @@ prepare_folders() {
 configure() {
     autoreconf
     cd $BUILD_FOLDER
-    ../../../configure --prefix $INSTALL_FOLDER --with-lua-prefix=/usr/include/lua5.1 --with-lua-suffix=5.1
+    ../../../configure --prefix $INSTALL_FOLDER
 }
 
 build() {
