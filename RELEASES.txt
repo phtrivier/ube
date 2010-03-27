@@ -1,7 +1,6 @@
-* ? 0.2.1 '?'
+*  27/03/2010 0.2.1 'Sidaction' (http://www.sidaction.org)
 
- - Changed build scripts
- - Debian package, hopefully ?
+ - Lua included in the build
 
 * 24/03/2010 0.2.0 'World Tuberculosis day' (http://en.wikipedia.org/wiki/World_Tuberculosis_Day)
 

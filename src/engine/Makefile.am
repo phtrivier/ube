@@ -27,6 +27,7 @@ AM_CPPFLAGS=-DSRCDIR=\"${srcdir}\" \
 	-Wall -Werror \
 	-I$(srcdir)/../../include \
 	-I$(srcdir)/../ \
+	-I$(srcdir)/../lua \
 	$(LUA_INCLUDE) \
 	$(BOOST_CPPFLAGS)
 
@@ -47,7 +48,9 @@ engine_tests_SOURCES= tests/engine_tests.cpp \
 engine_tests_LDADD=libube-engine.a \
 	../mvc/libube-mvc.a \
 	../common/libube-common.a \
-	-L$(top_srcdir)/lib -lgtest -lgmock -llua -ldl
+	../lua/liblua.a \
+	-L$(top_srcdir)/lib -lgtest -lgmock -ldl
+#	-L$(top_srcdir)/lib -lgtest -lgmock -llua -ldl
 
 # You should include here any local file that a test program.
 # Otherwise it won't be included in the distribution, 

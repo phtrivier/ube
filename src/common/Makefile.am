@@ -14,7 +14,7 @@ AM_CPPFLAGS=-DSRCDIR=\"${srcdir}\" \
 	-DLUADIR=\"${luadir}\" \
 	-Wall -Werror \
 	-I$(srcdir)/../../include \
-	$(LUA_INCLUDE) \
+	-I$(srcdir)/../lua \
 	$(BOOST_CPPFLAGS)
 
 # There is one program that aggreatates all tests cases
@@ -26,7 +26,7 @@ common_tests_SOURCES= tests/common_tests.cpp \
 	tests/stat_file_checker_test.cpp
 
 # The program needs to be compiled with 
-common_tests_LDADD=libube-common.a -L$(top_srcdir)/lib -lgtest -lgmock -llua -ldl
+common_tests_LDADD=../lua/liblua.a libube-common.a -L$(top_srcdir)/lib -lgtest -lgmock -ldl
 
 # This means common-tests is run when using 'make check'.
 TESTS = common-tests
