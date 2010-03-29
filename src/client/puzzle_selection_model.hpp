@@ -53,6 +53,11 @@ public:
   void set_hovered_puzzle_index(int i_index) {
     hovered_index_ = i_index;
   }
+
+  void reset() {
+    puzzle_index_ = -1;
+    hovered_index_ = -1;
+  }
   
 private:
 
