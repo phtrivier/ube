@@ -16,6 +16,8 @@ SdlPuzzleSelectionRenderer::init()
   if (res == 0) {
     res = load_font("FreeSans.ttf", 18, &p_font_);
   }
+  
+  grey_ = rgb(0x32, 0x8C, 0x8C);
 
   return res;
 }
@@ -99,4 +101,15 @@ int
 SdlPuzzleSelectionRenderer::get_mouse_position_as_puzzle_index(int i_x, int i_y)
 {
   return PuzzleSelectionGeometry::get_mouse_position_as_puzzle_index(i_x,i_y);
+}
+
+void 
+SdlPuzzleSelectionRenderer::highlight_puzzle_name(int i_index) 
+{
+  SDL_Rect dst;
+  dst.x = NAMES_X0 - 5;
+  dst.y = get_puzzle_name_y(i_index) - 5;
+  dst.w = NAMES_W + 10;
+  dst.h = NAMES_H - 5;
+  SDL_FillRect(get_screen(), &dst, grey_); 
 }

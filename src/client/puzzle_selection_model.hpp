@@ -12,7 +12,8 @@ class PuzzleSelectionModel {
 public:
 
   PuzzleSelectionModel():
-    puzzle_index_(-1)
+    puzzle_index_(-1),
+    hovered_index_(-1)
   {
     fill_puzzle_list();
   }
@@ -41,9 +42,27 @@ public:
     return (int) puzzle_names_.size();
   }
 
+  bool has_hovered_puzzle() {
+    return hovered_index_ != -1;
+  }
+
+  int get_hovered_puzzle_index() {
+    return hovered_index_;
+  }
+
+  void set_hovered_puzzle_index(int i_index) {
+    hovered_index_ = i_index;
+  }
+  
 private:
 
+  // Index of the puzzle selected (clicked on). -1 means
+  // no puzzle has been selected yet.
   int puzzle_index_;
+
+  // Index of the puzzle name hovered on. -1 means
+  // the mouse is not on top of a puzzle name.
+  int hovered_index_;
 
   // List of the "human readible" names of the puzzle
   std::vector<std::string> puzzle_names_;
