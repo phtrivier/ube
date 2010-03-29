@@ -12,7 +12,7 @@ using boost::format;
 int
 SdlPuzzleSelectionRenderer::init() 
 {
-  int res = load_image("bg.png", &p_bg_);
+  int res = load_image("bg_puzzle_selection.png", &p_bg_);
   if (res == 0) {
     res = load_font("FreeSans.ttf", 18, &p_font_);
   }
@@ -48,8 +48,8 @@ SdlPuzzleSelectionRenderer::clear()
   SDL_BlitSurface(p_bg_, NULL, get_screen(), NULL);
 
   // FIXME(pht) : i18n this
-  render_text("Please choose a level", 300, 450);
-  render_text("(Oh, and please, don't shoot the coder, he's doing his best.)", 170, 500);
+  render_text("Please choose a level", 300, 40);
+  render_text("(Oh, and please, don't shoot the coder, he's doing his best.)", 170, 510);
   render_text(str(format("ube v%1%") % VERSION), 10, 570);
 }
 
@@ -72,7 +72,7 @@ SdlPuzzleSelectionRenderer::render_text(std::string i_text, int i_x, int i_y)
   } else {
     SDL_Rect dst;
     dst.x = i_x;
-    dst.y = i_y; // 50 + (40*i_index + 10);
+    dst.y = i_y;
     LOG_D("puzzle_selection") << "Blitting text surface on screen" << dst.x << "," << dst.y << "," << dst.w << "," << dst.h << std::endl;
 
     SDL_BlitSurface(text_surface, NULL, get_screen(), &dst);
@@ -89,7 +89,9 @@ SdlPuzzleSelectionRenderer::render_puzzle_name(std::string & i_name,
 
   LOG_D("puzzle_selection") << "Rendering name " << i_name << " at index " << i_index << std::endl;
 
-  render_text(i_name, get_puzzle_name_x(i_index), get_puzzle_name_y(i_index));
+  std::string msg = str(format("Level %1% : %2%") % (i_index + 1) % i_name);
+
+  render_text(msg, get_puzzle_name_x(i_index), get_puzzle_name_y(i_index));
  
 }
 

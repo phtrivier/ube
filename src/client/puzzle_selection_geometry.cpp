@@ -1,7 +1,7 @@
 #include "puzzle_selection_geometry.hpp"
 
 #define NAMES_X0 50
-#define NAMES_Y0 50
+#define NAMES_Y0 100
 #define NAMES_H 40
 #define NAMES_W 600
 #define NAMES_DELTA 10
