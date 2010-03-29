@@ -26,6 +26,7 @@ PuzzleSelectionView::render_game()
   if (dep_model_.has_hovered_puzzle()) {
     dep_renderer_.highlight_puzzle_name(dep_model_.get_hovered_puzzle_index());
   }
+
   for (int i = 0 ; i < dep_model_.get_puzzle_count() ; i++) {
     dep_renderer_.render_puzzle_name(puzzle_names[i], i);
   }
@@ -36,14 +37,25 @@ PuzzleSelectionView::render_game()
 void
 PuzzleSelectionView::handle_event(int i_event)
 {
-
   if (i_event == GameEvent::MOUSE_CLICKED) {
     int mouse_x = dep_controller_.mouse_x();
     int mouse_y = dep_controller_.mouse_y();
     int puzzle_index = dep_renderer_.get_mouse_position_as_puzzle_index(mouse_x, mouse_y);
-    
+
     if (puzzle_index != -1 && puzzle_index < dep_model_.get_puzzle_count()) {
       dep_model_.set_selected_puzzle_index(puzzle_index);
+    } else if (puzzle_index == -1 
+	       && dep_model_.has_hovered_puzzle() 
+	       && dep_model_.get_hovered_puzzle_index() == 0) {
+
+      dep_model_.set_selected_puzzle_index(0);
+    } else if (puzzle_index > dep_model_.get_puzzle_count()
+	       && dep_model_.has_hovered_puzzle()
+	       && dep_model_.get_hovered_puzzle_index() == dep_model_.get_puzzle_count() - 1) {
+      dep_model_.set_selected_puzzle_index(dep_model_.get_puzzle_count() - 1);
+    }
+
+    if (dep_model_.has_selected_puzzle()) {
       dep_controller_.fire_event(GameEvent::PUZZLE_SELECTED);
     }
   }
