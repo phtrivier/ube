@@ -16,4 +16,6 @@ public:
   MOCK_METHOD0(flush, void());
   MOCK_METHOD0(clear, void());
 
+  MOCK_METHOD1(highlight_puzzle_name, 
+	       void(int i_index));
 };
