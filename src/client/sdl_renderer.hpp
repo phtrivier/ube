@@ -82,6 +82,13 @@ protected :
    */
   int load_image(std::string i_image_name, SDL_Surface ** o_pp_surface);
 
+  /**
+   * Helper function to created RGB color based on 
+   * the screen surface.
+   */
+  Uint32 rgb(Uint8 r, Uint8 g, Uint8 b);
+
+
 private:
 
   ResourceResolverInterface & dep_resolver_;

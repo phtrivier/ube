@@ -46,11 +46,15 @@ public:
  
   int get_mouse_position_as_puzzle_index(int i_x, int i_y);
 
+  void highlight_puzzle_name(int i_index);
+
 private:
 
   SDL_Surface * p_bg_;
   
   TTF_Font * p_font_;
+
+  Uint32 grey_;
   
   int load_font(const char * i_name, int i_ptsize, TTF_Font ** o_pp_font);
 
