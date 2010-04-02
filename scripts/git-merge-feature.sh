@@ -3,7 +3,7 @@
 # Uses --no-ff to keep all the commits inside the history
 delete() {
     echo "Deleting branch..."
-    git branch -d $1
+    git branch -D $1
 }
 
 push() {
