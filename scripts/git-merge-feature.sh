@@ -2,10 +2,12 @@
 # Helper script to merge feature back into the dev branch
 # Uses --no-ff to keep all the commits inside the history
 delete() {
+    echo "Deleting branch..."
     git branch -d $1
 }
 
 push() {
+    echo "Pushing branch..."
     git push origin dev
 }
 
@@ -19,6 +21,7 @@ then
     exit
 fi
 
+echo "Merging..."
 git checkout dev
 git merge --no-ff $1
 
