@@ -3,7 +3,7 @@
 
 // FIXME(pht) : would'nt it be better if those constants
 // here ? 
-#define MOVES_X 20
+#define MOVES_X (20 + 64 + 10 + 64 + 10)
 #define MOVES_Y 450
 #define MOVES_H 64
 #define MOVES_W 128
@@ -14,12 +14,14 @@
 #define CELLS_H 32
 
 #define UNDO_X 20
-#define UNDO_Y 520
+//#define UNDO_Y 520
+#define UNDO_Y 450
 #define UNDO_H 64
 #define UNDO_W 64
 
 #define REDO_X 20 + 64 + 10
-#define REDO_Y 520
+//#define REDO_Y 520
+#define REDO_Y 450
 #define REDO_H 64
 #define REDO_W 64
 
