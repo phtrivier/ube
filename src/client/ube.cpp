@@ -1,3 +1,4 @@
+#include "common/i18n.hpp"
 #include "common/logging.hpp"
 #include "common/prefix_resource_resolver.hpp"
 #include "common/cout_logger.hpp"
@@ -10,10 +11,6 @@
 
 #include "ube_game.hpp"
 
-#include <config.h>
-#include <locale.h>
-#include "gettext.h"
-#define _(String) gettext (String)
 #include <iostream>
 #include <cstdio>
 #include <stdio.h>
@@ -38,7 +35,7 @@ int main(int argc, char ** argv) {
   // Logging::add_logging_category("parser");
   //  Logging::add_logging_category("cell");
   // Logging::add_logging_category("in_game_view");
-  //  Logging::add_logging_category("puzzle_selection");
+  Logging::add_logging_category("puzzle_selection");
   //Logging::add_logging_category("view");
   //Logging::add_logging_category("ube_game");
 

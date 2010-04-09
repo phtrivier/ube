@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ube 0.1\n"
+"Project-Id-Version: ube 0.3.0\n"
 "Report-Msgid-Bugs-To: phtrivier@yahoo.fr\n"
-"POT-Creation-Date: 2009-10-27 21:09+0100\n"
+"POT-Creation-Date: 2010-04-10 00:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,12 +16,38 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/engine/greeter.cpp:19 src/engine/greeter.cpp:28
-#, c-format
-msgid "Hello %s!!\n"
+#: src/client/puzzle_selection_model.cpp:8
+msgid "From here to there (you can move, like.)"
 msgstr ""
 
-#: src/client/ube.cpp:62
-#, c-format
-msgid "Hello %s. What's the craic today ?\n"
+#: src/client/puzzle_selection_model.cpp:9
+msgid "Twice as fast (you can move even faster, like.)"
+msgstr ""
+
+#: src/client/puzzle_selection_model.cpp:10
+msgid "Ouch, a wall. You can cross it. Trust me."
+msgstr ""
+
+#: src/client/puzzle_selection_model.cpp:11
+msgid "Okay, let's get funnier..."
+msgstr ""
+
+#: src/client/puzzle_selection_model.cpp:12
+msgid "Relax. You'll pick up along the way."
+msgstr ""
+
+#: src/client/puzzle_selection_model.cpp:13
+msgid "Too simple ? Let's see..."
+msgstr ""
+
+#: src/client/sdl_puzzle_selection_renderer.cpp:54
+msgid "Please choose a level"
+msgstr ""
+
+#: src/client/sdl_puzzle_selection_renderer.cpp:55
+msgid "(Oh, and please, don't shoot the coder, he's doing his best.)"
+msgstr ""
+
+#: src/client/sdl_puzzle_selection_renderer.cpp:95
+msgid "Level %1% : %2%"
 msgstr ""
