@@ -111,9 +111,7 @@ InGameView::render_selected_cell(const Puzzle & i_puzzle) {
     if (i != -1) {
       if (i_puzzle.is_valid_position(i,j)) {
 	assert(i_puzzle.get_cell_at(i,j) != NULL);
-	if (!i_puzzle.get_cell_at(i,j)->is_empty()) {
 	  dep_renderer_.render_banned_cell(i,j);
-	}
       }
     }
   }
