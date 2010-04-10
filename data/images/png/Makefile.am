@@ -4,6 +4,7 @@ imagesdir=${datadir}/@PACKAGE@/images
 pngsdir=${imagesdir}/png
 
 pngs_DATA=cell_0.png cell_1.png cell_2.png cell_3.png \
-	player.png
+	path_0.png path_1.png \
+	player.png banned_cell.png
 
 EXTRA_DIST=${pngs_DATA}

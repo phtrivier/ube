@@ -23,4 +23,5 @@ end
 end
 
 convert_known_xcf("player.xcf")
+convert_known_xcf("banned_cell.xcf")
 

@@ -61,7 +61,7 @@ SdlInGameRenderer::init() {
   // FIXME(pht) : use a clever loop to try and load images and 
   // report the first error ...
   res = load_image("selected_cell.png", &p_selected_cell_image_);
-  res = load_image("banned_cell.png", &p_banned_cell_image_);
+  res = load_image("png/banned_cell.png", &p_banned_cell_image_);
   res = load_image("png/player.png", &p_player_image_);      
 
   res = load_image("bg.png", &p_bg_);
@@ -223,7 +223,7 @@ SdlInGameRenderer::load_overlay_images() {
 
 int
 SdlInGameRenderer::load_path_images() {
-  return load_images_for_move_types(path_images_, "path_%1%.png");
+  return load_images_for_move_types(path_images_, "png/path_%1%.png");
 }
 
 int
