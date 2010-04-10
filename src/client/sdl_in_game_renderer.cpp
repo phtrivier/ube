@@ -213,7 +213,7 @@ SdlInGameRenderer::load_image_for_move_type(int i_move_type, std::string & i_for
 
 int
 SdlInGameRenderer::load_move_images() {
-  return load_images_for_move_types(move_images_, "move_%1%.png");
+  return load_images_for_move_types(move_images_, "png/move_%1%.png");
 }
 
 int
