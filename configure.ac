@@ -29,6 +29,7 @@ AC_CONFIG_FILES([
 	po/Makefile.in
 	data/Makefile
 	data/images/Makefile
+	data/images/png/Makefile
 	data/fonts/Makefile
 	data/ogg/Makefile
 	data/lua/Makefile

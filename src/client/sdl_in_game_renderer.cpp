@@ -230,7 +230,7 @@ int
 SdlInGameRenderer::load_cell_image(int i_cell_type, SDL_Surface ** o_pp_surface) 
 {
   int res = -1;
-  std::string image_name = str(format("cell_%1%.png") % i_cell_type);
+  std::string image_name = str(format("png/cell_%1%.png") % i_cell_type);
   res = load_image(image_name, o_pp_surface);
   return res;
 }
