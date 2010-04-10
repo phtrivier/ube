@@ -218,7 +218,7 @@ SdlInGameRenderer::load_move_images() {
 
 int
 SdlInGameRenderer::load_overlay_images() {
-  return load_images_for_move_types(overlay_images_, "overlay_move_%1%.png");
+  return load_images_for_move_types(overlay_images_, "png/overlay_move_%1%.png");
 }
 
 int
