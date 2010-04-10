@@ -1,5 +1,3 @@
-(global-set-key [(control ?c) (control ?j)] 'compile-all-or-recompile)
-
 (defconst ube-dir "~/prj/ube")
 
 (defun ube-compile (what)
@@ -55,6 +53,10 @@
       (recompile)
     (ube-compile-all)))
 
+(defun run-ube ()
+  (interactive)
+  (start-process "ube" "*ube*" (concat ube-dir "/builds/linux/ube_linux/games/ube")))
+
 (setq ube-project
       (ede-cpp-root-project "ube"
 			    :name "ube-pht"
@@ -74,5 +76,9 @@
 			    ;; 			     "make -C ~/prj/ube/builds/linux/current/src/engine check"
 			    ;; 			     " && "
 			    ;; 			     "make -C ~/prj/ube/builds/linux/current/src/client check")))))
+
+(global-set-key [(control ?c) (control ?j)] 'compile-all-or-recompile)
+(global-set-key [(control ?c) (control ?u)] 'run-ube)
+
 
 (provide 'ube)

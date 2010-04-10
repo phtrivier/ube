@@ -6,4 +6,4 @@ set_puzzle_rows({"###",
 		 "I-#",
 		 "###"})
 
-set_puzzle_moves({Move.DOUBLE, Move.KNIGHT})
+set_puzzle_moves({Move.DOUBLE, Move.SINGLE})

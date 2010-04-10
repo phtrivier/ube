@@ -35,9 +35,9 @@ SdlInGameRenderer::~SdlInGameRenderer()
 {
 
   clear_image_map(cell_images_, Cell::CELL_TYPES_COUNT);
-  clear_image_map(move_images_, MoveType::KNIGHT+1);
-  clear_image_map(overlay_images_, MoveType::KNIGHT+1);
-  clear_image_map(path_images_, MoveType::KNIGHT+1);
+  clear_image_map(move_images_, MoveType::LAST+1);
+  clear_image_map(overlay_images_, MoveType::LAST+1);
+  clear_image_map(path_images_, MoveType::LAST+1);
 
   clear_image(p_selected_cell_image_);
   clear_image(p_banned_cell_image_);
@@ -62,7 +62,7 @@ SdlInGameRenderer::init() {
   // report the first error ...
   res = load_image("selected_cell.png", &p_selected_cell_image_);
   res = load_image("banned_cell.png", &p_banned_cell_image_);
-  res = load_image("player.png", &p_player_image_);      
+  res = load_image("png/player.png", &p_player_image_);      
 
   res = load_image("bg.png", &p_bg_);
 
@@ -191,7 +191,7 @@ int
 SdlInGameRenderer::load_images_for_move_types(std::map<int, SDL_Surface *> & i_map, std::string i_format)
 {
   int res = 0;
-  for (int move_type = 0 ; move_type <= MoveType::KNIGHT ; move_type ++) {
+  for (int move_type = 0 ; move_type <= MoveType::LAST ; move_type ++) {
     SDL_Surface * p_new_surface = NULL;
     res = load_image_for_move_type(move_type, i_format, &p_new_surface);
     if (res == 0) {
