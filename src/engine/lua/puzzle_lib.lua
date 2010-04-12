@@ -13,6 +13,15 @@ end
 -- Ask the globally available puzzle loader
 -- to set a row on the globally available puzzle.
 function set_puzzle_rows(rows)
+
+   -- height
+   h = #rows
+
+   -- hopefully, the puzzles have the proper dimensions
+   w = string.len(rows[1])
+
+   set_puzzle_dimensions(w,h)
+
    for i,row in ipairs(rows) do
       -- ipairs start indexing at 0. Pff. Whatever.
       cpp_puzzle_loader_set_row(cpp_puzzle, cpp_puzzle_loader, 

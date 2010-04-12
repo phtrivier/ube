@@ -4,11 +4,11 @@ void
 PuzzleSelectionModel::fill_puzzle_list()
 {
   add_puzzle("From here to there (you can move, like.)", "tutorial0.lua");
-  add_puzzle("Twice as fast (you can move even faster, like.)", "tutorial0a.lua");
-  add_puzzle("Ouch, a wall. You can cross it. Trust me.", "tutorial1.lua");
-  add_puzzle("Okay, let's get funnier...", "tutorial2.lua");
-  add_puzzle("Relax. You'll pick up along the way.", "tutorial3.lua");
-  add_puzzle("Too simple ? Let's see...", "tutorial4.lua");
+  add_puzzle("Twice as fast (you can move even faster, like.)", "tutorial1.lua");
+  add_puzzle("Ouch, a wall. You can cross it. Trust me.", "tutorial2.lua");
+  add_puzzle("Okay, let's get funnier...", "tutorial3.lua");
+  add_puzzle("Relax. You'll pick up along the way.", "tutorial4.lua");
+  add_puzzle("Too simple ? Let's see...", "tutorial5.lua");
 }
 
 void
