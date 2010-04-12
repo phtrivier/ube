@@ -1,6 +1,4 @@
 -- First puzzle to load in the game
-set_puzzle_dimensions(22,11)
-
 set_puzzle_rows({"I---------############",
 		 "-----------###########",
 		 "-----------###########",
