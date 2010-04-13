@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #include "common/logging.hpp"
 #include "common/prefix_resource_resolver.hpp"
 #include "common/cout_logger.hpp"

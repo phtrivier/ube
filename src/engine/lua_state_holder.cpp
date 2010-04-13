@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #include "common/lua_helper.hpp"
 #include "common/resource_resolver_interface.hpp"
 

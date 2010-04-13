@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #ifndef _RENDERER_INTERFACE_HPP_
 #define _RENDERER_INTERFACE_HPP_
 

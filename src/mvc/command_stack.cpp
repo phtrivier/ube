@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #include "command_stack.hpp"
 
 #include "command_interface.hpp"

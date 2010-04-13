@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #include "option_parser.hpp"
 
 #include "common/logging.hpp"

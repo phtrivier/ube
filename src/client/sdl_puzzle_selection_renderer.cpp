@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #include "sdl_puzzle_selection_renderer.hpp"
 
 #include "common/logging.hpp"

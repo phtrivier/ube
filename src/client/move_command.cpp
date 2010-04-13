@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #include "move_command.hpp"
 
 #include "client/in_game_model.hpp"
@@ -35,4 +38,3 @@ MoveCommand::undo()
   // Change the current move to be the one just cancelled
   dep_model_.set_current_move_index(move_index_);
 }
-

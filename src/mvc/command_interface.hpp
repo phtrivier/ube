@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #ifndef _COMMAND_INTERFACE_HPP_
 #define _COMMAND_INTERFACE_HPP_
 

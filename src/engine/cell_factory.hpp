@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #ifndef _CELL_FACTORY_HPP_
 #define _CELL_FACTORY_HPP_
 

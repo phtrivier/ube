@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #include "in_game_command_stack.hpp"
 
 #include "command_factory_interface.hpp"

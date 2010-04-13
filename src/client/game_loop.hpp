@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #ifndef _GAME_LOOP_HPP_
 #define _GAME_LOOP_HPP_
 

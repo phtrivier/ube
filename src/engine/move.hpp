@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #ifndef _MOVE_HPP_
 #define _MOVE_HPP_
 

@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #include <stat_file_checker.hpp>
 
 #include <sys/types.h>
@@ -27,4 +30,3 @@ StatFileChecker::has_stat_mode(const std::string iPath, mode_t mode) const {
   }
   return res;
 }
-

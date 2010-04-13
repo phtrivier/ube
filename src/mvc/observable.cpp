@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #include "observable.hpp"
 #include "observer_interface.hpp"
 

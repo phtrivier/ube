@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #include "lua_puzzle.hpp"
 
 // So if the function is not called

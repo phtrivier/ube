@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #ifndef _SDL_IN_GAME_RENDERER_HPP_
 #define _SDL_IN_GAME_RENDERER_HPP_
 
