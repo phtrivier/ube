@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #ifndef _LUA_PUZZLE_HPP_
 #define _LUA_PUZZLE_HPP_
 

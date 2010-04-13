@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #ifndef _SDL_APP_HPP_
 #define _SDL_APP_HPP_
 

@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #include "in_game_renderer_geometry.hpp"
 
 int

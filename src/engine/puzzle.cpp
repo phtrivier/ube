@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #include "puzzle.hpp"
 #include "cell.hpp"
 #include "move.hpp"

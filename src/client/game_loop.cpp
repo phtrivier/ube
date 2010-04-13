@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #include "game_loop.hpp"
 
 #include "common/logging.hpp"

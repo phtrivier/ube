@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #ifndef _UBE_GAME_HPP_
 #define _UBE_GAME_HPP_
 

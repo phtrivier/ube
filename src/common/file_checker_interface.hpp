@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #ifndef _FILE_CHECKER_INTERFACE_HPP_
 #define _FILE_CHECKER_INTERFACE_HPP_
 

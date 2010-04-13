@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #include "sdl_controller.hpp"
 
 #include "common/logging.hpp"

@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #include "game_mode.hpp"
 
 #include "mvc/controller_interface.hpp"

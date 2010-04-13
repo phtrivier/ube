@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #ifndef _SDL_PUZZLE_SELECTION_RENDERER_HPP_
 #define _SDL_PUZZLE_SELECTION_RENDERER_HPP_
 

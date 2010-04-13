@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #ifndef _PUZZLE_HPP_
 #define _PUZZLE_HPP_
 
