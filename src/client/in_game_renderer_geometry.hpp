@@ -17,13 +17,11 @@
 #define CELLS_H 32
 
 #define UNDO_X 20
-//#define UNDO_Y 520
 #define UNDO_Y 450
 #define UNDO_H 64
 #define UNDO_W 64
 
-#define REDO_X 20 + 64 + 10
-//#define REDO_Y 520
+#define REDO_X UNDO_X + UNDO_W
 #define REDO_Y 450
 #define REDO_H 64
 #define REDO_W 64
