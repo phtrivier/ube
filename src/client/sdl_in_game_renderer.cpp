@@ -55,6 +55,9 @@ SdlInGameRenderer::~SdlInGameRenderer()
 
 int
 SdlInGameRenderer::init() {
+
+  SdlRenderer::init();
+
   int res = -1;
   res = load_cell_images();
   res = load_move_images();
@@ -166,25 +169,25 @@ SdlInGameRenderer::render_move(Move & i_move, int i_index)
   SDL_BlitSurface(move_images_[i_move.type()], &src, get_screen(), &dst);
 }
 
-// TODO(pht) : fix this
+// TODO(pht) : fix this (use image, and/or DRY)
 void
 SdlInGameRenderer::render_current_move(int i_move_index) {
-SDL_Rect dst;
+  SDL_Rect dst;
   dst.x = MOVES_X + i_move_index*(MOVES_W + 10) - 5;
   dst.y = MOVES_Y - 5;
   dst.w = MOVES_W + 10;
   dst.h = MOVES_H + 10;
-  SDL_FillRect(get_screen(), &dst, rgb(255,0,0));
+  SDL_FillRect(get_screen(), &dst, blue_);
 }
 
 void
 SdlInGameRenderer::render_hovered_move(int i_move_index) {
-SDL_Rect dst;
+  SDL_Rect dst;
   dst.x = MOVES_X + i_move_index*(MOVES_W + 10) - 5;
   dst.y = MOVES_Y - 5;
   dst.w = MOVES_W + 10;
   dst.h = MOVES_H + 10;
-  SDL_FillRect(get_screen(), &dst, rgb(0,0,255));
+  SDL_FillRect(get_screen(), &dst, gray_);
 }
 
 int

@@ -15,12 +15,11 @@ using boost::format;
 int
 SdlPuzzleSelectionRenderer::init() 
 {
+  SdlRenderer::init();
   int res = load_image("bg_puzzle_selection.png", &p_bg_);
   if (res == 0) {
     res = load_font("FreeSans.ttf", 18, &p_font_);
   }
-  
-  grey_ = rgb(0x32, 0x8C, 0x8C);
 
   return res;
 }
@@ -114,5 +113,5 @@ SdlPuzzleSelectionRenderer::highlight_puzzle_name(int i_index)
   dst.y = get_puzzle_name_y(i_index) - 5;
   dst.w = NAMES_W + 10;
   dst.h = NAMES_H - 5;
-  SDL_FillRect(get_screen(), &dst, grey_); 
+  SDL_FillRect(get_screen(), &dst, gray_); 
 }

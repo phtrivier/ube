@@ -52,6 +52,8 @@ protected :
   // Quick access to colors
   Uint32 black_;
   Uint32 white_;
+  Uint32 gray_;
+  Uint32 blue_;
 
   /**
    * Access to the screen surface.

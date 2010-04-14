@@ -57,8 +57,6 @@ private:
   
   TTF_Font * p_font_;
 
-  Uint32 grey_;
-  
   int load_font(const char * i_name, int i_ptsize, TTF_Font ** o_pp_font);
 
   void render_text(std::string i_text, int i_x, int i_y);
