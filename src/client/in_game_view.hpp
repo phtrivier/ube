@@ -56,6 +56,8 @@ public:
 
   void render_overlays(const Puzzle & i_puzzle);
 
+  void update_hovered_move(InGameModel & i_model);
+
 private:
 
   // Dependencies

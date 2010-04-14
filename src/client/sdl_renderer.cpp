@@ -12,10 +12,6 @@
 int 
 SdlRenderer::init()
 {
-  /*
-  black_ = SDL_MapRGB(dep_p_screen_->format, 0x00, 0x00, 0x00);
-  white_ = SDL_MapRGB(dep_p_screen_->format, 0xFF, 0xFF, 0xFF);
-  */
   black_ = rgb(0x00, 0x00, 0x00);
   white_ = rgb(0xFF, 0xFF, 0xFF);
   return 0;
