@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #include "in_game_mode_factory.hpp"
 
 #include "engine/cell_factory.hpp"

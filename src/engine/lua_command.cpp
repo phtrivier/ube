@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #include "lua_command.hpp"
 
 #include "script_runner_interface.hpp"

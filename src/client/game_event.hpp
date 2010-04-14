@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #ifndef _GAME_EVENT_HPP_
 #define _GAME_EVENT_HPP_
 

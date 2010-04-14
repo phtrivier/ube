@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #ifndef _STAT_FILE_CHECKER_HPP
 #define _STAT_FILE_CHECKER_HPP
 

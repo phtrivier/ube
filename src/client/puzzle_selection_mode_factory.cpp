@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #include "puzzle_selection_mode_factory.hpp"
 
 #include "sdl_controller.hpp"
@@ -35,4 +38,3 @@ PuzzleSelectionModeFactory::create_mode() {
   return res;
 
 }
-

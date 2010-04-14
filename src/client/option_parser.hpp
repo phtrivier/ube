@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #ifndef _OPTION_PARSER_HPP_
 #define _OPTION_PARSER_HPP_
 

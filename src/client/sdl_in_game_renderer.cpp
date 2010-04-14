@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #include "sdl_in_game_renderer.hpp"
 
 #include "common/logging.hpp"

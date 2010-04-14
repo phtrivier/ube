@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #ifndef _LOGGER_HPP_
 #define _LOGGER_HPP_
 

@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #include "puzzle_selection_geometry.hpp"
 
 int

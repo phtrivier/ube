@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #ifndef _COUT_LOGGER_HPP_
 #define _COUT_LOGGER_HPP_
 

@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #include "prefix_resource_resolver.hpp"
 #include "file_checker_interface.hpp"
 #include <cassert>
@@ -116,4 +119,3 @@ PrefixResourceResolver::get_res_file_name(const char *iResType, const char * iRe
   res.append(iResName);
   return res;
 }
-

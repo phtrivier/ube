@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #include <config.h>
 #include <locale.h>
 #include "gettext.h"

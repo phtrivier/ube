@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #include "sdl_renderer.hpp"
 
 #include "common/resource_resolver_interface.hpp"

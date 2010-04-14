@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #include "in_game_view.hpp"
 
 #include "common/logging.hpp"

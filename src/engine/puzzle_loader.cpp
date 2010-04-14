@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #include "puzzle_loader.hpp"
 #include "cell_factory.hpp"
 #include "puzzle.hpp"
@@ -22,4 +25,3 @@ void PuzzleLoader::set_row(int i, Puzzle * poPuzzle, const char * row) {
   }
 
 }
-

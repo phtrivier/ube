@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #include "lua_path_finder.hpp"
 
 #include "common/lua_helper.hpp"

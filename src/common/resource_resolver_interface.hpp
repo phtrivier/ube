@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #ifndef _RESOURCE_RESOLVER_INTERFACE_HPP_
 #define _RESOURCE_RESOLVER_INTERFACE_HPP_
 

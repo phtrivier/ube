@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #include "ube_game.hpp"
 
 #include "option_parser.hpp"
