@@ -3,6 +3,7 @@
  */
 #include "sdl_puzzle_selection_renderer.hpp"
 
+#include "common/i18n.hpp"
 #include "common/logging.hpp"
 #include "common/resource_resolver_interface.hpp"
 
@@ -52,8 +53,8 @@ SdlPuzzleSelectionRenderer::clear()
   SDL_BlitSurface(p_bg_, NULL, get_screen(), NULL);
 
   // FIXME(pht) : i18n this
-  render_text("Please choose a level", 300, 40);
-  render_text("(Oh, and please, don't shoot the coder, he's doing his best.)", 170, 510);
+  render_text(_("Please choose a level"), 300, 40);
+  render_text(_("(Oh, and please, don't shoot the coder, he's doing his best.)"), 170, 510);
   render_text(str(format("ube v%1%") % VERSION), 10, 570);
 }
 
@@ -66,11 +67,13 @@ SdlPuzzleSelectionRenderer::flush()
 void
 SdlPuzzleSelectionRenderer::render_text(std::string i_text, int i_x, int i_y)
 {
+  LOG_D("puzzle_selection") << "Rendering text : " << i_text << std::endl;
+
   // FIXME(pht) : ideally, the text surface only has to be
   // computed once and can be reused, can't it ? 
   SDL_Surface * text_surface;
   SDL_Color white = {255,255,255};
-  if (!(text_surface = TTF_RenderText_Blended(p_font_, i_text.c_str(), white))) {
+  if (!(text_surface = TTF_RenderUTF8_Blended(p_font_, i_text.c_str(), white))) {
     printf("Error while printing text %s\n", TTF_GetError());
     LOG_D("puzzle_selection") << "Could not create renderering surface ; " << TTF_GetError() << std::endl;
   } else {
@@ -78,7 +81,7 @@ SdlPuzzleSelectionRenderer::render_text(std::string i_text, int i_x, int i_y)
     dst.x = i_x;
     dst.y = i_y;
     LOG_D("puzzle_selection") << "Blitting text surface on screen" << dst.x << "," << dst.y << "," << dst.w << "," << dst.h << std::endl;
-
+    
     SDL_BlitSurface(text_surface, NULL, get_screen(), &dst);
     SDL_FreeSurface(text_surface);
   }
@@ -93,7 +96,7 @@ SdlPuzzleSelectionRenderer::render_puzzle_name(std::string & i_name,
 
   LOG_D("puzzle_selection") << "Rendering name " << i_name << " at index " << i_index << std::endl;
 
-  std::string msg = str(format("Level %1% : %2%") % (i_index + 1) % i_name);
+  std::string msg = str(format(_("Level %1% : %2%")) % (i_index + 1) % i_name);
 
   render_text(msg, get_puzzle_name_x(i_index), get_puzzle_name_y(i_index));
  

@@ -1,5 +1,6 @@
 noinst_LIBRARIES=libube-common.a
-libube_common_a_SOURCES=gettext.h lua_helper.hpp \
+libube_common_a_SOURCES=lua_helper.hpp \
+	gettext.h i18n.hpp \
 	silent_ostream.hpp \
 	log_level.hpp logging.hpp logging.cpp \
 	logger_interface.hpp \
