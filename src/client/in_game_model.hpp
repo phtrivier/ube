@@ -119,6 +119,11 @@ public:
     hovered_move_index_ = i_index;
   }
 
+  /**
+   * Has the goal changed since last call to update_path ?
+   */
+  bool has_goal_changed();
+
 private:
   Puzzle * dep_puzzle_;
   PathFinderInterface & dep_path_finder_;
@@ -142,11 +147,6 @@ private:
 
   // Index of the move currently roled over by the mouse, or -1 if none is.
   int hovered_move_index_;
-
-  /**
-   * Has the goal changed since last call to update_path ?
-   */
-  bool has_goal_changed();
 
   /**
    * Has the player's position changed since last call

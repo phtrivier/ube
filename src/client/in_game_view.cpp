@@ -26,8 +26,8 @@ InGameView::render_game() {
   dep_renderer_.clear();
   dep_renderer_.render_ui(command_stack_.canUndo(), command_stack_.canRedo());
   render_puzzle(dep_model_.get_puzzle());
-  render_selected_cell(dep_model_.get_puzzle());
   render_path(dep_model_);
+  render_selected_cell(dep_model_);
   render_player(dep_model_.get_puzzle());
   render_overlays(dep_model_.get_puzzle());
   dep_renderer_.render_moves(dep_model_);
@@ -123,7 +123,7 @@ InGameView::render_overlays(const Puzzle & i_puzzle) {
 }
 
 void
-InGameView::render_selected_cell(const Puzzle & i_puzzle) {
+InGameView::render_selected_cell(InGameModel & i_model) {
   int mouse_x = dep_controller_.mouse_x();
   int mouse_y = dep_controller_.mouse_y();
 
@@ -133,11 +133,18 @@ InGameView::render_selected_cell(const Puzzle & i_puzzle) {
   if (j != -1) {
     int i = dep_renderer_.mouse_y_as_puzzle_line(mouse_y);
     if (i != -1) {
-      if (i_puzzle.is_valid_position(i,j)) {
-	assert(i_puzzle.get_cell_at(i,j) != NULL);
-	if (!i_puzzle.get_cell_at(i,j)->is_empty() &&
-	    !i_puzzle.get_cell_at(i,j)->is_in_path()) {
-	  dep_renderer_.render_banned_cell(i,j);
+
+      Puzzle & puzzle = i_model.get_puzzle();
+      
+      if (puzzle.is_valid_position(i,j)) {
+	assert(puzzle.get_cell_at(i,j) != NULL);
+	// TEST : Only display the banned cell if the path
+	// has been computed
+	if (!i_model.has_goal_changed()) {
+	  if (!puzzle.get_cell_at(i,j)->is_empty() &&
+	      !puzzle.get_cell_at(i,j)->is_in_path()) {
+	    dep_renderer_.render_banned_cell(i,j);
+	  }
 	}
       }
     }

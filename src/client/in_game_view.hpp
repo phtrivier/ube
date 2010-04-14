@@ -46,7 +46,7 @@ public:
    */
   void render_puzzle(const Puzzle & i_puzzle);
   
-  void render_selected_cell(const Puzzle & i_puzzle);
+  void render_selected_cell(InGameModel & i_model);
 
   void update_goal(InGameModel & i_model);
 

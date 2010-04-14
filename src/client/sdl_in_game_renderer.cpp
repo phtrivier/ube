@@ -123,7 +123,8 @@ SdlInGameRenderer::render_moves(InGameModel & i_model)
     render_current_move(i_model.current_move_index());
   }
 
-  if (i_model.hovered_move_index() != -1) {
+  if (i_model.hovered_move_index() != -1 &&
+      i_model.is_move_available(i_model.hovered_move_index())) {
     render_hovered_move(i_model.hovered_move_index());
   }
 
