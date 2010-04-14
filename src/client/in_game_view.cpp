@@ -14,6 +14,12 @@
 
 void
 InGameView::render_game() {
+
+  // Take the latest value of the cursor position, 
+  // and update state values of the model.
+  update_goal(dep_model_);
+  update_hovered_move(dep_model_);
+
   dep_renderer_.clear();
   dep_renderer_.render_ui(command_stack_.canUndo(), command_stack_.canRedo());
   render_puzzle(dep_model_.get_puzzle());
@@ -21,10 +27,29 @@ InGameView::render_game() {
   render_path(dep_model_);
   render_player(dep_model_.get_puzzle());
   render_overlays(dep_model_.get_puzzle());
-
   dep_renderer_.render_moves(dep_model_);
-  update_goal(dep_model_);
   dep_renderer_.flush();
+}
+
+void
+InGameView::update_hovered_move(InGameModel & i_model)
+{
+  // TODO(pht) : DRY this (see update_goal)
+  int mouse_x = dep_controller_.mouse_x();
+  int mouse_y = dep_controller_.mouse_y();
+  int move_index = dep_renderer_.mouse_position_as_move_index(mouse_x, mouse_y);
+  
+  if (i_model.is_valid_move_index(move_index)) {
+
+    if (move_index == i_model.current_move_index()) {
+      i_model.set_hovered_move_index(-1);
+    } else if (move_index != i_model.hovered_move_index()) {
+      i_model.set_hovered_move_index(move_index);
+    }
+  } else {
+    i_model.set_hovered_move_index(-1);
+  }
+  
 }
 
 void
@@ -47,16 +72,12 @@ InGameView::handle_event(int iEventCode) {
 
       }
     }
-    // FIXME(pht) : some of this really belongs to the model, but
-    // I am not in the mood for creating methods ;)
-    int move_index = dep_renderer_.mouse_position_as_move_index(mouse_x, mouse_y);
-    if (move_index != -1 && 
-	move_index < (int) dep_model_.get_puzzle().moves().size()) {
 
-      if (dep_model_.get_puzzle().moves()[move_index].available()) {
+    int move_index = dep_renderer_.mouse_position_as_move_index(mouse_x, mouse_y);
+    if (dep_model_.is_valid_move_index(move_index)) {
+      if (dep_model_.is_move_available(move_index)) {
 	  dep_model_.set_current_move_index(move_index);
       }
-      
     }
 
     if (dep_renderer_.is_on_undo_button(mouse_x, mouse_y)) {

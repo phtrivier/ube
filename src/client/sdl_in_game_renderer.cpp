@@ -119,6 +119,11 @@ SdlInGameRenderer::render_moves(InGameModel & i_model)
   if (i_model.current_move_index() != -1) {
     render_current_move(i_model.current_move_index());
   }
+
+  if (i_model.hovered_move_index() != -1) {
+    render_hovered_move(i_model.hovered_move_index());
+  }
+
   // THen the other available move
   std::vector<Move> & moves = i_model.get_puzzle().moves();
   std::vector<Move>::iterator it = moves.begin();
@@ -127,7 +132,8 @@ SdlInGameRenderer::render_moves(InGameModel & i_model)
 
     // TODO(pht) : if the move is not available, 
     // display it with another color, or something
-    if (i_model.get_puzzle().moves()[index].available()) {
+    //if (i_model.get_puzzle().moves()[index].available()) {
+    if (i_model.is_move_available(index)) {
       render_move(current, index);
     }
 
@@ -164,9 +170,18 @@ SDL_Rect dst;
   dst.y = MOVES_Y - 5;
   dst.w = MOVES_W + 10;
   dst.h = MOVES_H + 10;
-  SDL_FillRect(get_screen(), &dst, SDL_MapRGB(get_screen()->format, 255,0,0));
+  SDL_FillRect(get_screen(), &dst, rgb(255,0,0));
 }
 
+void
+SdlInGameRenderer::render_hovered_move(int i_move_index) {
+SDL_Rect dst;
+  dst.x = MOVES_X + i_move_index*(MOVES_W + 10) - 5;
+  dst.y = MOVES_Y - 5;
+  dst.w = MOVES_W + 10;
+  dst.h = MOVES_H + 10;
+  SDL_FillRect(get_screen(), &dst, rgb(0,0,255));
+}
 
 int
 SdlInGameRenderer::load_cell_images() {

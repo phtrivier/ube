@@ -194,6 +194,11 @@ private:
   void render_current_move(int i_move_index);
 
   /**
+   * Render the move that mouse is rolling one
+   */
+  void render_hovered_move(int i_move_index);
+
+  /**
    * Render an image on a cell.
    */
   void render_cell_image(int i_i, int i_j, SDL_Surface * i_p_surface);
