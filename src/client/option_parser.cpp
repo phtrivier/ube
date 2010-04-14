@@ -3,6 +3,7 @@
  */
 #include "option_parser.hpp"
 
+#include "common/i18n.hpp"
 #include "common/logging.hpp"
 
 #include <assert.h>
@@ -28,8 +29,9 @@ OptionParser::parse_options(int i_argc, const char ** i_argv) {
       POPT_ARG_STRING,
       &s_puzzle_file_name_,
       0,
-      "TODO : Specify a puzzle filename",
-      "PUZZLE FILE NAME"},
+      _("Specify a puzzle file name. It should be the name of an existing lua file, like 'puzzle1.lua'. The file should be residing in the standard shared/ube/lua/puzzles folder."),
+      _("PUZZLE FILE NAME")},
+    POPT_AUTOHELP
     { NULL, 0, 0, NULL, 0 }
   };
 

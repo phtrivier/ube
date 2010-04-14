@@ -1,6 +1,7 @@
 /**
  * This is Free Software. See COPYING for information.
  */
+#include "common/i18n.hpp"
 #include "common/logging.hpp"
 #include "common/prefix_resource_resolver.hpp"
 #include "common/cout_logger.hpp"
@@ -13,10 +14,6 @@
 
 #include "ube_game.hpp"
 
-#include <config.h>
-#include <locale.h>
-#include "gettext.h"
-#define _(String) gettext (String)
 #include <iostream>
 #include <cstdio>
 #include <stdio.h>
@@ -53,7 +50,7 @@ int main(int argc, char ** argv) {
 
   // Init i18n
   setlocale(LC_ALL, "");
-  bindtextdomain (PACKAGE, resolver.get_locale_dir().c_str());
+  bindtextdomain(PACKAGE, resolver.get_locale_dir().c_str());
   textdomain(PACKAGE);
 
   // Parse options
