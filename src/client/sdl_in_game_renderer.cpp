@@ -159,8 +159,8 @@ SdlInGameRenderer::render_move(Move & i_move, int i_index)
   src.h = MOVES_H;
 
   SDL_Rect dst;
-  dst.x = MOVES_X + i_index*(MOVES_W + 10);
-  dst.y = MOVES_Y;
+  dst.x = MOVES_X + (i_index % 4) *(MOVES_W + 10);
+  dst.y = (MOVES_Y + (i_index / 4)*10) + (i_index / 4) * MOVES_H;
   dst.w = MOVES_W;
   dst.h = MOVES_H;
 
@@ -169,24 +169,15 @@ SdlInGameRenderer::render_move(Move & i_move, int i_index)
   SDL_BlitSurface(move_images_[i_move.type()], &src, get_screen(), &dst);
 }
 
-// TODO(pht) : fix this (use image, and/or DRY)
 void
 SdlInGameRenderer::render_current_move(int i_move_index) {
-  SDL_Rect dst;
-  dst.x = MOVES_X + i_move_index*(MOVES_W + 10) - 5;
-  dst.y = MOVES_Y - 5;
-  dst.w = MOVES_W + 10;
-  dst.h = MOVES_H + 10;
+  SDL_Rect dst = move_surrounding_rect(i_move_index);
   SDL_FillRect(get_screen(), &dst, blue_);
 }
 
 void
 SdlInGameRenderer::render_hovered_move(int i_move_index) {
-  SDL_Rect dst;
-  dst.x = MOVES_X + i_move_index*(MOVES_W + 10) - 5;
-  dst.y = MOVES_Y - 5;
-  dst.w = MOVES_W + 10;
-  dst.h = MOVES_H + 10;
+  SDL_Rect dst = move_surrounding_rect(i_move_index);
   SDL_FillRect(get_screen(), &dst, gray_);
 }
 
@@ -329,4 +320,14 @@ SdlInGameRenderer::render_overlay(int i_i, int i_j, int i_overlay_type) {
   assert(overlay_images_.find(i_overlay_type) != overlay_images_.end());
   assert(overlay_images_[i_overlay_type] != NULL);
   render_cell_image(i_i, i_j, overlay_images_[i_overlay_type]);
+}
+
+SDL_Rect 
+SdlInGameRenderer::move_surrounding_rect(int i_move_index) {
+  SDL_Rect res;
+  res.x = MOVES_X + (i_move_index % MOVES_COUNT) * (MOVES_W + 10) - (MOVES_DELTA_X / 2);
+  res.y = (MOVES_Y + (i_move_index / MOVES_COUNT)*MOVES_DELTA_Y) - (MOVES_DELTA_Y / 2)  + (i_move_index / MOVES_COUNT) * MOVES_H;
+  res.w = MOVES_W + MOVES_DELTA_X;
+  res.h = MOVES_H + MOVES_DELTA_Y;
+  return res;
 }

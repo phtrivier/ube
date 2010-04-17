@@ -212,6 +212,12 @@ private:
    */
   void clear_image_map(std::map<int, SDL_Surface * > & i_map, int i_limit);
   
+  /**
+   * A rectangle to surround a move button at a given index
+   * @param i_move_index index of the move, should be valid.
+   */
+  SDL_Rect move_surrounding_rect(int i_move_index);
+
 };
 
 #endif // _SDL_IN_GAME_RENDERER_HPP_
