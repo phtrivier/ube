@@ -2,19 +2,19 @@ g_scripts = {};
 g_next_script_index = 1;
 
 function register_script(index, script)
-   print("Registering script at index " .. index)
+   -- print("Registering script at index " .. index)
    g_scripts[index] = script;
 end
 
 function do_script(index, puzzle)
-   print("Doing script at " .. index)
+   -- print("Doing script at " .. index)
    if (g_scripts[index] ~= nil) then
       g_scripts[index]:execute(puzzle)
    end
 end
 
 function undo_script(index, puzzle)
-   print("Undoing script at " .. index)
+   -- print("Undoing script at " .. index)
    if (g_scripts[index] ~= nil) then
       g_scripts[index]:undo(puzzle)
    end

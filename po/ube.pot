@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ube 0.3.0\n"
 "Report-Msgid-Bugs-To: phtrivier@yahoo.fr\n"
-"POT-Creation-Date: 2010-04-14 23:10+0200\n"
+"POT-Creation-Date: 2010-04-17 20:38+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,27 +17,35 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: src/client/puzzle_selection_model.cpp:11
-msgid "From here to there (you can move, like.)"
+msgid "Let's find the exit, for a start..."
 msgstr ""
 
 #: src/client/puzzle_selection_model.cpp:12
-msgid "Twice as fast (you can move even faster, like.)"
+msgid "Sometimes you have to jump."
 msgstr ""
 
 #: src/client/puzzle_selection_model.cpp:13
-msgid "Ouch, a wall. You can cross it. Trust me."
+msgid "A wall. You can cross it. Trust me."
 msgstr ""
 
 #: src/client/puzzle_selection_model.cpp:14
-msgid "Okay, let's get funnier..."
+msgid "Let's complicate a bit (just a bit.)"
 msgstr ""
 
 #: src/client/puzzle_selection_model.cpp:15
-msgid "Relax. You'll pick up along the way."
+msgid "You'll find a solution along the way..."
 msgstr ""
 
 #: src/client/puzzle_selection_model.cpp:16
-msgid "Too simple ? Let's see..."
+msgid "Be wise. Clock wise."
+msgstr ""
+
+#: src/client/puzzle_selection_model.cpp:17
+msgid "Looks easy ? Look again..."
+msgstr ""
+
+#: src/client/puzzle_selection_model.cpp:18
+msgid "Still too simple ? Let's see..."
 msgstr ""
 
 #: src/client/sdl_puzzle_selection_renderer.cpp:56
