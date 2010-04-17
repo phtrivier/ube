@@ -74,6 +74,12 @@ public:
    * Changes the current selected move to 
    * the first one that is still available.
    */
+  void set_first_available_move_as_current();
+
+  /**
+   * Changes the current selected move to 
+   * the next one that is still available.
+   */
   void set_next_available_move_as_current();
 
   /**

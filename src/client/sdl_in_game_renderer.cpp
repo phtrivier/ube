@@ -137,17 +137,7 @@ SdlInGameRenderer::render_moves(InGameModel & i_model)
   std::vector<Move>::iterator it = moves.begin();
   for ( int index = 0 ; it != moves.end() ; ++it ) {
     Move current = *it;
-
-    // TODO(pht) : if the move is not available, 
-    // display it with another color, or something
-    //if (i_model.get_puzzle().moves()[index].available()) {
     render_move(current, index, i_model.is_move_available(index));
-    /*
-    if (i_model.is_move_available(index)) {
-      render_move(current, index);
-    } else {
-    */
-
     index++;
   }
 }

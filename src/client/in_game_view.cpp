@@ -95,6 +95,8 @@ InGameView::handle_event(int iEventCode) {
     command_stack_.undoLast();
   } else if (iEventCode == GameEvent::REDO) {
     command_stack_.redoLast();
+  } else if (iEventCode == GameEvent::NEXT_MOVE) {
+    dep_model_.set_next_available_move_as_current();
   }
 }
 
