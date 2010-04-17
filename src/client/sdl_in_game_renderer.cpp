@@ -39,6 +39,7 @@ SdlInGameRenderer::~SdlInGameRenderer()
 
   clear_image_map(cell_images_, Cell::CELL_TYPES_COUNT);
   clear_image_map(move_images_, MoveType::LAST+1);
+  clear_image_map(grayed_move_images_, MoveType::LAST+1);
   clear_image_map(overlay_images_, MoveType::LAST+1);
   clear_image_map(path_images_, MoveType::LAST+1);
 
@@ -140,9 +141,12 @@ SdlInGameRenderer::render_moves(InGameModel & i_model)
     // TODO(pht) : if the move is not available, 
     // display it with another color, or something
     //if (i_model.get_puzzle().moves()[index].available()) {
+    render_move(current, index, i_model.is_move_available(index));
+    /*
     if (i_model.is_move_available(index)) {
       render_move(current, index);
-    }
+    } else {
+    */
 
     index++;
   }
@@ -151,7 +155,7 @@ SdlInGameRenderer::render_moves(InGameModel & i_model)
 /* ----------------- */
 
 void
-SdlInGameRenderer::render_move(Move & i_move, int i_index) 
+SdlInGameRenderer::render_move(Move & i_move, int i_index, bool i_is_available) 
 {
   SDL_Rect src;
   src.x = src.y = 0;
@@ -164,9 +168,16 @@ SdlInGameRenderer::render_move(Move & i_move, int i_index)
   dst.w = MOVES_W;
   dst.h = MOVES_H;
 
-  assert(move_images_.find(i_move.type()) != move_images_.end());
-  assert(move_images_[i_move.type()] != NULL);
-  SDL_BlitSurface(move_images_[i_move.type()], &src, get_screen(), &dst);
+  if (i_is_available) {
+    assert(move_images_.find(i_move.type()) != move_images_.end());
+    assert(move_images_[i_move.type()] != NULL);
+    SDL_BlitSurface(move_images_[i_move.type()], &src, get_screen(), &dst);
+  } else {
+    assert(grayed_move_images_.find(i_move.type()) != grayed_move_images_.end());
+    assert(grayed_move_images_[i_move.type()] != NULL);
+    SDL_BlitSurface(grayed_move_images_[i_move.type()], &src, get_screen(), &dst);
+  }
+
 }
 
 void
@@ -226,7 +237,11 @@ SdlInGameRenderer::load_image_for_move_type(int i_move_type, std::string & i_for
 
 int
 SdlInGameRenderer::load_move_images() {
-  return load_images_for_move_types(move_images_, "png/move_%1%.png");
+  int res = load_images_for_move_types(move_images_, "png/move_%1%.png");
+  if (res != -1) {
+    res = load_images_for_move_types(grayed_move_images_, "png/move_%1%_grayed.png");
+  }
+  return res;
 }
 
 int
