@@ -17,11 +17,13 @@ AC_CHECK_LIB([popt], [poptGetContext], , AC_MSG_WARN([Could not find popt lib]))
 
 AX_BOOST_BASE([1.34])
 
+AX_LUA_HEADERS
+AX_LUA_LIBS
+
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_FILES([ 
 	Makefile
    	src/Makefile
-	src/lua/Makefile
 	src/common/Makefile
    	src/engine/Makefile
    	src/mvc/Makefile

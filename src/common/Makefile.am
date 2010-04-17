@@ -1,6 +1,5 @@
 noinst_LIBRARIES=libube-common.a
-libube_common_a_SOURCES=lua_helper.hpp \
-	gettext.h i18n.hpp \
+libube_common_a_SOURCES=gettext.h lua_helper.hpp \
 	silent_ostream.hpp \
 	log_level.hpp logging.hpp logging.cpp \
 	logger_interface.hpp \
@@ -15,7 +14,7 @@ AM_CPPFLAGS=-DSRCDIR=\"${srcdir}\" \
 	-DLUADIR=\"${luadir}\" \
 	-Wall -Werror \
 	-I$(srcdir)/../../include \
-	-I$(srcdir)/../lua \
+	$(LUA_INCLUDE) \
 	$(BOOST_CPPFLAGS)
 
 # There is one program that aggreatates all tests cases
@@ -27,7 +26,7 @@ common_tests_SOURCES= tests/common_tests.cpp \
 	tests/stat_file_checker_test.cpp
 
 # The program needs to be compiled with 
-common_tests_LDADD=../lua/liblua.a libube-common.a -L$(top_srcdir)/lib -lgtest -lgmock -ldl
+common_tests_LDADD=libube-common.a -L$(top_srcdir)/lib -lgtest -lgmock -llua -ldl
 
 # This means common-tests is run when using 'make check'.
 TESTS = common-tests

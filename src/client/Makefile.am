@@ -1,4 +1,4 @@
-noinst_LIBRARIES=libube-client.a
+lib_LIBRARIES=libube-client.a
 libube_client_a_SOURCES=gettext.h \
 	game_mode_interface.hpp game_mode.hpp game_mode.cpp \
 	game_event.hpp \
@@ -28,17 +28,11 @@ libube_client_a_SOURCES=gettext.h \
 	puzzle_selection_mode_factory.hpp puzzle_selection_mode_factory.cpp \
 	sdl_puzzle_selection_renderer.hpp  sdl_puzzle_selection_renderer.cpp
 
-gamesdir=${prefix}/games
-games_PROGRAMS = ube
+bin_PROGRAMS = ube
 ube_SOURCES = ube.cpp
 
 # TODO : Find a way not to have to repeat this ... 
 luadir=${datadir}/@PACKAGE@/lua
-
-SDL_TTF_LIBS = -lSDL_ttf -lfreetype
-SDL_IMAGE_LIBS = -lSDL_image -lpng -ltiff -ljpeg -lz
-SDL_MIXER_LIBS = -lSDL_mixer
-POPT_LIBS=-lpopt
 
 AM_CPPFLAGS= -g -DLOCALEDIR=\"${datadir}/locale\" \
 	-DDATADIR=\"${datadir}/@PACKAGE@\" \
@@ -48,21 +42,31 @@ AM_CPPFLAGS= -g -DLOCALEDIR=\"${datadir}/locale\" \
 	-I$(srcdir)/../../include \
 	-I$(srcdir)/../ \
 	$(SDL_CFLAGS) \
-	$(BOOST_CPPFLAGS) \
-	$(POPT_CPPFLAGS) \
-	-I$(srcdir)/../lua
+	$(LUA_INCLUDE)
+
+SDL_TTF_LIBS = -lSDL_ttf -lfreetype
+SDL_IMAGE_LIBS = -lSDL_image -lpng -ltiff -ljpeg -lz
+SDL_MIXER_LIBS = -lSDL_mixer
+POPT_LIBS=-lpopt
+
+# Ok, I must be compiling libube-engine and common the wrong way, since so many symbols are not available...
+# ube_LDADD=libube-client.a \
+# 	../engine/libube-engine.a \
+# 	../common/libube-common.a \
+# 	$(LUA_LIB) $(LIBINTL) \
+# 	$(SDL_LIBS) $(SDL_IMAGE_LIBS) $(SDL_TTF_LIBS) $(SDL_MIXER_LIBS) \
+# 	-lpopt
 
 PROJECT_LIBS=libube-client.a \
 	../mvc/libube-mvc.a \
 	../engine/libube-engine.a \
-	../common/libube-common.a \
-	../lua/liblua.a
+	../common/libube-common.a
 
 ube_LDADD=$(PROJECT_LIBS) \
 	$(POPT_LIBS) \
 	$(SDL_image_LIBS) $(SDL_TTF_LIBS) $(SDL_mixer_LIBS) \
 	$(SDL_IMAGE_LIBS) $(SDL_MIXER_LIBS) \
-	$(LIBINTL) 
+	$(LUA_LIB) $(LIBINTL) 
 
 
 check_PROGRAMS=client-tests
@@ -86,6 +90,7 @@ client_tests_LDADD=$(PROJECT_LIBS) \
 	$(POPT_LIBS) \
 	$(SDL_image_LIBS) $(SDL_TTF_LIBS) $(SDL_mixer_LIBS) \
 	$(SDL_IMAGE_LIBS) $(SDL_MIXER_LIBS) \
-	$(LIBINTL)
+	$(LUA_LIB) $(LIBINTL) 
+
 
 TESTS = client-tests
