@@ -13,7 +13,9 @@ PuzzleSelectionModel::fill_puzzle_list()
   add_puzzle(_("Ouch, a wall. You can cross it. Trust me."), "tutorial1.lua");
   add_puzzle(_("Okay, let's get funnier..."), "tutorial2.lua");
   add_puzzle(_("Relax. You'll pick up along the way."), "tutorial3.lua");
-  add_puzzle(_("Too simple ? Let's see..."), "tutorial4.lua");
+  add_puzzle(_("Patience. Patience.."), "tutorial6.lua");
+  add_puzzle(_("Sometimes it is not as easy"), "tutorial7.lua");
+  add_puzzle(_("Too simple ? Let's see..."), "tutorial5.lua");
 }
 
 void
