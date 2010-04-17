@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ube 0.3.0\n"
 "Report-Msgid-Bugs-To: phtrivier@yahoo.fr\n"
-"POT-Creation-Date: 2010-04-14 23:10+0200\n"
-"PO-Revision-Date: 2010-04-14 23:11+0200\n"
+"POT-Creation-Date: 2010-04-17 20:38+0200\n"
+"PO-Revision-Date: 2010-04-17 20:47+0200\n"
 "Last-Translator: Pierre-Henri Trivier <phtrivier@yahoo.fr>\n"
 "Language-Team: French\n"
 "MIME-Version: 1.0\n"
@@ -18,27 +18,35 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: src/client/puzzle_selection_model.cpp:11
-msgid "From here to there (you can move, like.)"
-msgstr "De l'entrée à la sortie, de haut en bas, d'ici à là."
+msgid "Let's find the exit, for a start..."
+msgstr "Pour commencer, trouvez la sortie..."
 
 #: src/client/puzzle_selection_model.cpp:12
-msgid "Twice as fast (you can move even faster, like.)"
-msgstr "A grands pas, deux marches à la fois"
+msgid "Sometimes you have to jump."
+msgstr "Parfois, il faut savoir sauter."
 
 #: src/client/puzzle_selection_model.cpp:13
-msgid "Ouch, a wall. You can cross it. Trust me."
-msgstr "Un mur. Mais vous pouvez le traverser, croyez moi."
+msgid "A wall. You can cross it. Trust me."
+msgstr "Un mur. Vous pouvez le traverser, croyez moi."
 
 #: src/client/puzzle_selection_model.cpp:14
-msgid "Okay, let's get funnier..."
-msgstr "Bien. Compliquons un peu..."
+msgid "Let's complicate a bit (just a bit.)"
+msgstr "Compliquons un peu. Juste un peu."
 
 #: src/client/puzzle_selection_model.cpp:15
-msgid "Relax. You'll pick up along the way."
-msgstr "Vous trouverez une solution en chemin"
+msgid "You'll find a solution along the way..."
+msgstr "Vous trouverez une solution en chemin..."
 
 #: src/client/puzzle_selection_model.cpp:16
-msgid "Too simple ? Let's see..."
+msgid "Be wise. Clock wise."
+msgstr "Du bon sens. Celui des aiguilles, par exemple."
+
+#: src/client/puzzle_selection_model.cpp:17
+msgid "Looks easy ? Look again..."
+msgstr "Ca a l'air facile ? Regardez bien..."
+
+#: src/client/puzzle_selection_model.cpp:18
+msgid "Still too simple ? Let's see..."
 msgstr "Encore trop simple ? Voyons voir..."
 
 #: src/client/sdl_puzzle_selection_renderer.cpp:56
@@ -58,8 +66,20 @@ msgid ""
 "Specify a puzzle file name. It should be the name of an existing lua file, "
 "like 'puzzle1.lua'. The file should be residing in the standard shared/ube/"
 "lua/puzzles folder."
-msgstr "Specifier le nom d'un puzzle. Le nom doit être le nom d'un fichier lua, comme 'puzzle1.lua'. Le fichier doit se trouver dans le répèrtoire standard shared/ube/lua/puzzles"
+msgstr ""
+"Specifier le nom d'un puzzle. Le nom doit être le nom d'un fichier lua, "
+"comme 'puzzle1.lua'. Le fichier doit se trouver dans le répèrtoire standard "
+"shared/ube/lua/puzzles"
 
 #: src/client/option_parser.cpp:33
 msgid "PUZZLE FILE NAME"
 msgstr ""
+
+#~ msgid "From here to there (you can move, like.)"
+#~ msgstr "De l'entrée à la sortie, de haut en bas, d'ici à là."
+
+#~ msgid "Twice as fast (you can move even faster, like.)"
+#~ msgstr "A grands pas, deux marches à la fois"
+
+#~ msgid "Okay, let's get funnier..."
+#~ msgstr "Bien. Compliquons un peu..."

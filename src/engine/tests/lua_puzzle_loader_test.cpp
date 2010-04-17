@@ -151,5 +151,16 @@ namespace {
     ASSERT_FALSE(p.has_overlay(0,2));
   }
 
+  TEST_F(LuaPuzzleLoaderTest, LoadsOverlaysInPuzzleByNumberedCells) {
+    Puzzle p;
+    load_puzzle_from_file("puzzle_loader_test/puzzle_with_numbered_cells.lua", &p);
+    ASSERT_TRUE(p.has_overlay(2,1));
+    ASSERT_TRUE(p.has_overlay(1,1));
+    ASSERT_EQ(MoveType::DOUBLE, p.get_overlay(2,1));
+    ASSERT_EQ(MoveType::SINGLE, p.get_overlay(1,1));
+    p.do_script_at(2,1);
+    ASSERT_FALSE(p.has_overlay(2,1));
+  }
+
 
 } // Namespace

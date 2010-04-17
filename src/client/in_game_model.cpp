@@ -88,7 +88,7 @@ InGameModel::has_player_moved()
 
 
 void
-InGameModel::set_next_available_move_as_current()
+InGameModel::set_first_available_move_as_current()
 {
   std::vector<Move> & moves = dep_puzzle_->moves();
   int size = moves.size();
@@ -101,6 +101,24 @@ InGameModel::set_next_available_move_as_current()
     }
   }
 }
+
+void
+InGameModel::set_next_available_move_as_current()
+{
+  std::vector<Move> & moves = dep_puzzle_->moves();
+  int size = moves.size();
+  bool found = false;
+  int old_index = current_move_index_;
+
+  do {
+    current_move_index_ = (current_move_index_ + 1) % size;
+    if (moves[current_move_index_].available()) {
+      found = true;
+    }
+  } while (!found && current_move_index_ != old_index);
+
+}
+
 
 bool
 InGameModel::is_puzzle_finished()

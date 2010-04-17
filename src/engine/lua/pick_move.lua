@@ -30,3 +30,14 @@ function add_move(i,j,type)
    add_script(i,j,PickMoveScript:new(i,j,type))
    add_overlay(i,j,type)
 end
+
+function add_move_at_position(position_number, type)
+   local pos = string.format("%d", position_number)
+   if (g_numbered_cells[pos] ~= nil) then
+      print("g_numbered_cells[pos][i] " .. position_number .. " : " .. g_numbered_cells[pos]["i"])
+      print("g_numbered_cells[pos][i] " .. position_number .. " : " .. g_numbered_cells[pos]["j"])
+      i = g_numbered_cells[pos]["i"]
+      j = g_numbered_cells[pos]["j"]
+      add_move(i,j,type)
+   end
+end

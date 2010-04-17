@@ -7,9 +7,14 @@
 // FIXME(pht) : would'nt it be better if those constants
 // here ? 
 #define MOVES_X (20 + 64 + 10 + 64 + 10)
-#define MOVES_Y 450
+#define MOVES_Y 435
 #define MOVES_H 64
 #define MOVES_W 128
+#define MOVES_DELTA_X 10
+#define MOVES_DELTA_Y 10
+
+// Maximum number of moves in a line
+#define MOVES_COUNT 4
 
 #define CELLS_X 40
 #define CELLS_Y 40
@@ -17,12 +22,12 @@
 #define CELLS_H 32
 
 #define UNDO_X 20
-#define UNDO_Y 450
+#define UNDO_Y MOVES_Y
 #define UNDO_H 64
 #define UNDO_W 64
 
 #define REDO_X UNDO_X + UNDO_W
-#define REDO_Y 450
+#define REDO_Y MOVES_Y
 #define REDO_H 64
 #define REDO_W 64
 

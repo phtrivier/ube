@@ -50,7 +50,7 @@ InGameModeFactory::load_puzzle(std::string & i_file_name)
     // a puzzle ... and it would simplify a few things ... 
     p_puzzle_->enters_player();
     if (p_model_ != NULL) {
-      p_model_->set_next_available_move_as_current();
+      p_model_->set_first_available_move_as_current();
     }
   }
   // TODO : Otherwise, display any lua error message from
