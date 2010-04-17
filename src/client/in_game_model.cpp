@@ -117,15 +117,6 @@ InGameModel::set_next_available_move_as_current()
     }
   } while (!found && current_move_index_ != old_index);
 
-  /*
-  current_move_index_ = (current_move_index_ + 1) % size;
-  while (!found && current_move_index_ != old_index);
-    if (moves[current_move_index_].available()) {
-      found = true;
-    }
-    current_move_index_ = (current_move_index_ + 1) % size;
-  }
-  */
 }
 
 
