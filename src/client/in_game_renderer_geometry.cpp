@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #include "in_game_renderer_geometry.hpp"
 
 int
@@ -27,11 +30,15 @@ InGameRendererGeometry::mouse_position_as_move_index(int i_x, int i_y)
   
   int x = i_x - MOVES_X;
   int y = i_y - MOVES_Y;
-  int w = MOVES_W + 10;
+  int w = MOVES_W + MOVES_DELTA_X;
 
   if (y >0 && y < MOVES_H) {
     if (x % w < MOVES_W) {
       res = x / w;
+    }
+  } else if (y >= (MOVES_H + MOVES_DELTA_Y) && y < 2*MOVES_H) {
+    if (x % w < MOVES_W) {
+      res = MOVES_COUNT + (x / w);
     }
   }
 

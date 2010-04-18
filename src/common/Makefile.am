@@ -1,5 +1,6 @@
 noinst_LIBRARIES=libube-common.a
-libube_common_a_SOURCES=gettext.h lua_helper.hpp \
+libube_common_a_SOURCES=lua_helper.hpp \
+	gettext.h  i18n.hpp \
 	silent_ostream.hpp \
 	log_level.hpp logging.hpp logging.cpp \
 	logger_interface.hpp \
@@ -10,12 +11,20 @@ libube_common_a_SOURCES=gettext.h lua_helper.hpp \
 	prefix_resource_resolver.hpp prefix_resource_resolver.cpp \
 	stat_file_checker.hpp stat_file_checker.cpp
 
+if MINGW
 AM_CPPFLAGS=-DSRCDIR=\"${srcdir}\" \
 	-DLUADIR=\"${luadir}\" \
 	-Wall -Werror \
 	-I$(srcdir)/../../include \
-	-I$(srcdir)/../lua \
+	$(BOOST_CPPFLAGS) \
+	$(LUA_INCLUDE)
+else
+AM_CPPFLAGS=-DSRCDIR=\"${srcdir}\" \
+	-DLUADIR=\"${luadir}\" \
+	-Wall -Werror \
+	-I$(srcdir)/../../include \
 	$(BOOST_CPPFLAGS)
+endif
 
 # There is one program that aggreatates all tests cases
 check_PROGRAMS = common-tests
@@ -26,7 +35,7 @@ common_tests_SOURCES= tests/common_tests.cpp \
 	tests/stat_file_checker_test.cpp
 
 # The program needs to be compiled with 
-common_tests_LDADD=../lua/liblua.a libube-common.a -L$(top_srcdir)/lib -lgtest -lgmock -ldl
+common_tests_LDADD=libube-common.a -L$(top_srcdir)/lib -lgtest -lgmock -llua -ldl
 
 # This means common-tests is run when using 'make check'.
 TESTS = common-tests

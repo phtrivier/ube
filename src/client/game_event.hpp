@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #ifndef _GAME_EVENT_HPP_
 #define _GAME_EVENT_HPP_
 
@@ -16,6 +19,7 @@ public:
   static const int REDO = 3;
   static const int PUZZLE_SELECTED = 4;
   static const int PUZZLE_FINISHED = 5;
+  static const int NEXT_MOVE = 6;
 };
 
 #endif // _GAME_EVENT_HPP_

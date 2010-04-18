@@ -1,4 +1,13 @@
-*  27/03/2010 0.2.1 'Sidaction' (http://www.sidaction.org)
+* 18/04/2010 0.3.0 'St Perfectus' (http://en.wikipedia.org/wiki/Perfectus)
+
+ - Lots of UI modifications
+ - Added french translation of the puzzle names
+ - Available moves can be toggled with 'Tab'
+ - Added a few puzzles
+ - Fixed help message
+ - Refactored build system to allow cross-compilation without lua in the sources
+
+* 27/03/2010 0.2.1 'Sidaction' (http://www.sidaction.org)
 
  - Lua included in the build
 

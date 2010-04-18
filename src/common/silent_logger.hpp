@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #ifndef _SILENT_LOGGER_HPP_
 #define _SILENT_LOGGER_HPP_
 

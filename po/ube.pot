@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ube 0.1\n"
+"Project-Id-Version: ube 0.3.0\n"
 "Report-Msgid-Bugs-To: phtrivier@yahoo.fr\n"
-"POT-Creation-Date: 2009-10-27 21:09+0100\n"
+"POT-Creation-Date: 2010-04-17 20:38+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,12 +16,57 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/engine/greeter.cpp:19 src/engine/greeter.cpp:28
-#, c-format
-msgid "Hello %s!!\n"
+#: src/client/puzzle_selection_model.cpp:11
+msgid "Let's find the exit, for a start..."
 msgstr ""
 
-#: src/client/ube.cpp:62
-#, c-format
-msgid "Hello %s. What's the craic today ?\n"
+#: src/client/puzzle_selection_model.cpp:12
+msgid "Sometimes you have to jump."
+msgstr ""
+
+#: src/client/puzzle_selection_model.cpp:13
+msgid "A wall. You can cross it. Trust me."
+msgstr ""
+
+#: src/client/puzzle_selection_model.cpp:14
+msgid "Let's complicate a bit (just a bit.)"
+msgstr ""
+
+#: src/client/puzzle_selection_model.cpp:15
+msgid "You'll find a solution along the way..."
+msgstr ""
+
+#: src/client/puzzle_selection_model.cpp:16
+msgid "Be wise. Clock wise."
+msgstr ""
+
+#: src/client/puzzle_selection_model.cpp:17
+msgid "Looks easy ? Look again..."
+msgstr ""
+
+#: src/client/puzzle_selection_model.cpp:18
+msgid "Still too simple ? Let's see..."
+msgstr ""
+
+#: src/client/sdl_puzzle_selection_renderer.cpp:56
+msgid "Please choose a level"
+msgstr ""
+
+#: src/client/sdl_puzzle_selection_renderer.cpp:57
+msgid "(Oh, and please, don't shoot the coder, he's doing his best.)"
+msgstr ""
+
+#: src/client/sdl_puzzle_selection_renderer.cpp:99
+msgid "Level %1% : %2%"
+msgstr ""
+
+#: src/client/option_parser.cpp:32
+msgid ""
+"Specify a puzzle file name. It should be the name of an existing lua file, "
+"like 'puzzle1.lua'. The file should be residing in the standard shared/ube/"
+"lua/puzzles folder."
+msgstr ""
+
+#: src/client/option_parser.cpp:33
+msgid "PUZZLE FILE NAME"
 msgstr ""

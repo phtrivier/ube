@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #ifndef _SDL_IN_GAME_RENDERER_HPP_
 #define _SDL_IN_GAME_RENDERER_HPP_
 
@@ -85,6 +88,7 @@ private:
 
   std::map<int, SDL_Surface *> cell_images_;
   std::map<int, SDL_Surface *> move_images_;
+  std::map<int, SDL_Surface *> grayed_move_images_;
   std::map<int, SDL_Surface *> overlay_images_;
   std::map<int, SDL_Surface *> path_images_;
 
@@ -100,7 +104,6 @@ private:
   SDL_Surface * p_redo_image_;
   SDL_Surface * p_disabled_undo_image_;
   SDL_Surface * p_disabled_redo_image_;
-
 
   /**
    * Load all the images necessary to display
@@ -163,35 +166,23 @@ private:
   int load_cell_image(int i_cell_type, SDL_Surface ** o_pp_surface);
 
   /**
-   * Load the image necessary to display a move.
-   * 
-   * @param i_move_type 
-   * @param o_pp_surface output address of the image after loading
-   * @returns 0 if cell was loaded, -1 otherwise.
-   */
-  //K int load_move_image(int i_move_type, SDL_Surface ** o_pp_surface);
-
-  /**
-   * Load the image necessary to display an overlay
-   * 
-   * @param i_move_type 
-   * @param o_pp_surface output address of the image after loading
-   * @returns 0 if cell was loaded, -1 otherwise.
-   */
-  //K int load_overlay_image(int i_type, SDL_Surface ** o_pp_surface);
-
-  /**
    * Display the icon of a given move.
    *
    * @param i_move : the move which icon has to be displayed
    * @param i_index : index of the move icon
+   * @param i_is_available : is the move available
    */
-  void render_move(Move & i_move, int i_index);
+  void render_move(Move & i_move, int i_index, bool i_is_available);
 
   /**
    * Render the currently selected move
    */
   void render_current_move(int i_move_index);
+
+  /**
+   * Render the move that mouse is rolling one
+   */
+  void render_hovered_move(int i_move_index);
 
   /**
    * Render an image on a cell.
@@ -204,6 +195,12 @@ private:
    */
   void clear_image_map(std::map<int, SDL_Surface * > & i_map, int i_limit);
   
+  /**
+   * A rectangle to surround a move button at a given index
+   * @param i_move_index index of the move, should be valid.
+   */
+  SDL_Rect move_surrounding_rect(int i_move_index);
+
 };
 
 #endif // _SDL_IN_GAME_RENDERER_HPP_

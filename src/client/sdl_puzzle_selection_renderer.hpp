@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #ifndef _SDL_PUZZLE_SELECTION_RENDERER_HPP_
 #define _SDL_PUZZLE_SELECTION_RENDERER_HPP_
 
@@ -46,12 +49,14 @@ public:
  
   int get_mouse_position_as_puzzle_index(int i_x, int i_y);
 
+  void highlight_puzzle_name(int i_index);
+
 private:
 
   SDL_Surface * p_bg_;
   
   TTF_Font * p_font_;
-  
+
   int load_font(const char * i_name, int i_ptsize, TTF_Font ** o_pp_font);
 
   void render_text(std::string i_text, int i_x, int i_y);

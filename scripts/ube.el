@@ -1,5 +1,3 @@
-(global-set-key [(control ?c) (control ?j)] 'compile-all-or-recompile)
-
 (defconst ube-dir "~/prj/ube")
 
 (defun ube-compile (what)
@@ -29,12 +27,14 @@
 
 (defun ube-compile-all ()
   (interactive)
-  (let ((folder1 (make-folder "common"))
+  (let ((lua-folder (make-folder "lua"))
+	(folder1 (make-folder "common"))
         (folder2 (make-folder "engine"))
 	(folder3 (make-folder "mvc"))
 	(folder4 (make-folder "client")))
     (set 'compilation-directory folder1)
-    (set 'compile-command (concat "make -C" folder1 
+    (set 'compile-command (concat "make -C" lua-folder 
+				  " check && make -C " folder1 
 				  " check && make -C " folder2 
 				  " check && make -C " folder3 
 				  " check && make -C " folder4
@@ -52,6 +52,10 @@
   (if (fboundp 'recompile)
       (recompile)
     (ube-compile-all)))
+
+(defun run-ube ()
+  (interactive)
+  (start-process "ube" "*ube*" (concat ube-dir "/builds/linux/ube_linux/games/ube")))
 
 (setq ube-project
       (ede-cpp-root-project "ube"
@@ -72,5 +76,9 @@
 			    ;; 			     "make -C ~/prj/ube/builds/linux/current/src/engine check"
 			    ;; 			     " && "
 			    ;; 			     "make -C ~/prj/ube/builds/linux/current/src/client check")))))
+
+(global-set-key [(control ?c) (control ?j)] 'compile-all-or-recompile)
+(global-set-key [(control ?c) (control ?u)] 'run-ube)
+
 
 (provide 'ube)

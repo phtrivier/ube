@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #include "sdl_app.hpp"
 
 SdlApp::SdlApp() {

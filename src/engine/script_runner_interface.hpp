@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #ifndef _SCRIPT_RUNNER_INTERFACE_HPP_
 #define _SCRIPT_RUNNER_INTERFACE_HPP_
 

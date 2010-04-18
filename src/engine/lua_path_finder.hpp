@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #ifndef _LUA_PATH_FINDER_HPP_
 #define _LUA_PATH_FINDER_HPP_
 

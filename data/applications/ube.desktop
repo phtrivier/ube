@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Ube
+Comment=A puzzle game based on movement
+Comment[fr]=Un casse-tête basé sur le déplacement
+Exec=ube
+Terminal=false
+Icon=ube32x32.xpm
+Type=Application
+Categories=Game;LogicGame;

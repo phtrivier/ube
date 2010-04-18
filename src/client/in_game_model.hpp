@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #ifndef _IN_GAME_MODEL_HPP_
 #define _IN_GAME_MODEL_HPP_
 
@@ -24,7 +27,8 @@ public:
     last_goal_j_(-1),
     last_player_i_(-1),
     last_player_j_(-1),
-    current_move_index_(0)
+    current_move_index_(0),
+    hovered_move_index_(-1)
   {
   }
 
@@ -70,6 +74,12 @@ public:
    * Changes the current selected move to 
    * the first one that is still available.
    */
+  void set_first_available_move_as_current();
+
+  /**
+   * Changes the current selected move to 
+   * the next one that is still available.
+   */
   void set_next_available_move_as_current();
 
   /**
@@ -93,6 +103,33 @@ public:
    */
   bool is_puzzle_finished();
 
+  /**
+   * Is an index valid for a move ? 
+   */
+  bool is_valid_move_index(int i_index) {
+    return (i_index > -1 && i_index < (int) dep_puzzle_->moves().size());
+  }
+
+  /**
+   * Is a move at a given index available ? 
+   */
+  bool is_move_available(int i_index) {
+    return (is_valid_move_index(i_index) && dep_puzzle_->moves()[i_index].available());
+  }
+
+  int hovered_move_index() {
+    return hovered_move_index_;
+  }
+
+  void set_hovered_move_index(int i_index)  {
+    hovered_move_index_ = i_index;
+  }
+
+  /**
+   * Has the goal changed since last call to update_path ?
+   */
+  bool has_goal_changed();
+
 private:
   Puzzle * dep_puzzle_;
   PathFinderInterface & dep_path_finder_;
@@ -114,10 +151,8 @@ private:
   // Index of the move currently selected in the puzzle.
   int current_move_index_;
 
-  /**
-   * Has the goal changed since last call to update_path ?
-   */
-  bool has_goal_changed();
+  // Index of the move currently roled over by the mouse, or -1 if none is.
+  int hovered_move_index_;
 
   /**
    * Has the player's position changed since last call

@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #ifndef _PREFIX_RESOURCE_RESOLVER_HPP_
 #define _PREFIX_RESOURCE_RESOLVER_HPP_
 

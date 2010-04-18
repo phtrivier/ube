@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #ifndef _SDL_RENDERER_HPP_
 #define _SDL_RENDERER_HPP_
 
@@ -49,6 +52,8 @@ protected :
   // Quick access to colors
   Uint32 black_;
   Uint32 white_;
+  Uint32 gray_;
+  Uint32 blue_;
 
   /**
    * Access to the screen surface.
@@ -81,6 +86,13 @@ protected :
    * @returns 0 if image was loaded, -1 otherwise.
    */
   int load_image(std::string i_image_name, SDL_Surface ** o_pp_surface);
+
+  /**
+   * Helper function to created RGB color based on 
+   * the screen surface.
+   */
+  Uint32 rgb(Uint8 r, Uint8 g, Uint8 b);
+
 
 private:
 

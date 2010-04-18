@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #include "sdl_renderer.hpp"
 
 #include "common/resource_resolver_interface.hpp"
@@ -9,9 +12,17 @@
 int 
 SdlRenderer::init()
 {
-  black_ = SDL_MapRGB(dep_p_screen_->format, 0x00, 0x00, 0x00);
-  white_ = SDL_MapRGB(dep_p_screen_->format, 0xFF, 0xFF, 0xFF);
+  black_ = rgb(0x00, 0x00, 0x00);
+  white_ = rgb(0xFF, 0xFF, 0xFF);
+  gray_  = rgb(0x32, 0x8C, 0x8C);
+  blue_  = rgb(0,0,0xFF);
   return 0;
+}
+
+Uint32
+SdlRenderer::rgb(Uint8 r, Uint8 g, Uint8 b)
+{
+  return SDL_MapRGB(dep_p_screen_->format, r, g, b);
 }
 
 int

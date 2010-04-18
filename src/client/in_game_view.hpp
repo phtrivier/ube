@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #ifndef _IN_GAME_VIEW_HPP_
 #define _IN_GAME_VIEW_HPP_
 
@@ -43,7 +46,7 @@ public:
    */
   void render_puzzle(const Puzzle & i_puzzle);
   
-  void render_selected_cell(const Puzzle & i_puzzle);
+  void render_selected_cell(InGameModel & i_model);
 
   void update_goal(InGameModel & i_model);
 
@@ -52,6 +55,8 @@ public:
   void render_player(const Puzzle & i_puzzle);
 
   void render_overlays(const Puzzle & i_puzzle);
+
+  void update_hovered_move(InGameModel & i_model);
 
 private:
 

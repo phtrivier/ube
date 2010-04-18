@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #include "sdl_controller.hpp"
 
 #include "common/logging.hpp"
@@ -28,8 +31,10 @@ SdlController::handle_event() {
       fire_event(GameEvent::REDO);
     } else if (last_sdl_event_.key.keysym.sym == SDLK_ESCAPE) {
       fire_event(GameEvent::QUIT);
+    } else if (last_sdl_event_.key.keysym.sym == SDLK_TAB) {
+      fire_event(GameEvent::NEXT_MOVE);
     }
-
+    
   } else if (last_sdl_event_.type == SDL_QUIT) {
     fire_event(GameEvent::QUIT);
   } else if (last_sdl_event_.type == SDL_MOUSEMOTION) {

@@ -1,27 +1,85 @@
-# French translations for ube package.
-# Copyright (C) 2009 Pierre-Henri Trivier
+# French translations for ube package
+# Traductions françaises du paquet ube.
+# Copyright (C) 2010 Pierre-Henri Trivier
 # This file is distributed under the same license as the ube package.
-# Pierre-Henri Trivier <phtrivier@yahoo.fr>, 2009.
+# Pierre-Henri Trivier <phtrivier@yahoo.fr>, 2010.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: ube 0.1\n"
+"Project-Id-Version: ube 0.3.0\n"
 "Report-Msgid-Bugs-To: phtrivier@yahoo.fr\n"
-"POT-Creation-Date: 2009-10-27 21:09+0100\n"
-"PO-Revision-Date: 2009-10-07 13:26+0200\n"
+"POT-Creation-Date: 2010-04-17 20:38+0200\n"
+"PO-Revision-Date: 2010-04-17 20:47+0200\n"
 "Last-Translator: Pierre-Henri Trivier <phtrivier@yahoo.fr>\n"
 "Language-Team: French\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ASCII\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: src/engine/greeter.cpp:19 src/engine/greeter.cpp:28
-#, c-format
-msgid "Hello %s!!\n"
-msgstr "Bonjour %s!!\n"
+#: src/client/puzzle_selection_model.cpp:11
+msgid "Let's find the exit, for a start..."
+msgstr "Pour commencer, trouvez la sortie..."
 
-#: src/client/ube.cpp:62
-#, c-format
-msgid "Hello %s. What's the craic today ?\n"
-msgstr "Bonjour %s. Quoi de neuf aujourdh'ui ?\n"
+#: src/client/puzzle_selection_model.cpp:12
+msgid "Sometimes you have to jump."
+msgstr "Parfois, il faut savoir sauter."
+
+#: src/client/puzzle_selection_model.cpp:13
+msgid "A wall. You can cross it. Trust me."
+msgstr "Un mur. Vous pouvez le traverser, croyez moi."
+
+#: src/client/puzzle_selection_model.cpp:14
+msgid "Let's complicate a bit (just a bit.)"
+msgstr "Compliquons un peu. Juste un peu."
+
+#: src/client/puzzle_selection_model.cpp:15
+msgid "You'll find a solution along the way..."
+msgstr "Vous trouverez une solution en chemin..."
+
+#: src/client/puzzle_selection_model.cpp:16
+msgid "Be wise. Clock wise."
+msgstr "Du bon sens. Celui des aiguilles, par exemple."
+
+#: src/client/puzzle_selection_model.cpp:17
+msgid "Looks easy ? Look again..."
+msgstr "Ca a l'air facile ? Regardez bien..."
+
+#: src/client/puzzle_selection_model.cpp:18
+msgid "Still too simple ? Let's see..."
+msgstr "Encore trop simple ? Voyons voir..."
+
+#: src/client/sdl_puzzle_selection_renderer.cpp:56
+msgid "Please choose a level"
+msgstr "Choisissez un niveau"
+
+#: src/client/sdl_puzzle_selection_renderer.cpp:57
+msgid "(Oh, and please, don't shoot the coder, he's doing his best.)"
+msgstr "(Et ayez pitié du programmeur, il fait de son mieux)"
+
+#: src/client/sdl_puzzle_selection_renderer.cpp:99
+msgid "Level %1% : %2%"
+msgstr "Niveau %1% : %2%"
+
+#: src/client/option_parser.cpp:32
+msgid ""
+"Specify a puzzle file name. It should be the name of an existing lua file, "
+"like 'puzzle1.lua'. The file should be residing in the standard shared/ube/"
+"lua/puzzles folder."
+msgstr ""
+"Specifier le nom d'un puzzle. Le nom doit être le nom d'un fichier lua, "
+"comme 'puzzle1.lua'. Le fichier doit se trouver dans le répèrtoire standard "
+"shared/ube/lua/puzzles"
+
+#: src/client/option_parser.cpp:33
+msgid "PUZZLE FILE NAME"
+msgstr ""
+
+#~ msgid "From here to there (you can move, like.)"
+#~ msgstr "De l'entrée à la sortie, de haut en bas, d'ici à là."
+
+#~ msgid "Twice as fast (you can move even faster, like.)"
+#~ msgstr "A grands pas, deux marches à la fois"
+
+#~ msgid "Okay, let's get funnier..."
+#~ msgstr "Bien. Compliquons un peu..."

@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #include "ube_game.hpp"
 
 #include "option_parser.hpp"
@@ -192,6 +195,10 @@ UbeGame::handle_event(int i_event_code)
     break;
   }
   case (GameEvent::PUZZLE_FINISHED) : {
+    LOG_D("ube_game") << "-----------------------" << std::endl;
+    LOG_D("ube_game") << "Reseting model" << std::endl;
+    p_puzzle_selection_mode_->get_model().reset();
+    LOG_D("ube_game") << "model has hovered ? " << p_puzzle_selection_mode_->get_model().has_hovered_puzzle() << std::endl;
     set_current_game_mode("puzzle-selection");
     break;
   }

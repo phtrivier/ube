@@ -1,3 +1,6 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #ifndef _PATH_FINDER_INTERFACE_HPP_
 #define _PATH_FINDER_INTERFACE_HPP_
 

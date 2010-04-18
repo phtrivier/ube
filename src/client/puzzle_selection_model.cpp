@@ -1,14 +1,21 @@
+/**
+ * This is Free Software. See COPYING for information.
+ */
 #include "puzzle_selection_model.hpp"
+
+#include "common/i18n.hpp"
 
 void 
 PuzzleSelectionModel::fill_puzzle_list()
 {
-  add_puzzle("From here to there (you can move, like.)", "tutorial0.lua");
-  add_puzzle("Twice as fast (you can move even faster, like.)", "tutorial0a.lua");
-  add_puzzle("Ouch, a wall. You can cross it. Trust me.", "tutorial1.lua");
-  add_puzzle("Okay, let's get funnier...", "tutorial2.lua");
-  add_puzzle("Relax. You'll pick up along the way.", "tutorial3.lua");
-  add_puzzle("Too simple ? Let's see...", "tutorial4.lua");
+  add_puzzle(_("Let's find the exit, for a start..."), "tutorial0.lua");
+  add_puzzle(_("Sometimes you have to jump."), "tutorial1.lua");
+  add_puzzle(_("A wall. You can cross it. Trust me."), "tutorial2.lua");
+  add_puzzle(_("Let's complicate a bit (just a bit.)"), "tutorial2.lua");
+  add_puzzle(_("You'll find a solution along the way..."), "tutorial4.lua");
+  add_puzzle(_("Be wise. Clock wise."), "tutorial5.lua");
+  add_puzzle(_("Looks easy ? Look again..."), "tutorial6.lua");
+  add_puzzle(_("Still too simple ? Let's see..."), "tutorial7.lua");
 }
 
 void

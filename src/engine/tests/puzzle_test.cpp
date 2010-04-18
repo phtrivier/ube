@@ -99,7 +99,7 @@ namespace {
     Puzzle p;
     ASSERT_EQ(0, (int) p.moves().size());
     p.add_move(MoveType::DOUBLE);
-    p.add_move(MoveType::KNIGHT);
+    p.add_move(MoveType::SINGLE);
     ASSERT_EQ(2, (int) p.moves().size());
     ASSERT_EQ(MoveType::DOUBLE, p.moves().at(0).type());
     ASSERT_TRUE(p.moves().at(0).available());
