@@ -35,11 +35,6 @@ ube_SOURCES = ube.cpp
 # TODO : Find a way not to have to repeat this ... 
 luadir=${datadir}/@PACKAGE@/lua
 
-SDL_TTF_LIBS = -lSDL_ttf -lfreetype
-SDL_IMAGE_LIBS = -lSDL_image -lpng -ltiff -ljpeg -lz
-SDL_MIXER_LIBS = -lSDL_mixer
-POPT_LIBS=-lpopt
-
 AM_CPPFLAGS= -g -DLOCALEDIR=\"${datadir}/locale\" \
 	-DDATADIR=\"${datadir}/@PACKAGE@\" \
 	-DLUADIR=\"${luadir}\" \
@@ -48,22 +43,31 @@ AM_CPPFLAGS= -g -DLOCALEDIR=\"${datadir}/locale\" \
 	-I$(srcdir)/../../include \
 	-I$(srcdir)/../ \
 	$(SDL_CFLAGS) \
-	$(BOOST_CPPFLAGS) \
-	$(POPT_CPPFLAGS) \
-	-I$(srcdir)/../lua
+	$(LUA_INCLUDE)
 
+SDL_TTF_LIBS = -lSDL_ttf -lfreetype
+SDL_IMAGE_LIBS = -lSDL_image -lpng -ltiff -ljpeg -lz
+SDL_MIXER_LIBS = -lSDL_mixer
+POPT_LIBS=-lpopt
+
+if MINGW
+PROJECT_LIBS=libube-client.a \
+	../mvc/libube-mvc.a \
+	../engine/libube-engine.a \
+	../common/libube-common.a
+else
 PROJECT_LIBS=libube-client.a \
 	../mvc/libube-mvc.a \
 	../engine/libube-engine.a \
 	../common/libube-common.a \
 	../lua/liblua.a
+endif
 
 ube_LDADD=$(PROJECT_LIBS) \
 	$(POPT_LIBS) \
 	$(SDL_image_LIBS) $(SDL_TTF_LIBS) $(SDL_mixer_LIBS) \
 	$(SDL_IMAGE_LIBS) $(SDL_MIXER_LIBS) \
-	$(LIBINTL) 
-
+	$(LIBINTL) $(LUA_LIB)
 
 check_PROGRAMS=client-tests
 client_tests_SOURCES=tests/client_tests.cpp \
@@ -86,6 +90,6 @@ client_tests_LDADD=$(PROJECT_LIBS) \
 	$(POPT_LIBS) \
 	$(SDL_image_LIBS) $(SDL_TTF_LIBS) $(SDL_mixer_LIBS) \
 	$(SDL_IMAGE_LIBS) $(SDL_MIXER_LIBS) \
-	$(LIBINTL)
+	$(LIBINTL) $(LUA_LIB)
 
 TESTS = client-tests

@@ -58,7 +58,7 @@ prepare_folders() {
 build_cc() {
     autoreconf
     cd $BUILD_FOLDER
-    ../../../configure  --with-boost=$MW32/usr/i686-pc-mingw32/include --with-boost-lib-dir=$MW32/usr/i686-pc-mingw32/lib --prefix $INSTALL_FOLDER --host=i686-pc-mingw32 --build=i686-pc-linux-gnu 
+    ../../../configure  --with-boost=$MW32/usr/i686-pc-mingw32/include --with-boost-lib-dir=$MW32/usr/i686-pc-mingw32/lib --prefix $INSTALL_FOLDER --host=i686-pc-mingw32 --build=i686-pc-linux-gnu --enable-mingw
     make  && make install && rm -rf $BUILD_FOLDER && rm -rf $LATEST && ln -sf $INSTALL_FOLDER $LATEST
 }
 
