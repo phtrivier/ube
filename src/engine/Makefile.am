@@ -73,8 +73,8 @@ endif
 EXTRA_DIST=${lua_DATA} \
 	tests/lua/puzzle_loader_test/puzzle1.lua \
 	tests/lua/puzzle_loader_test/puzzle2.lua \
-	tests/lua/puzzle_loader_test/puzzle_with_scripts.lua
-
+	tests/lua/puzzle_loader_test/puzzle_with_scripts.lua \
+	tests/lua/puzzle_loader_test/puzzle_with_numbered_cells.lua
 
 # This means engine-tests is run when using 'make check'.
 TESTS = engine-tests

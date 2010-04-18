@@ -1,4 +1,4 @@
-lib_LIBRARIES=libube-client.a
+noinst_LIBRARIES=libube-client.a
 libube_client_a_SOURCES=gettext.h \
 	game_mode_interface.hpp game_mode.hpp game_mode.cpp \
 	game_event.hpp \
@@ -28,7 +28,8 @@ libube_client_a_SOURCES=gettext.h \
 	puzzle_selection_mode_factory.hpp puzzle_selection_mode_factory.cpp \
 	sdl_puzzle_selection_renderer.hpp  sdl_puzzle_selection_renderer.cpp
 
-ube_PROGRAMS = ube
+gamesdir=${prefix}/games
+games_PROGRAMS = ube
 ube_SOURCES = ube.cpp
 
 # TODO : Find a way not to have to repeat this ... 
