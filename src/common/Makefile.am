@@ -10,12 +10,20 @@ libube_common_a_SOURCES=gettext.h lua_helper.hpp \
 	prefix_resource_resolver.hpp prefix_resource_resolver.cpp \
 	stat_file_checker.hpp stat_file_checker.cpp
 
+if MINGW
 AM_CPPFLAGS=-DSRCDIR=\"${srcdir}\" \
 	-DLUADIR=\"${luadir}\" \
 	-Wall -Werror \
 	-I$(srcdir)/../../include \
-	$(LUA_INCLUDE) \
+	$(BOOST_CPPFLAGS) \
+	$(LUA_INCLUDE)
+else
+AM_CPPFLAGS=-DSRCDIR=\"${srcdir}\" \
+	-DLUADIR=\"${luadir}\" \
+	-Wall -Werror \
+	-I$(srcdir)/../../include \
 	$(BOOST_CPPFLAGS)
+endif
 
 # There is one program that aggreatates all tests cases
 check_PROGRAMS = common-tests

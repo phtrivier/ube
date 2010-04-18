@@ -28,7 +28,7 @@ libube_client_a_SOURCES=gettext.h \
 	puzzle_selection_mode_factory.hpp puzzle_selection_mode_factory.cpp \
 	sdl_puzzle_selection_renderer.hpp  sdl_puzzle_selection_renderer.cpp
 
-bin_PROGRAMS = ube
+ube_PROGRAMS = ube
 ube_SOURCES = ube.cpp
 
 # TODO : Find a way not to have to repeat this ... 
@@ -49,25 +49,24 @@ SDL_IMAGE_LIBS = -lSDL_image -lpng -ltiff -ljpeg -lz
 SDL_MIXER_LIBS = -lSDL_mixer
 POPT_LIBS=-lpopt
 
-# Ok, I must be compiling libube-engine and common the wrong way, since so many symbols are not available...
-# ube_LDADD=libube-client.a \
-# 	../engine/libube-engine.a \
-# 	../common/libube-common.a \
-# 	$(LUA_LIB) $(LIBINTL) \
-# 	$(SDL_LIBS) $(SDL_IMAGE_LIBS) $(SDL_TTF_LIBS) $(SDL_MIXER_LIBS) \
-# 	-lpopt
-
+if MINGW
 PROJECT_LIBS=libube-client.a \
 	../mvc/libube-mvc.a \
 	../engine/libube-engine.a \
 	../common/libube-common.a
+else
+PROJECT_LIBS=libube-client.a \
+	../mvc/libube-mvc.a \
+	../engine/libube-engine.a \
+	../common/libube-common.a \
+	../lua/liblua.a
+endif
 
 ube_LDADD=$(PROJECT_LIBS) \
 	$(POPT_LIBS) \
 	$(SDL_image_LIBS) $(SDL_TTF_LIBS) $(SDL_mixer_LIBS) \
 	$(SDL_IMAGE_LIBS) $(SDL_MIXER_LIBS) \
-	$(LUA_LIB) $(LIBINTL) 
-
+	$(LIBINTL) $(LUA_LIB)
 
 check_PROGRAMS=client-tests
 client_tests_SOURCES=tests/client_tests.cpp \
@@ -90,7 +89,6 @@ client_tests_LDADD=$(PROJECT_LIBS) \
 	$(POPT_LIBS) \
 	$(SDL_image_LIBS) $(SDL_TTF_LIBS) $(SDL_mixer_LIBS) \
 	$(SDL_IMAGE_LIBS) $(SDL_MIXER_LIBS) \
-	$(LUA_LIB) $(LIBINTL) 
-
+	$(LIBINTL) $(LUA_LIB)
 
 TESTS = client-tests
