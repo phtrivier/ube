@@ -48,6 +48,8 @@ AC_CONFIG_FILES([
 	data/ogg/Makefile
 	data/lua/Makefile
 	data/lua/puzzles/Makefile
+	data/pixmaps/Makefile
+	data/applications/Makefile
 ])
 
 AM_COND_IF([MINGW],[],
