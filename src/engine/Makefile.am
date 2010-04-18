@@ -11,6 +11,7 @@ libube_engine_a_SOURCES=cell.hpp cell.cpp \
 	script_runner_interface.hpp \
 	lua_command.hpp lua_command.cpp
 
+# TODO : Find a way to make sure this file is available ...
 luadir=${datadir}/@PACKAGE@/lua/engine
 lua_DATA=lua/puzzle_lib.lua \
 	lua/path_finder_lib.lua \
@@ -21,14 +22,23 @@ lua_DATA=lua/puzzle_lib.lua \
 	lua/script.lua \
 	lua/pick_move.lua
 
+if MINGW
+AM_CPPFLAGS=-DSRCDIR=\"${srcdir}\" \
+	-DLUADIR=\"${luadir}\" \
+	-Wall -Werror \
+	-I$(srcdir)/../../include \
+	-I$(srcdir)/../ \
+	$(LUA_INCLUDE) \
+	$(BOOST_CPPFLAGS)
+else
 AM_CPPFLAGS=-DSRCDIR=\"${srcdir}\" \
 	-DLUADIR=\"${luadir}\" \
 	-Wall -Werror \
 	-I$(srcdir)/../../include \
 	-I$(srcdir)/../ \
 	-I$(srcdir)/../lua \
-	$(LUA_INCLUDE) \
 	$(BOOST_CPPFLAGS)
+endif
 
 # There is one program that aggreatates all tests cases
 check_PROGRAMS = engine-tests 
@@ -44,11 +54,18 @@ engine_tests_SOURCES= tests/engine_tests.cpp \
 	tests/lua_command_test.cpp
 
 # The program needs to be compiled with 
+if MINGW
+engine_tests_LDADD=libube-engine.a \
+	../mvc/libube-mvc.a \
+	../common/libube-common.a \
+	-L$(top_srcdir)/lib -lgtest -lgmock -llua -ldl
+else
 engine_tests_LDADD=libube-engine.a \
 	../mvc/libube-mvc.a \
 	../common/libube-common.a \
 	../lua/liblua.a \
 	-L$(top_srcdir)/lib -lgtest -lgmock -ldl
+endif
 
 # You should include here any local file that a test program.
 # Otherwise it won't be included in the distribution, 
