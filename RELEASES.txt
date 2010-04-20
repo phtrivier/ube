@@ -1,3 +1,7 @@
+* 19/04/2010 0.3.1 'Joyeux anniversaire, maman !'
+
+ - The same level was used twice. Call this 'quality'.
+
 * 18/04/2010 0.3.0 'St Perfectus' (http://en.wikipedia.org/wiki/Perfectus)
 
  - Lots of UI modifications
