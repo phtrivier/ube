@@ -1,6 +1,8 @@
 cmake_minimum_required (VERSION 2.6) 
 project(UBE)
 
+add_definitions(-Wall -Werror)
+
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 
 # find_package(Gettext)
@@ -21,4 +23,6 @@ include_directories(src ${SDL_INCLUDE_DIR} ${Popt_INCLUDE_DIR} ${Popt_INCLUDE_DI
 
 set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} -DPREFIX=\\"${CMAKE_INSTALL_PREFIX}\\")
 
+add_subdirectory(data)
 add_subdirectory(src)
+

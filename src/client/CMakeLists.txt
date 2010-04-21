@@ -2,3 +2,6 @@ add_library(ube-client gettext.h game_mode_interface.hpp game_mode.hpp game_mode
 
 add_executable(ube ube.cpp)
 target_link_libraries(ube ube-client ube-mvc ube-engine ube-common lua ${LIBS})
+
+install(TARGETS ube
+        RUNTIME DESTINATION games)
