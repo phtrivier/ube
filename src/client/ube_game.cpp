@@ -18,7 +18,8 @@
 
 #include "common/logging.hpp"
 
-#include <config.h>
+// #include <config.h>
+#include "common/i18n.hpp" // FIXME(pht) : replace this with config.
 #include <assert.h>
 
 #include "SDL.h"  

@@ -1,0 +1,1 @@
+add_library(ube-mvc command_stack.hpp command_stack.cpp command_interface.hpp clock_interface.hpp observer_interface.hpp observable.hpp observable.cpp controller_interface.hpp view_interface.hpp)

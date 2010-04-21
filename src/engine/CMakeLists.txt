@@ -1,0 +1,1 @@
+add_library(ube-engine cell.hpp cell.cpp cell_factory.hpp cell_factory.cpp move.hpp move.cpp puzzle.hpp puzzle.cpp puzzle_loader.hpp puzzle_loader.cpp lua_puzzle_loader.hpp lua_puzzle_loader.cpp lua_state_holder.hpp lua_state_holder.cpp path_finder_interface.hpp lua_path_finder.hpp lua_path_finder.cpp script_runner_interface.hpp lua_command.hpp lua_command.cpp)
