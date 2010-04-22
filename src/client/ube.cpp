@@ -2,35 +2,35 @@
  * This is Free Software. See COPYING for information.
  */
 #include "common/i18n.hpp"
+#include "common/cout_logger.hpp"
 #include "common/logging.hpp"
 #include "common/prefix_resource_resolver.hpp"
-#include "common/cout_logger.hpp"
 #include "common/silent_logger.hpp"
 #include "common/stat_file_checker.hpp"
 
-#include "sdl_clock.hpp"
-
 #include "option_parser.hpp"
-
+#include "sdl_clock.hpp"
 #include "ube_game.hpp"
 
-#include <iostream>
+#include "config.h"
+
 #include <cstdio>
+#include <boost/shared_ptr.hpp>
+#include <iostream>
 #include <stdio.h>
 #include <stdlib.h> /* for exit() */
-using namespace std;
-
-#include <boost/shared_ptr.hpp>
-
 #include "SDL.h"  
 #include "SDL_image.h"
 #include "SDL_ttf.h"
 #include "SDL_mixer.h"
 
+using namespace std;
+
+
 int main(int argc, char ** argv) {
 
   boost::shared_ptr<LoggerInterface> logger( new CoutLogger());
-;
+
   Logging::init_logging(*logger);
   // TODO : add the loading of some configuration for the categories
   // Logging::add_logging_category("sdl_in_game_renderer");
@@ -49,6 +49,11 @@ int main(int argc, char ** argv) {
   resolver.set_prefixes(prefixes,2);
 
   // Init i18n
+
+  std::cout << "Preparing gettext with LC_ALL :" << LC_ALL << std::endl;
+  std::cout << "PACKAGE text domain to bind :" << PACKAGE << std::endl;
+  std::cout << "Resolve locale dir : " << resolver.get_locale_dir().c_str() << std::endl;
+
   setlocale(LC_ALL, "");
   bindtextdomain(PACKAGE, resolver.get_locale_dir().c_str());
   textdomain(PACKAGE);

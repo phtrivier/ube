@@ -17,17 +17,17 @@
 #include "game_event.hpp"
 
 #include "common/logging.hpp"
+#include "common/i18n.hpp"
 
-// #include <config.h>
-#include "common/i18n.hpp" // FIXME(pht) : replace this with config.
+#include <config.h>
+
 #include <assert.h>
-
+#include <boost/format.hpp>
 #include "SDL.h"  
 #include "SDL_image.h"
 #include "SDL_ttf.h"
 #include "SDL_mixer.h"
 
-#include <boost/format.hpp>
 using boost::format;
 
 int

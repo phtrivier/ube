@@ -7,9 +7,9 @@
 #include "common/logging.hpp"
 #include "common/resource_resolver_interface.hpp"
 
-#include <assert.h>
-//#include <config.h>
+#include <config.h>
 
+#include <assert.h>
 #include <boost/format.hpp>
 using boost::format;
 

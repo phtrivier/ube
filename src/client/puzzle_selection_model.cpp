@@ -16,6 +16,7 @@ PuzzleSelectionModel::fill_puzzle_list()
   add_puzzle(_("Be wise. Clock wise."), "tutorial5.lua");
   add_puzzle(_("Looks easy ? Look again..."), "tutorial6.lua");
   add_puzzle(_("Still too simple ? Let's see..."), "tutorial7.lua");
+  add_puzzle(_("Once more, with feelings.."), "tutorial7.lua");
 }
 
 void
