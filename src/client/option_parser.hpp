@@ -50,6 +50,7 @@ public:
     return (should_show_copyright_ != 0);
   }
 
+
 private:
 
   poptContext opt_con_;

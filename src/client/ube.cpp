@@ -73,7 +73,7 @@ int main(int argc, char ** argv) {
   // Parse options
   OptionParser parser;
   if (parser.parse_options(argc, (const char **) argv) != 0) {
-    printf("Error while parsing options ... TODO : use popt to generate a nice message\n");
+    // 'Usage' message will be displayed by the parser.
     return -1;
   }
 
