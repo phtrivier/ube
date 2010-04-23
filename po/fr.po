@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ube 0.3.0\n"
 "Report-Msgid-Bugs-To: phtrivier@yahoo.fr\n"
-"POT-Creation-Date: 2010-04-17 20:38+0200\n"
-"PO-Revision-Date: 2010-04-17 20:47+0200\n"
+"POT-Creation-Date: 2010-04-23 23:25+0200\n"
+"PO-Revision-Date: 2010-04-23 23:26+0200\n"
 "Last-Translator: Pierre-Henri Trivier <phtrivier@yahoo.fr>\n"
 "Language-Team: French\n"
 "MIME-Version: 1.0\n"
@@ -61,7 +61,7 @@ msgstr "(Et ayez pitié du programmeur, il fait de son mieux)"
 msgid "Level %1% : %2%"
 msgstr "Niveau %1% : %2%"
 
-#: src/client/option_parser.cpp:32
+#: src/client/option_parser.cpp:34
 msgid ""
 "Specify a puzzle file name. It should be the name of an existing lua file, "
 "like 'puzzle1.lua'. The file should be residing in the standard shared/ube/"
@@ -71,15 +71,38 @@ msgstr ""
 "comme 'puzzle1.lua'. Le fichier doit se trouver dans le répèrtoire standard "
 "shared/ube/lua/puzzles"
 
-#: src/client/option_parser.cpp:33
+#: src/client/option_parser.cpp:35
 msgid "PUZZLE FILE NAME"
-msgstr ""
+msgstr "NOM DU PUZZLE"
 
-#~ msgid "From here to there (you can move, like.)"
-#~ msgstr "De l'entrée à la sortie, de haut en bas, d'ici à là."
+#: src/client/option_parser.cpp:42
+msgid "Show version number"
+msgstr "Affiche la version du programme"
 
-#~ msgid "Twice as fast (you can move even faster, like.)"
-#~ msgstr "A grands pas, deux marches à la fois"
+#: src/client/option_parser.cpp:50
+msgid "Show copyright info"
+msgstr "Affiche les informations de license"
 
-#~ msgid "Okay, let's get funnier..."
-#~ msgstr "Bien. Compliquons un peu..."
+#: src/client/ube.cpp:33
+msgid "ube %1%"
+msgstr "ube %1%"
+
+#: src/client/ube.cpp:38
+msgid "Copyright (c) 2010 Pierre-Henri Trivier"
+msgstr "Copyright (c) 2010 Pierre-Henri Trivier"
+
+#: src/client/ube.cpp:40
+msgid "This is free software, licensed under the MIT ('X11') License."
+msgstr "Ceci est un Logiciel Libre, distribué sous license MIT ('X11'.)"
+
+#: src/client/ube.cpp:41
+msgid "See <http://www.opensource.org/licenses/mit-license.php>."
+msgstr "Voir <http://www.opensource.org/licenses/mit-license.php>."
+
+#: src/client/ube.cpp:42
+msgid "There is NO WARRANTY, to the extend permitted by law."
+msgstr "Il n'y a AUCUNE GARANTIE, dans les limites de la loi."
+
+#: src/client/ube.cpp:44
+msgid "Written by Pierre-Henri Trivier."
+msgstr "Développé par Pierre-Henri Trivier."

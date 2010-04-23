@@ -38,10 +38,10 @@ void show_copyright() {
   std::cout << _("Copyright (c) 2010 Pierre-Henri Trivier") << std::endl;
   std::cout << std::endl;
   std::cout << _("This is free software, licensed under the MIT ('X11') License.") << std::endl;
-  std::cout << _("See <http://www.opensource.org/licenses/mit-license.php>") << std::endl;
+  std::cout << _("See <http://www.opensource.org/licenses/mit-license.php>.") << std::endl;
   std::cout << _("There is NO WARRANTY, to the extend permitted by law.") << std::endl;
   std::cout << std::endl;
-  std::cout << _("Written by Pierre-Henri Trivier") << std::endl;
+  std::cout << _("Written by Pierre-Henri Trivier.") << std::endl;
 }
 
 int main(int argc, char ** argv) {
