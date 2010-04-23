@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ube 0.3.0\n"
+"Project-Id-Version: ube 0.4.0-dev\n"
 "Report-Msgid-Bugs-To: phtrivier@yahoo.fr\n"
-"POT-Creation-Date: 2010-04-17 20:38+0200\n"
+"POT-Creation-Date: 2010-04-23 23:25+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -60,13 +60,45 @@ msgstr ""
 msgid "Level %1% : %2%"
 msgstr ""
 
-#: src/client/option_parser.cpp:32
+#: src/client/option_parser.cpp:34
 msgid ""
 "Specify a puzzle file name. It should be the name of an existing lua file, "
 "like 'puzzle1.lua'. The file should be residing in the standard shared/ube/"
 "lua/puzzles folder."
 msgstr ""
 
-#: src/client/option_parser.cpp:33
+#: src/client/option_parser.cpp:35
 msgid "PUZZLE FILE NAME"
+msgstr ""
+
+#: src/client/option_parser.cpp:42
+msgid "Show version number"
+msgstr ""
+
+#: src/client/option_parser.cpp:50
+msgid "Show copyright info"
+msgstr ""
+
+#: src/client/ube.cpp:33
+msgid "ube %1%"
+msgstr ""
+
+#: src/client/ube.cpp:38
+msgid "Copyright (c) 2010 Pierre-Henri Trivier"
+msgstr ""
+
+#: src/client/ube.cpp:40
+msgid "This is free software, licensed under the MIT ('X11') License."
+msgstr ""
+
+#: src/client/ube.cpp:41
+msgid "See <http://www.opensource.org/licenses/mit-license.php>."
+msgstr ""
+
+#: src/client/ube.cpp:42
+msgid "There is NO WARRANTY, to the extend permitted by law."
+msgstr ""
+
+#: src/client/ube.cpp:44
+msgid "Written by Pierre-Henri Trivier."
 msgstr ""
