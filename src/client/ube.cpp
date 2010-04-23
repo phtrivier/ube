@@ -9,10 +9,10 @@
 #include "common/stat_file_checker.hpp"
 
 #include "sdl_clock.hpp"
-
 #include "option_parser.hpp"
-
 #include "ube_game.hpp"
+
+#include "config.h"
 
 #include <iostream>
 #include <cstdio>
@@ -21,11 +21,28 @@
 using namespace std;
 
 #include <boost/shared_ptr.hpp>
+#include <boost/format.hpp>
+using boost::format;
 
 #include "SDL.h"  
 #include "SDL_image.h"
 #include "SDL_ttf.h"
 #include "SDL_mixer.h"
+
+void show_version() {
+  std::cout << str(format(_("ube %1%")) % PACKAGE_VERSION) << std::endl;
+}
+
+void show_copyright() {
+  show_version();
+  std::cout << _("Copyright (c) 2010 Pierre-Henri Trivier") << std::endl;
+  std::cout << std::endl;
+  std::cout << _("This is free software, licensed under the MIT ('X11') License.") << std::endl;
+  std::cout << _("See <http://www.opensource.org/licenses/mit-license.php>") << std::endl;
+  std::cout << _("There is NO WARRANTY, to the extend permitted by law.") << std::endl;
+  std::cout << std::endl;
+  std::cout << _("Written by Pierre-Henri Trivier") << std::endl;
+}
 
 int main(int argc, char ** argv) {
 
@@ -60,15 +77,23 @@ int main(int argc, char ** argv) {
     return -1;
   }
 
-  SdlClock clock;
-
-  // Actually prepare and run the game
-  UbeGame ube(&clock, resolver, parser);
-  if (ube.prepare_game() != 0) {
-    std::cout << "Error while preparing game" << std::endl;
-    std::cout << "Error message : " << ube.get_preparation_error_message() << std::endl;
+  if (parser.should_show_version()) {
+    show_version();
+  } else if (parser.should_show_copyright()) {
+    show_copyright();
   } else {
-    ube.play();
+    
+    SdlClock clock;
+
+    // Actually prepare and run the game
+    UbeGame ube(&clock, resolver, parser);
+    if (ube.prepare_game() != 0) {
+      std::cout << "Error while preparing game" << std::endl;
+      std::cout << "Error message : " << ube.get_preparation_error_message() << std::endl;
+    } else {
+      ube.play();
+    }
+
   }
 
   return 0;

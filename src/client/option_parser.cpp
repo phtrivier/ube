@@ -31,6 +31,25 @@ OptionParser::parse_options(int i_argc, const char ** i_argv) {
       0,
       _("Specify a puzzle file name. It should be the name of an existing lua file, like 'puzzle1.lua'. The file should be residing in the standard shared/ube/lua/puzzles folder."),
       _("PUZZLE FILE NAME")},
+
+    { "version",
+      'v',
+      POPT_ARG_NONE,
+      &should_show_version_,
+      1,
+      _("Show version number"),
+      NULL},
+
+    { "copyright",
+      '\0',
+      POPT_ARG_NONE,
+      &should_show_copyright_,
+      1,
+      _("Show copyright info"),
+      NULL},
+
+
+
     POPT_AUTOHELP
     { NULL, 0, 0, NULL, 0 }
   };
