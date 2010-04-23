@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ube 0.3.0\n"
 "Report-Msgid-Bugs-To: phtrivier@yahoo.fr\n"
-"POT-Creation-Date: 2010-04-17 20:38+0200\n"
-"PO-Revision-Date: 2010-04-17 20:47+0200\n"
+"POT-Creation-Date: 2010-04-23 23:25+0200\n"
+"PO-Revision-Date: 2010-04-23 23:26+0200\n"
 "Last-Translator: Pierre-Henri Trivier <phtrivier@yahoo.fr>\n"
 "Language-Team: French\n"
 "MIME-Version: 1.0\n"
@@ -29,6 +29,10 @@ msgstr "Un mur. Vous pouvez le traverser, croyez moi."
 msgid "Be wise. Clock wise."
 msgstr "Du bon sens. Celui des aiguilles, par exemple."
 
+#: src/client/ube.cpp:38
+msgid "Copyright (c) 2010 Pierre-Henri Trivier"
+msgstr "Copyright (c) 2010 Pierre-Henri Trivier"
+
 #: src/client/puzzle_selection_model.cpp:14
 msgid "Let's complicate a bit (just a bit.)"
 msgstr "Compliquons un peu. Juste un peu."
@@ -45,19 +49,31 @@ msgstr "Niveau %1% : %2%"
 msgid "Looks easy ? Look again..."
 msgstr "Ca a l'air facile ? Regardez bien..."
 
-#: src/client/option_parser.cpp:33
+#: src/client/option_parser.cpp:35
 msgid "PUZZLE FILE NAME"
-msgstr ""
+msgstr "NOM DU PUZZLE"
 
 #: src/client/sdl_puzzle_selection_renderer.cpp:56
 msgid "Please choose a level"
 msgstr "Choisissez un niveau"
 
+#: src/client/ube.cpp:41
+msgid "See <http://www.opensource.org/licenses/mit-license.php>."
+msgstr "Voir <http://www.opensource.org/licenses/mit-license.php>."
+
+#: src/client/option_parser.cpp:50
+msgid "Show copyright info"
+msgstr "Affiche les informations de license"
+
+#: src/client/option_parser.cpp:42
+msgid "Show version number"
+msgstr "Affiche la version du programme"
+
 #: src/client/puzzle_selection_model.cpp:12
 msgid "Sometimes you have to jump."
 msgstr "Parfois, il faut savoir sauter."
 
-#: src/client/option_parser.cpp:32
+#: src/client/option_parser.cpp:34
 msgid ""
 "Specify a puzzle file name. It should be the name of an existing lua file, "
 "like 'puzzle1.lua'. The file should be residing in the standard shared/ube/"
@@ -71,15 +87,22 @@ msgstr ""
 msgid "Still too simple ? Let's see..."
 msgstr "Encore trop simple ? Voyons voir..."
 
+#: src/client/ube.cpp:42
+msgid "There is NO WARRANTY, to the extend permitted by law."
+msgstr "Il n'y a AUCUNE GARANTIE, dans les limites de la loi."
+
+#: src/client/ube.cpp:40
+msgid "This is free software, licensed under the MIT ('X11') License."
+msgstr "Ceci est un Logiciel Libre, distribué sous license MIT ('X11'.)"
+
+#: src/client/ube.cpp:44
+msgid "Written by Pierre-Henri Trivier."
+msgstr "Développé par Pierre-Henri Trivier."
+
 #: src/client/puzzle_selection_model.cpp:15
 msgid "You'll find a solution along the way..."
 msgstr "Vous trouverez une solution en chemin..."
 
-#~ msgid "From here to there (you can move, like.)"
-#~ msgstr "De l'entrée à la sortie, de haut en bas, d'ici à là."
-
-#~ msgid "Okay, let's get funnier..."
-#~ msgstr "Bien. Compliquons un peu..."
-
-#~ msgid "Twice as fast (you can move even faster, like.)"
-#~ msgstr "A grands pas, deux marches à la fois"
+#: src/client/ube.cpp:33
+msgid "ube %1%"
+msgstr "ube %1%"

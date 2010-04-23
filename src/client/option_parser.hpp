@@ -15,6 +15,11 @@ class OptionParser {
 
 public:
 
+  OptionParser() {
+    should_show_version_ = 0;
+    should_show_copyright_ = 0;
+  }
+
   ~OptionParser();
 
   /**
@@ -34,12 +39,28 @@ public:
    */
   std::string get_puzzle_file_name() const;
 
+  /**
+   * Has the 'version' option been used ? 
+   */
+  bool should_show_version() const {
+    return (should_show_version_ != 0);
+  }
+
+  bool should_show_copyright() const {
+    return (should_show_copyright_ != 0);
+  }
+
+
 private:
 
   poptContext opt_con_;
 
   // Should be allocated by popt
   const char * s_puzzle_file_name_;
+
+  // Should be filled by popt
+  int should_show_version_;
+  int should_show_copyright_;
 
 };
 

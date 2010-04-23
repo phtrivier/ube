@@ -53,15 +53,14 @@ engine_tests_SOURCES= tests/engine_tests.cpp \
 	tests/mock_script_runner.hpp \
 	tests/lua_command_test.cpp
 
-# The program needs to be compiled with 
+# 	../mvc/libube-mvc.a
+
 if MINGW
 engine_tests_LDADD=libube-engine.a \
-	../mvc/libube-mvc.a \
 	../common/libube-common.a \
 	-L$(top_srcdir)/lib -lgtest -lgmock -llua -ldl
 else
 engine_tests_LDADD=libube-engine.a \
-	../mvc/libube-mvc.a \
 	../common/libube-common.a \
 	../lua/liblua.a \
 	-L$(top_srcdir)/lib -lgtest -lgmock -ldl

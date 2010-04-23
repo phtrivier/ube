@@ -2,30 +2,47 @@
  * This is Free Software. See COPYING for information.
  */
 #include "common/i18n.hpp"
-#include "common/cout_logger.hpp"
 #include "common/logging.hpp"
 #include "common/prefix_resource_resolver.hpp"
+#include "common/cout_logger.hpp"
 #include "common/silent_logger.hpp"
 #include "common/stat_file_checker.hpp"
 
-#include "option_parser.hpp"
 #include "sdl_clock.hpp"
+#include "option_parser.hpp"
 #include "ube_game.hpp"
 
 #include "config.h"
 
-#include <cstdio>
-#include <boost/shared_ptr.hpp>
 #include <iostream>
+#include <cstdio>
 #include <stdio.h>
 #include <stdlib.h> /* for exit() */
+using namespace std;
+
+#include <boost/shared_ptr.hpp>
+#include <boost/format.hpp>
+using boost::format;
+
 #include "SDL.h"  
 #include "SDL_image.h"
 #include "SDL_ttf.h"
 #include "SDL_mixer.h"
 
-using namespace std;
+void show_version() {
+  std::cout << str(format(_("ube %1%")) % PACKAGE_VERSION) << std::endl;
+}
 
+void show_copyright() {
+  show_version();
+  std::cout << _("Copyright (c) 2010 Pierre-Henri Trivier") << std::endl;
+  std::cout << std::endl;
+  std::cout << _("This is free software, licensed under the MIT ('X11') License.") << std::endl;
+  std::cout << _("See <http://www.opensource.org/licenses/mit-license.php>.") << std::endl;
+  std::cout << _("There is NO WARRANTY, to the extend permitted by law.") << std::endl;
+  std::cout << std::endl;
+  std::cout << _("Written by Pierre-Henri Trivier.") << std::endl;
+}
 
 int main(int argc, char ** argv) {
 
@@ -49,11 +66,6 @@ int main(int argc, char ** argv) {
   resolver.set_prefixes(prefixes,2);
 
   // Init i18n
-
-  std::cout << "Preparing gettext with LC_ALL :" << LC_ALL << std::endl;
-  std::cout << "PACKAGE text domain to bind :" << PACKAGE << std::endl;
-  std::cout << "Resolve locale dir : " << resolver.get_locale_dir().c_str() << std::endl;
-
   setlocale(LC_ALL, "");
   bindtextdomain(PACKAGE, resolver.get_locale_dir().c_str());
   textdomain(PACKAGE);
@@ -61,19 +73,27 @@ int main(int argc, char ** argv) {
   // Parse options
   OptionParser parser;
   if (parser.parse_options(argc, (const char **) argv) != 0) {
-    printf("Error while parsing options ... TODO : use popt to generate a nice message\n");
+    // 'Usage' message will be displayed by the parser.
     return -1;
   }
 
-  SdlClock clock;
-
-  // Actually prepare and run the game
-  UbeGame ube(&clock, resolver, parser);
-  if (ube.prepare_game() != 0) {
-    std::cout << "Error while preparing game" << std::endl;
-    std::cout << "Error message : " << ube.get_preparation_error_message() << std::endl;
+  if (parser.should_show_version()) {
+    show_version();
+  } else if (parser.should_show_copyright()) {
+    show_copyright();
   } else {
-    ube.play();
+    
+    SdlClock clock;
+
+    // Actually prepare and run the game
+    UbeGame ube(&clock, resolver, parser);
+    if (ube.prepare_game() != 0) {
+      std::cout << "Error while preparing game" << std::endl;
+      std::cout << "Error message : " << ube.get_preparation_error_message() << std::endl;
+    } else {
+      ube.play();
+    }
+
   }
 
   return 0;

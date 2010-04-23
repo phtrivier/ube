@@ -1,6 +1,7 @@
 #ifndef _CONFIG_H
 #define _CONFIG_H
 #define VERSION "@VERSION@"
+#define PACKAGE_VERSION "@VERSION@"
 #define PACKAGE "@PACKAGE@"
 #define ENABLE_NLS 1
 #define HAVE_DCGETTEXT 1
