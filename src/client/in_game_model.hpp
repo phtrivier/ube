@@ -6,6 +6,7 @@
 
 #include "engine/puzzle.hpp"
 #include <assert.h>
+#include <string>
 
 class PathFinderInterface;
 
@@ -39,6 +40,7 @@ public:
     return *dep_puzzle_;
   }
 
+  /* FIXME(pht) : hide this */
   void set_puzzle(Puzzle & dep_puzzle) {
     this->dep_puzzle_ = &dep_puzzle;
   }
@@ -130,7 +132,19 @@ public:
    */
   bool has_goal_changed();
 
+  std::string get_message() {
+    return dep_puzzle_->get_message();
+  }
+
+  /* FIXME(pht) : not needed actually
+   *
+  void set_message(std::string & i_message) {
+    dep_puzzle_.set_message(i_message);
+  }
+  */
+  
 private:
+  // TODO(pht) : make the puzzle a "part" of the stuff
   Puzzle * dep_puzzle_;
   PathFinderInterface & dep_path_finder_;
 
@@ -160,6 +174,8 @@ private:
    */
   bool has_player_moved();
 
+  // Message to display in the dialog box
+  std::string message_;
 
 };
 

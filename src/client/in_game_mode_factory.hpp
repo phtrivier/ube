@@ -5,6 +5,7 @@
 #define _IN_GAME_MODE_FACTORY_HPP_
 
 #include "engine/cell_factory.hpp"
+#include "engine/lua_path_finder.hpp"
 
 #include <string>
 
@@ -17,7 +18,7 @@ class SdlController;
 class InGameView;
 class InGameModel;
 class Puzzle;
-class LuaPathFinder;
+// class LuaPathFinder;
 class LuaPuzzleLoader;
 
 /**
@@ -33,12 +34,12 @@ public:
 		    std::string puzzle_file_name) :
     dep_resolver_(dep_resolver),
     dep_renderer_(dep_renderer),
+    path_finder_(dep_resolver),
     puzzle_file_name_(puzzle_file_name),
     p_view_(NULL),
     p_model_(NULL),
     p_puzzle_(NULL),
     p_controller_(NULL),
-    p_path_finder_(NULL),
     p_puzzle_loader_(NULL)
   {
   }
@@ -59,14 +60,17 @@ private:
 
   ResourceResolverInterface & dep_resolver_;
   InGameRendererInterface & dep_renderer_;
+  LuaPathFinder path_finder_;
 
   std::string puzzle_file_name_;
 
   InGameView * p_view_;
   InGameModel * p_model_;
+
+  // FIXME(pht) : ideally, creating a model would also create the puzzle, and fuck it !!
   Puzzle * p_puzzle_;
+
   SdlController * p_controller_;
-  LuaPathFinder * p_path_finder_;
   CellFactory cell_factory_;
   LuaPuzzleLoader * p_puzzle_loader_;
   

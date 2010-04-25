@@ -5,6 +5,8 @@
 #define _PUZZLE_HPP_
 
 #include "move.hpp"
+
+#include <string>
 #include <vector>
 
 class Cell;
@@ -150,6 +152,14 @@ public:
   
   void set_overlay(int i_i, int i_j, int i_type);
 
+  std::string get_message() {
+    return message_;
+  }
+
+  void set_message(std::string & i_message) {
+    message_ = i_message;
+  }
+
 private:
 
   // Cells
@@ -174,6 +184,8 @@ private:
 
   // Moves
   std::vector<Move> moves_;
+
+  std::string message_;
 
   // Clear all the cells
   void clear_cells();

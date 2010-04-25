@@ -16,8 +16,8 @@
 #include <assert.h>
 
 void
-InGameView::render_game() {
-
+InGameView::render_game() 
+{
   // Take the latest value of the cursor position, 
   // and update state values of the model.
   update_goal(dep_model_);
@@ -31,7 +31,99 @@ InGameView::render_game() {
   render_player(dep_model_.get_puzzle());
   render_overlays(dep_model_.get_puzzle());
   dep_renderer_.render_moves(dep_model_);
+
+  if (has_message_) {
+    dep_renderer_.render_message(dep_model_.get_message());
+  }
+
   dep_renderer_.flush();
+}
+
+void
+InGameView::handle_event(int iEventCode) 
+{
+  if (iEventCode == GameEvent::MOUSE_CLICKED) {
+    handle_mouse_click();
+  } else if (iEventCode == GameEvent::UNDO) {
+    command_stack_.undoLast();
+  } else if (iEventCode == GameEvent::REDO) {
+    command_stack_.redoLast();
+  } else if (iEventCode == GameEvent::NEXT_MOVE) {
+    dep_model_.set_next_available_move_as_current();
+  } else if (iEventCode == GameEvent::SHOW_MESSAGE) {
+    has_message_ = true; 
+  } else if (iEventCode == GameEvent::HIDE_MESSAGE) {
+    has_message_ = false;
+  }
+}
+
+void
+InGameView::handle_mouse_click() 
+{
+  int mouse_x = dep_controller_.mouse_x();
+  int mouse_y = dep_controller_.mouse_y();
+
+  if (!has_message_) {
+    check_cell_click(mouse_x, mouse_y);
+    check_move_click(mouse_x, mouse_y);
+    check_undo_click(mouse_x, mouse_y);
+    check_redo_click(mouse_x, mouse_y);
+  } else {
+    check_message_box_click(mouse_x, mouse_y);
+  }
+}
+
+void
+InGameView::check_message_box_click(int mouse_x, int mouse_y)
+{
+  // TODO
+}
+
+void
+InGameView::check_cell_click(int mouse_x, int mouse_y)
+{
+  int i = dep_renderer_.mouse_y_as_puzzle_line(mouse_y);
+  int j = dep_renderer_.mouse_x_as_puzzle_column(mouse_x);
+  if (i!=-1 && j!=-1 && 
+      dep_model_.get_puzzle().is_valid_position(i,j)) {
+
+    if (dep_model_.get_puzzle().get_cell_at(i,j)->is_in_path()) {
+      command_stack_.doMove(dep_model_, dep_model_.current_move_index(), i, j);
+
+      if (dep_model_.is_puzzle_finished()) {
+	command_stack_.clear();
+	dep_controller_.fire_event(GameEvent::PUZZLE_FINISHED);
+      }
+
+    }
+  }
+}
+
+void
+InGameView::check_move_click(int mouse_x, int mouse_y)
+{
+  int move_index = dep_renderer_.mouse_position_as_move_index(mouse_x, mouse_y);
+  if (dep_model_.is_valid_move_index(move_index)) {
+    if (dep_model_.is_move_available(move_index)) {
+      dep_model_.set_current_move_index(move_index);
+    }
+  }
+}
+
+void
+InGameView::check_undo_click(int mouse_x, int mouse_y)
+{
+  if (dep_renderer_.is_on_undo_button(mouse_x, mouse_y)) {
+    command_stack_.undoLast();
+  }
+}
+
+void
+InGameView::check_redo_click(int mouse_x, int mouse_y)
+{
+  if (dep_renderer_.is_on_redo_button(mouse_x, mouse_y)) {
+    command_stack_.redoLast();
+  }
 }
 
 void
@@ -55,53 +147,10 @@ InGameView::update_hovered_move(InGameModel & i_model)
   
 }
 
-void
-InGameView::handle_event(int iEventCode) {
-  if (iEventCode == GameEvent::MOUSE_CLICKED) {
-    int mouse_x = dep_controller_.mouse_x();
-    int mouse_y = dep_controller_.mouse_y();
-    int i = dep_renderer_.mouse_y_as_puzzle_line(mouse_y);
-    int j = dep_renderer_.mouse_x_as_puzzle_column(mouse_x);
-    if (i!=-1 && j!=-1 && 
-	dep_model_.get_puzzle().is_valid_position(i,j)) {
-
-      if (dep_model_.get_puzzle().get_cell_at(i,j)->is_in_path()) {
-	command_stack_.doMove(dep_model_, dep_model_.current_move_index(), i, j);
-
-	if (dep_model_.is_puzzle_finished()) {
-	  command_stack_.clear();
-	  dep_controller_.fire_event(GameEvent::PUZZLE_FINISHED);
-	}
-
-      }
-    }
-
-    int move_index = dep_renderer_.mouse_position_as_move_index(mouse_x, mouse_y);
-    if (dep_model_.is_valid_move_index(move_index)) {
-      if (dep_model_.is_move_available(move_index)) {
-	  dep_model_.set_current_move_index(move_index);
-      }
-    }
-
-    if (dep_renderer_.is_on_undo_button(mouse_x, mouse_y)) {
-      command_stack_.undoLast();
-    }
-
-    if (dep_renderer_.is_on_redo_button(mouse_x, mouse_y)) {
-      command_stack_.redoLast();
-    }
-
-  } else if (iEventCode == GameEvent::UNDO) {
-    command_stack_.undoLast();
-  } else if (iEventCode == GameEvent::REDO) {
-    command_stack_.redoLast();
-  } else if (iEventCode == GameEvent::NEXT_MOVE) {
-    dep_model_.set_next_available_move_as_current();
-  }
-}
 
 void
-InGameView::render_puzzle(const Puzzle & i_puzzle) {
+InGameView::render_puzzle(const Puzzle & i_puzzle) 
+{
   assert(i_puzzle.get_w() > 0);
   assert(i_puzzle.get_h() > 0);
   for (int i = 0 ; i < i_puzzle.get_h() ; i++) {
@@ -112,7 +161,8 @@ InGameView::render_puzzle(const Puzzle & i_puzzle) {
 }
 
 void
-InGameView::render_overlays(const Puzzle & i_puzzle) {
+InGameView::render_overlays(const Puzzle & i_puzzle) 
+{
   assert(i_puzzle.get_w() > 0);
   assert(i_puzzle.get_h() > 0);
   for (int i = 0 ; i < i_puzzle.get_h() ; i++) {
@@ -125,7 +175,8 @@ InGameView::render_overlays(const Puzzle & i_puzzle) {
 }
 
 void
-InGameView::render_selected_cell(InGameModel & i_model) {
+InGameView::render_selected_cell(InGameModel & i_model) 
+{
   int mouse_x = dep_controller_.mouse_x();
   int mouse_y = dep_controller_.mouse_y();
 
@@ -154,7 +205,8 @@ InGameView::render_selected_cell(InGameModel & i_model) {
 }
 
 void 
-InGameView::update_goal(InGameModel & i_model) {
+InGameView::update_goal(InGameModel & i_model) 
+{
   // Update the position of the cursor
   int mouse_x = dep_controller_.mouse_x();
   int mouse_y = dep_controller_.mouse_y();
@@ -170,8 +222,8 @@ InGameView::update_goal(InGameModel & i_model) {
 }
 
 void
-InGameView::render_path(InGameModel & i_model) {
-  
+InGameView::render_path(InGameModel & i_model) 
+{
   // Render the existing path if any (note that both stuff
   // could be done in another order, but one frame
   // should not be too much to cause a glitch)
@@ -188,7 +240,8 @@ InGameView::render_path(InGameModel & i_model) {
 }
 
 void
-InGameView::render_player(const Puzzle & i_puzzle) {
+InGameView::render_player(const Puzzle & i_puzzle) 
+{
   if (i_puzzle.get_player_i() != -1 &&
       i_puzzle.get_player_j() != -1) {
     dep_renderer_.render_player(i_puzzle.get_player_i(), i_puzzle.get_player_j());

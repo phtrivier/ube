@@ -83,6 +83,8 @@ public:
   bool is_on_redo_button(int i_x, int i_y);
 
   void render_overlay(int i_i, int i_j, int i_overlay_type); 
+
+  void render_message(std::string i_msg);
     
 private:
 

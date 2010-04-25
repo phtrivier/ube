@@ -68,14 +68,28 @@ InGameModeFactory::create_mode() {
 
   if (res == 0) {
     // Bring things together
-    p_path_finder_ = new LuaPathFinder(dep_resolver_);
-    p_model_ = new InGameModel(*p_path_finder_);
-    p_model_->set_puzzle(*p_puzzle_);
+
+    // Create controller (always the same in my cases...)
     p_controller_ = new SdlController();
+
+    // Create the model (will be different from time to time)
+    //K p_path_finder_ = new LuaPathFinder(dep_resolver_);
+    // TODO(pht) : no dynamic alloc really needed, actually... 
+    p_model_ = new InGameModel(path_finder_);
+    p_model_->set_puzzle(*p_puzzle_);
+
+    // Create the view (will typically need the controllers and
+    // model, but can be anything !
     p_view_ = new InGameView(dep_renderer_, *p_model_, *p_controller_);
+
+    // Create the mode iteself
     mode_ = boost::shared_ptr<InGameMode>(new InGameMode(*p_controller_, *p_view_, *p_model_));
+
+    // Link the controller and the view (could be done the same for all, no ?)
     if (p_controller_ != NULL && p_view_ != NULL) {
       p_controller_->add_observer(p_view_);
+    } else {
+      res = -1;
     }
   }
 

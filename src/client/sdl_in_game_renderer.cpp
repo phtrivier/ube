@@ -327,6 +327,14 @@ SdlInGameRenderer::render_overlay(int i_i, int i_j, int i_overlay_type) {
   render_cell_image(i_i, i_j, overlay_images_[i_overlay_type]);
 }
 
+void
+SdlInGameRenderer::render_message(std::string i_msg) {
+  std::cout << "Renderering :" << i_msg << std::endl;
+}
+
+
+/* ------------ private ----------- */
+
 SDL_Rect 
 SdlInGameRenderer::move_surrounding_rect(int i_move_index) {
   SDL_Rect res;
