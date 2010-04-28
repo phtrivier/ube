@@ -43,13 +43,11 @@ namespace {
     MockPathFinder pf;
     InGameModel model(pf);
 
-    Puzzle p;
+    Puzzle & p = model.get_puzzle();
     p.set_dimensions(1,1);
     Cell c(0,0, Cell::WALKABLE);
     p.add_cell(&c);
     p.put_player(0,0);
-
-    model.set_puzzle(p);
     
     MockCommand * move1 = new MockCommand();
 

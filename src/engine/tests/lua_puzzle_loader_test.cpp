@@ -53,7 +53,7 @@ namespace {
 	.WillOnce(Return(str(format("%1%/tests/lua/%2%") % SRCDIR % i_file_name)));
     
       p_loader_ = new LuaPuzzleLoader(&f_,resolver_);
-      p_loader_->load_puzzle_file(i_file_name.c_str(), o_p_puzzle);
+      p_loader_->load_puzzle_file(i_file_name.c_str(), *o_p_puzzle);
     }
 
   };

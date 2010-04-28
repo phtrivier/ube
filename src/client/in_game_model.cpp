@@ -15,21 +15,21 @@ void
 InGameModel::update_path()
 {
   if (has_valid_move() || !has_valid_goal()) {
-    dep_puzzle_->clear_path();
+    puzzle_.clear_path();
   } else {
     // If required, look for a path
     if (has_goal_changed() || has_player_moved()) {
       assert(goal_i_ != -1);
       assert(goal_j_ != -1);
 
-      dep_puzzle_->clear_path();
+      puzzle_.clear_path();
 
-      assert(current_move_index_ < (int) dep_puzzle_->moves().size());
-      int move_type = dep_puzzle_->moves()[current_move_index_].type();
+      assert(current_move_index_ < (int) puzzle_.moves().size());
+      int move_type = puzzle_.moves()[current_move_index_].type();
     
-      dep_path_finder_.find_path(dep_puzzle_,
-				 dep_puzzle_->get_player_i(),
-				 dep_puzzle_->get_player_j(),
+      dep_path_finder_.find_path(puzzle_,
+				 puzzle_.get_player_i(),
+				 puzzle_.get_player_j(),
 				 goal_i_,
 				 goal_j_,
 				 move_type);
@@ -37,8 +37,8 @@ InGameModel::update_path()
       last_goal_i_ = goal_i_;
       last_goal_j_ = goal_j_;
 
-      last_player_i_ = dep_puzzle_->get_player_i();
-      last_player_j_ = dep_puzzle_->get_player_j();
+      last_player_i_ = puzzle_.get_player_i();
+      last_player_j_ = puzzle_.get_player_j();
 
     }
   }
@@ -47,8 +47,8 @@ InGameModel::update_path()
 void
 InGameModel::move_player(int i_i, int i_j) 
 {
-  assert(dep_puzzle_->is_valid_position(i_i, i_j));
-  dep_puzzle_->put_player(i_i, i_j);
+  assert(puzzle_.is_valid_position(i_i, i_j));
+  puzzle_.put_player(i_i, i_j);
 }
 
 bool
@@ -61,8 +61,8 @@ bool
 InGameModel::has_valid_goal()
 {
   return goal_i_ >= 0 && goal_j_ >= 0 &&
-    goal_i_ < dep_puzzle_->get_h() &&
-    goal_j_ < dep_puzzle_->get_w();
+    goal_i_ < puzzle_.get_h() &&
+    goal_j_ < puzzle_.get_w();
 }
 
 bool
@@ -81,8 +81,8 @@ InGameModel::has_goal_changed()
 bool
 InGameModel::has_player_moved()
 {
-  bool res = last_player_i_ != dep_puzzle_->get_player_i() ||
-    last_player_j_ != dep_puzzle_->get_player_j();
+  bool res = last_player_i_ != puzzle_.get_player_i() ||
+    last_player_j_ != puzzle_.get_player_j();
   return res;
 }
 
@@ -90,7 +90,7 @@ InGameModel::has_player_moved()
 void
 InGameModel::set_first_available_move_as_current()
 {
-  std::vector<Move> & moves = dep_puzzle_->moves();
+  std::vector<Move> & moves = puzzle_.moves();
   int size = moves.size();
   bool found = false;
   current_move_index_ = -1;
@@ -105,7 +105,7 @@ InGameModel::set_first_available_move_as_current()
 void
 InGameModel::set_next_available_move_as_current()
 {
-  std::vector<Move> & moves = dep_puzzle_->moves();
+  std::vector<Move> & moves = puzzle_.moves();
   int size = moves.size();
   bool found = false;
   int old_index = current_move_index_;
@@ -123,5 +123,5 @@ InGameModel::set_next_available_move_as_current()
 bool
 InGameModel::is_puzzle_finished()
 {
-  return dep_puzzle_->is_finished();
+  return puzzle_.is_finished();
 }

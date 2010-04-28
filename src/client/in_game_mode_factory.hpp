@@ -7,6 +7,9 @@
 #include "engine/cell_factory.hpp"
 #include "engine/lua_path_finder.hpp"
 
+#include "client/in_game_model.hpp"
+#include "client/in_game_model_loader.hpp"
+
 #include <string>
 
 #include <boost/shared_ptr.hpp>
@@ -16,9 +19,7 @@ class ResourceResolverInterface;
 class InGameRendererInterface;
 class SdlController;
 class InGameView;
-class InGameModel;
 class Puzzle;
-// class LuaPathFinder;
 class LuaPuzzleLoader;
 
 /**
@@ -35,12 +36,11 @@ public:
     dep_resolver_(dep_resolver),
     dep_renderer_(dep_renderer),
     path_finder_(dep_resolver),
+    model_(path_finder_),
     puzzle_file_name_(puzzle_file_name),
     p_view_(NULL),
-    p_model_(NULL),
-    p_puzzle_(NULL),
     p_controller_(NULL),
-    p_puzzle_loader_(NULL)
+    in_game_model_loader_(dep_resolver)
   {
   }
 
@@ -61,19 +61,17 @@ private:
   ResourceResolverInterface & dep_resolver_;
   InGameRendererInterface & dep_renderer_;
   LuaPathFinder path_finder_;
+  InGameModel model_;
 
   std::string puzzle_file_name_;
 
   InGameView * p_view_;
-  InGameModel * p_model_;
-
-  // FIXME(pht) : ideally, creating a model would also create the puzzle, and fuck it !!
-  Puzzle * p_puzzle_;
 
   SdlController * p_controller_;
   CellFactory cell_factory_;
-  LuaPuzzleLoader * p_puzzle_loader_;
-  
+
+  InGameModelLoader in_game_model_loader_;
+
   boost::shared_ptr<GameMode> mode_;
 
 };

@@ -37,12 +37,7 @@ public:
   }
   
   Puzzle & get_puzzle() {
-    return *dep_puzzle_;
-  }
-
-  /* FIXME(pht) : hide this */
-  void set_puzzle(Puzzle & dep_puzzle) {
-    this->dep_puzzle_ = &dep_puzzle;
+    return puzzle_;
   }
 
   /**
@@ -63,13 +58,13 @@ public:
   }
 
   void set_current_move_index(int i_index) {
-    assert(i_index < (int) dep_puzzle_->moves().size());
+    assert(i_index < (int) puzzle_.moves().size());
     current_move_index_ = i_index;
   }
 
   Move & current_move() {
-    assert(current_move_index_ < (int) dep_puzzle_->moves().size());
-    return dep_puzzle_->moves()[current_move_index_];
+    assert(current_move_index_ < (int) puzzle_.moves().size());
+    return puzzle_.moves()[current_move_index_];
   }
  
   /**
@@ -109,14 +104,14 @@ public:
    * Is an index valid for a move ? 
    */
   bool is_valid_move_index(int i_index) {
-    return (i_index > -1 && i_index < (int) dep_puzzle_->moves().size());
+    return (i_index > -1 && i_index < (int) puzzle_.moves().size());
   }
 
   /**
    * Is a move at a given index available ? 
    */
   bool is_move_available(int i_index) {
-    return (is_valid_move_index(i_index) && dep_puzzle_->moves()[i_index].available());
+    return (is_valid_move_index(i_index) && puzzle_.moves()[i_index].available());
   }
 
   int hovered_move_index() {
@@ -133,20 +128,14 @@ public:
   bool has_goal_changed();
 
   std::string get_message() {
-    return dep_puzzle_->get_message();
+    return puzzle_.get_message();
   }
 
-  /* FIXME(pht) : not needed actually
-   *
-  void set_message(std::string & i_message) {
-    dep_puzzle_.set_message(i_message);
-  }
-  */
-  
 private:
-  // TODO(pht) : make the puzzle a "part" of the stuff
-  Puzzle * dep_puzzle_;
+
   PathFinderInterface & dep_path_finder_;
+
+  Puzzle puzzle_;
 
   // Position of the current goal in the path
   int goal_i_;

@@ -16,7 +16,7 @@ public:
   virtual ~PathFinderInterface() {
   }
   
-  virtual int find_path(Puzzle * o_p_puzzle, 
+  virtual int find_path(Puzzle & o_puzzle, 
 			int i_i0, int i_j0, 
 			int i_i1, int i_j1,
 			int move_type) = 0;

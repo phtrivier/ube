@@ -11,7 +11,7 @@
 #include <assert.h>
 
 int
-LuaPathFinder::find_path(Puzzle * o_p_puzzle, 
+LuaPathFinder::find_path(Puzzle & o_puzzle, 
 			 int i_i0, int i_j0, 
 			 int i_i1, int i_j1, 
 			 int move_type)
@@ -21,8 +21,8 @@ LuaPathFinder::find_path(Puzzle * o_p_puzzle,
 
   if (i_i0 < 0 
       || i_j0 < 0 
-      || i_i1 >= o_p_puzzle->get_h() 
-      || i_j1 >= o_p_puzzle->get_w()) {
+      || i_i1 >= o_puzzle.get_h() 
+      || i_j1 >= o_puzzle.get_w()) {
     return -1;
   }
 
@@ -33,7 +33,7 @@ LuaPathFinder::find_path(Puzzle * o_p_puzzle,
   // reflect the positions of the new cells in 
   // the path.
   lua_getglobal(get_lua_state(), "find_path");
-  lua_pushlightuserdata(get_lua_state(), o_p_puzzle);
+  lua_pushlightuserdata(get_lua_state(), &o_puzzle);
   lua_pushnumber(get_lua_state(), i_i0);
   lua_pushnumber(get_lua_state(), i_j0);
   lua_pushnumber(get_lua_state(), i_i1);

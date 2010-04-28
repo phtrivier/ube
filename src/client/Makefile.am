@@ -26,7 +26,8 @@ libube_client_a_SOURCES=gettext.h \
 	puzzle_selection_view.hpp puzzle_selection_view.cpp \
 	puzzle_selection_mode.hpp puzzle_selection_mode.cpp \
 	puzzle_selection_mode_factory.hpp puzzle_selection_mode_factory.cpp \
-	sdl_puzzle_selection_renderer.hpp  sdl_puzzle_selection_renderer.cpp
+	sdl_puzzle_selection_renderer.hpp  sdl_puzzle_selection_renderer.cpp \
+	in_game_model_loader.hpp in_game_model_loader.cpp
 
 gamesdir=${prefix}/games
 games_PROGRAMS = ube
@@ -39,6 +40,7 @@ AM_CPPFLAGS= -g -DLOCALEDIR=\"${datadir}/locale\" \
 	-DDATADIR=\"${datadir}/@PACKAGE@\" \
 	-DLUADIR=\"${luadir}\" \
 	-DPREFIX=\"${prefix}\" \
+	-DSRCDIR=\"${srcdir}\" \
 	-Wall -Werror -enable-assert\
 	-I$(srcdir)/../../include \
 	-I$(srcdir)/../ \
@@ -83,7 +85,8 @@ client_tests_SOURCES=tests/client_tests.cpp \
 	tests/in_game_command_stack_test.cpp \
 	tests/puzzle_selection_model_test.cpp \
 	tests/puzzle_selection_view_test.cpp \
-	tests/in_game_model_test.cpp 
+	tests/in_game_model_test.cpp \
+	tests/in_game_model_loader_test.cpp
 
 client_tests_LDADD=$(PROJECT_LIBS) \
 	-L$(top_srcdir)/lib -lgtest -lgmock \

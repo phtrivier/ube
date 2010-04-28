@@ -130,18 +130,17 @@ LuaPuzzleLoader::load_lua_puzzle_file(const char * iFileName)
 }
 
 int
-LuaPuzzleLoader::load_puzzle_file(const char * iFileName, 
-				  Puzzle * oPuzzle) {
+LuaPuzzleLoader::load_puzzle_file(const char * i_file_name, 
+				  Puzzle & o_puzzle) {
 
-  assert(oPuzzle != NULL);
-  oPuzzle->clear();
+  o_puzzle.clear();
 
   // The puzzle will be accessible to the script as 
   // a global "cpp_puzzle" variable.
-  lua_pushlightuserdata(get_lua_state(), oPuzzle);
+  lua_pushlightuserdata(get_lua_state(), &o_puzzle);
   lua_setglobal(get_lua_state(), "cpp_puzzle");
 
-  load_lua_puzzle_file(iFileName);
+  load_lua_puzzle_file(i_file_name);
   // TODO(pht) : propagate error codes
   return 0;
 }

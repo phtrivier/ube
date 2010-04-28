@@ -48,9 +48,9 @@ public:
    * @param oPuzzle the puzzle to be initialized.
    * @return TODO(pht) error code in case something goes wrong
    */
-  int load_puzzle_file(const char * iFileName, Puzzle * oPuzzle);
+  int load_puzzle_file(const char * iFileName, Puzzle & o_puzzle);
 
-  void register_lua_functions();
+  virtual void register_lua_functions();
 
   /**
    * Creates a script command to be used on a puzzle.
