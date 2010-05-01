@@ -2,8 +2,11 @@
 
 #include "engine/puzzle.hpp"
 #include "engine/cell.hpp"
-
 #include "engine/tests/mock_path_finder.hpp"
+
+#include "mvc/tests/mock_observer.hpp"
+
+#include "client/game_event.hpp"
 
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>

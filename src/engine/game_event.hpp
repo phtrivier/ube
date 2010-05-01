@@ -19,8 +19,6 @@ public:
   static const int PUZZLE_SELECTED = 4;
   static const int PUZZLE_FINISHED = 5;
   static const int NEXT_MOVE = 6;
-  static const int MESSAGE_SHOWN = 7;
-  //K  static const int HIDE_MESSAGE = 8;
 };
 
 #endif // _GAME_EVENT_HPP_

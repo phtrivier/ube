@@ -51,7 +51,7 @@ namespace {
 	.WillOnce(Return(str(format("%1%/../engine/lua/puzzle_lib.lua") % SRCDIR)));
 
       EXPECT_CALL(resolver_, get_puzzle_lua_file_name(StrEq(i_file_name)))
-	.WillOnce(Return(str(format("%1%/../engine/tests/lua/%2%") % SRCDIR % i_file_name)));
+	.WillOnce(Return(str(format("%1%/tests/lua/%2%") % SRCDIR % i_file_name)));
     
       p_loader_ = new InGameModelLoader(resolver_);
       p_loader_->load_puzzle_file(i_file_name.c_str(), o_model);
@@ -60,11 +60,10 @@ namespace {
 
   };
 
-
-  TEST_F(InGameModelLoaderTest, DoesSomethingCool) {
+  TEST_F(InGameModelLoaderTest, LoadsPuzzleFromFile) {
     MockPathFinder pf;
     InGameModel model(pf);
-    load_puzzle_from_file("puzzle_loader_test/puzzle1.lua", model);
+    load_puzzle_from_file("model_loader_test/puzzle1.lua", model);
     
     ASSERT_EQ(3, model.get_puzzle().get_w());
     ASSERT_EQ(4, model.get_puzzle().get_h());
@@ -77,7 +76,18 @@ namespace {
     ASSERT_EQ(2, (int) model.get_puzzle().moves().size());
     ASSERT_EQ(MoveType::DOUBLE, model.get_puzzle().moves().at(0).type());
     ASSERT_TRUE(model.get_puzzle().moves().at(0).available());
-
   }
+
+  TEST_F(InGameModelLoaderTest, CanTriggerMessages) {
+    MockPathFinder pf;
+    InGameModel model(pf);
+    ASSERT_TRUE(model.get_message().empty());
+    load_puzzle_from_file("model_loader_test/puzzle_with_messages.lua", model);
+    ASSERT_EQ("Hello !", model.get_message());
+    model.set_message("");
+    ASSERT_TRUE(model.get_message().empty());
+  }
+
+
 
 } // Namespace

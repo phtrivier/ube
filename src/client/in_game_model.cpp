@@ -3,6 +3,7 @@
  */
 #include "in_game_model.hpp"
 
+#include "engine/game_event.hpp"
 #include "engine/move.hpp"
 #include "engine/puzzle.hpp"
 #include "engine/path_finder_interface.hpp"

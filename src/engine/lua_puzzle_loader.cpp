@@ -89,6 +89,19 @@ int lua_puzzle_set_overlay(lua_State * i_p_lua_state) {
   return 0;
 }
 
+int lua_puzzle_set_start_message(lua_State * i_p_lua_state) {
+  Puzzle * p_puzzle = (Puzzle *) lua_touserdata(i_p_lua_state, 1);
+  assert(p_puzzle != NULL);
+  const char * s_msg = lua_tostring(i_p_lua_state, 2);
+  std::string msg(s_msg);
+  p_puzzle->set_start_message(msg);
+  return 0;
+}
+
+#define REGISTER_LUA_FN(lua_fn, cpp_fn)   lua_pushcfunction(get_lua_state(), lua_fn); \
+  lua_setglobal(get_lua_state(), cpp_fn);
+
+
 void
 LuaPuzzleLoader::register_lua_functions() 
 {
@@ -101,8 +114,7 @@ LuaPuzzleLoader::register_lua_functions()
   lua_pushlightuserdata(get_lua_state(),this);
   lua_setglobal(get_lua_state(), "cpp_puzzle_loader");
 
-  lua_pushcfunction(get_lua_state(), lua_puzzle_set_dimensions);
-  lua_setglobal(get_lua_state(), "cpp_puzzle_set_dimensions");
+  REGISTER_LUA_FN(lua_puzzle_set_dimensions, "cpp_puzzle_set_dimensions");
 
   lua_pushcfunction(get_lua_state(), lua_puzzle_loader_set_row);
   lua_setglobal(get_lua_state(), "cpp_puzzle_loader_set_row");
@@ -118,6 +130,14 @@ LuaPuzzleLoader::register_lua_functions()
 
   lua_pushcfunction(get_lua_state(), lua_puzzle_set_overlay);
   lua_setglobal(get_lua_state(), "cpp_puzzle_set_overlay");
+
+  lua_pushcfunction(get_lua_state(), lua_puzzle_set_start_message);
+  lua_setglobal(get_lua_state(), "cpp_puzzle_set_start_message");
+
+  // TODO(pht) : for lua_puzzle_set_end_message()
+  /*
+  REGISTER_LUA_FN(lua_puzzle_set_dimensions, "cpp_puzzle_set_dimensions");
+  */
 
   load_lua_engine_file("puzzle_lib.lua");
 

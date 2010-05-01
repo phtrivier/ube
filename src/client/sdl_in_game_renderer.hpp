@@ -41,7 +41,9 @@ public:
     p_selected_cell_image_(NULL), p_banned_cell_image_(NULL),
     p_player_image_(NULL),
     p_bg_(NULL), p_undo_image_(NULL), p_redo_image_(NULL),
-    p_disabled_undo_image_(NULL), p_disabled_redo_image_(NULL)
+    p_disabled_undo_image_(NULL), p_disabled_redo_image_(NULL),
+    p_msg_box_image_(NULL),
+    p_msg_font_(NULL)
   {
 
   }
@@ -86,6 +88,8 @@ public:
 
   void render_message(std::string i_msg);
     
+  bool is_on_msg_button(int i_x, int i_y);
+
 private:
 
   std::map<int, SDL_Surface *> cell_images_;
@@ -106,6 +110,11 @@ private:
   SDL_Surface * p_redo_image_;
   SDL_Surface * p_disabled_undo_image_;
   SDL_Surface * p_disabled_redo_image_;
+
+  SDL_Surface * p_msg_box_image_;
+
+  TTF_Font * p_msg_font_;
+
 
   /**
    * Load all the images necessary to display
@@ -202,6 +211,7 @@ private:
    * @param i_move_index index of the move, should be valid.
    */
   SDL_Rect move_surrounding_rect(int i_move_index);
+
 
 };
 

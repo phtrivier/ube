@@ -42,3 +42,37 @@ SdlRenderer::flush() {
   assert(dep_p_screen_ != NULL);
   SDL_Flip(dep_p_screen_);
 }
+
+int
+SdlRenderer::load_font(const char * i_name, int i_ptsize, TTF_Font ** o_pp_font) {
+  int res = -1;
+  std::string file_name = get_resolver().get_font_file_name(i_name);
+  *o_pp_font = TTF_OpenFont(file_name.c_str(), i_ptsize);
+  if (o_pp_font != NULL) {
+    res = 0;
+  }
+  return res;
+}
+
+void
+SdlRenderer::render_text(std::string i_text, int i_x, int i_y, TTF_Font * i_p_font)
+{
+  LOG_D("puzzle_selection") << "Rendering text : " << i_text << std::endl;
+
+  // FIXME(pht) : ideally, the text surface only has to be
+  // computed once and can be reused, can't it ? 
+  SDL_Surface * text_surface;
+  SDL_Color white = {255,255,255};
+  if (!(text_surface = TTF_RenderUTF8_Blended(i_p_font, i_text.c_str(), white))) {
+    printf("Error while printing text %s\n", TTF_GetError());
+    LOG_D("puzzle_selection") << "Could not create renderering surface ; " << TTF_GetError() << std::endl;
+  } else {
+    SDL_Rect dst;
+    dst.x = i_x;
+    dst.y = i_y;
+    LOG_D("puzzle_selection") << "Blitting text surface on screen" << dst.x << "," << dst.y << "," << dst.w << "," << dst.h << std::endl;
+    
+    SDL_BlitSurface(text_surface, NULL, get_screen(), &dst);
+    SDL_FreeSurface(text_surface);
+  }
+}

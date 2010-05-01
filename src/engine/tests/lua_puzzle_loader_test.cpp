@@ -3,6 +3,9 @@
 #include "puzzle.hpp"
 #include "cell_factory.hpp"
 #include "lua_command.hpp"
+#include "game_event.hpp"
+
+#include "mvc/tests/mock_observer.hpp"
 
 #include "common/tests/mock_resource_resolver.hpp"
 #include "common/stat_file_checker.hpp"
@@ -162,5 +165,11 @@ namespace {
     ASSERT_FALSE(p.has_overlay(2,1));
   }
 
+  TEST_F(LuaPuzzleLoaderTest, DisplayMessagesWhenPlayersEnterPuzzle) {
+    Puzzle p;
+    load_puzzle_from_file("puzzle_loader_test/puzzle_with_messages.lua", &p);
+    ASSERT_TRUE(p.has_start_message());
+    ASSERT_EQ("Hello, world !", p.get_start_message());
+  }
 
 } // Namespace

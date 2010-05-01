@@ -31,6 +31,13 @@
 #define REDO_H 64
 #define REDO_W 64
 
+#define MSG_BOX_X 210
+#define MSG_BOX_Y 150
+#define MSG_BOX_BUTTON_X (MSG_BOX_X + 250)
+#define MSG_BOX_BUTTON_Y (MSG_BOX_Y + 130)
+#define MSG_BOX_BUTTON_H 40
+#define MSG_BOX_BUTTON_W 80
+
 /**
  * Geometry of the screen.
  */
@@ -54,6 +61,15 @@ public:
   bool is_on_undo_button(int i_x, int i_y);
 
   bool is_on_redo_button(int i_x, int i_y);
+
+  bool is_on_msg_button(int i_x, int i_y);
+
+protected :
+
+  bool is_in_box(int i_x, int i_y, int i_x0, int i_y0, int i_w, int i_h) {
+    return (i_x > i_x0 && i_x < i_x0 + i_w && 
+	    i_y > i_y0 && i_y < i_y0 + i_h);
+  }
 
 };
 

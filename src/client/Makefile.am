@@ -1,7 +1,6 @@
 noinst_LIBRARIES=libube-client.a
 libube_client_a_SOURCES=gettext.h \
 	game_mode_interface.hpp game_mode.hpp game_mode.cpp \
-	game_event.hpp \
 	game_loop.hpp game_loop.cpp \
 	sdl_clock.hpp sdl_clock.cpp \
 	sdl_controller.hpp sdl_controller.cpp \
@@ -59,8 +58,8 @@ PROJECT_LIBS=libube-client.a \
 	../common/libube-common.a
 else
 PROJECT_LIBS=libube-client.a \
-	../mvc/libube-mvc.a \
 	../engine/libube-engine.a \
+	../mvc/libube-mvc.a \
 	../common/libube-common.a \
 	../lua/liblua.a
 endif
@@ -94,5 +93,8 @@ client_tests_LDADD=$(PROJECT_LIBS) \
 	$(SDL_image_LIBS) $(SDL_TTF_LIBS) $(SDL_mixer_LIBS) \
 	$(SDL_IMAGE_LIBS) $(SDL_MIXER_LIBS) \
 	$(LIBINTL) $(LUA_LIB)
+
+EXTRA_DIST=tests/lua/model_loader_test/puzzle1.lua \
+	tests/lua/model_loader_test/puzzle_with_messages.lua
 
 TESTS = client-tests

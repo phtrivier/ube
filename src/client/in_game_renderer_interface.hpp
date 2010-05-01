@@ -84,6 +84,8 @@ public:
    * Display a dialog box with a message.
    */
   virtual void render_message(std::string i_msg) = 0;
+
+  virtual bool is_on_msg_button(int i_x, int i_y) = 0;
   
 };
 

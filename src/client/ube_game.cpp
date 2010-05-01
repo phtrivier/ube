@@ -14,7 +14,7 @@
 #include "sdl_puzzle_selection_renderer.hpp"
 #include "puzzle_selection_mode_factory.hpp"
 #include "puzzle_selection_mode.hpp"
-#include "game_event.hpp"
+#include "engine/game_event.hpp"
 
 #include "common/logging.hpp"
 

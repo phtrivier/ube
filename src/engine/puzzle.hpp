@@ -6,6 +6,8 @@
 
 #include "move.hpp"
 
+#include "mvc/observable.hpp"
+
 #include <string>
 #include <vector>
 
@@ -15,18 +17,23 @@ class CommandInterface;
 /**
  * The board of the game.
  */
-class Puzzle { 
+class Puzzle : 
+  public Observable
+{ 
 
 public:
 
   Puzzle() : 
+    Observable(),
     cells_(NULL),
     scripts_(NULL),
     overlays_(NULL),
     w_(-1), 
     h_(-1), 
     player_i_(-1),
-    player_j_(-1)
+    player_j_(-1),
+    start_message_(""),
+    has_start_message_(false)
   {
   }
 
@@ -152,12 +159,17 @@ public:
   
   void set_overlay(int i_i, int i_j, int i_type);
 
-  std::string get_message() {
-    return message_;
+  std::string get_start_message() {
+    return start_message_;
   }
 
-  void set_message(std::string & i_message) {
-    message_ = i_message;
+  void set_start_message(std::string & i_message) {
+    start_message_ = i_message;
+    has_start_message_ = true;
+  }
+
+  bool has_start_message() {
+    return has_start_message_;
   }
 
 private:
@@ -182,10 +194,11 @@ private:
   int player_i_;
   int player_j_;
 
+  std::string start_message_;
+  bool has_start_message_;
+
   // Moves
   std::vector<Move> moves_;
-
-  std::string message_;
 
   // Clear all the cells
   void clear_cells();

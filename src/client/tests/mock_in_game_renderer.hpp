@@ -49,4 +49,7 @@ class MockInGameRenderer : public InGameRendererInterface {
   MOCK_METHOD1(render_message,
 	       void (std::string i_msg));
 
+  MOCK_METHOD2(is_on_msg_button, 
+	       bool(int i_x, int i_y));
+
 };

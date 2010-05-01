@@ -12,3 +12,5 @@ set_puzzle_rows({"######################",
 		 "######################"})
 
 set_puzzle_moves({Move.SINGLE})
+
+after_start_message({en = "Welcome to UBE !"})

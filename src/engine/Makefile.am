@@ -2,6 +2,7 @@ noinst_LIBRARIES=libube-engine.a
 libube_engine_a_SOURCES=cell.hpp cell.cpp \
 	cell_factory.hpp cell_factory.cpp \
 	move.hpp move.cpp \
+	game_event.hpp \
 	puzzle.hpp puzzle.cpp \
 	puzzle_loader.hpp puzzle_loader.cpp \
 	lua_puzzle_loader.hpp lua_puzzle_loader.cpp \
@@ -57,11 +58,13 @@ engine_tests_SOURCES= tests/engine_tests.cpp \
 
 if MINGW
 engine_tests_LDADD=libube-engine.a \
+	../mvc/libube-mvc.a \
 	../common/libube-common.a \
 	-L$(top_srcdir)/lib -lgtest -lgmock -llua -ldl
 else
 engine_tests_LDADD=libube-engine.a \
 	../common/libube-common.a \
+	../mvc/libube-mvc.a \
 	../lua/liblua.a \
 	-L$(top_srcdir)/lib -lgtest -lgmock -ldl
 endif

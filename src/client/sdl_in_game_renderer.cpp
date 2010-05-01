@@ -3,6 +3,7 @@
  */
 #include "sdl_in_game_renderer.hpp"
 
+#include "common/i18n.hpp"
 #include "common/logging.hpp"
 #include "common/resource_resolver_interface.hpp"
 
@@ -51,6 +52,7 @@ SdlInGameRenderer::~SdlInGameRenderer()
   clear_image(p_redo_image_);
   clear_image(p_disabled_undo_image_);
   clear_image(p_disabled_redo_image_);
+  clear_image(p_msg_box_image_);
 
 }
 
@@ -77,6 +79,9 @@ SdlInGameRenderer::init() {
   res = load_image("redo.png", &p_redo_image_);
   res = load_image("disabled_undo.png", &p_disabled_undo_image_);
   res = load_image("disabled_redo.png", &p_disabled_redo_image_);
+  res = load_image("png/msg_box.png", &p_msg_box_image_);
+
+  res = load_font("FreeSans.ttf", 18, &p_msg_font_);
 
   return res;
 }
@@ -320,6 +325,11 @@ SdlInGameRenderer::is_on_redo_button(int i_x, int i_y) {
   return InGameRendererGeometry::is_on_redo_button(i_x,i_y);
 }
 
+bool
+SdlInGameRenderer::is_on_msg_button(int i_x, int i_y) {
+  return InGameRendererGeometry::is_on_msg_button(i_x,i_y);
+}
+
 void
 SdlInGameRenderer::render_overlay(int i_i, int i_j, int i_overlay_type) {
   assert(overlay_images_.find(i_overlay_type) != overlay_images_.end());
@@ -329,7 +339,21 @@ SdlInGameRenderer::render_overlay(int i_i, int i_j, int i_overlay_type) {
 
 void
 SdlInGameRenderer::render_message(std::string i_msg) {
-  std::cout << "Renderering :" << i_msg << std::endl;
+
+  SDL_Rect dst;
+  dst.x = MSG_BOX_X;
+  dst.y = MSG_BOX_Y;
+  // Render the image
+  SDL_BlitSurface(p_msg_box_image_, NULL, get_screen(), &dst);
+  
+  // Render the button's text
+  // TODO : Compute the proper position of the message based on 
+  // its length
+  render_text(_("OK"), MSG_BOX_BUTTON_X + 50, MSG_BOX_BUTTON_Y + 5, p_msg_font_);
+
+  // Render the text
+  // TODO : Compute the proper position of the message ! 
+  render_text(i_msg, MSG_BOX_X + 20, MSG_BOX_Y + 20 , p_msg_font_);
 }
 
 

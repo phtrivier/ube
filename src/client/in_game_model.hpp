@@ -5,6 +5,8 @@
 #define _IN_GAME_MODEL_HPP_
 
 #include "engine/puzzle.hpp"
+#include "mvc/observable.hpp"
+
 #include <assert.h>
 #include <string>
 
@@ -15,12 +17,15 @@ class Move;
 /**
  * Model for the bulk of the game
  */
-class InGameModel { 
+class InGameModel : 
+  public Observable
+{ 
 
 public:
 
   //FIXME(pht) : should'nt the puzzle be a dependency, too ?
   InGameModel(PathFinderInterface & dep_path_finder):
+    Observable(),
     dep_path_finder_(dep_path_finder),
     goal_i_(-1),
     goal_j_(-1),
@@ -128,9 +133,13 @@ public:
   bool has_goal_changed();
 
   std::string get_message() {
-    return puzzle_.get_message();
+    return message_;
   }
 
+  void set_message(std::string i_msg) {
+    message_ = i_msg;
+  }
+  
 private:
 
   PathFinderInterface & dep_path_finder_;

@@ -8,7 +8,7 @@
 #include "mvc/clock_interface.hpp"
 
 #include "game_mode.hpp"
-#include "game_event.hpp"
+#include "engine/game_event.hpp"
 
 #include <cstdio>
 

@@ -4,7 +4,7 @@
 #include "sdl_controller.hpp"
 
 #include "common/logging.hpp"
-#include "game_event.hpp"
+#include "engine/game_event.hpp"
 #include "in_game_model.hpp"
 
 #include <cstdio>

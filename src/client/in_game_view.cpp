@@ -6,10 +6,10 @@
 #include "common/logging.hpp"
 #include "engine/cell.hpp"
 #include "engine/puzzle.hpp"
+#include "engine/game_event.hpp"
 
 #include "mvc/controller_interface.hpp"
 
-#include "game_event.hpp"
 #include "in_game_model.hpp"
 #include "in_game_renderer_interface.hpp"
 
@@ -18,19 +18,30 @@
 void
 InGameView::render_game() 
 {
+
+  has_message_ = !dep_model_.get_message().empty();
+
   // Take the latest value of the cursor position, 
   // and update state values of the model.
-  update_goal(dep_model_);
-  update_hovered_move(dep_model_);
+  if (!has_message_) {
+    update_goal(dep_model_);
+    update_hovered_move(dep_model_);
+  }
 
   dep_renderer_.clear();
   dep_renderer_.render_ui(command_stack_.canUndo(), command_stack_.canRedo());
   render_puzzle(dep_model_.get_puzzle());
-  render_path(dep_model_);
-  render_selected_cell(dep_model_);
+
+  if (!has_message_) {
+    render_path(dep_model_);
+    render_selected_cell(dep_model_);
+  }
+
   render_player(dep_model_.get_puzzle());
   render_overlays(dep_model_.get_puzzle());
   dep_renderer_.render_moves(dep_model_);
+
+  LOG_D("in_game_view") << "Dep model's message : [" << dep_model_.get_message() << "]" << std::endl;
 
   if (has_message_) {
     dep_renderer_.render_message(dep_model_.get_message());
@@ -48,12 +59,6 @@ InGameView::handle_event(int iEventCode)
     command_stack_.undoLast();
   } else if (iEventCode == GameEvent::REDO) {
     command_stack_.redoLast();
-  } else if (iEventCode == GameEvent::NEXT_MOVE) {
-    dep_model_.set_next_available_move_as_current();
-  } else if (iEventCode == GameEvent::SHOW_MESSAGE) {
-    has_message_ = true; 
-  } else if (iEventCode == GameEvent::HIDE_MESSAGE) {
-    has_message_ = false;
   }
 }
 
@@ -76,7 +81,10 @@ InGameView::handle_mouse_click()
 void
 InGameView::check_message_box_click(int mouse_x, int mouse_y)
 {
-  // TODO
+  if (dep_renderer_.is_on_msg_button(mouse_x, mouse_y)) {
+    dep_model_.set_message("");
+    has_message_ = false;
+  }
 }
 
 void
