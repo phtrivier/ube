@@ -37,6 +37,7 @@
 #define MSG_BOX_BUTTON_Y (MSG_BOX_Y + 130)
 #define MSG_BOX_BUTTON_H 40
 #define MSG_BOX_BUTTON_W 80
+#define MSG_BOX_TEXT_W 250
 
 /**
  * Geometry of the screen.

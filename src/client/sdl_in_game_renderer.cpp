@@ -353,7 +353,7 @@ SdlInGameRenderer::render_message(std::string i_msg) {
 
   // Render the text
   // TODO : Compute the proper position of the message ! 
-  render_text(i_msg, MSG_BOX_X + 20, MSG_BOX_Y + 20 , p_msg_font_);
+  render_text(i_msg, MSG_BOX_X + 20, MSG_BOX_Y + 20 , p_msg_font_, MSG_BOX_TEXT_W);
 }
 
 

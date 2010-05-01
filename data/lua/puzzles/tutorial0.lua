@@ -13,5 +13,5 @@ set_puzzle_rows({"######################",
 
 set_puzzle_moves({Move.SINGLE})
 
-after_start_message({en = "Welcome to UBE !", 
-		     fr = "Bienvenue dans UBE !" })
+after_start_message({en = "Welcome to UBE ! Can you reach the exit ?", 
+		     fr = "Bienvenue dans UBE ! Pouvez vous atteindre la sortie ?"})
