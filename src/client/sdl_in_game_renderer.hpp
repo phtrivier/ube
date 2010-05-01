@@ -86,7 +86,7 @@ public:
 
   void render_overlay(int i_i, int i_j, int i_overlay_type); 
 
-  void render_message(std::string i_msg);
+  void render_message(std::string i_msg, bool i_is_hovering);
     
   bool is_on_msg_button(int i_x, int i_y);
 

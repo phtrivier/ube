@@ -26,7 +26,7 @@ InGameView::render_game()
   if (!has_message_) {
     update_goal(dep_model_);
     update_hovered_move(dep_model_);
-  }
+  } 
 
   dep_renderer_.clear();
   dep_renderer_.render_ui(command_stack_.canUndo(), command_stack_.canRedo());
@@ -44,7 +44,10 @@ InGameView::render_game()
   LOG_D("in_game_view") << "Dep model's message : [" << dep_model_.get_message() << "]" << std::endl;
 
   if (has_message_) {
-    dep_renderer_.render_message(dep_model_.get_message());
+      int mouse_x = dep_controller_.mouse_x();
+      int mouse_y = dep_controller_.mouse_y();
+      bool is_hovering = dep_renderer_.is_on_msg_button(mouse_x, mouse_y);
+      dep_renderer_.render_message(dep_model_.get_message(), is_hovering);
   }
 
   dep_renderer_.flush();

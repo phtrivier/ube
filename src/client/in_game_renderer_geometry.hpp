@@ -33,7 +33,7 @@
 
 #define MSG_BOX_X 210
 #define MSG_BOX_Y 150
-#define MSG_BOX_BUTTON_X (MSG_BOX_X + 250)
+#define MSG_BOX_BUTTON_X (MSG_BOX_X + 280)
 #define MSG_BOX_BUTTON_Y (MSG_BOX_Y + 130)
 #define MSG_BOX_BUTTON_H 40
 #define MSG_BOX_BUTTON_W 80

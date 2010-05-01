@@ -338,18 +338,28 @@ SdlInGameRenderer::render_overlay(int i_i, int i_j, int i_overlay_type) {
 }
 
 void
-SdlInGameRenderer::render_message(std::string i_msg) {
+SdlInGameRenderer::render_message(std::string i_msg, bool i_is_hovering) {
 
   SDL_Rect dst;
   dst.x = MSG_BOX_X;
   dst.y = MSG_BOX_Y;
   // Render the image
   SDL_BlitSurface(p_msg_box_image_, NULL, get_screen(), &dst);
+
+  if (i_is_hovering) {
+    // FIXME(pht) : don't recompute this every time
+    SDL_Rect rect;
+    rect.x = MSG_BOX_BUTTON_X + 1;
+    rect.y = MSG_BOX_BUTTON_Y + 2;
+    rect.w = MSG_BOX_BUTTON_W - 13;
+    rect.h = MSG_BOX_BUTTON_H - 15;
+    SDL_FillRect(get_screen(), &rect, gray_);
+  }
   
   // Render the button's text
   // TODO : Compute the proper position of the message based on 
   // its length
-  render_text(_("OK"), MSG_BOX_BUTTON_X + 50, MSG_BOX_BUTTON_Y + 5, p_msg_font_);
+  render_text(_("OK"), MSG_BOX_BUTTON_X + 20, MSG_BOX_BUTTON_Y + 5, p_msg_font_);
 
   // Render the text
   // TODO : Compute the proper position of the message ! 
