@@ -21,7 +21,8 @@ lua_DATA=lua/puzzle_lib.lua \
 	lua/move.lua \
 	lua/archive.lua \
 	lua/script.lua \
-	lua/pick_move.lua
+	lua/pick_move.lua \
+	lua/i18n.lua
 
 if MINGW
 AM_CPPFLAGS=-DSRCDIR=\"${srcdir}\" \
