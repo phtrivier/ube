@@ -58,3 +58,10 @@ InGameRendererGeometry::is_on_redo_button(int i_x, int i_y)
   return (i_x > REDO_X && i_x < REDO_X + REDO_W) &&
     (i_y > REDO_Y && i_y < REDO_Y + REDO_H);
 }
+
+bool
+InGameRendererGeometry::is_on_msg_button(int i_x, int i_y) {
+  return is_in_box(i_x, i_y, MSG_BOX_BUTTON_X, MSG_BOX_BUTTON_Y, 
+		   MSG_BOX_BUTTON_W, MSG_BOX_BUTTON_H);
+
+}

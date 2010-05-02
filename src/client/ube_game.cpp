@@ -14,7 +14,7 @@
 #include "sdl_puzzle_selection_renderer.hpp"
 #include "puzzle_selection_mode_factory.hpp"
 #include "puzzle_selection_mode.hpp"
-#include "game_event.hpp"
+#include "engine/game_event.hpp"
 
 #include "common/logging.hpp"
 
@@ -143,8 +143,22 @@ UbeGame::prepare_in_game_mode(std::string & i_puzzle_file_name)
       if (res != 0) {
 	sdl_preparation_error_message("Error creating in_game_mode : %1%\n");
       } else {
+	// Static cast would become useless if I used templates, at least on the type of returned
+	// InGameMode...
 	p_in_game_mode_ = static_cast<InGameMode *>(p_in_game_mode_factory_->get_mode().get());
 	register_game_mode("in-game", p_in_game_mode_);
+
+	// What I want to be able to write : 
+	/*
+	p_in_game_dislog_mode_factory_ = new DialogModeFactory(*p_in_game_mode_):
+	res = p_in_game_dialog_mode_factory_->create_mode();
+	if (res != 0) {
+	  // error message
+	} else {
+	  p_in_game_dialog_mode = p_in_game_dialog_mode_factory_->get_mode().get());
+	register_game_mode("in-game-dialog", p_in_game_mode_dialog);
+	}
+	*/
       }
     }
   } else {

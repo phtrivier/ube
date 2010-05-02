@@ -5,6 +5,8 @@
 
 #include "client/in_game_model.hpp"
 
+#include <string>
+
 void
 MoveCommand::execute()
 {
@@ -17,6 +19,12 @@ MoveCommand::execute()
 
   if (dep_model_.get_puzzle().has_script(target_i_, target_j_)) {
     dep_model_.get_puzzle().do_script_at(target_i_, target_j_);
+
+    if (dep_model_.get_puzzle().has_script_message()) {
+      dep_model_.set_message(dep_model_.get_puzzle().get_script_message());
+      dep_model_.get_puzzle().set_script_message(std::string(""));
+    }
+
   }
 
   // Change the current move to be the next available one

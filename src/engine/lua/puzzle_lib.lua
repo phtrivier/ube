@@ -4,6 +4,7 @@ package.path = ube_engine_lua_path or package.path
 require 'move'
 require 'script'
 require 'pick_move'
+require 'i18n'
 
 g_numbered_cells = {}
 
@@ -63,5 +64,17 @@ end
 
 function add_overlay(i,j,type)
    cpp_puzzle_set_overlay(cpp_puzzle, i, j , type);
+end
+
+function after_start_message(message_table)
+   cpp_puzzle_set_start_message(cpp_puzzle, i18n(message_table))
+end
+
+function before_end_message(message_table)
+   cpp_puzzle_set_end_message(cpp_puzzle, i18n(message_table))
+end
+
+function script_message(message_table)
+   cpp_puzzle_set_script_message(cpp_puzzle, i18n(message_table))
 end
 

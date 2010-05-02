@@ -30,7 +30,8 @@ public:
     dep_renderer_(dep_renderer),
     dep_model_(dep_model),
     dep_controller_(dep_controller),
-    command_stack_(command_factory_)
+    command_stack_(command_factory_),
+    has_message_(false)
   {
   }
 
@@ -67,7 +68,17 @@ private:
 
   InGameCommandFactory command_factory_;
   InGameCommandStack command_stack_;
-  
+
+  bool has_message_;
+
+  void handle_mouse_click();
+  void check_cell_click(int mouse_x, int mouse_y);
+  void check_move_click(int mouse_x, int mouse_y);
+  void check_undo_click(int mouse_x, int mouse_y);
+  void check_redo_click(int mouse_x, int mouse_y);
+  void check_message_box_click(int mouse_x, int mouse_y);
+
+
 };
 
 #endif // _IN_GAME_VIEW_HPP_

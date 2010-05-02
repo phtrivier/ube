@@ -3,6 +3,8 @@
  */
 #include "puzzle_selection_view.hpp"
 
+#include "engine/game_event.hpp"
+
 #include "common/logging.hpp"
 
 #include "mvc/controller_interface.hpp"
@@ -10,7 +12,6 @@
 #include "puzzle_selection_model.hpp"
 #include "puzzle_selection_geometry.hpp"
 #include "puzzle_selection_renderer_interface.hpp"
-#include "game_event.hpp"
 
 #include <vector>
 #include <string>

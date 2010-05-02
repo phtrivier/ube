@@ -11,7 +11,9 @@
 /**
  * Base class for controllers.
  */
-class ControllerInterface : public Observable { 
+class ControllerInterface : 
+  public Observable 
+{ 
 
 public:
 

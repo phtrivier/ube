@@ -12,8 +12,6 @@
 
 #include <string>
 
-#include "SDL_ttf.h"
-
 // Note : bad case of "a renderer is a geometry" where I would
 // really like to say "a renderer has a geometry".
 // *sigh*.
@@ -56,10 +54,6 @@ private:
   SDL_Surface * p_bg_;
   
   TTF_Font * p_font_;
-
-  int load_font(const char * i_name, int i_ptsize, TTF_Font ** o_pp_font);
-
-  void render_text(std::string i_text, int i_x, int i_y);
 
 };
 

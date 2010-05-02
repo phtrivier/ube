@@ -144,5 +144,4 @@ namespace {
     ASSERT_EQ(1, p.get_overlay(0,0));
   }
 
-
 } // Namespace

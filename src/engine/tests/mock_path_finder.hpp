@@ -4,7 +4,7 @@
 class MockPathFinder : public PathFinderInterface {
 public:
   MOCK_METHOD6(find_path,
-	       int(Puzzle * o_p_puzzle, 
+	       int(Puzzle & o_puzzle, 
 		   int i_i0, int i_j0,
 		   int i_i1, int i_j1,
 		   int move_type));

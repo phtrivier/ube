@@ -2,8 +2,10 @@ noinst_LIBRARIES=libube-engine.a
 libube_engine_a_SOURCES=cell.hpp cell.cpp \
 	cell_factory.hpp cell_factory.cpp \
 	move.hpp move.cpp \
+	game_event.hpp \
 	puzzle.hpp puzzle.cpp \
 	puzzle_loader.hpp puzzle_loader.cpp \
+	lua_puzzle_functions.hpp \
 	lua_puzzle_loader.hpp lua_puzzle_loader.cpp \
 	lua_state_holder.hpp lua_state_holder.cpp \
 	path_finder_interface.hpp \
@@ -20,7 +22,8 @@ lua_DATA=lua/puzzle_lib.lua \
 	lua/move.lua \
 	lua/archive.lua \
 	lua/script.lua \
-	lua/pick_move.lua
+	lua/pick_move.lua \
+	lua/i18n.lua
 
 if MINGW
 AM_CPPFLAGS=-DSRCDIR=\"${srcdir}\" \
@@ -57,11 +60,13 @@ engine_tests_SOURCES= tests/engine_tests.cpp \
 
 if MINGW
 engine_tests_LDADD=libube-engine.a \
+	../mvc/libube-mvc.a \
 	../common/libube-common.a \
 	-L$(top_srcdir)/lib -lgtest -lgmock -llua -ldl
 else
 engine_tests_LDADD=libube-engine.a \
 	../common/libube-common.a \
+	../mvc/libube-mvc.a \
 	../lua/liblua.a \
 	-L$(top_srcdir)/lib -lgtest -lgmock -ldl
 endif

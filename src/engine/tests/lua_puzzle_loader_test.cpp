@@ -3,6 +3,9 @@
 #include "puzzle.hpp"
 #include "cell_factory.hpp"
 #include "lua_command.hpp"
+#include "game_event.hpp"
+
+#include "mvc/tests/mock_observer.hpp"
 
 #include "common/tests/mock_resource_resolver.hpp"
 #include "common/stat_file_checker.hpp"
@@ -53,7 +56,7 @@ namespace {
 	.WillOnce(Return(str(format("%1%/tests/lua/%2%") % SRCDIR % i_file_name)));
     
       p_loader_ = new LuaPuzzleLoader(&f_,resolver_);
-      p_loader_->load_puzzle_file(i_file_name.c_str(), o_p_puzzle);
+      p_loader_->load_puzzle_file(i_file_name.c_str(), *o_p_puzzle);
     }
 
   };
@@ -162,5 +165,31 @@ namespace {
     ASSERT_FALSE(p.has_overlay(2,1));
   }
 
+  TEST_F(LuaPuzzleLoaderTest, DisplayMessagesWhenPlayersEnterPuzzle) {
+    Puzzle p;
+    load_puzzle_from_file("puzzle_loader_test/puzzle_with_messages.lua", &p);
+    ASSERT_TRUE(p.has_start_message());
+    ASSERT_EQ("Hello, world !", p.get_start_message());
+    ASSERT_TRUE(p.has_end_message());
+    ASSERT_EQ("Thanks for playing !", p.get_end_message());
+
+    ASSERT_TRUE(p.has_overlay(2,1));
+    p.do_script_at(2,1);
+    ASSERT_TRUE(p.has_script_message());
+    ASSERT_EQ("You just picked a move. Good for you !", p.get_script_message());
+
+    // Simulate the clearing of the message
+    p.set_script_message(std::string(""));
+
+    // But move scripts should only be done once
+    p.do_script_at(2,1);
+    ASSERT_FALSE(p.has_script_message());
+
+    load_puzzle_from_file("puzzle_loader_test/puzzle_with_numbered_cells.lua", &p);
+    ASSERT_FALSE(p.has_start_message());
+    ASSERT_FALSE(p.has_end_message());
+    ASSERT_FALSE(p.has_script_message());
+
+  }
 
 } // Namespace

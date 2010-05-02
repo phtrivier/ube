@@ -4,10 +4,13 @@
 #ifndef _SDL_RENDERER_HPP_
 #define _SDL_RENDERER_HPP_
 
+#include "common/logging.hpp"
+
+#include <vector>
 #include <string>
 
 #include "SDL.h"
-
+#include "SDL_ttf.h"
 
 class ResourceResolverInterface;
 
@@ -93,11 +96,22 @@ protected :
    */
   Uint32 rgb(Uint8 r, Uint8 g, Uint8 b);
 
+  /**
+   * Load an SDL_TTF font
+   */
+  int load_font(const char * i_name, int i_ptsize, TTF_Font ** o_pp_font);
+
+  /**
+   * Draw a text in white using a given font
+   */
+  void render_text(std::string i_text, int i_x, int i_y, TTF_Font * i_p_font, int i_max_w = -1);
 
 private:
 
   ResourceResolverInterface & dep_resolver_;
   SDL_Surface * dep_p_screen_;
+
+  std::vector<std::string> split_text_to_render(std::string i_text, TTF_Font * i_p_font, int i_max_w = -1);
 
 };
 

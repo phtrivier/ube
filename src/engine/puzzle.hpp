@@ -5,6 +5,10 @@
 #define _PUZZLE_HPP_
 
 #include "move.hpp"
+
+#include "mvc/observable.hpp"
+
+#include <string>
 #include <vector>
 
 class Cell;
@@ -13,18 +17,24 @@ class CommandInterface;
 /**
  * The board of the game.
  */
-class Puzzle { 
+class Puzzle : 
+  public Observable
+{ 
 
 public:
 
   Puzzle() : 
+    Observable(),
     cells_(NULL),
     scripts_(NULL),
     overlays_(NULL),
     w_(-1), 
     h_(-1), 
     player_i_(-1),
-    player_j_(-1)
+    player_j_(-1),
+    start_message_(""),
+    end_message_(""),
+    script_message_("")
   {
   }
 
@@ -150,6 +160,43 @@ public:
   
   void set_overlay(int i_i, int i_j, int i_type);
 
+  std::string get_start_message() {
+    return start_message_;
+  }
+
+  void set_start_message(std::string & i_message) {
+    start_message_ = i_message;
+  }
+
+  bool has_start_message() {
+    return !start_message_.empty();
+  }
+
+  std::string get_end_message() {
+    return end_message_;
+  }
+
+  void set_end_message(std::string & i_message) {
+    end_message_ = i_message;
+  }
+
+  bool has_end_message() {
+    return !end_message_.empty();
+  }
+
+  std::string get_script_message() {
+    return script_message_;
+  }
+
+  void set_script_message(std::string i_message) {
+    script_message_ = i_message;
+  }
+
+  bool has_script_message() {
+    return !script_message_.empty();
+  }
+
+
 private:
 
   // Cells
@@ -171,6 +218,10 @@ private:
   // Position of the player
   int player_i_;
   int player_j_;
+
+  std::string start_message_;
+  std::string end_message_;
+  std::string script_message_;
 
   // Moves
   std::vector<Move> moves_;

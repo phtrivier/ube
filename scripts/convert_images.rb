@@ -1,7 +1,8 @@
 #!/usr/bin/ruby
 
 if (ARGV.size < 1)
-  puts "Usage : ./scripts/convert_images.rb data/images move"
+  puts "Usage : ./scripts/convert_images.rb data/images"
+  exit(1)
 end
 
 def convert_file(filename)
@@ -24,4 +25,4 @@ end
 
 convert_known_xcf("player.xcf")
 convert_known_xcf("banned_cell.xcf")
-
+convert_known_xcf("msg_box.xcf")

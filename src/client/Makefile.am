@@ -1,7 +1,6 @@
 noinst_LIBRARIES=libube-client.a
 libube_client_a_SOURCES=gettext.h \
 	game_mode_interface.hpp game_mode.hpp game_mode.cpp \
-	game_event.hpp \
 	game_loop.hpp game_loop.cpp \
 	sdl_clock.hpp sdl_clock.cpp \
 	sdl_controller.hpp sdl_controller.cpp \
@@ -26,7 +25,8 @@ libube_client_a_SOURCES=gettext.h \
 	puzzle_selection_view.hpp puzzle_selection_view.cpp \
 	puzzle_selection_mode.hpp puzzle_selection_mode.cpp \
 	puzzle_selection_mode_factory.hpp puzzle_selection_mode_factory.cpp \
-	sdl_puzzle_selection_renderer.hpp  sdl_puzzle_selection_renderer.cpp
+	sdl_puzzle_selection_renderer.hpp  sdl_puzzle_selection_renderer.cpp \
+	in_game_model_loader.hpp in_game_model_loader.cpp
 
 gamesdir=${prefix}/games
 games_PROGRAMS = ube
@@ -39,6 +39,7 @@ AM_CPPFLAGS= -g -DLOCALEDIR=\"${datadir}/locale\" \
 	-DDATADIR=\"${datadir}/@PACKAGE@\" \
 	-DLUADIR=\"${luadir}\" \
 	-DPREFIX=\"${prefix}\" \
+	-DSRCDIR=\"${srcdir}\" \
 	-Wall -Werror -enable-assert\
 	-I$(srcdir)/../../include \
 	-I$(srcdir)/../ \
@@ -57,8 +58,8 @@ PROJECT_LIBS=libube-client.a \
 	../common/libube-common.a
 else
 PROJECT_LIBS=libube-client.a \
-	../mvc/libube-mvc.a \
 	../engine/libube-engine.a \
+	../mvc/libube-mvc.a \
 	../common/libube-common.a \
 	../lua/liblua.a
 endif
@@ -83,7 +84,8 @@ client_tests_SOURCES=tests/client_tests.cpp \
 	tests/in_game_command_stack_test.cpp \
 	tests/puzzle_selection_model_test.cpp \
 	tests/puzzle_selection_view_test.cpp \
-	tests/in_game_model_test.cpp 
+	tests/in_game_model_test.cpp \
+	tests/in_game_model_loader_test.cpp
 
 client_tests_LDADD=$(PROJECT_LIBS) \
 	-L$(top_srcdir)/lib -lgtest -lgmock \
@@ -91,5 +93,8 @@ client_tests_LDADD=$(PROJECT_LIBS) \
 	$(SDL_image_LIBS) $(SDL_TTF_LIBS) $(SDL_mixer_LIBS) \
 	$(SDL_IMAGE_LIBS) $(SDL_MIXER_LIBS) \
 	$(LIBINTL) $(LUA_LIB)
+
+EXTRA_DIST=tests/lua/model_loader_test/puzzle1.lua \
+	tests/lua/model_loader_test/puzzle_with_messages.lua
 
 TESTS = client-tests

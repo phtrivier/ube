@@ -56,7 +56,7 @@ namespace {
 
     LuaPathFinder finder(resolver);
 
-    ASSERT_EQ(1, finder.find_path(&p, 0, 0, 0, 1, MoveType::SINGLE));
+    ASSERT_EQ(1, finder.find_path(p, 0, 0, 0, 1, MoveType::SINGLE));
 
     ASSERT_TRUE(p.get_cell_at(0,0)->is_in_path());
     ASSERT_TRUE(p.get_cell_at(0,1)->is_in_path());
@@ -87,8 +87,8 @@ namespace {
 
     LuaPathFinder finder(resolver);
 
-    ASSERT_EQ(0, finder.find_path(&p, 5, 1, (w-1), (h-1), MoveType::DOUBLE));
-    ASSERT_EQ(1, finder.find_path(&p, 5, 1, 5, 7, MoveType::DOUBLE));
+    ASSERT_EQ(0, finder.find_path(p, 5, 1, (w-1), (h-1), MoveType::DOUBLE));
+    ASSERT_EQ(1, finder.find_path(p, 5, 1, 5, 7, MoveType::DOUBLE));
 
   }
 
@@ -120,7 +120,7 @@ namespace {
 
     LuaPathFinder finder(resolver);
 
-    ASSERT_EQ(1, finder.find_path(&p, 0, 2, 1, 0, MoveType::SINGLE));
+    ASSERT_EQ(1, finder.find_path(p, 0, 2, 1, 0, MoveType::SINGLE));
     
   }
 

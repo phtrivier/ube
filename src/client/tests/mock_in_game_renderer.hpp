@@ -1,6 +1,8 @@
 #include "in_game_renderer_interface.hpp"
 #include <gmock/gmock.h>
 
+#include <string>
+
 class InGameModel;
 
 class MockInGameRenderer : public InGameRendererInterface {
@@ -43,5 +45,11 @@ class MockInGameRenderer : public InGameRendererInterface {
 
   MOCK_METHOD3(render_overlay,
 	       void (int i_i, int i_j, int i_overlay_type));
+
+  MOCK_METHOD2(render_message,
+	       void (std::string i_msg, bool i_is_hovering));
+
+  MOCK_METHOD2(is_on_msg_button, 
+	       bool(int i_x, int i_y));
 
 };

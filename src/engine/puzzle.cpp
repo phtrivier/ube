@@ -138,6 +138,9 @@ Puzzle::clear()
   moves_.clear();
   w_ = h_ = -1;
   player_i_ = player_j_ = -1;
+  start_message_ = "";
+  end_message_ = "";
+  script_message_ = "";
 }
 
 void

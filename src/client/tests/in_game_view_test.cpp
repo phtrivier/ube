@@ -67,19 +67,15 @@ namespace {
 
   TEST_F(InGameViewTest, UsesPuzzleFromModelToRenderGame) {
 
-    Cell c(0,0,Cell::EMPTY);
-        
-    Puzzle p;
-    p.set_dimensions(1,1);
-    p.add_cell(&c);
-
     MockInGameRenderer renderer;
-
     MockController controller;
-    
     MockPathFinder pf;
     InGameModel model(pf);
-    model.set_puzzle(p);
+
+    Cell c(0,0,Cell::EMPTY);
+
+    model.get_puzzle().set_dimensions(1,1);
+    model.get_puzzle().add_cell(&c);
     
     InGameView v(renderer, model, controller);
 
@@ -95,10 +91,6 @@ namespace {
   }
 
   TEST_F(InGameViewTest, DoesNotMarkEmptyCellAsSelected) {
-    Cell c(0,0,Cell::EMPTY);
-    Puzzle p;
-    p.set_dimensions(1,1);
-    p.add_cell(&c);
 
     MockInGameRenderer renderer;
 
@@ -106,7 +98,11 @@ namespace {
     
     MockPathFinder pf;
     InGameModel model(pf);
-    model.set_puzzle(p);
+
+    Cell c(0,0,Cell::EMPTY);
+
+    model.get_puzzle().set_dimensions(1,1);
+    model.get_puzzle().add_cell(&c);
     
     InGameView v(renderer, model, controller);
 
@@ -130,18 +126,17 @@ namespace {
     Cell c2(0,1,Cell::WALKABLE);
     Cell c3(0,2,Cell::OUT);
         
-    Puzzle p;
-    p.set_dimensions(3,1);
-    p.add_cell(&c1);
-    p.add_cell(&c2);
-    p.add_cell(&c3);
 
     MockInGameRenderer renderer;
     MockController controller;
     MockPathFinder pf;
     InGameModel model(pf);
 
-    model.set_puzzle(p);
+    Puzzle & p = model.get_puzzle();
+    p.set_dimensions(3,1);
+    p.add_cell(&c1);
+    p.add_cell(&c2);
+    p.add_cell(&c3);
     
     InGameView v(renderer, model, controller);
 
@@ -164,7 +159,13 @@ namespace {
     Cell c2(0,1,Cell::WALKABLE);
     Cell c3(0,2,Cell::OUT);
         
-    Puzzle p;
+
+    NiceMock<MockInGameRenderer> renderer;
+    MockController controller;
+    MockPathFinder pf;
+    InGameModel model(pf);
+
+    Puzzle & p = model.get_puzzle();
     p.set_dimensions(3,1);
     p.add_cell(&c1);
     p.add_cell(&c2);
@@ -173,11 +174,6 @@ namespace {
     p.add_move(MoveType::DOUBLE);
     p.add_move(MoveType::SINGLE);
 
-    NiceMock<MockInGameRenderer> renderer;
-    MockController controller;
-    MockPathFinder pf;
-    InGameModel model(pf);
-    model.set_puzzle(p);
 
     InGameView v(renderer, model, controller);
 
