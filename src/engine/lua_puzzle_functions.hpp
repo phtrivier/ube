@@ -96,3 +96,12 @@ int lua_puzzle_set_end_message(lua_State * i_p_lua_state) {
   p_puzzle->set_end_message(msg);
   return 0;
 }
+
+int lua_puzzle_set_script_message(lua_State * i_p_lua_state) {
+  Puzzle * p_puzzle = (Puzzle *) lua_touserdata(i_p_lua_state, 1);
+  assert(p_puzzle != NULL);
+  const char * s_msg = lua_tostring(i_p_lua_state, 2);
+  std::string msg(s_msg);
+  p_puzzle->set_script_message(msg);
+  return 0;
+}

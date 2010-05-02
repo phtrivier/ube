@@ -89,7 +89,6 @@ InGameView::check_message_box_click(int mouse_x, int mouse_y)
     has_message_ = false;
 
     if (dep_model_.get_puzzle().is_finished()) {
-      // TODO(pht) : factor this
       command_stack_.clear();
       dep_controller_.fire_event(GameEvent::PUZZLE_FINISHED);
     }

@@ -173,9 +173,23 @@ namespace {
     ASSERT_TRUE(p.has_end_message());
     ASSERT_EQ("Thanks for playing !", p.get_end_message());
 
+    ASSERT_TRUE(p.has_overlay(2,1));
+    p.do_script_at(2,1);
+    ASSERT_TRUE(p.has_script_message());
+    ASSERT_EQ("You just picked a move. Good for you !", p.get_script_message());
+
+    // Simulate the clearing of the message
+    p.set_script_message(std::string(""));
+
+    // But move scripts should only be done once
+    p.do_script_at(2,1);
+    ASSERT_FALSE(p.has_script_message());
+
     load_puzzle_from_file("puzzle_loader_test/puzzle_with_numbered_cells.lua", &p);
     ASSERT_FALSE(p.has_start_message());
     ASSERT_FALSE(p.has_end_message());
+    ASSERT_FALSE(p.has_script_message());
+
   }
 
 } // Namespace

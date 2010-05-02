@@ -54,8 +54,9 @@ LuaPuzzleLoader::register_lua_functions()
   lua_pushcfunction(get_lua_state(), lua_puzzle_set_start_message);
   lua_setglobal(get_lua_state(), "cpp_puzzle_set_start_message");
 
-  // TODO(pht) : for lua_puzzle_set_end_message()
   REGISTER_LUA_FN(lua_puzzle_set_end_message, "cpp_puzzle_set_end_message");
+
+  REGISTER_LUA_FN(lua_puzzle_set_script_message, "cpp_puzzle_set_script_message");
 
   load_lua_engine_file("puzzle_lib.lua");
 

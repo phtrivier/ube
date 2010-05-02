@@ -33,7 +33,8 @@ public:
     player_i_(-1),
     player_j_(-1),
     start_message_(""),
-    end_message_("")
+    end_message_(""),
+    script_message_("")
   {
   }
 
@@ -183,6 +184,19 @@ public:
     return !end_message_.empty();
   }
 
+  std::string get_script_message() {
+    return script_message_;
+  }
+
+  void set_script_message(std::string i_message) {
+    script_message_ = i_message;
+  }
+
+  bool has_script_message() {
+    return !script_message_.empty();
+  }
+
+
 private:
 
   // Cells
@@ -207,6 +221,7 @@ private:
 
   std::string start_message_;
   std::string end_message_;
+  std::string script_message_;
 
   // Moves
   std::vector<Move> moves_;
