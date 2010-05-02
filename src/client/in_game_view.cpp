@@ -87,6 +87,13 @@ InGameView::check_message_box_click(int mouse_x, int mouse_y)
   if (dep_renderer_.is_on_msg_button(mouse_x, mouse_y)) {
     dep_model_.set_message("");
     has_message_ = false;
+
+    if (dep_model_.get_puzzle().is_finished()) {
+      // TODO(pht) : factor this
+      command_stack_.clear();
+      dep_controller_.fire_event(GameEvent::PUZZLE_FINISHED);
+    }
+
   }
 }
 
@@ -102,8 +109,15 @@ InGameView::check_cell_click(int mouse_x, int mouse_y)
       command_stack_.doMove(dep_model_, dep_model_.current_move_index(), i, j);
 
       if (dep_model_.is_puzzle_finished()) {
-	command_stack_.clear();
-	dep_controller_.fire_event(GameEvent::PUZZLE_FINISHED);
+
+	if (dep_model_.get_puzzle().has_end_message()) {
+	  dep_model_.set_message(dep_model_.get_puzzle().get_end_message());
+	  has_message_ = true;
+	} else {
+	  // TODO(pht) : factor this
+	  command_stack_.clear();
+	  dep_controller_.fire_event(GameEvent::PUZZLE_FINISHED);
+	}
       }
 
     }

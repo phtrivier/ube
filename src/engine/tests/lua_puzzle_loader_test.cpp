@@ -170,6 +170,12 @@ namespace {
     load_puzzle_from_file("puzzle_loader_test/puzzle_with_messages.lua", &p);
     ASSERT_TRUE(p.has_start_message());
     ASSERT_EQ("Hello, world !", p.get_start_message());
+    ASSERT_TRUE(p.has_end_message());
+    ASSERT_EQ("Thanks for playing !", p.get_end_message());
+
+    load_puzzle_from_file("puzzle_loader_test/puzzle_with_numbered_cells.lua", &p);
+    ASSERT_FALSE(p.has_start_message());
+    ASSERT_FALSE(p.has_end_message());
   }
 
 } // Namespace

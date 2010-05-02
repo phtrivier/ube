@@ -69,3 +69,8 @@ end
 function after_start_message(message_table)
    cpp_puzzle_set_start_message(cpp_puzzle, i18n(message_table))
 end
+
+function before_end_message(message_table)
+   cpp_puzzle_set_end_message(cpp_puzzle, i18n(message_table))
+end
+

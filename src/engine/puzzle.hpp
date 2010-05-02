@@ -33,7 +33,7 @@ public:
     player_i_(-1),
     player_j_(-1),
     start_message_(""),
-    has_start_message_(false)
+    end_message_("")
   {
   }
 
@@ -165,11 +165,22 @@ public:
 
   void set_start_message(std::string & i_message) {
     start_message_ = i_message;
-    has_start_message_ = true;
   }
 
   bool has_start_message() {
-    return has_start_message_;
+    return !start_message_.empty();
+  }
+
+  std::string get_end_message() {
+    return end_message_;
+  }
+
+  void set_end_message(std::string & i_message) {
+    end_message_ = i_message;
+  }
+
+  bool has_end_message() {
+    return !end_message_.empty();
   }
 
 private:
@@ -195,7 +206,7 @@ private:
   int player_j_;
 
   std::string start_message_;
-  bool has_start_message_;
+  std::string end_message_;
 
   // Moves
   std::vector<Move> moves_;
