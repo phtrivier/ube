@@ -1,4 +1,4 @@
 * DONE ube-01
   Seems like cells on the border of a puzzle cannot be reached ... 
-* ube-02
+* DONE ube-02
   When you use your last available move, it stays active (and you can use it again)

@@ -1,0 +1,8 @@
+* Idea about the messages : 
+- [X] When a puzzle starts, a message is displayed
+- [X] The message should be displayed in the proper locale of the user (so the locale will have to be added to 
+  the load_puzzle_from_file function, big deal !!
+- [X] If the message is too long, it should be split in several lines (given a maximum width)
+- [X] 'Ok' button should be hoverred...
+- [X] Before the puzzle is finished a message is displayed.
+- [X] When the player picks up a move, a message is displayed

@@ -15,7 +15,7 @@
 void
 InGameModel::update_path()
 {
-  if (has_valid_move() || !has_valid_goal()) {
+  if (!has_valid_move() || !has_valid_goal()) {
     puzzle_.clear_path();
   } else {
     // If required, look for a path
@@ -55,7 +55,7 @@ InGameModel::move_player(int i_i, int i_j)
 bool
 InGameModel::has_valid_move()
 {
-  return current_move_index_ == -1;
+  return current_move_index_ != -1;
 }
 
 bool
@@ -117,6 +117,10 @@ InGameModel::set_next_available_move_as_current()
       found = true;
     }
   } while (!found && current_move_index_ != old_index);
+
+  if (!found) {
+    current_move_index_ = -1;
+  }
 
 }
 

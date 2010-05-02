@@ -48,4 +48,24 @@ namespace {
 
   }
 
+  TEST_F(InGameModelTest, ResetsCurrentMoveIfNoneIsAvailable) {
+
+    MockPathFinder pf;
+    InGameModel model(pf);
+    model.get_puzzle().add_move(MoveType::DOUBLE);
+    model.get_puzzle().add_move(MoveType::SINGLE);
+    
+    model.set_first_available_move_as_current();
+    ASSERT_EQ(0, model.current_move_index());
+    model.get_puzzle().use_move(model.current_move_index());
+    model.set_next_available_move_as_current();
+    ASSERT_EQ(1, model.current_move_index());
+    model.get_puzzle().use_move(model.current_move_index());
+    model.set_next_available_move_as_current();
+    ASSERT_EQ(-1, model.current_move_index());
+    ASSERT_FALSE(model.has_valid_move());
+
+  }
+
+
 } // Namespace
