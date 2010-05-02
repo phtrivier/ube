@@ -80,6 +80,7 @@ SdlRenderer::split_text_to_render(std::string i_text, TTF_Font * i_p_font, int i
       token_index++;
       TTF_SizeUTF8(i_p_font, line.c_str(), &w, &h);
       if (w > i_max_w || token_index == token_count) {
+	boost::replace_all(line, "_", " ");
 	res.push_back(line);
 	line = "";
       } 

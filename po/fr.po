@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ube 0.3.0\n"
 "Report-Msgid-Bugs-To: phtrivier@yahoo.fr\n"
-"POT-Creation-Date: 2010-04-23 23:25+0200\n"
+"POT-Creation-Date: 2010-05-02 15:55+0200\n"
 "PO-Revision-Date: 2010-04-23 23:26+0200\n"
 "Last-Translator: Pierre-Henri Trivier <phtrivier@yahoo.fr>\n"
 "Language-Team: French\n"
@@ -49,15 +49,15 @@ msgstr "Ca a l'air facile ? Regardez bien..."
 msgid "Still too simple ? Let's see..."
 msgstr "Encore trop simple ? Voyons voir..."
 
-#: src/client/sdl_puzzle_selection_renderer.cpp:56
+#: src/client/sdl_puzzle_selection_renderer.cpp:45
 msgid "Please choose a level"
 msgstr "Choisissez un niveau"
 
-#: src/client/sdl_puzzle_selection_renderer.cpp:57
+#: src/client/sdl_puzzle_selection_renderer.cpp:46
 msgid "(Oh, and please, don't shoot the coder, he's doing his best.)"
 msgstr "(Et ayez pitié du programmeur, il fait de son mieux)"
 
-#: src/client/sdl_puzzle_selection_renderer.cpp:99
+#: src/client/sdl_puzzle_selection_renderer.cpp:64
 msgid "Level %1% : %2%"
 msgstr "Niveau %1% : %2%"
 
