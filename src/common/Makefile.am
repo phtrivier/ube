@@ -18,12 +18,16 @@ AM_CPPFLAGS=-DSRCDIR=\"${srcdir}\" \
 	-I$(srcdir)/../../include \
 	$(BOOST_CPPFLAGS) \
 	$(LUA_INCLUDE)
+	-I$(top_builddir)/lib \
+	-I$(top_srcdir)/lib
 else
 AM_CPPFLAGS=-DSRCDIR=\"${srcdir}\" \
 	-DLUADIR=\"${luadir}\" \
 	-Wall -Werror \
 	-I$(srcdir)/../../include \
-	$(BOOST_CPPFLAGS)
+	$(BOOST_CPPFLAGS) \
+	-I$(top_builddir)/lib \
+	-I$(top_srcdir)/lib
 endif
 
 # There is one program that aggreatates all tests cases

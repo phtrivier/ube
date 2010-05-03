@@ -44,7 +44,9 @@ AM_CPPFLAGS= -g -DLOCALEDIR=\"${datadir}/locale\" \
 	-I$(srcdir)/../../include \
 	-I$(srcdir)/../ \
 	$(SDL_CFLAGS) \
-	$(LUA_INCLUDE)
+	$(LUA_INCLUDE) \
+	-I$(top_builddir)/lib \
+	-I$(top_srcdir)/lib
 
 SDL_TTF_LIBS = -lSDL_ttf -lfreetype
 SDL_IMAGE_LIBS = -lSDL_image -lpng -ltiff -ljpeg -lz
@@ -55,13 +57,15 @@ if MINGW
 PROJECT_LIBS=libube-client.a \
 	../mvc/libube-mvc.a \
 	../engine/libube-engine.a \
-	../common/libube-common.a
+	../common/libube-common.a \
+	../../lib/libgnu.a
 else
 PROJECT_LIBS=libube-client.a \
 	../engine/libube-engine.a \
 	../mvc/libube-mvc.a \
 	../common/libube-common.a \
-	../lua/liblua.a
+	../lua/liblua.a \
+	../../lib/libgnu.a
 endif
 
 ube_LDADD=$(PROJECT_LIBS) \

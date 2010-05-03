@@ -13,7 +13,6 @@ libube_engine_a_SOURCES=cell.hpp cell.cpp \
 	script_runner_interface.hpp \
 	lua_command.hpp lua_command.cpp
 
-# TODO : Find a way to make sure this file is available ...
 luadir=${datadir}/@PACKAGE@/lua/engine
 lua_DATA=lua/puzzle_lib.lua \
 	lua/path_finder_lib.lua \
@@ -23,7 +22,8 @@ lua_DATA=lua/puzzle_lib.lua \
 	lua/archive.lua \
 	lua/script.lua \
 	lua/pick_move.lua \
-	lua/i18n.lua
+	lua/i18n.lua \
+	lua/pdebug.lua
 
 if MINGW
 AM_CPPFLAGS=-DSRCDIR=\"${srcdir}\" \
@@ -32,7 +32,9 @@ AM_CPPFLAGS=-DSRCDIR=\"${srcdir}\" \
 	-I$(srcdir)/../../include \
 	-I$(srcdir)/../ \
 	$(LUA_INCLUDE) \
-	$(BOOST_CPPFLAGS)
+	$(BOOST_CPPFLAGS) \
+	-I$(top_builddir)/lib \
+	-I$(top_srcdir)/lib
 else
 AM_CPPFLAGS=-DSRCDIR=\"${srcdir}\" \
 	-DLUADIR=\"${luadir}\" \
@@ -40,7 +42,9 @@ AM_CPPFLAGS=-DSRCDIR=\"${srcdir}\" \
 	-I$(srcdir)/../../include \
 	-I$(srcdir)/../ \
 	-I$(srcdir)/../lua \
-	$(BOOST_CPPFLAGS)
+	$(BOOST_CPPFLAGS) \
+	-I$(top_builddir)/lib \
+	-I$(top_srcdir)/lib
 endif
 
 # There is one program that aggreatates all tests cases
@@ -56,18 +60,18 @@ engine_tests_SOURCES= tests/engine_tests.cpp \
 	tests/mock_script_runner.hpp \
 	tests/lua_command_test.cpp
 
-# 	../mvc/libube-mvc.a
-
 if MINGW
 engine_tests_LDADD=libube-engine.a \
 	../mvc/libube-mvc.a \
 	../common/libube-common.a \
+	../../lib/libgnu.a \
 	-L$(top_srcdir)/lib -lgtest -lgmock -llua -ldl
 else
 engine_tests_LDADD=libube-engine.a \
 	../common/libube-common.a \
 	../mvc/libube-mvc.a \
 	../lua/liblua.a \
+	../../lib/libgnu.a \
 	-L$(top_srcdir)/lib -lgtest -lgmock -ldl
 endif
 

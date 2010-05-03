@@ -58,6 +58,8 @@ LuaPuzzleLoader::register_lua_functions()
 
   REGISTER_LUA_FN(lua_puzzle_set_script_message, "cpp_puzzle_set_script_message");
 
+  REGISTER_LUA_FN(lua_get_locale_name, "cpp_get_locale_name");
+
   load_lua_engine_file("puzzle_lib.lua");
 
 }

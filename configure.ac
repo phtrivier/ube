@@ -3,6 +3,10 @@ AM_INIT_AUTOMAKE([foreign -Wall -Werror])
 AM_GNU_GETTEXT([external])
 AM_GNU_GETTEXT_VERSION([0.17])
 AC_PROG_CXX
+AC_PROG_CC
+gl_EARLY
+gl_INIT
+
 AC_PROG_RANLIB
 
 AC_ARG_ENABLE([mingw],
@@ -50,6 +54,7 @@ AC_CONFIG_FILES([
 	data/lua/puzzles/Makefile
 	data/pixmaps/Makefile
 	data/applications/Makefile
+	lib/Makefile
 ])
 
 AM_COND_IF([MINGW],[],

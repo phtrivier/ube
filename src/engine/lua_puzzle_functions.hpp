@@ -7,6 +7,9 @@
  * See also lua_puzzle_loader.cpp
  */
 
+#include "common/i18n.hpp"
+#include "localename.h"
+
 int lua_puzzle_set_dimensions(lua_State * ipLuaState) {
   Puzzle * pPuzzle = (Puzzle *) lua_touserdata(ipLuaState,1);
   int w = lua_tointeger(ipLuaState,2);
@@ -104,4 +107,18 @@ int lua_puzzle_set_script_message(lua_State * i_p_lua_state) {
   std::string msg(s_msg);
   p_puzzle->set_script_message(msg);
   return 0;
+}
+
+int lua_get_locale_name(lua_State * i_p_lua_state) {
+  /*
+   * gl_locale_name is from gnulib's "localename" modules.
+   * The string returned by gl_locale_name should be of the form "fr_FR****".
+   * The string cannot be directly passed to lua (this causes a crash on win32.
+   * However, passing a copy seem to work fine ; which is what I am doing.
+   */
+  const char * locale_name = gl_locale_name(LC_MESSAGES, "LC_MESSAGES");
+  char buffer[strlen(locale_name) + 1];
+  strcpy(buffer, locale_name);
+  lua_pushstring(i_p_lua_state, buffer);
+  return 1;
 }

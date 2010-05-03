@@ -27,13 +27,15 @@
 
 (defun ube-compile-all ()
   (interactive)
-  (let ((lua-folder (make-folder "lua"))
+  (let ((lib-folder (make-folder "../lib"))
+	(lua-folder (make-folder "lua"))
 	(folder1 (make-folder "common"))
         (folder2 (make-folder "engine"))
 	(folder3 (make-folder "mvc"))
 	(folder4 (make-folder "client")))
     (set 'compilation-directory folder1)
-    (set 'compile-command (concat "make -C" lua-folder 
+    (set 'compile-command (concat "make -C " lib-folder
+				  " check && make -C " lua-folder 
 				  " check && make -C " folder1 
 				  " check && make -C " folder2 
 				  " check && make -C " folder3 

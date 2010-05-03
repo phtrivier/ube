@@ -4,6 +4,7 @@ package.path = ube_engine_lua_path or package.path
 require 'move'
 require 'script'
 require 'pick_move'
+require 'pdebug'
 require 'i18n'
 
 g_numbered_cells = {}

@@ -1,16 +1,14 @@
+package.path = ube_engine_lua_path or package.path
+
 g_locale = nil
 
+require "pdebug"
+
 function compute_locale()
-   g_locale = "en"
-   -- Probably a very naïve way to compute the locale used by getext ... 
-   -- Anyway, lets try it ! 
-   potential_vars = {"LC_ALL", "LC_MESSAGES", "LANGUAGES", "LANG"}
-   for i,var in ipairs(potential_vars) do
-      if (os.getenv(var) ~= nil) then
-	 g_locale = string.lower(string.sub(os.getenv(var), 0, 2))
-	 break
-      end
-   end
+   pdbg("Calling C to get the locale ...")
+   local l = cpp_get_locale_name()
+   pdbg("Recevied full locale name " .. l)
+   g_locale = string.lower(string.sub(l, 0, 2))
 end
 
 function i18n(message_map)
@@ -19,7 +17,7 @@ function i18n(message_map)
       compute_locale()
    end
 
-   print("Computed locale : " .. g_locale)
+   pdbg("Computed locale : " .. g_locale)
 
    local res = "[Missing translation]"
    if (message_map[g_locale] ~= nil) then
