@@ -42,7 +42,7 @@ SdlChapterSelectionRenderer::clear()
 
   // FIXME(pht) : i18n this
   render_text(_("Please choose a chapter"), 300, 40, p_font_);
-  render_text(str(format("ube v%1%") % VERSION), 10, 570, p_font_);
+  render_text(str(format("ube v%1%") % VERSION), 650, 570, p_font_);
 }
 
 void

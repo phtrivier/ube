@@ -4,7 +4,7 @@
 #ifndef _PUZZLE_SELECTION_VIEW_HPP_
 #define _PUZZLE_SELECTION_VIEW_HPP_
 
-#include "selection_renderer_interface.hpp"
+#include "puzzle_selection_renderer_interface.hpp"
 #include "selection_view.hpp"
 #include "puzzle_selection_model.hpp"
 
@@ -19,10 +19,11 @@ class PuzzleSelectionView :
   
 public:
   
-  PuzzleSelectionView(SelectionRendererInterface & dep_renderer,
+  PuzzleSelectionView(PuzzleSelectionRendererInterface & dep_renderer,
 		      PuzzleSelectionModel & dep_model,
 		      ControllerInterface & dep_controller) :
-    SelectionView(dep_renderer, dep_model, dep_controller)
+    SelectionView(dep_renderer, dep_model, dep_controller),
+    dep_puzzle_selection_renderer_(dep_renderer)
   {
   }
 
@@ -32,6 +33,10 @@ public:
   void render_game();
 
   void handle_event(int iEventCode);
+
+protected:
+
+  PuzzleSelectionRendererInterface & dep_puzzle_selection_renderer_;
 
 };
 

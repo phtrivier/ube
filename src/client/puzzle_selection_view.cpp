@@ -16,8 +16,20 @@ PuzzleSelectionView::render_game()
 void
 PuzzleSelectionView::handle_event(int i_event)
 {
-  SelectionView::handle_event(i_event);
-  if (i_event == GameEvent::MOUSE_CLICKED && dep_model_.has_selected()) {
-    dep_controller_.fire_event(GameEvent::PUZZLE_SELECTED);
+  if (i_event == GameEvent::MOUSE_CLICKED) {
+    int mouse_x = dep_controller_.mouse_x();
+    int mouse_y = dep_controller_.mouse_y();
+    if (dep_puzzle_selection_renderer_.is_on_back_button(mouse_x, mouse_y)) {
+      dep_controller_.fire_event(GameEvent::BACK_TO_CHAPTER_SELECTION);
+    }
   }
+
+  SelectionView::handle_event(i_event);
+
+  if (i_event == GameEvent::MOUSE_CLICKED) {
+    if (dep_model_.has_selected()) {
+      dep_controller_.fire_event(GameEvent::PUZZLE_SELECTED);
+    }
+  }
+
 }

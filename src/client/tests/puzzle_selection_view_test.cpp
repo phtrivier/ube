@@ -5,6 +5,7 @@
 #include "client/puzzle_selection_model.hpp"
 
 #include "client/tests/mock_selection_renderer.hpp"
+#include "client/tests/mock_puzzle_selection_renderer.hpp"
 
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
@@ -31,7 +32,7 @@ namespace {
   };
 
   TEST_F(PuzzleSelectionViewTest, UsesRendererToRender) {
-    MockSelectionRenderer renderer;
+    MockPuzzleSelectionRenderer renderer;
     PuzzleSelectionModel model;
     MockController controller;
 

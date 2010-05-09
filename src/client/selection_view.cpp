@@ -18,7 +18,6 @@
 void
 SelectionView::render_game()
 {
-
   int mouse_x = dep_controller_.mouse_x();
   int mouse_y = dep_controller_.mouse_y();
 

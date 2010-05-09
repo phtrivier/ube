@@ -7,12 +7,12 @@
 #include "sdl_controller.hpp"
 #include "puzzle_selection_view.hpp"
 #include "puzzle_selection_model.hpp"
+#include "puzzle_selection_renderer_interface.hpp"
 
 #include <boost/shared_ptr.hpp>
 
 class GameMode;
 class GameModeInterface;
-class SelectionRendererInterface;
 
 /**
  * Factory to create and initialize a puzzle selection mode
@@ -21,7 +21,7 @@ class PuzzleSelectionModeFactory {
 
 public:
 
-  PuzzleSelectionModeFactory(SelectionRendererInterface & dep_renderer) :
+  PuzzleSelectionModeFactory(PuzzleSelectionRendererInterface & dep_renderer) :
     dep_renderer_(dep_renderer),
     controller_(),
     model_(),
@@ -39,7 +39,7 @@ public:
 
 private:
 
-  SelectionRendererInterface & dep_renderer_;
+  PuzzleSelectionRendererInterface & dep_renderer_;
   
   SdlController controller_;
   PuzzleSelectionModel model_;

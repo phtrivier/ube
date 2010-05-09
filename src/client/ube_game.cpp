@@ -235,6 +235,11 @@ UbeGame::handle_event(int i_event_code)
     break;
   }
 
+  case (GameEvent::BACK_TO_CHAPTER_SELECTION) : {
+    p_puzzle_selection_mode_->get_model().reset();
+    set_current_game_mode("chapter-selection");
+    break;
+  }
     
 
   }
