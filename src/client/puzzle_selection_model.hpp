@@ -33,7 +33,6 @@ public:
   }
 
   void set_selected_puzzle_index(int i_index) {
-    // TODO : assert
     puzzle_index_ = i_index;
   }
 
@@ -61,7 +60,12 @@ public:
     puzzle_index_ = -1;
     hovered_index_ = -1;
   }
-  
+
+  /**
+   * Clear the lists of 
+   */
+  void clear();
+
 private:
 
   // Index of the puzzle selected (clicked on). -1 means
@@ -77,9 +81,14 @@ private:
   // List of the lua file names for puzzles
   std::vector<std::string> puzzle_file_names_;
 
-  void fill_puzzle_list();
-
+  /**
+   * Add a puzzle to this model
+   * @param name the string displayed to select this model
+   * @param file_name the name of the lua puzzle file to load (eg "tutorial1.lua") 
+   */
   void add_puzzle(std::string name, std::string file_name);
+
+  void fill_puzzle_list();
 
 };
 
