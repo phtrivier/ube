@@ -1,11 +1,13 @@
 /**
  * This is Free Software. See COPYING for information.
  */
-#ifndef _SDL_PUZZLE_SELECTION_RENDERER_HPP_
-#define _SDL_PUZZLE_SELECTION_RENDERER_HPP_
+#ifndef _SDL_CHAPTER_SELECTION_RENDERER_HPP_
+#define _SDL_CHAPTER_SELECTION_RENDERER_HPP_
 
-#include "puzzle_selection_renderer_interface.hpp"
-#include "puzzle_selection_geometry.hpp"
+#include "selection_renderer_interface.hpp"
+
+#include "chapter_selection_geometry.hpp"
+
 #include "sdl_renderer.hpp"
 
 #include <string>
@@ -15,25 +17,25 @@
 // *sigh*.
 
 /**
- * puzzle selection renderer based on SDL
+ * chapter selection renderer based on SDL
  */
-class SdlPuzzleSelectionRenderer : 
-  public PuzzleSelectionRendererInterface,
-  public PuzzleSelectionGeometry,
+class SdlChapterSelectionRenderer : 
+  public SelectionRendererInterface,
+  public ChapterSelectionGeometry,
   public SdlRenderer
 { 
 
 public:
 
-  SdlPuzzleSelectionRenderer(ResourceResolverInterface & dep_resolver, SDL_Surface * dep_p_screen) :
-    PuzzleSelectionRendererInterface(),
+  SdlChapterSelectionRenderer(ResourceResolverInterface & dep_resolver, SDL_Surface * dep_p_screen) :
+    SelectionRendererInterface(),
     SdlRenderer(dep_resolver, dep_p_screen),
     p_bg_(NULL)
   {
 
   }
 
-  ~SdlPuzzleSelectionRenderer();
+  ~SdlChapterSelectionRenderer();
 
   int init();
 
@@ -47,8 +49,6 @@ public:
 
   void highlight_item_name(int i_index);
 
-  bool is_on_back_button(int i_x, int i_y);
-
 private:
 
   SDL_Surface * p_bg_;
@@ -57,4 +57,4 @@ private:
 
 };
 
-#endif // _SDL_PUZZLE_SELECTION_RENDERER_HPP_
+#endif // _SDL_CHAPTER_SELECTION_RENDERER_HPP_

@@ -4,6 +4,7 @@
 #include "mvc/tests/mock_controller.hpp"
 #include "client/puzzle_selection_model.hpp"
 
+#include "client/tests/mock_selection_renderer.hpp"
 #include "client/tests/mock_puzzle_selection_renderer.hpp"
 
 #include <gtest/gtest.h>
@@ -37,7 +38,7 @@ namespace {
 
     PuzzleSelectionView v(renderer, model, controller);
 
-    EXPECT_CALL(renderer, render_puzzle_name(_,_)).Times(model.get_puzzle_count());
+    EXPECT_CALL(renderer, render_item_name(_,_)).Times(model.get_item_count());
 
     v.render_game();
 

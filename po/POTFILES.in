@@ -3,3 +3,4 @@ src/client/puzzle_selection_model.cpp
 src/client/sdl_puzzle_selection_renderer.cpp
 src/client/option_parser.cpp
 src/client/ube.cpp
+src/client/chapter_select_model.cpp

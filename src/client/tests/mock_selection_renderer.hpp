@@ -3,7 +3,7 @@
 
 #include <string>
 
-class MockPuzzleSelectionRenderer : public PuzzleSelectionRendererInterface {
+class MockSelectionRenderer : public SelectionRendererInterface {
 
 public:
 
@@ -18,8 +18,5 @@ public:
 
   MOCK_METHOD1(highlight_item_name, 
 	       void(int i_index));
-
-  MOCK_METHOD2(is_on_back_button,
-	       bool(int, int));
 
 };

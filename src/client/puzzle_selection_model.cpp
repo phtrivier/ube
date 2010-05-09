@@ -1,13 +1,16 @@
 /**
  * This is Free Software. See COPYING for information.
  */
+
 #include "puzzle_selection_model.hpp"
 
 #include "common/i18n.hpp"
 
+/* TODO : Move this elsewhare
 void 
 PuzzleSelectionModel::fill_puzzle_list()
 {
+  clear();
   add_puzzle(_("Let's find the exit, for a start..."), "tutorial0.lua");
   add_puzzle(_("Sometimes you have to jump."), "tutorial1.lua");
   add_puzzle(_("A wall. You can cross it. Trust me."), "tutorial2.lua");
@@ -25,3 +28,5 @@ PuzzleSelectionModel::add_puzzle(std::string i_name,
   puzzle_names_.push_back(i_name);
   puzzle_file_names_.push_back(i_file_name);
 }
+*/
+

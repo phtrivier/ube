@@ -8,7 +8,6 @@
 #include "common/resource_resolver_interface.hpp"
 
 #include <assert.h>
-#include <config.h>
 
 #include <boost/format.hpp>
 using boost::format;
@@ -44,7 +43,11 @@ SdlPuzzleSelectionRenderer::clear()
   // FIXME(pht) : i18n this
   render_text(_("Please choose a level"), 300, 40, p_font_);
   render_text(_("(Oh, and please, don't shoot the coder, he's doing his best.)"), 170, 510, p_font_);
-  render_text(str(format("ube v%1%") % VERSION), 10, 570, p_font_);
+ 
+  render_text(str(format("ube v%1%") % VERSION), 650, 570, p_font_);
+
+  render_text(_("Back"), (BACK_X0 + 5), (BACK_Y0 + 5), p_font_);
+
 }
 
 void
@@ -54,7 +57,7 @@ SdlPuzzleSelectionRenderer::flush()
 }
 
 void
-SdlPuzzleSelectionRenderer::render_puzzle_name(std::string & i_name,
+SdlPuzzleSelectionRenderer::render_item_name(std::string & i_name,
 					       int i_index)
 {
   assert(p_font_ != NULL); 
@@ -62,19 +65,17 @@ SdlPuzzleSelectionRenderer::render_puzzle_name(std::string & i_name,
   LOG_D("puzzle_selection") << "Rendering name " << i_name << " at index " << i_index << std::endl;
 
   std::string msg = str(format(_("Level %1% : %2%")) % (i_index + 1) % i_name);
-
   render_text(msg, get_puzzle_name_x(i_index), get_puzzle_name_y(i_index), p_font_);
- 
 }
 
 int
-SdlPuzzleSelectionRenderer::get_mouse_position_as_puzzle_index(int i_x, int i_y)
+SdlPuzzleSelectionRenderer::get_mouse_position_as_item_index(int i_x, int i_y)
 {
   return PuzzleSelectionGeometry::get_mouse_position_as_puzzle_index(i_x,i_y);
 }
 
 void 
-SdlPuzzleSelectionRenderer::highlight_puzzle_name(int i_index) 
+SdlPuzzleSelectionRenderer::highlight_item_name(int i_index) 
 {
   SDL_Rect dst;
   dst.x = NAMES_X0 - 5;
@@ -82,4 +83,10 @@ SdlPuzzleSelectionRenderer::highlight_puzzle_name(int i_index)
   dst.w = NAMES_W + 10;
   dst.h = NAMES_H - 5;
   SDL_FillRect(get_screen(), &dst, gray_); 
+}
+
+bool
+SdlPuzzleSelectionRenderer::is_on_back_button(int i_x, int i_y) 
+{
+  return is_in_box(i_x, i_y, BACK_X0, BACK_Y0, BACK_W, BACK_H);
 }

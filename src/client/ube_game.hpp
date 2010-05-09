@@ -12,12 +12,20 @@
 
 class ResourceResolverInterface;
 class OptionParser;
-class SdlInGameRenderer;
-class InGameModeFactory;
-class InGameMode;
+
+class SdlChapterSelectionRenderer;
+class ChapterSelectionModeFactory;
+class ChapterSelectionMode;
+
 class SdlPuzzleSelectionRenderer;
 class PuzzleSelectionModeFactory;
 class PuzzleSelectionMode;
+
+class SdlInGameRenderer;
+class InGameModeFactory;
+class InGameMode;
+
+class Chapter;
 
 /**
  * Class for the meat of the game
@@ -35,12 +43,15 @@ public:
     dep_resolver_(dep_resolver),
     dep_option_parser_(dep_option_parser),
     preparation_error_message_(""),
-    p_in_game_renderer_(NULL),
-    p_in_game_mode_factory_(NULL),
-    p_in_game_mode_(NULL),
+    p_chapter_selection_renderer_(NULL),
+    p_chapter_selection_mode_factory_(NULL),
+    p_chapter_selection_mode_(NULL),
     p_puzzle_selection_renderer_(NULL),
     p_puzzle_selection_mode_factory_(NULL),
-    p_puzzle_selection_mode_(NULL)
+    p_puzzle_selection_mode_(NULL),
+    p_in_game_renderer_(NULL),
+    p_in_game_mode_factory_(NULL),
+    p_in_game_mode_(NULL)
   {
   }
 
@@ -77,20 +88,24 @@ private:
   // Screen is owned by the game.
   SDL_Surface * p_screen_;
 
-  // TODO(pht) : only the game_mode_factory should
-  // be needed.
-  SdlInGameRenderer * p_in_game_renderer_;
-  InGameModeFactory * p_in_game_mode_factory_;
-  InGameMode * p_in_game_mode_;
+  // TODO(pht) : probably only one of the three classes should really be needed...
+  SdlChapterSelectionRenderer * p_chapter_selection_renderer_;
+  ChapterSelectionModeFactory * p_chapter_selection_mode_factory_;
+  ChapterSelectionMode * p_chapter_selection_mode_;
 
   SdlPuzzleSelectionRenderer * p_puzzle_selection_renderer_;
   PuzzleSelectionModeFactory * p_puzzle_selection_mode_factory_;
   PuzzleSelectionMode * p_puzzle_selection_mode_;
 
+  SdlInGameRenderer * p_in_game_renderer_;
+  InGameModeFactory * p_in_game_mode_factory_;
+  InGameMode * p_in_game_mode_;
+
   int prepare_sdl();
   int prepare_game_modes();
 
-  int prepare_puzzle_selection_mode();
+  int prepare_chapter_selection_mode();
+  int prepare_puzzle_selection_mode(Chapter & i_chapter);
   int prepare_in_game_mode(std::string & i_puzzle_file_name);
 
   /**

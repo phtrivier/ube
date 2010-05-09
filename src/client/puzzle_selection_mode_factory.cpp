@@ -11,9 +11,6 @@
 
 PuzzleSelectionModeFactory::~PuzzleSelectionModeFactory()
 {
-  delete p_view_;
-  delete p_model_;
-  delete p_controller_;
 }
 
 int
@@ -21,20 +18,9 @@ PuzzleSelectionModeFactory::create_mode() {
   
   int res = 0;
 
-  // FIXME(pht) : this is duplicated in factories, or templatable
-  p_controller_ = new SdlController();
-  p_model_ = new PuzzleSelectionModel();
-  p_view_ = new PuzzleSelectionView(dep_renderer_, *p_model_, *p_controller_);
+  mode_ = boost::shared_ptr<GameModeInterface>(new PuzzleSelectionMode(controller_, view_, model_));
 
-  mode_ = boost::shared_ptr<GameModeInterface>(new PuzzleSelectionMode(*p_controller_, *p_view_, *p_model_));
-
-  // FIXME(pht) : this is duplicated in factories
-  if (p_controller_ != NULL && p_view_ != NULL) {
-    p_controller_->add_observer(p_view_);
-  } else {
-    res = -1;
-  }
+  controller_.add_observer(&view_);
 
   return res;
-
 }
