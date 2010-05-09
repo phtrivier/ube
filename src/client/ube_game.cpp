@@ -75,17 +75,25 @@ UbeGame::prepare_sdl()
 int
 UbeGame::prepare_game_modes()
 {
-  int res = 0;
+  int res = prepare_chapter_selection_mode();
+
+  // If a puzzle has been specified as a command line, when we look for the chapter
+  // containing this puzzle, and prepare both the puzzle selection mode and
+  // the in game mode for this puzzle. This is so that when the puzzle is finished, 
+  // we can go back to a properly initialized puzzle selection mode.
   LOG_D("main") << "Do we have a puzzle name ? " << dep_option_parser_.has_puzzle_file_name() << std::endl;
-  
   if (dep_option_parser_.has_puzzle_file_name()) {
-    LOG_D("main") << "Getting puzzle file name" << std::endl;
     std::string puzzle_file_name = dep_option_parser_.get_puzzle_file_name();
-    LOG_D("main") << "Puzzle file name : " << puzzle_file_name << std::endl;
-    LOG_D("main") << "Puzzle file name's c_str() : " << puzzle_file_name.c_str() << std::endl;
-    res = prepare_in_game_mode(puzzle_file_name);
-  } else {
-    res = prepare_chapter_selection_mode();
+    if (!p_chapter_selection_mode_->get_model().has_chapter_with_puzzle(puzzle_file_name)) {
+      res = -1;
+      preparation_error_message_.append(str(format("Could not find a chapter with puzzle named %1%") % puzzle_file_name));
+    } else {
+      Chapter & chapter = p_chapter_selection_mode_->get_model().get_chapter_with_puzzle(puzzle_file_name);
+      res = prepare_puzzle_selection_mode(chapter);
+      if (res == 0) {
+	res = prepare_in_game_mode(puzzle_file_name);
+      }
+    }
   }
   return res;
 }

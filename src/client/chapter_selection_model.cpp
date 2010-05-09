@@ -7,6 +7,7 @@
 
 #include "common/i18n.hpp"
 
+#include <assert.h>
 #include <boost/foreach.hpp>
 
 ChapterSelectionModel::~ChapterSelectionModel()
@@ -31,4 +32,32 @@ ChapterSelectionModel::fill_chapters()
   p_tutorial->add_puzzle(_("Still too simple ? Let's see..."), "tutorial7.lua");
   chapters_.push_back(p_tutorial);
 
+}
+
+
+bool 
+ChapterSelectionModel::has_chapter_with_puzzle(std::string i_puzzle_file_name)
+{
+  bool res = false;
+  BOOST_FOREACH(Chapter * p_chapter, chapters_) {
+    if (p_chapter->has_puzzle_file_name(i_puzzle_file_name)) {
+      res = true;
+      break;
+    }
+  }
+  return res;
+}
+
+Chapter & 
+ChapterSelectionModel::get_chapter_with_puzzle(std::string i_puzzle_file_name)
+{
+  Chapter * res = NULL;
+  BOOST_FOREACH(Chapter * p_chapter, chapters_) {
+    if (p_chapter->has_puzzle_file_name(i_puzzle_file_name)) {
+      res = p_chapter;
+      break;
+    }
+  }
+  assert(res != NULL);
+  return *res;
 }

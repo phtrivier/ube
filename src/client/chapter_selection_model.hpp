@@ -55,6 +55,10 @@ public:
     return res;
   }
 
+  bool has_chapter_with_puzzle(std::string i_puzzle_file_name);
+
+  Chapter & get_chapter_with_puzzle(std::string i_puzzle_file_name);
+
 private:
   
   std::vector<Chapter *> chapters_;

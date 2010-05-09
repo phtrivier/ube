@@ -22,7 +22,7 @@ libube_client_a_SOURCES=gettext.h \
 	selection_model.hpp \
 	selection_renderer_interface.hpp \
 	selection_view.hpp selection_view.cpp \
-	chapter.hpp \
+	chapter.hpp chapter.cpp \
 	chapter_selection_model.hpp chapter_selection_model.cpp \
 	chapter_selection_view.hpp chapter_selection_view.cpp \
 	chapter_selection_geometry.hpp chapter_selection_geometry.cpp \

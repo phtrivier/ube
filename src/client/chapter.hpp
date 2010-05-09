@@ -49,6 +49,8 @@ public:
   std::string chapter_name() {
     return chapter_name_;
   }
+
+  bool has_puzzle_file_name(std::string i_puzzle_file_name);
   
 private:
 
