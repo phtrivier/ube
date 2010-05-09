@@ -19,6 +19,7 @@ libube_client_a_SOURCES=gettext.h \
 	move_command.hpp move_command.cpp \
 	in_game_command_stack.hpp in_game_command_stack.cpp \
 	ube_game.hpp ube_game.cpp \
+	selection_model.hpp \
 	puzzle_selection_model.hpp puzzle_selection_model.cpp \
 	puzzle_selection_renderer_interface.hpp \
 	puzzle_selection_geometry.hpp puzzle_selection_geometry.cpp \

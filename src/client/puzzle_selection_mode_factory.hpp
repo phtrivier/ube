@@ -8,8 +8,6 @@
 #include "puzzle_selection_view.hpp"
 #include "puzzle_selection_model.hpp"
 
-#include <string>
-
 #include <boost/shared_ptr.hpp>
 
 class GameMode;

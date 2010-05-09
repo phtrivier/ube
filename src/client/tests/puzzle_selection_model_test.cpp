@@ -24,14 +24,14 @@ namespace {
   TEST_F(PuzzleSelectionModelTest, KnowsListOfSelectablePuzzle) {
 
     PuzzleSelectionModel m;
-    ASSERT_FALSE(m.has_selected_puzzle());
+    ASSERT_FALSE(m.has_selected());
 
     std::vector<std::string> names = m.get_puzzle_names();
     // EXPECT_EQ("First puzzle", names[0]);
     
-    m.set_selected_puzzle_index(0);
+    m.set_selected_index(0);
 
-    ASSERT_TRUE(m.has_selected_puzzle());
+    ASSERT_TRUE(m.has_selected());
 
     // EXPECT_EQ("puzzle1.lua", m.get_selected_puzzle_file_name());
     

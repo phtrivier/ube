@@ -212,7 +212,7 @@ UbeGame::handle_event(int i_event_code)
     LOG_D("ube_game") << "-----------------------" << std::endl;
     LOG_D("ube_game") << "Reseting model" << std::endl;
     p_puzzle_selection_mode_->get_model().reset();
-    LOG_D("ube_game") << "model has hovered ? " << p_puzzle_selection_mode_->get_model().has_hovered_puzzle() << std::endl;
+    LOG_D("ube_game") << "model has hovered ? " << p_puzzle_selection_mode_->get_model().has_hovered() << std::endl;
     set_current_game_mode("puzzle-selection");
     break;
   }

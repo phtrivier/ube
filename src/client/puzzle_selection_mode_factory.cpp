@@ -23,5 +23,4 @@ PuzzleSelectionModeFactory::create_mode() {
   controller_.add_observer(&view_);
 
   return res;
-
 }
