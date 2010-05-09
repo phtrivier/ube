@@ -1,12 +1,12 @@
 /**
  * This is Free Software. See COPYING for information.
  */
-#ifndef _SDL_PUZZLE_SELECTION_RENDERER_HPP_
-#define _SDL_PUZZLE_SELECTION_RENDERER_HPP_
+#ifndef _SDL_CHAPTER_SELECTION_RENDERER_HPP_
+#define _SDL_CHAPTER_SELECTION_RENDERER_HPP_
 
 #include "selection_renderer_interface.hpp"
 
-#include "puzzle_selection_geometry.hpp"
+#include "chapter_selection_geometry.hpp"
 
 #include "sdl_renderer.hpp"
 
@@ -17,17 +17,17 @@
 // *sigh*.
 
 /**
- * puzzle selection renderer based on SDL
+ * chapter selection renderer based on SDL
  */
-class SdlPuzzleSelectionRenderer : 
+class SdlChapterSelectionRenderer : 
   public SelectionRendererInterface,
-  public PuzzleSelectionGeometry,
+  public ChapterSelectionGeometry,
   public SdlRenderer
 { 
 
 public:
 
-  SdlPuzzleSelectionRenderer(ResourceResolverInterface & dep_resolver, SDL_Surface * dep_p_screen) :
+  SdlChapterSelectionRenderer(ResourceResolverInterface & dep_resolver, SDL_Surface * dep_p_screen) :
     SelectionRendererInterface(),
     SdlRenderer(dep_resolver, dep_p_screen),
     p_bg_(NULL)
@@ -35,7 +35,7 @@ public:
 
   }
 
-  ~SdlPuzzleSelectionRenderer();
+  ~SdlChapterSelectionRenderer();
 
   int init();
 
@@ -57,4 +57,4 @@ private:
 
 };
 
-#endif // _SDL_PUZZLE_SELECTION_RENDERER_HPP_
+#endif // _SDL_CHAPTER_SELECTION_RENDERER_HPP_

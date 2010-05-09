@@ -14,6 +14,9 @@
 #include "sdl_puzzle_selection_renderer.hpp"
 #include "puzzle_selection_mode_factory.hpp"
 #include "puzzle_selection_mode.hpp"
+#include "sdl_chapter_selection_renderer.hpp"
+#include "chapter_selection_mode_factory.hpp"
+#include "chapter_selection_mode.hpp"
 #include "engine/game_event.hpp"
 
 #include "common/logging.hpp"
@@ -72,33 +75,46 @@ UbeGame::prepare_sdl()
 int
 UbeGame::prepare_game_modes()
 {
-
-  int res = prepare_puzzle_selection_mode();
-  if (res == 0) {
-    
-    // FIXME(pht) : the code about the puzzle should
-    // probably be somewhere else ? 
-    // Note : I'll need to charge a given puzzle
-    
-    LOG_D("main") << "Do we have a puzzle name ? " << dep_option_parser_.has_puzzle_file_name() << std::endl;
+  int res = 0;
+  LOG_D("main") << "Do we have a puzzle name ? " << dep_option_parser_.has_puzzle_file_name() << std::endl;
   
-    if (dep_option_parser_.has_puzzle_file_name()) {
-      LOG_D("main") << "Getting puzzle file name" << std::endl;
-      std::string puzzle_file_name = dep_option_parser_.get_puzzle_file_name();
-      LOG_D("main") << "Puzzle file name : " << puzzle_file_name << std::endl;
-      LOG_D("main") << "Puzzle file name's c_str() : " << puzzle_file_name.c_str() << std::endl;
-      res = prepare_in_game_mode(puzzle_file_name);
+  if (dep_option_parser_.has_puzzle_file_name()) {
+    LOG_D("main") << "Getting puzzle file name" << std::endl;
+    std::string puzzle_file_name = dep_option_parser_.get_puzzle_file_name();
+    LOG_D("main") << "Puzzle file name : " << puzzle_file_name << std::endl;
+    LOG_D("main") << "Puzzle file name's c_str() : " << puzzle_file_name.c_str() << std::endl;
+    res = prepare_in_game_mode(puzzle_file_name);
+  } else {
+    res = prepare_chapter_selection_mode();
+  }
+  return res;
+}
+
+int
+UbeGame::prepare_chapter_selection_mode()
+{
+  assert(p_screen_ != NULL);
+  p_chapter_selection_renderer_ = new SdlChapterSelectionRenderer(dep_resolver_, p_screen_);
+  int res = p_chapter_selection_renderer_->init();
+  if (res != 0) {
+    sdl_preparation_error_message("Error while initializing sdl_renderer : %1%\n");
+  } else {
+    p_chapter_selection_mode_factory_ = new ChapterSelectionModeFactory(*p_chapter_selection_renderer_);
+    res = p_chapter_selection_mode_factory_->create_mode();
+    if (res != 0) {
+      sdl_preparation_error_message("Error creating chapter_selection_mode : %1%\n");
+    } else {
+      p_chapter_selection_mode_ = static_cast<ChapterSelectionMode*>(p_chapter_selection_mode_factory_->get_mode().get());
+      register_game_mode("chapter-selection", p_chapter_selection_mode_);
     }
   }
   return res;
 }
 
-
 int
-UbeGame::prepare_puzzle_selection_mode()
+UbeGame::prepare_puzzle_selection_mode(Chapter & i_chapter)
 {
   assert(p_screen_ != NULL);
-
   p_puzzle_selection_renderer_ = new SdlPuzzleSelectionRenderer(dep_resolver_, p_screen_);
   int res = p_puzzle_selection_renderer_->init();
   if (res != 0) {
@@ -110,6 +126,7 @@ UbeGame::prepare_puzzle_selection_mode()
       sdl_preparation_error_message("Error creating puzzle_selection_mode : %1%\n");
     } else {
       p_puzzle_selection_mode_ = static_cast<PuzzleSelectionMode*>(p_puzzle_selection_mode_factory_->get_mode().get());
+      p_puzzle_selection_mode_->get_model().set_chapter(i_chapter);
       register_game_mode("puzzle-selection", p_puzzle_selection_mode_);
     }
   }
@@ -125,6 +142,7 @@ UbeGame::prepare_in_game_mode(std::string & i_puzzle_file_name)
 
   int res = -1;
 
+  // If "has_mode('in-game') ...
   if (p_in_game_mode_factory_ == NULL) {
     // Note(pht) : that could "look" simplier to let the factory create
     // SdlInGameRenderer, but then I would need to pass the screen explicitely, 
@@ -143,22 +161,8 @@ UbeGame::prepare_in_game_mode(std::string & i_puzzle_file_name)
       if (res != 0) {
 	sdl_preparation_error_message("Error creating in_game_mode : %1%\n");
       } else {
-	// Static cast would become useless if I used templates, at least on the type of returned
-	// InGameMode...
 	p_in_game_mode_ = static_cast<InGameMode *>(p_in_game_mode_factory_->get_mode().get());
 	register_game_mode("in-game", p_in_game_mode_);
-
-	// What I want to be able to write : 
-	/*
-	p_in_game_dislog_mode_factory_ = new DialogModeFactory(*p_in_game_mode_):
-	res = p_in_game_dialog_mode_factory_->create_mode();
-	if (res != 0) {
-	  // error message
-	} else {
-	  p_in_game_dialog_mode = p_in_game_dialog_mode_factory_->get_mode().get());
-	register_game_mode("in-game-dialog", p_in_game_mode_dialog);
-	}
-	*/
       }
     }
   } else {
@@ -186,7 +190,7 @@ UbeGame::play()
   if (dep_option_parser_.has_puzzle_file_name()) {
     set_current_game_mode("in-game");
   } else {
-    set_current_game_mode("puzzle-selection");
+    set_current_game_mode("chapter-selection");
   }
 
   loop();
@@ -201,6 +205,12 @@ UbeGame::handle_event(int i_event_code)
   GameLoop::handle_event(i_event_code);
 
   switch (i_event_code) {
+  case GameEvent::CHAPTER_SELECTED : {
+    Chapter & chapter = p_chapter_selection_mode_->get_model().get_selected_chapter();
+    prepare_puzzle_selection_mode(chapter);
+    set_current_game_mode("puzzle-selection");
+    break;
+  }
   case GameEvent::PUZZLE_SELECTED : {
     // FIXME(pht) : move some of this to prepare
     std::string puzzle_file_name = p_puzzle_selection_mode_->get_model().get_selected_puzzle_file_name();
@@ -216,5 +226,8 @@ UbeGame::handle_event(int i_event_code)
     set_current_game_mode("puzzle-selection");
     break;
   }
+
+    
+
   }
 }

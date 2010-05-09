@@ -1,10 +1,12 @@
 /**
  * This is Free Software. See COPYING for information.
  */
+
 #include "puzzle_selection_model.hpp"
 
 #include "common/i18n.hpp"
 
+/* TODO : Move this elsewhare
 void 
 PuzzleSelectionModel::fill_puzzle_list()
 {
@@ -26,10 +28,5 @@ PuzzleSelectionModel::add_puzzle(std::string i_name,
   puzzle_names_.push_back(i_name);
   puzzle_file_names_.push_back(i_file_name);
 }
+*/
 
-void
-PuzzleSelectionModel::clear()
-{
-  puzzle_names_.clear();
-  puzzle_file_names_.clear();
-}

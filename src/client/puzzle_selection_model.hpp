@@ -5,6 +5,7 @@
 #define _PUZZLE_SELECTION_MODEL_HPP_
 
 #include "selection_model.hpp"
+#include "chapter.hpp"
 
 #include <assert.h>
 #include <vector>
@@ -20,9 +21,9 @@ class PuzzleSelectionModel :
 public:
 
   PuzzleSelectionModel():
-    SelectionModel()
+    SelectionModel(),
+    chapter_("")
   {
-    fill_puzzle_list();
   }
 
   ~PuzzleSelectionModel() {
@@ -30,37 +31,28 @@ public:
 
   std::string get_selected_puzzle_file_name() {
     assert(has_selected());
-    return puzzle_file_names_[selected_index()];
+    return chapter_.puzzle_file_name_at(selected_index());
   }
 
-  std::vector<std::string> get_puzzle_names() {
-    return puzzle_names_;
+  std::vector<std::string> & get_puzzle_names() {
+    return chapter_.puzzle_names();
   }
 
-  int get_puzzle_count() {
-    return (int) puzzle_names_.size();
+  int get_item_count() {
+    return (int) chapter_.size();
   }
 
-  /**
-   * Clear the lists of puzzles.
-   */
-  void clear();
+  void set_chapter(Chapter & i_chapter) {
+    chapter_ = i_chapter;
+  }
 
+  std::vector<std::string> get_item_names() {
+    return chapter_.puzzle_names();
+  }
+  
 private:
 
-  // List of the "human readible" names of the puzzle
-  std::vector<std::string> puzzle_names_;
-  // List of the lua file names for puzzles
-  std::vector<std::string> puzzle_file_names_;
-
-  /**
-   * Add a puzzle to this model
-   * @param name the string displayed to select this model
-   * @param file_name the name of the lua puzzle file to load (eg "tutorial1.lua") 
-   */
-  void add_puzzle(std::string name, std::string file_name);
-
-  void fill_puzzle_list();
+  Chapter chapter_;
 
 };
 

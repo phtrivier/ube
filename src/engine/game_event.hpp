@@ -19,6 +19,7 @@ public:
   static const int PUZZLE_SELECTED = 4;
   static const int PUZZLE_FINISHED = 5;
   static const int NEXT_MOVE = 6;
+  static const int CHAPTER_SELECTED = 7;
 };
 
 #endif // _GAME_EVENT_HPP_

@@ -20,6 +20,15 @@ libube_client_a_SOURCES=gettext.h \
 	in_game_command_stack.hpp in_game_command_stack.cpp \
 	ube_game.hpp ube_game.cpp \
 	selection_model.hpp \
+	selection_renderer_interface.hpp \
+	selection_view.hpp selection_view.cpp \
+	chapter.hpp \
+	chapter_selection_model.hpp chapter_selection_model.cpp \
+	chapter_selection_view.hpp chapter_selection_view.cpp \
+	chapter_selection_geometry.hpp chapter_selection_geometry.cpp \
+	chapter_selection_mode_factory.hpp chapter_selection_mode_factory.cpp \
+	sdl_chapter_selection_renderer.hpp  sdl_chapter_selection_renderer.cpp \
+	chapter_selection_mode.hpp chapter_selection_mode.cpp \
 	puzzle_selection_model.hpp puzzle_selection_model.cpp \
 	puzzle_selection_renderer_interface.hpp \
 	puzzle_selection_geometry.hpp puzzle_selection_geometry.cpp \

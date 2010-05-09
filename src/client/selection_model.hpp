@@ -56,6 +56,10 @@ public:
     hovered_index_ = -1;
   }
 
+  virtual int get_item_count() = 0;
+
+  virtual std::vector<std::string> get_item_names() = 0;
+
 private:
 
   // Index of the selected item (clicked on). -1 means

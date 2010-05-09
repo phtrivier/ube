@@ -8,7 +8,6 @@
 #include "common/resource_resolver_interface.hpp"
 
 #include <assert.h>
-#include <config.h>
 
 #include <boost/format.hpp>
 using boost::format;
@@ -54,7 +53,7 @@ SdlPuzzleSelectionRenderer::flush()
 }
 
 void
-SdlPuzzleSelectionRenderer::render_puzzle_name(std::string & i_name,
+SdlPuzzleSelectionRenderer::render_item_name(std::string & i_name,
 					       int i_index)
 {
   assert(p_font_ != NULL); 
@@ -68,13 +67,13 @@ SdlPuzzleSelectionRenderer::render_puzzle_name(std::string & i_name,
 }
 
 int
-SdlPuzzleSelectionRenderer::get_mouse_position_as_puzzle_index(int i_x, int i_y)
+SdlPuzzleSelectionRenderer::get_mouse_position_as_item_index(int i_x, int i_y)
 {
   return PuzzleSelectionGeometry::get_mouse_position_as_puzzle_index(i_x,i_y);
 }
 
 void 
-SdlPuzzleSelectionRenderer::highlight_puzzle_name(int i_index) 
+SdlPuzzleSelectionRenderer::highlight_item_name(int i_index) 
 {
   SDL_Rect dst;
   dst.x = NAMES_X0 - 5;
