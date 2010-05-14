@@ -48,6 +48,7 @@ AC_CONFIG_FILES([
 	data/Makefile
 	data/images/Makefile
 	data/images/png/Makefile
+	data/images/bmp/Makefile
 	data/fonts/Makefile
 	data/ogg/Makefile
 	data/lua/Makefile

@@ -6,6 +6,6 @@ images_DATA=selected_cell.png \
 	undo.png redo.png disabled_undo.png disabled_redo.png \
 	bg.png bg_puzzle_selection.png
 
-SUBDIRS=png
+SUBDIRS=png bmp
 
 EXTRA_DIST=${images_DATA}

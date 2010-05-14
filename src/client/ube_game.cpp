@@ -20,6 +20,7 @@
 #include "engine/game_event.hpp"
 
 #include "common/logging.hpp"
+#include "common/resource_resolver_interface.hpp"
 
 #include <config.h>
 #include <assert.h>
@@ -43,6 +44,17 @@ UbeGame::prepare_game()
   return res;
 }
 
+void
+UbeGame::set_icon() 
+{
+  Uint32          colorkey;
+  SDL_Surface     *p_icon;
+  p_icon = SDL_LoadBMP(dep_resolver_.get_image_file_name("bmp/icon.bmp").c_str());
+  colorkey = SDL_MapRGB(p_icon->format, 0, 255, 0);
+  SDL_SetColorKey(p_icon, SDL_SRCCOLORKEY, colorkey);
+  SDL_WM_SetIcon(p_icon, NULL);
+}
+
 int
 UbeGame::prepare_sdl()
 {
@@ -50,6 +62,11 @@ UbeGame::prepare_sdl()
   if((SDL_Init(SDL_INIT_VIDEO)==-1)) { 
     res = -1;
   } else {
+
+    // For some reason, WM_SetIcon must be used before SetVideoMode ...
+    // so I set the icon right now
+    set_icon();
+
     p_screen_ = SDL_SetVideoMode(800, 600, 8, SDL_SWSURFACE);
     if (p_screen_ == NULL) {
       res = -1;

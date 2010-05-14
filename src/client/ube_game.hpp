@@ -119,6 +119,8 @@ private:
 
   void ttf_preparation_error_message(std::string i_msg);
 
+  void set_icon();
+  
 };
 
 #endif // _UBE_GAME_HPP_
