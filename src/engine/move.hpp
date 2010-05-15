@@ -7,9 +7,10 @@
 namespace MoveType {
   static const int SINGLE = 0;
   static const int DOUBLE = 1;
+  static const int KNIGHT = 2;
   // Marker to help loops, should be increased
   // when elements are added
-  static const int LAST = 1;
+  static const int LAST = 2;
 }
 
 /**

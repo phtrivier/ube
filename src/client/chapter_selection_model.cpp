@@ -32,6 +32,10 @@ ChapterSelectionModel::fill_chapters()
   p_tutorial->add_puzzle(_("Still too simple ? Let's see..."), "tutorial7.lua");
   chapters_.push_back(p_tutorial);
 
+  Chapter * p_begin = new Chapter(_("Beginning"));
+  p_begin->add_puzzle(_("A knight. My kingdom for a knight !"), "begin0.lua");
+  chapters_.push_back(p_begin);
+
 }
 
 
