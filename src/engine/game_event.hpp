@@ -21,6 +21,7 @@ public:
   static const int NEXT_MOVE = 6;
   static const int CHAPTER_SELECTED = 7;
   static const int BACK_TO_CHAPTER_SELECTION = 8;
+  static const int RELOAD_PUZZLE = 9;
 };
 
 #endif // _GAME_EVENT_HPP_

@@ -25,13 +25,17 @@ void
 SdlController::handle_event() {
   if (last_sdl_event_.type == SDL_KEYDOWN) {
 
-    if (last_sdl_event_.key.keysym.sym == SDLK_z) {
+    SDLKey key_sim = last_sdl_event_.key.keysym.sym;
+
+    if (key_sim == SDLK_z) {
       fire_event(GameEvent::UNDO);
-    } else if (last_sdl_event_.key.keysym.sym == SDLK_y) {
+    } else if (key_sim == SDLK_y) {
       fire_event(GameEvent::REDO);
-    } else if (last_sdl_event_.key.keysym.sym == SDLK_ESCAPE) {
+    } else if (key_sim == SDLK_r) {
+      fire_event(GameEvent::RELOAD_PUZZLE);
+    } else if (key_sim == SDLK_ESCAPE) {
       fire_event(GameEvent::QUIT);
-    } else if (last_sdl_event_.key.keysym.sym == SDLK_TAB) {
+    } else if (key_sim == SDLK_TAB) {
       fire_event(GameEvent::NEXT_MOVE);
     }
     
