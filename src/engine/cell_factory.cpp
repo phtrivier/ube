@@ -17,6 +17,7 @@ CellFactory::is_valid_cell_letter(char iLetter) const {
   case 'O':
   case '#':
   case '-':
+  case '_':
     res = true;
   }
   return res;
@@ -36,7 +37,8 @@ CellFactory::make_cell(int iI, int iJ, char iLetter) {
   case 'O' : 
     type = Cell::OUT;
     break;
-  case '#' : 
+  case '#' :
+  case '_':
     type = Cell::EMPTY;
     break;
   case '-' :
