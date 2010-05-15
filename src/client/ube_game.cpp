@@ -236,7 +236,8 @@ UbeGame::handle_event(int i_event_code)
     set_current_game_mode("puzzle-selection");
     break;
   }
-  case GameEvent::PUZZLE_SELECTED : {
+  case GameEvent::PUZZLE_SELECTED : 
+  case GameEvent::RELOAD_PUZZLE: {
     // FIXME(pht) : move some of this to prepare
     std::string puzzle_file_name = p_puzzle_selection_mode_->get_model().get_selected_puzzle_file_name();
     prepare_in_game_mode(puzzle_file_name);
@@ -257,7 +258,6 @@ UbeGame::handle_event(int i_event_code)
     set_current_game_mode("chapter-selection");
     break;
   }
-    
 
   }
 }
